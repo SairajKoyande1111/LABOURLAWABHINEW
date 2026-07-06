@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-900: #0B192C;
+  --color-navy-800: #142A4A;
+  --color-navy-700: #1D3B68;
+  --color-teal-500: #00A896;
+  --color-teal-600: #008C7D;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+#root {
+  min-height: 100vh;
+}

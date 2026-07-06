@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "Cy2IW4C-IBJgIUTTNzGBI"
+uri = "file://src/assets/hero-office.png"
+type = "image"
+title = "corporate office interior"
+
+[[generated]]
+id = "mz9nXC3Gi9mrC-6RiWQ47"
+uri = "file://src/assets/service-labour.png"
+type = "image"
+title = "legal documents on desk"
+
+[[generated]]
+id = "OShqjvlm5y4MLZXkN4EQe"
+uri = "file://src/assets/service-payroll.png"
+type = "image"
+title = "financial charts and payroll"
+
+[[generated]]
+id = "ML06tsMyQmZCi3DPcmB0K"
+uri = "file://src/assets/service-statutory.png"
+type = "image"
+title = "compliance folders and filings"
+
+[[generated]]
+id = "D0LjeQ3JRqqEIbpO5wok3"
+uri = "file://src/assets/service-staffing.png"
+type = "image"
+title = "diverse team working"
+
+[[generated]]
+id = "R4VltsD4cix_bQW1Zxe2P"
+uri = "file://src/assets/service-audits.png"
+type = "image"
+title = "auditors reviewing documents"
+
+[[generated]]
+id = "jucReZwy41qMmFXdisXvz"
+uri = "file://src/assets/service-licensing.png"
+type = "image"
+title = "official license certificate"
+
+[[generated]]
+id = "Wd_vd-6Am7nZMq7FZl4qQ"
+uri = "file://src/assets/service-hr.png"
+type = "image"
+title = "HR professionals meeting"
+
+[[generated]]
+id = "iXlx_nIY07jVI7jHBdTMn"
+uri = "file://src/assets/service-legal.png"
+type = "image"
+title = "legal gavel on block"
+
+[[generated]]
+id = "5qdkI1Kqg75gxMofv-LVs"
+uri = "file://src/assets/service-training.png"
+type = "image"
+title = "corporate training workshop"
