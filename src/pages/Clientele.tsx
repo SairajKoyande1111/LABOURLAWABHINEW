@@ -90,7 +90,7 @@ const Clientele = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: i * 0.07 }}
-                className="bg-white border border-gray-100 aspect-[3/2] rounded-2xl flex items-center justify-center px-8 shadow-sm hover:shadow-xl hover:border-teal-100 transition-all group cursor-default grayscale opacity-60 hover:grayscale-0 hover:opacity-100"
+                className="bg-white border border-gray-100 aspect-[3/2] rounded-2xl flex items-center justify-center px-8 shadow-sm hover:shadow-xl hover:border-teal-100 transition-all group cursor-default"
               >
                 <Logo />
               </motion.div>
