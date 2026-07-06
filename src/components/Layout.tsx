@@ -126,10 +126,7 @@ const Layout = () => {
 
           <Link to="/" className="flex items-center gap-3.5 shrink-0 group">
             <LogoMark />
-            <div className="flex flex-col leading-none">
-              <span className="font-display font-bold text-[1.35rem] text-navy-900 tracking-tight leading-none">Labour Codes</span>
-              <span className="text-[9px] font-semibold text-teal-500 tracking-[0.22em] uppercase mt-1">Compliance · Law · Staffing</span>
-            </div>
+            <span className="font-display font-bold text-[1.35rem] text-navy-900 tracking-tight leading-none">Labour Codes</span>
           </Link>
 
           {/* Desktop Nav */}

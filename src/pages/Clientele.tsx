@@ -29,11 +29,11 @@ const Clientele = () => {
     <div className="w-full">
 
       {/* ── Hero ──────────────────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ minHeight: '400px' }}>
+      <section className="relative overflow-hidden" style={{ height: 'calc(100vh - 114px)', minHeight: '500px', maxHeight: '820px' }}>
         <img src="/assets/service-hr.png" alt="Our Clientele"
-          className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-900/85 via-navy-900/60 to-navy-900/20" />
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 flex items-center py-16" style={{ minHeight: '400px' }}>
+          className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-900/80 via-navy-900/50 to-navy-900/10" />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 h-full flex items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.55 }}
             className="bg-white rounded-2xl p-8 md:p-10 shadow-2xl max-w-md">
@@ -50,25 +50,6 @@ const Clientele = () => {
               <span className="text-teal-600">Clientele</span>
             </nav>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── Stats ─────────────────────────────────────────── */}
-      <section className="bg-navy-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-white/10">
-            {[
-              { value: '500+', label: 'Corporate Clients' },
-              { value: '21+', label: 'Years Experience' },
-              { value: '15+', label: 'States Covered' },
-              { value: '50+', label: 'Legal Experts' },
-            ].map((s, i) => (
-              <div key={i} className="px-4">
-                <div className="text-3xl md:text-4xl font-display font-bold text-teal-400 mb-1">{s.value}</div>
-                <div className="text-white/45 text-[11px] uppercase tracking-widest font-semibold">{s.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
