@@ -259,7 +259,7 @@ const Home = () => {
           <div className="animate-marquee">
             {[...ALL_CLIENTS, ...ALL_CLIENTS].map(({ name, Logo }, i) => (
               <div key={i} title={name}
-                className="flex items-center justify-center mx-10 shrink-0 h-14 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-default">
+                className="flex items-center justify-center mx-10 shrink-0 h-14 transition-all duration-300 cursor-default">
                 <Logo />
               </div>
             ))}
