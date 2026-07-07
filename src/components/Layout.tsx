@@ -86,7 +86,7 @@ const Layout = () => {
 
           {/* Logo — actual brand image */}
           <Link to="/" className="shrink-0">
-            <img src="/assets/maru-logo.png" alt="Maru Consultancy Services" className="h-11 w-auto object-contain" />
+            <img src="/assets/maru-logo.png" alt="Maru Consultancy Services" className="h-16 w-auto object-contain" style={{ maxHeight: '64px' }} />
           </Link>
 
           {/* Desktop Nav */}

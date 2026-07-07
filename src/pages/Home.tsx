@@ -10,11 +10,11 @@ const fadeUp = {
 };
 
 const slidingPhrases = [
-  'Labour Compliance to',
-  'Payroll Solutions to',
-  'HR Outsourcing to',
-  'Statutory Filings to',
-  'Legal Expertise to',
+  'Labour Compliance',
+  'Payroll Solutions',
+  'HR Outsourcing',
+  'Statutory Filings',
+  'Legal Expertise',
 ];
 
 const servicesList = [
@@ -82,11 +82,11 @@ const Home = () => {
               variants={{ show: { transition: { staggerChildren: 0.13 } } }}>
 
               <motion.h1 variants={fadeUp}
-                className="font-bold leading-[1.08] mb-6"
+                className="font-semibold leading-[1.08] mb-6"
                 style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2.6rem, 5vw, 3.8rem)' }}>
                 <span className="text-navy-900 block">We bring</span>
-                {/* Sliding amber phrase */}
-                <span className="block overflow-hidden" style={{ height: '2.25em' }}>
+                {/* Sliding amber phrase — always one line */}
+                <span className="block overflow-hidden" style={{ height: '1.15em' }}>
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={phraseIndex}
@@ -94,12 +94,12 @@ const Home = () => {
                       animate={{ y: '0%', opacity: 1 }}
                       exit={{ y: '-100%', opacity: 0 }}
                       transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                      className="block font-bold" style={{ color: '#fda102' }}>
+                      className="block font-semibold whitespace-nowrap" style={{ color: '#fda102' }}>
                       {slidingPhrases[phraseIndex]}
                     </motion.span>
                   </AnimatePresence>
                 </span>
-                <span className="text-navy-900 block">your growth.</span>
+                <span className="text-navy-900 block">to your growth.</span>
               </motion.h1>
 
               <motion.p variants={fadeUp}
@@ -110,7 +110,10 @@ const Home = () => {
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
                 <Link to="/contact"
-                  className="inline-flex items-center gap-2 bg-navy-900 hover:bg-teal-600 text-white px-8 py-3.5 rounded-lg font-bold text-sm transition-all shadow-lg hover:scale-[1.02]">
+                  className="inline-flex items-center gap-2 text-white px-8 py-3.5 rounded-full font-bold text-sm transition-all shadow-lg hover:scale-[1.02]"
+                  style={{ backgroundColor: '#a83a00' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00'; }}>
                   Get Started Today <ArrowRight size={15} />
                 </Link>
 
@@ -118,7 +121,10 @@ const Home = () => {
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setServicesOpen(!servicesOpen)}
-                    className="inline-flex items-center gap-2 border-2 border-navy-900 text-navy-900 px-7 py-3 rounded-lg font-semibold text-sm hover:bg-navy-900 hover:text-white transition-all">
+                    className="inline-flex items-center gap-2 text-white px-7 py-3.5 rounded-full font-bold text-sm transition-all shadow-lg"
+                    style={{ backgroundColor: '#a83a00' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00'; }}>
                     Our Services
                     <ChevronDown size={15} className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
                   </button>
@@ -151,29 +157,62 @@ const Home = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}>
 
-              {/* 2×2 grid — fills full width, fixed height */}
-              <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full" style={{ height: '520px' }}>
+              {/*
+                Mosaic pattern (2 cols × 2 rows):
+                Col widths  : 2fr (narrower) | 3fr (wider)
+                Row heights : 3fr (taller)   | 2fr (shorter)
+                ┌──────────────┬─────────────────┐
+                │ Vertical     │ Square          │  ← tall row
+                │ Rectangle    │                 │
+                ├──────────────┼─────────────────┤
+                │ Square       │ Horizontal Rect │  ← short row
+                └──────────────┴─────────────────┘
+              */}
+              <div
+                className="w-full gap-3"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '2fr 3fr',
+                  gridTemplateRows: '3fr 2fr',
+                  height: '580px',
+                  gap: '12px',
+                }}>
 
-                {[
-                  { delay: 0.3, initial: { opacity: 0, y: -14 } },
-                  { delay: 0.4, initial: { opacity: 0, x: 14 } },
-                  { delay: 0.5, initial: { opacity: 0, x: -14 } },
-                  { delay: 0.55, initial: { opacity: 0, y: 14 } },
-                ].map((slot, i) => (
-                  <motion.div
-                    key={i}
-                    initial={slot.initial}
-                    animate={{ opacity: 1, x: 0, y: 0 }}
-                    transition={{ duration: 0.5, delay: slot.delay }}
-                    className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300 w-full h-full">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <rect x="3" y="3" width="18" height="18" rx="3"/>
-                      <circle cx="8.5" cy="8.5" r="1.5"/>
-                      <path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                    <span className="text-xs font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image</span>
-                  </motion.div>
-                ))}
+                {/* Slot 1 — Vertical Rectangle (top-left, portrait) */}
+                <motion.div
+                  initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                </motion.div>
+
+                {/* Slot 2 — Square (top-right) */}
+                <motion.div
+                  initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                </motion.div>
+
+                {/* Slot 3 — Square (bottom-left) */}
+                <motion.div
+                  initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                </motion.div>
+
+                {/* Slot 4 — Horizontal Rectangle (bottom-right, landscape) */}
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.55 }}
+                  className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                </motion.div>
 
               </div>
             </motion.div>
