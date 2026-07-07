@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const LogoMark = () => (
   <svg width="30" height="32" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="15" cy="4" r="2.4" fill="#14B8A6"/>
-    <line x1="15" y1="6" x2="15" y2="24" stroke="#14B8A6" strokeWidth="1.6" strokeLinecap="round"/>
-    <line x1="3" y1="10" x2="27" y2="10" stroke="#14B8A6" strokeWidth="1.6" strokeLinecap="round"/>
-    <line x1="5" y1="10" x2="5" y2="14" stroke="#14B8A6" strokeWidth="1.4" strokeLinecap="round"/>
-    <line x1="25" y1="10" x2="25" y2="14" stroke="#14B8A6" strokeWidth="1.4" strokeLinecap="round"/>
-    <path d="M1 14 Q5 21 9 14" stroke="#14B8A6" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-    <path d="M21 14 Q25 21 29 14" stroke="#14B8A6" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-    <line x1="10" y1="24" x2="20" y2="24" stroke="#14B8A6" strokeWidth="1.6" strokeLinecap="round"/>
+    <circle cx="15" cy="4" r="2.4" fill="#9B1C1C"/>
+    <line x1="15" y1="6" x2="15" y2="24" stroke="#9B1C1C" strokeWidth="1.6" strokeLinecap="round"/>
+    <line x1="3" y1="10" x2="27" y2="10" stroke="#9B1C1C" strokeWidth="1.6" strokeLinecap="round"/>
+    <line x1="5" y1="10" x2="5" y2="14" stroke="#9B1C1C" strokeWidth="1.4" strokeLinecap="round"/>
+    <line x1="25" y1="10" x2="25" y2="14" stroke="#9B1C1C" strokeWidth="1.4" strokeLinecap="round"/>
+    <path d="M1 14 Q5 21 9 14" stroke="#9B1C1C" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+    <path d="M21 14 Q25 21 29 14" stroke="#9B1C1C" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+    <line x1="10" y1="24" x2="20" y2="24" stroke="#9B1C1C" strokeWidth="1.6" strokeLinecap="round"/>
   </svg>
 );
 
@@ -98,7 +98,7 @@ const Layout = () => {
 
           <Link to="/" className="flex items-center gap-3 shrink-0 group">
             <LogoMark />
-            <span className="font-bold text-[1.25rem] text-navy-900 tracking-tight leading-none" style={{ fontFamily: 'Poppins, sans-serif' }}>Labour Law</span>
+            <span className="font-bold text-[1.25rem] text-navy-900 tracking-tight leading-none" style={{ fontFamily: 'Poppins, sans-serif' }}>Maru Consultancy</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -227,12 +227,12 @@ const Layout = () => {
               <div className="flex items-center gap-3.5 mb-5">
                 <LogoMarkWhite />
                 <div className="flex flex-col leading-none">
-                  <span className="font-display font-bold text-xl text-white tracking-tight leading-none">Labour Law</span>
-                  <span className="text-[9px] font-semibold text-teal-400 tracking-[0.22em] uppercase mt-1">Compliance · Law · Staffing</span>
+                  <span className="font-bold text-xl text-white tracking-tight leading-none" style={{ fontFamily: 'Poppins, sans-serif' }}>Maru Consultancy</span>
+                  <span className="text-[9px] font-semibold text-teal-400 tracking-[0.22em] uppercase mt-1" style={{ fontFamily: 'Poppins, sans-serif' }}>Labour Laws Consultants & Practitioners</span>
                 </div>
               </div>
-              <p className="text-white/55 mb-6 text-sm leading-relaxed">
-                India's premier professional services firm specializing in New Labour Codes, HR compliance, statutory filings, and staffing solutions.
+              <p className="text-white/55 mb-6 text-sm leading-relaxed" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                India's trusted labour law consultancy specializing in HR compliance, statutory filings, payroll, and staffing solutions across 15+ states.
               </p>
               <div className="flex gap-2.5">
                 <a href="https://facebook.com" target="_blank" rel="noreferrer"
@@ -309,7 +309,7 @@ const Layout = () => {
           </div>
 
           <div className="pt-8 border-t border-white/10 text-white/35 text-xs flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>&copy; {new Date().getFullYear()} Labour Law Consulting Pvt. Ltd. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Maru Consultancy Services Pvt. Ltd. All rights reserved.</p>
             <div className="flex gap-6">
               <Link to="#" className="hover:text-white transition-colors">Privacy Policy</Link>
               <Link to="#" className="hover:text-white transition-colors">Terms of Service</Link>

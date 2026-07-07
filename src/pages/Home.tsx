@@ -94,7 +94,7 @@ const Home = () => {
                       animate={{ y: '0%', opacity: 1 }}
                       exit={{ y: '-100%', opacity: 0 }}
                       transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                      className="block text-amber-500 font-bold">
+                      className="block font-bold" style={{ color: '#9B1C1C' }}>
                       {slidingPhrases[phraseIndex]}
                     </motion.span>
                   </AnimatePresence>
@@ -215,9 +215,9 @@ const Home = () => {
         {/* Background accents */}
         <div className="absolute top-0 left-0 w-full h-1 bg-teal-500" />
         <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #14B8A6, transparent)' }} />
+          style={{ background: 'radial-gradient(circle, #9B1C1C, transparent)' }} />
         <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #14B8A6, transparent)' }} />
+          style={{ background: 'radial-gradient(circle, #9B1C1C, transparent)' }} />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
@@ -397,7 +397,7 @@ const Home = () => {
       {/* ── Testimonials ──────────────────────────────────── */}
       <section className="py-20 bg-navy-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]"
-          style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #00C2A0 0%, transparent 60%)' }} />
+          style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #9B1C1C 0%, transparent 60%)' }} />
         <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
           <div className="text-center mb-14">
             <p className="text-teal-400 font-bold tracking-[0.18em] uppercase text-xs mb-3">Client Feedback</p>

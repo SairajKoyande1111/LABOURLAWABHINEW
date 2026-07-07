@@ -5,14 +5,18 @@
   --color-navy-900: #0F172A;
   --color-navy-800: #1E293B;
   --color-navy-700: #334155;
-  --color-teal-500: #14B8A6;
-  --color-teal-600: #0D9488;
-  --color-teal-700: #0F766E;
-  --color-teal-400: #2DD4BF;
-  --color-teal-50:  #F0FDFA;
-  --color-teal-100: #CCFBF1;
-  --color-mint-50: #f0faf8;
-  --color-mint-100: #d9f0eb;
+
+  /* Brand crimson / maroon — replaces teal throughout */
+  --color-teal-500: #9B1C1C;
+  --color-teal-600: #7F1414;
+  --color-teal-700: #671111;
+  --color-teal-400: #B52020;
+  --color-teal-50:  #FEF2F2;
+  --color-teal-100: #FDE8E8;
+
+  --color-mint-50:  #FEF9F9;
+  --color-mint-100: #FDE8E8;
+
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Playfair Display', serif;
   --font-poppins: 'Poppins', sans-serif;
