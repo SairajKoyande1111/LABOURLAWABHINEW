@@ -1,8 +1,33 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, ChevronRight, Star, TrendingUp, Shield, Users, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ALL_CLIENTS } from '../components/ClientLogos';
+
+/* ── Animated count-up stat ───────────────────────────────── */
+function StatCounter({ target, decimals = 0, suffix = '' }: { target: number; decimals?: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
+  const [display, setDisplay] = useState('0');
+
+  useEffect(() => {
+    if (!isInView) return;
+    const duration = 1800;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * target;
+      setDisplay(current.toFixed(decimals));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [isInView, target, decimals]);
+
+  return <span ref={ref}>{display}{suffix}</span>;
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -444,8 +469,6 @@ const Home = () => {
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.55 }}
             className="text-center mb-6 px-6">
-            <p className="font-bold tracking-[0.22em] uppercase text-xs mb-4"
-              style={{ fontFamily: 'Poppins, sans-serif', color: '#ffffff' }}>Client Feedback</p>
             <h2 className="font-bold text-white mb-4"
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.9rem, 3.2vw, 2.8rem)' }}>
               Trusted by Industry Leaders
@@ -456,20 +479,22 @@ const Home = () => {
             </p>
           </motion.div>
 
-          {/* ── Stats bar ── */}
+          {/* ── Stats bar — count-up on scroll-into-view ── */}
           <motion.div
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
             className="flex justify-center gap-8 md:gap-16 mb-14 px-6 flex-wrap">
             {[
-              { value: '500+', label: 'Clients Served' },
-              { value: '4.9★', label: 'Average Rating' },
-              { value: '15+', label: 'Years of Expertise' },
-              { value: '98%', label: 'Retention Rate' },
-            ].map(({ value, label }) => (
+              { target: 500, decimals: 0, suffix: '+',  label: 'Clients Served' },
+              { target: 4.9, decimals: 1, suffix: '★', label: 'Average Rating' },
+              { target: 15,  decimals: 0, suffix: '+',  label: 'Years of Expertise' },
+              { target: 98,  decimals: 0, suffix: '%',  label: 'Retention Rate' },
+            ].map(({ target, decimals, suffix, label }) => (
               <div key={label} className="text-center">
-                <p className="font-bold text-2xl mb-0.5"
-                  style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>{value}</p>
+                <p className="font-bold text-3xl mb-1"
+                  style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>
+                  <StatCounter target={target} decimals={decimals} suffix={suffix} />
+                </p>
                 <p className="text-xs uppercase tracking-widest"
                   style={{ fontFamily: 'Poppins, sans-serif', color: '#ffffff' }}>{label}</p>
               </div>
