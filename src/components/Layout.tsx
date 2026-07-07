@@ -92,35 +92,6 @@ const Layout = () => {
   return (
     <div className="min-h-screen flex flex-col font-sans">
 
-      {/* Top Bar */}
-      <div className="bg-teal-500 text-white py-2.5 hidden md:block">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"
-              className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 transition-colors flex items-center justify-center">
-              <IconFacebook />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn"
-              className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 transition-colors flex items-center justify-center">
-              <IconLinkedin />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter"
-              className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 transition-colors flex items-center justify-center">
-              <IconTwitter />
-            </a>
-          </div>
-          <div className="flex items-center gap-6 text-sm font-medium">
-            <a href="mailto:contact@labourcodes.in" className="flex items-center gap-1.5 hover:text-white/80 transition-colors">
-              <Mail size={13} /> contact@labourcodes.in
-            </a>
-            <span className="text-white/30">|</span>
-            <a href="tel:+919876543210" className="flex items-center gap-1.5 hover:text-white/80 transition-colors">
-              <Phone size={13} /> +91 98765 43210
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Sticky Header */}
       <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-lg' : 'shadow-md'} border-b border-gray-100`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[72px] flex justify-between items-center">

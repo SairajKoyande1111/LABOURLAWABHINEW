@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ChevronRight, Star, Quote, TrendingUp, Shield, Users, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ALL_CLIENTS } from '../components/ClientLogos';
@@ -8,6 +8,14 @@ const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay: i * 0.1 } }),
 };
+
+const slidingPhrases = [
+  'Labour Compliance to',
+  'Payroll Solutions to',
+  'HR Outsourcing to',
+  'Statutory Filings to',
+  'Legal Expertise to',
+];
 
 const servicesList = [
   { name: 'Labour Law Compliance', slug: 'labour-law-compliance' },
@@ -23,6 +31,7 @@ const servicesList = [
 
 const Home = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,6 +42,13 @@ const Home = () => {
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPhraseIndex((prev) => (prev + 1) % slidingPhrases.length);
+    }, 2800);
+    return () => clearInterval(interval);
   }, []);
 
   const testimonials = [
@@ -51,73 +67,134 @@ const Home = () => {
     <div className="w-full">
 
       {/* ── Hero ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ height: 'calc(100vh - 114px)', minHeight: '500px', maxHeight: '820px' }}>
-        <img src="/assets/hero-office.png" alt="Corporate Office"
-          className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-900/90 via-navy-900/70 to-navy-900/30" />
+      <section className="relative overflow-hidden bg-white py-16 lg:py-0 lg:min-h-[620px] lg:flex lg:items-center">
+        {/* Subtle dot pattern background */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
 
-        {/* Decorative bracket */}
-        <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-1 opacity-70">
-          <div className="w-3 h-3 border-t-2 border-l-2 border-teal-400" />
-          <div className="w-0.5 h-40 bg-teal-400/40 mx-1" />
-          <div className="w-3 h-3 border-b-2 border-l-2 border-teal-400" />
-        </div>
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 w-full">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 h-full flex items-center">
-          <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.12 } } }} className="max-w-2xl">
+            {/* ── Left: Text Content ── */}
+            <motion.div
+              className="lg:w-1/2 flex flex-col"
+              initial="hidden" animate="show"
+              variants={{ show: { transition: { staggerChildren: 0.13 } } }}>
 
-            <motion.span variants={fadeUp}
-              className="inline-block text-teal-400 font-bold tracking-[0.2em] uppercase text-xs mb-4">
-              LABOUR LAW
-            </motion.span>
+              <motion.h1 variants={fadeUp}
+                className="font-display font-bold leading-[1.1] mb-6"
+                style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)' }}>
+                <span className="text-navy-900 block">We bring</span>
+                {/* Sliding amber phrase */}
+                <span className="block overflow-hidden" style={{ height: '1.15em' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={phraseIndex}
+                      initial={{ y: '100%', opacity: 0 }}
+                      animate={{ y: '0%', opacity: 1 }}
+                      exit={{ y: '-100%', opacity: 0 }}
+                      transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+                      className="block text-amber-500 whitespace-nowrap">
+                      {slidingPhrases[phraseIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
+                <span className="text-navy-900 block">your growth.</span>
+              </motion.h1>
 
-            <motion.h1 variants={fadeUp}
-              className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white leading-[1.15] mb-5">
-              Future is perfect when your present makes sense
-            </motion.h1>
+              <motion.p variants={fadeUp}
+                className="text-gray-500 text-[15px] leading-relaxed mb-8 max-w-md">
+                Unlock the potential of your business with our comprehensive HR and compliance solutions. From recruitment to payroll management to compliance, we provide tailored services that ensure your business runs smoothly, efficiently, and in full compliance with all regulations.
+              </motion.p>
 
-            <motion.div variants={fadeUp} className="space-y-1.5 mb-7 text-white/80 text-sm font-medium">
-              <p>✦ 500+ Corporate Clients across India</p>
-              <p>✦ 21+ Years of uninterrupted compliance excellence</p>
-              <p>✦ 50+ Dedicated Labour Law Experts</p>
-              <p>✦ 15+ States covered with local regulatory expertise</p>
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
+                <Link to="/contact"
+                  className="inline-flex items-center gap-2 bg-navy-900 hover:bg-teal-600 text-white px-8 py-3.5 rounded-lg font-bold text-sm transition-all shadow-lg hover:scale-[1.02]">
+                  Get Started Today <ArrowRight size={15} />
+                </Link>
+
+                {/* Services dropdown */}
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setServicesOpen(!servicesOpen)}
+                    className="inline-flex items-center gap-2 border-2 border-navy-900 text-navy-900 px-7 py-3 rounded-lg font-semibold text-sm hover:bg-navy-900 hover:text-white transition-all">
+                    Our Services
+                    <ChevronDown size={15} className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {servicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50">
+                      {servicesList.map((s) => (
+                        <Link
+                          key={s.slug}
+                          to={`/services/${s.slug}`}
+                          onClick={() => setServicesOpen(false)}
+                          className="flex items-center gap-2.5 px-5 py-2.5 text-sm text-gray-700 hover:text-teal-600 hover:bg-teal-50 transition-colors font-medium">
+                          <span className="w-1.5 h-1.5 rounded-full bg-teal-400 shrink-0" />
+                          {s.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-              <Link to="/contact"
-                className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-7 py-3 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-teal-500/30 hover:scale-[1.02]">
-                Free Consultation <ArrowRight size={15} />
-              </Link>
+            {/* ── Right: Image Collage + Stat ── */}
+            <div className="lg:w-1/2 relative flex items-center justify-center min-h-[380px] lg:min-h-[520px]">
 
-              {/* Services dropdown */}
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setServicesOpen(!servicesOpen)}
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/25 text-white px-7 py-3 rounded-full font-semibold text-sm hover:bg-white/20 transition-all">
-                  Our Services
-                  <ChevronDown size={15} className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {servicesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.18 }}
-                    className="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50">
-                    {servicesList.map((s) => (
-                      <Link
-                        key={s.slug}
-                        to={`/services/${s.slug}`}
-                        onClick={() => setServicesOpen(false)}
-                        className="flex items-center gap-2.5 px-5 py-2.5 text-sm text-gray-700 hover:text-teal-600 hover:bg-teal-50 transition-colors font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-teal-400 shrink-0" />
-                        {s.name}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
+              {/* Big stat — centered background */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10 pointer-events-none select-none">
+                <p className="font-display font-black text-navy-900 leading-none"
+                  style={{ fontSize: 'clamp(5rem, 12vw, 9rem)' }}>21+</p>
+                <p className="text-gray-500 font-semibold text-sm mt-1 tracking-wide">Year's experience working</p>
+              </motion.div>
+
+              {/* Top-left image */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.3 }}
+                className="absolute top-0 left-4 lg:left-8 w-36 lg:w-44 h-28 lg:h-32 rounded-xl overflow-hidden shadow-lg z-20">
+                <img src="/assets/service-hr.png" alt="Office" className="w-full h-full object-cover" />
+              </motion.div>
+
+              {/* Bottom-left image */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.55, delay: 0.45 }}
+                className="absolute bottom-8 left-4 lg:left-8 w-32 lg:w-40 h-32 lg:h-40 rounded-xl overflow-hidden shadow-lg z-20">
+                <img src="/assets/service-staffing.png" alt="Team" className="w-full h-full object-cover" />
+              </motion.div>
+
+              {/* Top-right image */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.55, delay: 0.4 }}
+                className="absolute top-4 right-4 lg:right-0 w-32 lg:w-36 h-36 lg:h-44 rounded-xl overflow-hidden shadow-lg z-20">
+                <img src="/assets/service-labour.png" alt="Compliance" className="w-full h-full object-cover" />
+              </motion.div>
+
+              {/* Bottom-right image */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.5 }}
+                className="absolute bottom-4 right-4 lg:right-0 w-36 lg:w-44 h-28 lg:h-36 rounded-xl overflow-hidden shadow-lg z-20">
+                <img src="/assets/service-payroll.png" alt="Payroll" className="w-full h-full object-cover" />
+              </motion.div>
+            </div>
+
+          </div>
         </div>
       </section>
 
