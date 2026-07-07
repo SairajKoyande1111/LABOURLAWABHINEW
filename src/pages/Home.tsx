@@ -244,7 +244,7 @@ const Home = () => {
 
       {/* ── One Stop Consultancy Partner ─────────────────── */}
       <section className="py-16 overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
-        <div className="w-full px-6 lg:px-10">
+        <div className="w-full px-0">
 
           {/* Section header */}
           <motion.div className="text-center mb-12"
@@ -260,8 +260,8 @@ const Home = () => {
             </h2>
           </motion.div>
 
-          {/* 6-card horizontal grid — full width so text fits on one line per card */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 lg:gap-6">
+          {/* 6-card horizontal grid — always single row */}
+          <div className="grid grid-cols-6 gap-px">
             {[
               { anim: animStatutory,       title: 'Statutory Registrations',       desc: 'ESI, EPF, Professional Tax' },
               { anim: animLabourActs,      title: 'Core Labour Law Acts',           desc: 'Contract Labour, Gratuity, Bonus' },
@@ -275,24 +275,24 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="flex flex-col items-center text-center rounded-2xl p-6 lg:p-8"
+                className="flex flex-col items-center text-center rounded-2xl p-9 lg:p-14"
                 style={{ backgroundColor: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.18)' }}>
 
                 {/* Lottie animation — larger */}
                 <LottieAnim
                   animationData={item.anim}
-                  className="w-28 h-28 lg:w-32 lg:h-32 mb-5 shrink-0"
+                  className="w-36 h-36 lg:w-40 lg:h-40 mb-6 shrink-0"
                 />
 
                 {/* Title — single line */}
                 <h3 className="font-semibold text-white whitespace-nowrap mb-2"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.88rem', lineHeight: 1.3 }}>
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.95rem', lineHeight: 1.3 }}>
                   {item.title}
                 </h3>
 
                 {/* Desc — single line */}
                 <p className="whitespace-nowrap"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.73rem', fontWeight: 400, color: 'rgba(255,255,255,0.72)', lineHeight: 1.5 }}>
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.78rem', fontWeight: 400, color: 'rgba(255,255,255,0.72)', lineHeight: 1.5 }}>
                   {item.desc}
                 </p>
 
