@@ -3,35 +3,13 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Phone, Mail, MapPin, Menu, X, ChevronDown, ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const LogoMarkBrand = () => (
-  <svg width="30" height="32" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="15" cy="4" r="2.4" fill="#a83a00"/>
-    <line x1="15" y1="6" x2="15" y2="24" stroke="#a83a00" strokeWidth="1.6" strokeLinecap="round"/>
-    <line x1="3" y1="10" x2="27" y2="10" stroke="#a83a00" strokeWidth="1.6" strokeLinecap="round"/>
-    <line x1="5" y1="10" x2="5" y2="14" stroke="#a83a00" strokeWidth="1.4" strokeLinecap="round"/>
-    <line x1="25" y1="10" x2="25" y2="14" stroke="#a83a00" strokeWidth="1.4" strokeLinecap="round"/>
-    <path d="M1 14 Q5 21 9 14" stroke="#a83a00" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-    <path d="M21 14 Q25 21 29 14" stroke="#a83a00" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-    <line x1="10" y1="24" x2="20" y2="24" stroke="#a83a00" strokeWidth="1.6" strokeLinecap="round"/>
-  </svg>
-);
-
-const IconFacebook = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-  </svg>
-);
-const IconLinkedin = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
-    <circle cx="4" cy="4" r="2"/>
-  </svg>
-);
-const IconTwitter = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
-  </svg>
-);
+const socialLinks = [
+  { href: 'https://wa.me/919876543210',               img: '/assets/social-whatsapp.png',  label: 'WhatsApp'  },
+  { href: 'https://instagram.com/maruconsultancy',    img: '/assets/social-instagram.png', label: 'Instagram' },
+  { href: 'https://linkedin.com/company/maruconsultancy', img: '/assets/social-linkedin.png', label: 'LinkedIn'  },
+  { href: 'https://facebook.com/maruconsultancy',     img: '/assets/social-facebook.png',  label: 'Facebook'  },
+  { href: 'https://twitter.com/maruconsultancy',      img: '/assets/social-twitter.png',   label: 'Twitter'   },
+];
 
 const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -225,64 +203,51 @@ const Layout = () => {
         <Outlet />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white pt-16 pb-8 border-t-4" style={{ borderTopColor: '#a83a00' }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+      {/* ── Footer ─────────────────────────────────────────── */}
+      <footer className="bg-white border-t-4" style={{ borderTopColor: '#a83a00' }}>
 
-            {/* Brand column */}
+        {/* Main content grid */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-14 pb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+            {/* ── Col 1: Brand ── */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <div className="flex items-center gap-3.5 mb-5">
-                <LogoMarkBrand />
-                <div className="flex flex-col leading-none">
-                  <span className="font-bold text-xl tracking-tight leading-none"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Maru Consultancy</span>
-                  <span className="text-[9px] font-semibold tracking-[0.2em] uppercase mt-1"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>Labour Laws Consultants & Practitioners</span>
-                </div>
+              {/* Logo image */}
+              <div className="mb-5">
+                <img src="/assets/maru-logo-full.png" alt="Maru Consultancy Services"
+                  className="h-16 w-auto object-contain" />
               </div>
-              <p className="text-sm leading-relaxed mb-6"
-                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#6b7280' }}>
+              {/* Description — black text, base size */}
+              <p className="text-base leading-relaxed mb-6"
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#111111' }}>
                 India's trusted labour law consultancy specializing in HR compliance, statutory filings, payroll, and staffing solutions across 15+ states.
               </p>
-              <div className="flex gap-2.5">
-                {[
-                  { href: 'https://facebook.com', Icon: IconFacebook },
-                  { href: 'https://linkedin.com', Icon: IconLinkedin },
-                  { href: 'https://twitter.com', Icon: IconTwitter },
-                ].map(({ href, Icon }) => (
-                  <a key={href} href={href} target="_blank" rel="noreferrer"
-                    className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200"
-                    style={{ backgroundColor: '#f3f4f6', color: '#a83a00' }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00';
-                      (e.currentTarget as HTMLElement).style.color = '#ffffff';
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = '#f3f4f6';
-                      (e.currentTarget as HTMLElement).style.color = '#a83a00';
-                    }}>
-                    <Icon />
+              {/* Social icons — uploaded images */}
+              <div className="flex gap-3 flex-wrap">
+                {socialLinks.map(({ href, img, label }) => (
+                  <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}
+                    className="w-10 h-10 rounded-xl overflow-hidden hover:scale-110 transition-transform duration-200 shadow-sm">
+                    <img src={img} alt={label} className="w-full h-full object-cover" />
                   </a>
                 ))}
               </div>
             </motion.div>
 
-            {/* Services column */}
+            {/* ── Col 2: Our Services — all 8 ── */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
-              <h3 className="font-bold text-sm mb-6 uppercase tracking-wider"
+              <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
                 style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Our Services</h3>
               <ul className="space-y-3">
-                {serviceLinks.slice(0, 5).map((s) => (
+                {serviceLinks.slice(0, 8).map((s) => (
                   <li key={s.slug}>
                     <Link to={`/services/${s.slug}`}
-                      className="text-sm flex items-center gap-2 transition-colors duration-200"
-                      style={{ fontFamily: 'Poppins, sans-serif', color: '#6b7280' }}
+                      className="text-base flex items-center gap-2.5 transition-colors duration-200"
+                      style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#6b7280'; }}>
-                      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#fda102' }} />
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#111111'; }}>
+                      <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: '#fda102' }} />
                       {s.name}
                     </Link>
                   </li>
@@ -290,20 +255,20 @@ const Layout = () => {
               </ul>
             </motion.div>
 
-            {/* Contact column */}
+            {/* ── Col 3: Contact Us ── */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
-              <h3 className="font-bold text-sm mb-6 uppercase tracking-wider"
+              <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
                 style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Contact Us</h3>
-              <ul className="space-y-4">
-                <li className="flex gap-3 text-sm" style={{ fontFamily: 'Poppins, sans-serif', color: '#6b7280' }}>
-                  <MapPin size={16} className="shrink-0 mt-0.5" style={{ color: '#fda102' }} />
-                  <span>15th Floor, Nariman Point, Mumbai, Maharashtra 400021</span>
+              <ul className="space-y-5">
+                <li className="flex gap-3" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
+                  <MapPin size={18} className="shrink-0 mt-0.5" style={{ color: '#fda102' }} />
+                  <span className="text-base leading-snug">15th Floor, Nariman Point, Mumbai, Maharashtra 400021</span>
                 </li>
-                <li className="flex gap-3 text-sm" style={{ fontFamily: 'Poppins, sans-serif', color: '#6b7280' }}>
-                  <Phone size={15} className="shrink-0 mt-0.5" style={{ color: '#fda102' }} />
-                  <div>
-                    <a href="tel:+919876543210" className="block transition-colors duration-200"
+                <li className="flex gap-3" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
+                  <Phone size={17} className="shrink-0 mt-0.5" style={{ color: '#fda102' }} />
+                  <div className="text-base">
+                    <a href="tel:+919876543210" className="block transition-colors duration-200 font-medium"
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}>
                       +91 98765 43210
@@ -315,9 +280,10 @@ const Layout = () => {
                     </a>
                   </div>
                 </li>
-                <li className="flex gap-3 text-sm" style={{ fontFamily: 'Poppins, sans-serif', color: '#6b7280' }}>
-                  <Mail size={15} className="shrink-0 mt-0.5" style={{ color: '#fda102' }} />
-                  <a href="mailto:contact@labourcodes.in" className="block transition-colors duration-200"
+                <li className="flex gap-3" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
+                  <Mail size={17} className="shrink-0 mt-0.5" style={{ color: '#fda102' }} />
+                  <a href="mailto:contact@labourcodes.in"
+                    className="text-base transition-colors duration-200 font-medium"
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}>
                     contact@labourcodes.in
@@ -326,50 +292,90 @@ const Layout = () => {
               </ul>
             </motion.div>
 
-            {/* Newsletter column */}
+            {/* ── Col 4: Newsletter ── */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}>
-              <h3 className="font-bold text-sm mb-6 uppercase tracking-wider"
+              <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
                 style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Newsletter</h3>
-              <p className="text-sm mb-4 leading-relaxed"
-                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#6b7280' }}>
+              <p className="text-base mb-5 leading-relaxed"
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#111111' }}>
                 Subscribe for critical compliance alerts and regulatory updates.
               </p>
-              <form className="flex flex-col gap-2.5" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
                   placeholder="Your Email Address"
-                  className="rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-colors"
+                  className="rounded-lg px-4 py-3 text-base focus:outline-none transition-colors"
                   style={{
                     fontFamily: 'Poppins, sans-serif',
                     backgroundColor: '#f9fafb',
-                    border: '1px solid #e5e7eb',
-                    color: '#111827',
+                    border: '1.5px solid #e5e7eb',
+                    color: '#111111',
                   }}
                   onFocus={e => { (e.currentTarget as HTMLElement).style.borderColor = '#a83a00'; }}
                   onBlur={e => { (e.currentTarget as HTMLElement).style.borderColor = '#e5e7eb'; }}
                 />
                 <button type="submit"
-                  className="px-4 py-2.5 rounded-lg text-sm font-bold text-white transition-all duration-200"
+                  className="px-4 py-3 rounded-lg text-base font-bold text-white transition-all duration-200"
                   style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#a83a00' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#1a1a1a'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102';
+                    (e.currentTarget as HTMLElement).style.color = '#1a1a1a';
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00';
+                    (e.currentTarget as HTMLElement).style.color = '#ffffff';
+                  }}>
                   Subscribe Now
                 </button>
               </form>
             </motion.div>
           </div>
 
-          {/* Bottom bar */}
-          <div className="pt-8 border-t border-gray-200 text-xs flex flex-col md:flex-row justify-between items-center gap-4"
-            style={{ fontFamily: 'Poppins, sans-serif', color: '#9ca3af' }}>
-            <p>&copy; {new Date().getFullYear()} Maru Consultancy Services Pvt. Ltd. All rights reserved.</p>
-            <div className="flex gap-6">
+          {/* ── Google Map ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}
+            className="w-full rounded-2xl overflow-hidden border border-gray-200 shadow-sm mb-10"
+            style={{ height: '300px' }}>
+            <iframe
+              title="Maru Consultancy Services Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.0530!2d72.82161!3d18.92556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c2a26c9969%3A0x9b74cf8ec1c57f40!2sNariman%20Point%2C%20Mumbai%2C%20Maharashtra%20400021!5e0!3m2!1sen!2sin!4v1720343000000!5m2!1sen!2sin"
+              width="100%"
+              height="300"
+              style={{ border: 0, display: 'block' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </motion.div>
+
+          {/* ── Bottom bar ── */}
+          <div className="pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* Left: copyright + Airavata */}
+            <div className="text-center md:text-left" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              <p className="text-sm font-medium" style={{ color: '#111111' }}>
+                &copy; {new Date().getFullYear()} Maru Consultancy Services Pvt. Ltd. All rights reserved.
+              </p>
+              <p className="text-sm mt-0.5" style={{ color: '#6b7280' }}>
+                Designed &amp; Developed by{' '}
+                <a href="https://www.airavatatechnologies.com/" target="_blank" rel="noreferrer"
+                  className="font-semibold transition-colors duration-200"
+                  style={{ color: '#a83a00' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fda102'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}>
+                  Airavata Technologies
+                </a>
+              </p>
+            </div>
+            {/* Right: policy links */}
+            <div className="flex gap-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
               {['Privacy Policy', 'Terms of Service', 'Sitemap'].map((label) => (
                 <Link key={label} to="#"
-                  className="transition-colors duration-200"
+                  className="text-sm font-medium transition-colors duration-200"
+                  style={{ color: '#111111' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}>
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#111111'; }}>
                   {label}
                 </Link>
               ))}
