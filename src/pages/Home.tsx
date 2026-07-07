@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronRight, Star, Quote, TrendingUp, Shield, Users, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronRight, Star, TrendingUp, Shield, Users, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ALL_CLIENTS } from '../components/ClientLogos';
 
@@ -221,64 +221,93 @@ const Home = () => {
       </section>
 
       {/* ── Why Choose Us ─────────────────────────────────── */}
-      <section className="py-24 relative overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="flex flex-col lg:flex-row gap-14 items-center">
 
-        {/* Background accents */}
-        <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: '#fda102' }} />
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full opacity-[0.12]"
-          style={{ background: 'radial-gradient(circle, #fda102, transparent)' }} />
-        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-[0.10]"
-          style={{ background: 'radial-gradient(circle, #fda102, transparent)' }} />
+            {/* ── Left: Collage (same mosaic as hero) ── */}
+            <motion.div
+              className="w-full lg:w-[45%] shrink-0"
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
+              <div className="flex gap-3" style={{ height: '480px' }}>
 
-            {/* ── Left: Content ── */}
+                {/* Left column: one big tall card */}
+                <div className="flex flex-col" style={{ width: '42%' }}>
+                  <div
+                    className="rounded-2xl overflow-hidden border-2 border-dashed flex flex-col items-center justify-center gap-2 shadow-md"
+                    style={{ flex: 1, borderColor: 'rgba(255,255,255,0.35)', backgroundColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.45)' }}>
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                  </div>
+                </div>
+
+                {/* Right column: small card top + big card bottom */}
+                <div className="flex flex-col gap-3" style={{ width: '58%' }}>
+                  <div
+                    className="rounded-2xl overflow-hidden border-2 border-dashed flex flex-col items-center justify-center gap-2 shadow-md"
+                    style={{ flex: '0 0 42%', borderColor: 'rgba(255,255,255,0.35)', backgroundColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.45)' }}>
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                  </div>
+                  <div
+                    className="rounded-2xl overflow-hidden border-2 border-dashed flex flex-col items-center justify-center gap-2 shadow-md"
+                    style={{ flex: 1, borderColor: 'rgba(255,255,255,0.35)', backgroundColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.45)' }}>
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                  </div>
+                </div>
+
+              </div>
+            </motion.div>
+
+            {/* ── Right: Text Content ── */}
             <div className="lg:w-[55%]">
-              <motion.div initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }}
+              <motion.div initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.6 }}>
 
                 {/* Eyebrow */}
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-4">
                   <div className="w-8 h-[2px] bg-white" />
                   <p className="font-semibold tracking-[0.2em] uppercase text-xs"
                     style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>Why Labour Law</p>
                 </div>
 
-                {/* Heading */}
-                <h2 className="font-bold text-white leading-[1.1] mb-6"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2rem, 3.5vw, 2.9rem)' }}>
+                {/* Heading — lighter weight, smaller size */}
+                <h2 className="font-semibold text-white leading-[1.15] mb-4"
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.5rem, 2.6vw, 2.1rem)' }}>
                   Expertise that protects your business &amp; empowers your
                   <span style={{ color: '#fda102' }}> workforce.</span>
                 </h2>
 
-                <p className="text-white/80 mb-10 leading-relaxed text-[15px]"
+                <p className="text-white/75 mb-7 leading-relaxed text-sm"
                   style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}>
-                  We don't just file paperwork — we architect robust compliance frameworks. With India's labour law landscape shifting dramatically under the New Codes, you need a partner who anticipates regulatory changes before they impact your bottom line.
+                  We don't just file paperwork — we architect robust compliance frameworks. With India's labour law landscape shifting under the New Codes, you need a partner who anticipates regulatory changes before they impact your bottom line.
                 </p>
 
-                {/* Numbered feature rows */}
-                <div className="space-y-0 mb-10">
+                {/* Numbered feature rows — compact */}
+                <div className="space-y-0 mb-7">
                   {whyUs.map((item, i) => (
                     <motion.div key={i}
-                      initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.12 }}
-                      className="flex gap-5 py-5 border-b border-white/20 group">
-                      {/* Number */}
-                      <span className="font-black shrink-0 leading-none mt-0.5"
-                        style={{ fontFamily: 'Poppins, sans-serif', fontSize: '1.6rem', color: '#fda102' }}>
+                      initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
+                      className="flex gap-4 py-3.5 border-b border-white/20">
+                      <span className="font-bold shrink-0 leading-none mt-0.5 text-lg"
+                        style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      {/* Icon + text */}
-                      <div className="flex gap-4 items-start">
-                        <div className="mt-0.5 w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors"
+                      <div className="flex gap-3 items-start">
+                        <div className="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
                           style={{ backgroundColor: 'rgba(253,161,2,0.18)', color: '#fda102' }}>
-                          <item.icon size={18} />
+                          <item.icon size={15} />
                         </div>
                         <div>
-                          <h4 className="font-bold text-white mb-1 text-[0.95rem]"
+                          <h4 className="font-semibold text-white mb-0.5 text-sm"
                             style={{ fontFamily: 'Poppins, sans-serif' }}>{item.title}</h4>
-                          <p className="text-white/70 text-sm leading-relaxed"
+                          <p className="text-white/65 text-xs leading-relaxed"
                             style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}>{item.desc}</p>
                         </div>
                       </div>
@@ -286,79 +315,32 @@ const Home = () => {
                   ))}
                 </div>
 
-                {/* Stats row */}
+                {/* Stats row — compact */}
                 <motion.div
-                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
-                  className="grid grid-cols-4 gap-4 mb-10 p-5 rounded-2xl border border-white/20"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.10)' }}>
+                  initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.25 }}
+                  className="grid grid-cols-4 gap-3 mb-7 p-4 rounded-xl border border-white/20"
+                  style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
                   {[
-                    { num: '500+', label: 'Corporate Clients' },
-                    { num: '21+', label: 'Years Experience' },
-                    { num: '50+', label: 'Law Experts' },
-                    { num: '15+', label: 'States Covered' },
+                    { num: '500+', label: 'Clients' },
+                    { num: '21+', label: 'Years' },
+                    { num: '50+', label: 'Experts' },
+                    { num: '15+', label: 'States' },
                   ].map((s, i) => (
                     <div key={i} className="text-center">
-                      <p className="font-black leading-none mb-1"
-                        style={{ fontFamily: 'Poppins, sans-serif', fontSize: '1.6rem', color: '#fda102' }}>{s.num}</p>
-                      <p className="text-white/70 text-[11px] font-medium leading-snug"
+                      <p className="font-bold leading-none mb-0.5 text-xl"
+                        style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>{s.num}</p>
+                      <p className="text-white/65 text-[10px] font-medium"
                         style={{ fontFamily: 'Poppins, sans-serif' }}>{s.label}</p>
                     </div>
                   ))}
                 </motion.div>
 
                 <Link to="/about"
-                  className="inline-flex items-center gap-2 text-navy-900 px-8 py-3.5 rounded-full font-bold text-sm transition-all shadow-lg hover:scale-[1.02] hover:opacity-90"
-                  style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102' }}>
-                  Learn Our Story <ArrowRight size={15} />
+                  className="inline-flex items-center gap-2 text-white px-7 py-3 rounded-full font-semibold text-sm transition-all hover:opacity-90 hover:scale-[1.02] shadow-lg"
+                  style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102', color: '#1a1a1a' }}>
+                  Learn Our Story <ArrowRight size={14} />
                 </Link>
-              </motion.div>
-            </div>
-
-            {/* ── Right: Image ── */}
-            <div className="lg:w-[45%]">
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }} transition={{ duration: 0.65 }} className="relative">
-
-                {/* Frame accent */}
-                <div className="absolute -top-4 -right-4 w-full h-full rounded-2xl z-0 border-2 border-white/25" />
-
-                {/* Image */}
-                <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
-                  <img src="/assets/service-hr.png" alt="HR Experts" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                </div>
-
-                {/* Floating quote card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
-                  className="absolute -bottom-6 -left-6 bg-white text-navy-900 p-5 rounded-2xl shadow-2xl max-w-[260px] hidden md:block z-20 border border-gray-100">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3"
-                    style={{ backgroundColor: '#fda102' }}>
-                    <Quote size={16} className="text-white" />
-                  </div>
-                  <p className="text-[13px] font-semibold leading-snug text-navy-900 mb-2"
-                    style={{ fontFamily: 'Poppins, sans-serif' }}>
-                    "Compliance is not a cost center; it's the foundation of sustainable growth."
-                  </p>
-                  <div className="flex items-center gap-2 mt-3">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold"
-                      style={{ backgroundColor: '#a83a00' }}>MC</div>
-                    <span className="text-[11px] text-gray-400 font-medium" style={{ fontFamily: 'Poppins, sans-serif' }}>Maru Consultancy Team</span>
-                  </div>
-                </motion.div>
-
-                {/* Floating badge top-right */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.45 }}
-                  className="absolute -top-5 -right-5 w-20 h-20 rounded-2xl flex flex-col items-center justify-center shadow-xl z-20 hidden md:flex"
-                  style={{ backgroundColor: '#fda102' }}>
-                  <span className="font-black text-navy-900 text-xl leading-none" style={{ fontFamily: 'Poppins, sans-serif' }}>21+</span>
-                  <span className="text-navy-900/70 text-[9px] font-semibold text-center leading-tight mt-0.5" style={{ fontFamily: 'Poppins, sans-serif' }}>Years<br/>Expert</span>
-                </motion.div>
-
               </motion.div>
             </div>
 
