@@ -2,9 +2,34 @@ import { useState, useRef, useEffect } from 'react';
 import heroVideo from '@assets/7552418-hd_1080_1920_25fps_1783420764090.mp4';
 import heroImage from '@assets/pexels-vlada-karpovich-7433855_1783420874088.jpg';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { ArrowRight, ChevronRight, Star, TrendingUp, Shield, Users } from 'lucide-react';
+import { ArrowRight, ChevronRight, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ALL_CLIENTS } from '../components/ClientLogos';
+import lottie from 'lottie-web';
+import animStatutory from '../assets/animations/anim-statutory.json';
+import animLabourActs from '../assets/animations/anim-labour-acts.json';
+import animEstablishment from '../assets/animations/anim-establishment.json';
+import animPayrollPlanning from '../assets/animations/anim-payroll-planning.json';
+import animPayrollRecords from '../assets/animations/anim-payroll-records.json';
+import animHr from '../assets/animations/anim-hr.json';
+
+/* ── Lottie player wrapper (uses lottie-web directly, no duplicate-React risk) ── */
+function LottieAnim({ animationData, className }: { animationData: unknown; className?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const anim = lottie.loadAnimation({
+      container: containerRef.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      animationData: animationData as any,
+    });
+    return () => anim.destroy();
+  }, [animationData]);
+  return <div ref={containerRef} className={className} />;
+}
 
 /* ── Animated count-up stat ───────────────────────────────── */
 function StatCounter({ target, decimals = 0, suffix = '' }: { target: number; decimals?: number; suffix?: string }) {
@@ -66,9 +91,9 @@ const Home = () => {
   ];
 
   const whyUs = [
-    { icon: TrendingUp, title: "Pan-India Presence", desc: "Deep expertise across state-specific regulations and all central labour legislations from Kashmir to Kanyakumari." },
-    { icon: Shield, title: "Proactive Risk Mitigation", desc: "We identify vulnerabilities before they become liabilities — our audits are proactive, not reactive." },
-    { icon: Users, title: "Technology-Driven Approach", desc: "Proprietary compliance tracking tools give you real-time dashboards and automated deadline reminders." },
+    { title: "Pan-India Presence", desc: "Deep expertise across state-specific regulations and all central labour legislations from Kashmir to Kanyakumari." },
+    { title: "Proactive Risk Mitigation", desc: "We identify vulnerabilities before they become liabilities — our audits are proactive, not reactive." },
+    { title: "Technology-Driven Approach", desc: "Proprietary compliance tracking tools give you real-time dashboards and automated deadline reminders." },
   ];
 
   return (
@@ -217,108 +242,114 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── Why Choose Us ─────────────────────────────────── */}
+      {/* ── One Stop Consultancy Partner ─────────────────── */}
       <section className="py-16 overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-col lg:flex-row gap-8 items-stretch">
 
-            {/* ── Left: One Stop Consultancy Partner card ── */}
-            <motion.div
-              className="w-full lg:w-1/2"
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}>
+          {/* Section header */}
+          <motion.div className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}>
+            <p className="font-bold text-sm uppercase tracking-widest mb-3"
+              style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.7)' }}>
+              Your Complete HR &amp; Compliance Partner
+            </p>
+            <h2 className="font-bold text-white leading-[1.15]"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)' }}>
+              One Stop Consultancy Partner
+            </h2>
+          </motion.div>
 
-              <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl h-full flex flex-col">
-                {/* Eyebrow */}
-                <p className="font-bold text-base uppercase tracking-wider mb-4"
-                  style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>One Stop Consultancy Partner</p>
+          {/* 6-card horizontal grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-5">
+            {[
+              { anim: animStatutory,       title: 'Statutory Registrations',           desc: 'ESI, EPF, Professional Tax' },
+              { anim: animLabourActs,      title: 'Core Labour Law Acts',              desc: 'Contract Labour, Gratuity, Bonus, Minimum Wages' },
+              { anim: animEstablishment,   title: 'Establishment & Factory',           desc: 'MLWF, Shops Act, Factories Act, audits' },
+              { anim: animPayrollPlanning, title: 'Payroll Planning & Processing',     desc: 'Manpower planning, salary structuring' },
+              { anim: animPayrollRecords,  title: 'Payroll Reports & Records',         desc: 'MIS, salary register, FNF, bank transfers' },
+              { anim: animHr,              title: 'HR Related Matters',                desc: 'Advisory and day-to-day support' },
+            ].map((item, i) => (
+              <motion.div key={i}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                className="flex flex-col items-center text-center rounded-2xl p-5 lg:p-6"
+                style={{ backgroundColor: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.18)' }}>
 
-                {/* Heading */}
-                <h2 className="font-bold leading-[1.2] mb-6"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.35rem, 2.2vw, 1.85rem)', color: '#111111' }}>
-                  Everything your business needs,<br />
-                  <span style={{ color: '#a83a00' }}>under one roof.</span>
-                </h2>
+                {/* Lottie animation */}
+                <LottieAnim
+                  animationData={item.anim}
+                  className="w-20 h-20 lg:w-24 lg:h-24 mb-4 shrink-0"
+                />
 
-                {/* Service list */}
-                <div className="flex-1 space-y-0">
-                  {[
-                    { title: 'Statutory Registrations', desc: 'ESI, EPF, Professional Tax' },
-                    { title: 'Core Labour Law Acts', desc: 'Contract Labour, Gratuity, Bonus, Minimum Wages' },
-                    { title: 'Establishment & Factory Compliance', desc: 'MLWF, Shops Act, Factories Act, other labour laws, audits' },
-                    { title: 'Payroll Planning & Processing', desc: 'Manpower planning, salary structuring, processing' },
-                    { title: 'Payroll Reports & Records', desc: 'MIS, salary register, FNF, bank transfers' },
-                    { title: 'HR Related Matters', desc: 'Advisory and day-to-day support' },
-                  ].map((item, i) => (
-                    <motion.div key={i}
-                      initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }}
-                      className="flex gap-4 py-3.5 border-b border-gray-100 last:border-b-0">
-                      <span className="font-bold shrink-0 leading-none mt-0.5 text-lg"
-                        style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <div>
-                        <h4 className="font-semibold mb-0.5 text-sm"
-                          style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>{item.title}</h4>
-                        <p className="text-xs leading-relaxed"
-                          style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#666666' }}>{item.desc}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+                {/* Title */}
+                <h3 className="font-semibold text-white leading-snug mb-2"
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.8rem' }}>
+                  {item.title}
+                </h3>
 
-            {/* ── Right: Why Labour Law card ── */}
-            <div className="w-full lg:w-1/2">
-              <motion.div initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.6 }}
-                className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl h-full flex flex-col">
+                {/* Desc */}
+                <p style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.7rem', fontWeight: 400, color: 'rgba(255,255,255,0.72)', lineHeight: 1.5 }}>
+                  {item.desc}
+                </p>
 
-                {/* Eyebrow */}
-                <p className="font-bold text-base uppercase tracking-wider mb-4"
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── Why Labour Law ────────────────────────────────── */}
+      <section className="py-16" style={{ backgroundColor: '#f9f5f2' }}>
+        <div className="max-w-5xl mx-auto px-6 lg:px-10">
+          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6 }}
+            className="bg-white rounded-2xl p-8 lg:p-12 shadow-xl">
+
+            {/* Two-column layout: left = heading + para, right = numbered list */}
+            <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+
+              {/* Left */}
+              <div className="lg:w-[45%] shrink-0">
+                <p className="font-bold text-sm uppercase tracking-widest mb-4"
                   style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Why Labour Law</p>
-
-                {/* Heading */}
-                <h2 className="font-bold leading-[1.15] mb-4"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.35rem, 2.2vw, 1.85rem)', color: '#111111' }}>
+                <h2 className="font-bold leading-[1.2] mb-5"
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.4rem, 2.4vw, 2rem)', color: '#111111' }}>
                   Expertise that protects your business &amp; empowers your
                   <span style={{ color: '#a83a00' }}> workforce.</span>
                 </h2>
-
-                <p className="mb-7 leading-relaxed text-base"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#444444' }}>
+                <p className="leading-relaxed text-sm"
+                  style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#555555' }}>
                   We don't just file paperwork — we architect robust compliance frameworks. With India's labour law landscape shifting under the New Codes, you need a partner who anticipates regulatory changes before they impact your bottom line.
                 </p>
+              </div>
 
-                {/* Numbered feature rows — no icons */}
-                <div className="flex-1 space-y-0">
-                  {whyUs.map((item, i) => (
-                    <motion.div key={i}
-                      initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className="flex gap-4 py-4 border-b border-gray-100 last:border-b-0">
-                      <span className="font-bold shrink-0 leading-none mt-0.5 text-lg"
-                        style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <div>
-                        <h4 className="font-semibold mb-0.5 text-sm"
-                          style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>{item.title}</h4>
-                        <p className="text-xs leading-relaxed"
-                          style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#666666' }}>{item.desc}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+              {/* Right: numbered rows */}
+              <div className="flex-1 divide-y divide-gray-100">
+                {whyUs.map((item, i) => (
+                  <motion.div key={i}
+                    initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
+                    className="flex gap-5 py-5 first:pt-0 last:pb-0">
+                    <span className="font-bold shrink-0 text-xl leading-none mt-0.5"
+                      style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div>
+                      <h4 className="font-semibold mb-1 text-sm"
+                        style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>{item.title}</h4>
+                      <p className="text-xs leading-relaxed"
+                        style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#666666' }}>{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
 
-              </motion.div>
             </div>
-
-          </div>
+          </motion.div>
         </div>
       </section>
 
