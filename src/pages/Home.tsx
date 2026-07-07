@@ -67,26 +67,32 @@ const Home = () => {
     <div className="w-full">
 
       {/* ── Hero ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white py-16 lg:py-0 lg:min-h-[620px] lg:flex lg:items-center">
+      <section className="relative overflow-hidden bg-white py-16 lg:py-0 lg:min-h-[700px] lg:flex lg:items-center">
         {/* Subtle dot pattern background */}
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 w-full">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          {/*
+            Fixed grid — text col never squishes the collage col.
+            Text: 44% | Collage: 56%
+          */}
+          <div className="flex flex-col lg:grid lg:gap-10 items-center"
+            style={{ gridTemplateColumns: '44fr 56fr' }}>
 
-            {/* ── Left: Text Content ── */}
+            {/* ── Left: Text Content — flex-none keeps it from shrinking ── */}
             <motion.div
-              className="lg:w-1/2 flex flex-col"
+              className="w-full flex flex-col"
               initial="hidden" animate="show"
               variants={{ show: { transition: { staggerChildren: 0.13 } } }}>
 
               <motion.h1 variants={fadeUp}
-                className="font-semibold leading-[1.08] mb-6"
-                style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2.6rem, 5vw, 3.8rem)' }}>
+                className="font-semibold leading-[1.1] mb-6"
+                style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2.4rem, 4.2vw, 3.6rem)' }}>
                 <span className="text-navy-900 block">We bring</span>
-                {/* Sliding amber phrase — always one line */}
-                <span className="block overflow-hidden" style={{ height: '1.15em' }}>
+
+                {/* Sliding amber phrase — clipped only vertically so long phrases stay on one line */}
+                <span className="block" style={{ overflow: 'hidden', height: '1.2em' }}>
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={phraseIndex}
@@ -94,11 +100,13 @@ const Home = () => {
                       animate={{ y: '0%', opacity: 1 }}
                       exit={{ y: '-100%', opacity: 0 }}
                       transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                      className="block font-semibold whitespace-nowrap" style={{ color: '#fda102' }}>
+                      className="block font-semibold"
+                      style={{ color: '#fda102', whiteSpace: 'nowrap', fontSize: 'clamp(2rem, 3.6vw, 3rem)' }}>
                       {slidingPhrases[phraseIndex]}
                     </motion.span>
                   </AnimatePresence>
                 </span>
+
                 <span className="text-navy-900 block">to your growth.</span>
               </motion.h1>
 
@@ -150,70 +158,61 @@ const Home = () => {
               </motion.div>
             </motion.div>
 
-            {/* ── Right: Creative Image Collage ── */}
+            {/* ── Right: Collage — photo-frame mosaic ──────────────
+                Layout (matches reference image):
+                ┌───────────────┬──────────────────────────┐
+                │               │  Card B (small portrait) │
+                │  Card A       ├──────────────────────────┤
+                │  (BIG tall    │  Card C (big landscape/  │
+                │   portrait)   │   portrait)              │
+                └───────────────┴──────────────────────────┘
+                Two flex-columns side by side; left is one full-height card,
+                right has two stacked cards.
+            ──────────────────────────────────────────────── */}
             <motion.div
-              className="lg:w-1/2 w-full"
+              className="w-full mt-10 lg:mt-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}>
 
-              {/*
-                Mosaic pattern (2 cols × 2 rows):
-                Col widths  : 2fr (narrower) | 3fr (wider)
-                Row heights : 3fr (taller)   | 2fr (shorter)
-                ┌──────────────┬─────────────────┐
-                │ Vertical     │ Square          │  ← tall row
-                │ Rectangle    │                 │
-                ├──────────────┼─────────────────┤
-                │ Square       │ Horizontal Rect │  ← short row
-                └──────────────┴─────────────────┘
-              */}
-              <div
-                className="w-full gap-3"
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '2fr 3fr',
-                  gridTemplateRows: '3fr 2fr',
-                  height: '580px',
-                  gap: '12px',
-                }}>
+              <div className="flex gap-3" style={{ height: '620px' }}>
 
-                {/* Slot 1 — Vertical Rectangle (top-left, portrait) */}
-                <motion.div
-                  initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                  <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
-                </motion.div>
+                {/* ── Left column: one big tall portrait ── */}
+                <div className="flex flex-col" style={{ width: '42%' }}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.55, delay: 0.3 }}
+                    className="rounded-2xl overflow-hidden border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300 shadow-sm"
+                    style={{ flex: 1 }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                  </motion.div>
+                </div>
 
-                {/* Slot 2 — Square (top-right) */}
-                <motion.div
-                  initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                  <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
-                </motion.div>
+                {/* ── Right column: small card on top + big card on bottom ── */}
+                <div className="flex flex-col gap-3" style={{ width: '58%' }}>
 
-                {/* Slot 3 — Square (bottom-left) */}
-                <motion.div
-                  initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                  className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                  <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
-                </motion.div>
+                  {/* Card B — smaller portrait/square on top */}
+                  <motion.div
+                    initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, delay: 0.4 }}
+                    className="rounded-2xl overflow-hidden border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300 shadow-sm"
+                    style={{ flex: '0 0 42%' }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                  </motion.div>
 
-                {/* Slot 4 — Horizontal Rectangle (bottom-right, landscape) */}
-                <motion.div
-                  initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.55 }}
-                  className="rounded-2xl overflow-hidden shadow-sm border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                  <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
-                </motion.div>
+                  {/* Card C — big card on bottom */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, delay: 0.5 }}
+                    className="rounded-2xl overflow-hidden border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300 shadow-sm"
+                    style={{ flex: 1 }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                  </motion.div>
 
+                </div>
               </div>
             </motion.div>
 
