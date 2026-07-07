@@ -425,14 +425,16 @@ const Home = () => {
       </section>
 
       {/* ── Testimonials ──────────────────────────────────── */}
-      <section className="py-24 relative overflow-hidden" style={{ backgroundColor: '#0d0d0d' }}>
+      <section className="py-24 relative overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
 
         {/* Decorative ambient glows */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
-            style={{ backgroundColor: '#a83a00' }} />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl"
+          <div className="absolute top-0 left-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style={{ backgroundColor: '#7a2900' }} />
+          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full opacity-20 blur-3xl"
             style={{ backgroundColor: '#fda102' }} />
+          <div className="absolute inset-0 opacity-5"
+            style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
         </div>
 
         <div className="relative z-10">
@@ -474,37 +476,35 @@ const Home = () => {
                 <p className="font-bold text-2xl mb-0.5"
                   style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>{value}</p>
                 <p className="text-xs uppercase tracking-widest"
-                  style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.45)' }}>{label}</p>
+                  style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.7)' }}>{label}</p>
               </div>
             ))}
           </motion.div>
 
           {/* ── Scrolling card strip ── */}
           <div className="overflow-hidden relative">
-            {/* Fade edges */}
+            {/* Fade edges matching section bg */}
             <div className="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to right, #0d0d0d, transparent)' }} />
+              style={{ background: 'linear-gradient(to right, #a83a00, transparent)' }} />
             <div className="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to left, #0d0d0d, transparent)' }} />
+              style={{ background: 'linear-gradient(to left, #a83a00, transparent)' }} />
 
             <div className="animate-marquee-testimonials pb-2">
               {[...testimonials, ...testimonials].map((test, i) => (
                 <div key={i}
-                  className="shrink-0 mx-4 rounded-2xl flex flex-col relative overflow-hidden"
+                  className="shrink-0 mx-4 rounded-2xl flex flex-col relative overflow-hidden bg-white"
                   style={{
                     width: '360px',
-                    background: 'linear-gradient(145deg, #1c1c1c 0%, #161616 100%)',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
                   }}>
-                  {/* Amber top accent bar */}
-                  <div className="h-[3px] w-full"
-                    style={{ background: 'linear-gradient(90deg, #a83a00, #fda102)' }} />
+                  {/* Amber-to-orange top accent bar */}
+                  <div className="h-[4px] w-full"
+                    style={{ background: 'linear-gradient(90deg, #fda102, #a83a00)' }} />
 
                   <div className="p-7 flex flex-col flex-grow">
                     {/* Large decorative quote mark */}
-                    <div className="text-6xl font-serif leading-none mb-1 select-none"
-                      style={{ color: '#fda102', opacity: 0.25, lineHeight: 1 }}>"</div>
+                    <div className="text-7xl font-serif leading-none select-none -mt-2 mb-0"
+                      style={{ color: '#fda102', opacity: 0.18, lineHeight: 1 }}>"</div>
 
                     {/* Stars */}
                     <div className="flex gap-1 mb-4">
@@ -515,32 +515,32 @@ const Home = () => {
 
                     {/* Quote text */}
                     <p className="text-sm leading-relaxed mb-7 flex-grow"
-                      style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: 'rgba(255,255,255,0.78)' }}>
+                      style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#333333' }}>
                       {test.text}
                     </p>
 
                     {/* Divider */}
-                    <div className="h-px mb-5" style={{ backgroundColor: 'rgba(255,255,255,0.07)' }} />
+                    <div className="h-px mb-5" style={{ backgroundColor: '#f0f0f0' }} />
 
                     {/* Author row */}
                     <div className="flex items-center gap-3.5">
-                      {/* Avatar with gradient ring */}
-                      <div className="p-[2px] rounded-full shrink-0"
+                      {/* Avatar with amber ring */}
+                      <div className="p-[2.5px] rounded-full shrink-0"
                         style={{ background: 'linear-gradient(135deg, #fda102, #a83a00)' }}>
                         <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
-                          style={{ backgroundColor: '#1c1c1c', color: '#fda102', fontFamily: 'Poppins, sans-serif' }}>
+                          style={{ backgroundColor: '#fff7ed', color: '#a83a00', fontFamily: 'Poppins, sans-serif' }}>
                           {test.author.charAt(0)}
                         </div>
                       </div>
                       <div>
-                        <p className="font-semibold text-white text-sm leading-none mb-1"
-                          style={{ fontFamily: 'Poppins, sans-serif' }}>{test.author}</p>
+                        <p className="font-semibold text-sm leading-none mb-1"
+                          style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>{test.author}</p>
                         <p className="text-xs"
-                          style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.45)' }}>{test.role}</p>
+                          style={{ fontFamily: 'Poppins, sans-serif', color: '#888888' }}>{test.role}</p>
                       </div>
                       {/* Verified badge */}
                       <div className="ml-auto shrink-0 px-2.5 py-1 rounded-full text-[10px] font-semibold"
-                        style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: 'rgba(253,161,2,0.12)', color: '#fda102', border: '1px solid rgba(253,161,2,0.25)' }}>
+                        style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fff7ed', color: '#a83a00', border: '1px solid #fda102' }}>
                         Verified
                       </div>
                     </div>
