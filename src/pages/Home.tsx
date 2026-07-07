@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import heroVideo from '@assets/7552418-hd_1080_1920_25fps_1783420764090.mp4';
+import heroImage from '@assets/pexels-vlada-karpovich-7433855_1783420874088.jpg';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, ChevronRight, Star, TrendingUp, Shield, Users, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -210,39 +212,45 @@ const Home = () => {
 
               <div className="flex gap-3" style={{ height: '620px', paddingLeft: '6%' }}>
 
-                {/* ── Left column: one big tall portrait ── */}
+                {/* ── Left column: one big tall portrait — VIDEO ── */}
                 <div className="flex flex-col" style={{ width: '48%' }}>
                   <motion.div
                     initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.55, delay: 0.3 }}
-                    className="rounded-2xl overflow-hidden border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300 shadow-sm"
+                    className="rounded-2xl overflow-hidden shadow-sm"
                     style={{ flex: 1 }}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                    <video
+                      src={heroVideo}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      aria-hidden="true"
+                      className="w-full h-full object-cover"
+                      style={{ display: 'block' }}
+                    />
                   </motion.div>
                 </div>
 
                 {/* ── Right column: small card on top + big card on bottom ── */}
                 <div className="flex flex-col gap-3" style={{ width: '52%' }}>
 
-                  {/* Card B — smaller portrait/square on top */}
+                  {/* Card B — smaller portrait/square on top — IMAGE */}
                   <motion.div
                     initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.55, delay: 0.4 }}
-                    className="rounded-2xl overflow-hidden border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300 shadow-sm"
+                    className="rounded-2xl overflow-hidden shadow-sm"
                     style={{ flex: '0 0 42%' }}>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                    <img src={heroImage} alt="" aria-hidden="true" className="w-full h-full object-cover" />
                   </motion.div>
 
-                  {/* Card C — big card on bottom */}
+                  {/* Card C — big card on bottom — IMAGE */}
                   <motion.div
                     initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.55, delay: 0.5 }}
-                    className="rounded-2xl overflow-hidden border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300 shadow-sm"
+                    className="rounded-2xl overflow-hidden shadow-sm"
                     style={{ flex: 1 }}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                    <span className="text-[11px] font-medium tracking-wide" style={{ fontFamily: 'Poppins, sans-serif' }}>Image / Video</span>
+                    <img src={heroImage} alt="" aria-hidden="true" className="w-full h-full object-cover" />
                   </motion.div>
 
                 </div>
