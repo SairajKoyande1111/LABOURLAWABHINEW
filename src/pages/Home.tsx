@@ -275,13 +275,13 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="flex flex-col items-center text-center rounded-2xl p-6 lg:p-8"
+                className="flex flex-col items-center text-center rounded-2xl p-8 lg:p-10"
                 style={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb' }}>
 
                 {/* Lottie animation — larger */}
                 <LottieAnim
                   animationData={item.anim}
-                  className="w-28 h-28 lg:w-32 lg:h-32 mb-4 shrink-0"
+                  className="w-32 h-32 lg:w-36 lg:h-36 mb-5 shrink-0"
                 />
 
                 {/* Title — single line */}
