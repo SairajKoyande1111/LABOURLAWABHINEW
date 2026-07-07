@@ -445,18 +445,13 @@ const Home = () => {
             viewport={{ once: true }} transition={{ duration: 0.55 }}
             className="text-center mb-6 px-6">
             <p className="font-bold tracking-[0.22em] uppercase text-xs mb-4"
-              style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>Client Feedback</p>
+              style={{ fontFamily: 'Poppins, sans-serif', color: '#ffffff' }}>Client Feedback</p>
             <h2 className="font-bold text-white mb-4"
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.9rem, 3.2vw, 2.8rem)' }}>
-              Trusted by Industry{' '}
-              <span style={{
-                background: 'linear-gradient(90deg, #fda102, #a83a00)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>Leaders</span>
+              Trusted by Industry Leaders
             </h2>
             <p className="text-base max-w-xl mx-auto"
-              style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>
+              style={{ fontFamily: 'Poppins, sans-serif', color: '#ffffff', fontWeight: 400 }}>
               Real results from real clients across India's most demanding industries.
             </p>
           </motion.div>
@@ -476,18 +471,13 @@ const Home = () => {
                 <p className="font-bold text-2xl mb-0.5"
                   style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>{value}</p>
                 <p className="text-xs uppercase tracking-widest"
-                  style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.7)' }}>{label}</p>
+                  style={{ fontFamily: 'Poppins, sans-serif', color: '#ffffff' }}>{label}</p>
               </div>
             ))}
           </motion.div>
 
           {/* ── Scrolling card strip ── */}
           <div className="overflow-hidden relative">
-            {/* Fade edges matching section bg */}
-            <div className="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to right, #a83a00, transparent)' }} />
-            <div className="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to left, #a83a00, transparent)' }} />
 
             <div className="animate-marquee-testimonials pb-2">
               {[...testimonials, ...testimonials].map((test, i) => (
@@ -502,10 +492,6 @@ const Home = () => {
                     style={{ background: 'linear-gradient(90deg, #fda102, #a83a00)' }} />
 
                   <div className="p-7 flex flex-col flex-grow">
-                    {/* Large decorative quote mark */}
-                    <div className="text-7xl font-serif leading-none select-none -mt-2 mb-0"
-                      style={{ color: '#fda102', opacity: 0.18, lineHeight: 1 }}>"</div>
-
                     {/* Stars */}
                     <div className="flex gap-1 mb-4">
                       {[...Array(5)].map((_, j) => (
@@ -537,11 +523,6 @@ const Home = () => {
                           style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>{test.author}</p>
                         <p className="text-xs"
                           style={{ fontFamily: 'Poppins, sans-serif', color: '#888888' }}>{test.role}</p>
-                      </div>
-                      {/* Verified badge */}
-                      <div className="ml-auto shrink-0 px-2.5 py-1 rounded-full text-[10px] font-semibold"
-                        style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fff7ed', color: '#a83a00', border: '1px solid #fda102' }}>
-                        Verified
                       </div>
                     </div>
                   </div>
