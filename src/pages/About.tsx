@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroVideo from '@assets/7552418-hd_1080_1920_25fps_1783420764090.mp4';
 import ctaVideo from '@assets/7691594-hd_1920_1080_25fps_1783493752065.mp4';
@@ -36,6 +36,38 @@ const STORY_SLIDES = [
   },
 ];
 
+const OFFICE_IMAGES = [
+  '/assets/hero-office.png',
+  '/assets/service-audits.png',
+  '/assets/service-legal.png',
+];
+
+const OfficeImageCarousel = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % OFFICE_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="absolute inset-0">
+      <AnimatePresence>
+        {OFFICE_IMAGES.map((src, i) => (
+          i === index && (
+            <motion.img key={src} src={src} alt="Our office"
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 1 }} />
+          )
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const StoryCarousel = () => {
   const [index, setIndex] = useState(0);
 
@@ -67,10 +99,15 @@ const StoryCarousel = () => {
       </AnimatePresence>
 
       <div className="flex items-center justify-between">
-        <Link to="/contact" className="inline-flex items-center gap-2 font-semibold text-sm hover:gap-3 transition-all w-fit"
+        <a href="#journey"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="inline-flex items-center gap-2 font-semibold text-sm hover:gap-3 transition-all w-fit cursor-pointer"
           style={{ fontFamily: PP, color: '#a83a00' }}>
           Our full story <ArrowRight size={15} />
-        </Link>
+        </a>
 
         {/* Progress dots */}
         <div className="flex items-center gap-2">
@@ -268,38 +305,45 @@ const About = () => {
             <motion.div className="col-span-12 lg:col-span-5 row-span-2 rounded-3xl overflow-hidden relative group"
               initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.65 }}>
-              <img src="/assets/hero-office.png" alt="Our office"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0"
-                style={{ background: 'linear-gradient(to top, rgba(168,58,0,0.85) 0%, transparent 55%)' }} />
+              <OfficeImageCarousel />
+              <div className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)' }} />
               <div className="absolute bottom-0 left-0 p-8">
                 <p className="font-bold text-4xl text-white mb-1" style={{ fontFamily: PP }}>Est.</p>
                 <p className="font-bold text-white" style={{ fontFamily: PP, fontSize: '6rem', lineHeight: 1, color: '#fda102' }}>2003</p>
               </div>
             </motion.div>
 
-            {/* Top-right: stat card */}
-            <motion.div className="col-span-12 lg:col-span-4 row-span-1 rounded-3xl flex flex-col justify-center px-8 py-7"
-              style={{ backgroundColor: '#a83a00' }}
+            {/* Top-right: combined horizontal card — stats + video */}
+            <motion.div className="col-span-12 lg:col-span-7 row-span-1 rounded-3xl overflow-hidden flex flex-col sm:flex-row"
               initial={{ opacity: 0, y: -24 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.1 }}>
-              <p className="font-bold text-xs uppercase tracking-[0.2em] mb-3" style={{ fontFamily: PP, color: '#fda102' }}>By the Numbers</p>
-              <div className="grid grid-cols-3 gap-4">
-                {[['500+','Clients'],['21+','Years'],['15+','States']].map(([n,l]) => (
-                  <div key={l}>
-                    <p className="font-bold text-2xl text-white" style={{ fontFamily: PP }}>{n}</p>
-                    <p className="text-xs text-white/60 uppercase tracking-wide" style={{ fontFamily: PP }}>{l}</p>
-                  </div>
-                ))}
+              {/* Stats side */}
+              <div className="flex-1 flex flex-col justify-center px-8 py-7"
+                style={{ backgroundColor: '#a83a00' }}>
+                <p className="font-bold text-xs uppercase tracking-[0.2em] mb-3" style={{ fontFamily: PP, color: '#fda102' }}>By the Numbers</p>
+                <div className="grid grid-cols-3 gap-4">
+                  {[['500+','Clients'],['21+','Years'],['15+','States']].map(([n,l]) => (
+                    <div key={l}>
+                      <p className="font-bold text-2xl text-white" style={{ fontFamily: PP }}>{n}</p>
+                      <p className="text-xs text-white/60 uppercase tracking-wide" style={{ fontFamily: PP }}>{l}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </motion.div>
-
-            {/* Top-right image */}
-            <motion.div className="col-span-12 lg:col-span-3 row-span-1 rounded-3xl overflow-hidden relative group"
-              initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.15 }}>
-              <img src="/assets/service-hr.png" alt=""
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              {/* Video side — placeholder until a client video is provided */}
+              <div className="relative flex-1 flex items-center justify-center min-h-[140px]"
+                style={{ backgroundColor: '#1a1a1a' }}>
+                <div className="absolute inset-0 opacity-40"
+                  style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px)', backgroundSize: '20px 20px' }} />
+                <div className="relative flex flex-col items-center gap-2">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: '#fda102' }}>
+                    <Play size={16} style={{ color: '#fff' }} fill="#fff" />
+                  </div>
+                  <p className="text-[11px] uppercase tracking-widest" style={{ fontFamily: PP, color: 'rgba(255,255,255,0.55)' }}>Video coming soon</p>
+                </div>
+              </div>
             </motion.div>
 
             {/* Bottom-right: story carousel */}
