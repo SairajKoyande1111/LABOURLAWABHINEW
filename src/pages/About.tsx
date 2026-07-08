@@ -348,60 +348,75 @@ const About = () => {
           style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.06) 1.5px, transparent 1.5px)', backgroundSize: '28px 28px' }} />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
-            <p className="font-bold text-xs uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#fda102' }}>Our Journey</p>
+          <div className="flex justify-center mb-5">
+            <p className="font-bold uppercase tracking-[0.3em]" style={{ fontFamily: PP, color: '#fda102', fontSize: '1rem' }}>Our Journey</p>
           </div>
-          <h2 className="font-bold text-white leading-[1.15] mb-16 max-w-xl"
-            style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)' }}>
-            Three decades of building India&apos;s compliance backbone.
+          <h2 className="font-bold text-white text-center leading-[1.15] mb-20 mx-auto sm:whitespace-nowrap"
+            style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.6vw, 2.4rem)' }}>
+            Three decades of building India&apos;s compliance backbone
           </h2>
 
           {/* ── Horizontal timeline ── */}
           <div className="relative">
             {/* Track (background) */}
             <div className="absolute left-0 right-0 hidden sm:block"
-              style={{ top: '28px', height: '2px', backgroundColor: 'rgba(255,255,255,0.18)' }} />
+              style={{ top: '44px', height: '2px', backgroundColor: 'rgba(255,255,255,0.18)' }} />
             {/* Animated fill line — draws left to right */}
             <motion.div className="absolute left-0 hidden sm:block"
-              style={{ top: '28px', height: '2px', backgroundColor: '#fda102', transformOrigin: 'left' }}
+              style={{ top: '44px', height: '2px', backgroundColor: '#fda102', transformOrigin: 'left' }}
               initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }}
               viewport={{ once: true }} transition={{ duration: 1.6, ease: 'easeInOut' }} />
 
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-10 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-14 sm:gap-6">
               {[
-                { year: '2003', event: 'Founded', lines: ['Established as a boutique advisory', 'firm in Mumbai with a core focus on', 'Factory Act compliance & filings.'] },
-                { year: '2009', event: 'Pan-India', lines: ['Expanded operations to Delhi NCR', 'and Bangalore — becoming a true', 'pan-India firm serving 100+ clients.'] },
-                { year: '2016', event: 'Tech-Enabled', lines: ['Launched proprietary compliance', 'tracking software with real-time', 'dashboards and automated alerts.'] },
-                { year: '2023', event: 'New Codes Authority', lines: ["Two decades on, India's go-to", 'authority on the New Labour Codes,', 'serving 500+ organisations nationwide.'] },
-              ].map((m, i) => (
-                <motion.div key={i} className="flex flex-col items-center text-center"
-                  initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 + i * 0.25 }}>
+                { year: '2003', event: 'Founded', img: '/assets/service-statutory.png', lines: ['Established as a boutique advisory firm in Mumbai focused on compliance.'] },
+                { year: '2009', event: 'Pan-India', img: '/assets/service-payroll.png', lines: ['Expanded to Delhi NCR and Bangalore, becoming a true pan-India firm.'] },
+                { year: '2016', event: 'Tech-Enabled', img: '/assets/service-training.png', lines: ['Launched proprietary compliance software with real-time dashboards.'] },
+                { year: '2023', event: 'New Codes Authority', img: '/assets/service-hr.png', lines: ["India's go-to authority on the New Labour Codes nationwide."] },
+              ].map((m, i) => {
+                const down = i % 2 === 0; // even index: image up top, text below circle. odd: text above, image below.
+                const Image = (
+                  <div className="w-full h-24 sm:h-28 rounded-xl overflow-hidden shadow-lg">
+                    <img src={m.img} alt="" className="w-full h-full object-cover" />
+                  </div>
+                );
+                const Text = (
+                  <div>
+                    <p className="font-bold uppercase tracking-widest mb-3 text-center"
+                      style={{ fontFamily: PP, color: '#fda102', fontSize: '0.95rem' }}>{m.event}</p>
+                    <p className="max-w-[220px] mx-auto"
+                      style={{ fontFamily: PP, color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, textAlign: 'justify', textAlignLast: 'center', fontSize: '0.9rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {m.lines.join(' ')}
+                    </p>
+                  </div>
+                );
 
-                  {/* Circle node */}
-                  <motion.div
-                    className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center shrink-0 font-bold"
-                    style={{ backgroundColor: '#a83a00', border: '2px solid #fda102', color: '#fda102', fontFamily: PP, fontSize: '0.85rem' }}
-                    initial={{ scale: 0 }} whileInView={{ scale: 1 }}
-                    viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.2 + i * 0.25, type: 'spring', stiffness: 260, damping: 18 }}>
-                    {m.year}
+                return (
+                  <motion.div key={i} className="flex flex-col items-center text-center"
+                    initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.4, delay: i * 0.1 }}>
+
+                    {/* Image zone — always first on mobile (order-1); alternates before/after the circle on sm+ so circles stay aligned */}
+                    <div className={`w-full flex items-end justify-center mb-5 order-1 sm:min-h-[112px] ${down ? 'sm:order-1' : 'sm:order-3'}`}>
+                      {Image}
+                    </div>
+
+                    {/* Circle node */}
+                    <motion.div
+                      className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center shrink-0 font-bold shadow-lg order-2"
+                      style={{ backgroundColor: '#fda102', color: '#ffffff', fontFamily: PP, fontSize: '1.15rem' }}
+                      initial={{ scale: 0 }} whileInView={{ scale: 1 }}
+                      viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.4, delay: 0.05 + i * 0.1, type: 'spring', stiffness: 260, damping: 18 }}>
+                      {m.year}
+                    </motion.div>
+
+                    {/* Text zone — always last on mobile (order-3); alternates before/after the circle on sm+ */}
+                    <div className={`w-full flex items-start justify-center mt-5 order-3 ${down ? 'sm:order-3' : 'sm:order-1'}`}>
+                      {Text}
+                    </div>
                   </motion.div>
-
-                  {/* Connector to text */}
-                  <div className="w-px h-6" style={{ backgroundColor: 'rgba(255,255,255,0.25)' }} />
-
-                  {/* Event label */}
-                  <p className="font-bold text-xs uppercase tracking-widest mb-3"
-                    style={{ fontFamily: PP, color: '#fda102' }}>{m.event}</p>
-
-                  {/* 3-line justified content */}
-                  <p className="text-sm max-w-[220px]"
-                    style={{ fontFamily: PP, color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, textAlign: 'justify', textAlignLast: 'center' }}>
-                    {m.lines.join(' ')}
-                  </p>
-                </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
