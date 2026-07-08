@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroVideo from '@assets/7552418-hd_1080_1920_25fps_1783420764090.mp4';
@@ -20,6 +20,79 @@ const MARQUEE_ITEMS = [
   'Compliance Audits', '✦', 'Factory Act', '✦',
   'New Labour Codes', '✦', 'Workforce Management', '✦',
 ];
+
+const STORY_SLIDES = [
+  {
+    heading: <>Founded on a vision of<br /><span style={{ color: '#a83a00' }}>simplified compliance.</span></>,
+    text: "What started as a boutique advisory in Mumbai has grown into a pan-India powerhouse trusted by some of India's most respected corporations. We manage compliance for 500+ organisations — from dynamic startups to Fortune 500 conglomerates.",
+  },
+  {
+    heading: <>Built on deep expertise,<br /><span style={{ color: '#a83a00' }}>not guesswork.</span></>,
+    text: "Every engagement is led by consultants who live and breathe labour law — tracking every amendment across 15+ states so our clients never have to. That rigor is what turned a single Mumbai office into a nationwide practice.",
+  },
+  {
+    heading: <>Powered by technology,<br /><span style={{ color: '#a83a00' }}>guided by people.</span></>,
+    text: "Our proprietary compliance dashboards give clients real-time visibility into every filing and audit — backed by a dedicated consultant who's always a call away. It's how we keep 98% of our clients year after year.",
+  },
+];
+
+const StoryCarousel = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % STORY_SLIDES.length);
+    }, 4500);
+    return () => clearInterval(id);
+  }, []);
+
+  const slide = STORY_SLIDES[index];
+
+  return (
+    <div className="relative h-full flex flex-col justify-between overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div key={index}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -14 }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}>
+          <h2 className="font-bold leading-[1.2] mb-4"
+            style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.2vw, 1.8rem)', color: '#111' }}>
+            {slide.heading}
+          </h2>
+          <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: PP, color: '#666', lineHeight: 1.8 }}>
+            {slide.text}
+          </p>
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="flex items-center justify-between">
+        <Link to="/contact" className="inline-flex items-center gap-2 font-semibold text-sm hover:gap-3 transition-all w-fit"
+          style={{ fontFamily: PP, color: '#a83a00' }}>
+          Our full story <ArrowRight size={15} />
+        </Link>
+
+        {/* Progress dots */}
+        <div className="flex items-center gap-2">
+          {STORY_SLIDES.map((_, i) => (
+            <button key={i} type="button" aria-label={`Go to slide ${i + 1}`}
+              onClick={() => setIndex(i)}
+              className="relative h-1.5 rounded-full overflow-hidden transition-all duration-300"
+              style={{ width: i === index ? '28px' : '8px', backgroundColor: 'rgba(168,58,0,0.18)' }}>
+              {i === index && (
+                <motion.div key={index} className="absolute inset-0 rounded-full"
+                  style={{ backgroundColor: '#a83a00', transformOrigin: 'left' }}
+                  initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+                  transition={{ duration: 4.5, ease: 'linear' }}
+                />
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const About = () => {
   const styleInjected = useRef(false);
@@ -186,14 +259,8 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           3. BENTO IMAGE GRID — Our Story
          ══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white">
+      <section id="our-story" className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-
-          {/* Section label */}
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
-            <p className="font-bold text-xs uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#a83a00' }}>Our Story</p>
-          </div>
 
           <div className="grid grid-cols-12 grid-rows-2 gap-4" style={{ height: '580px' }}>
 
@@ -235,22 +302,12 @@ const About = () => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
             </motion.div>
 
-            {/* Bottom-right: story text */}
-            <motion.div className="col-span-12 lg:col-span-7 row-span-1 rounded-3xl p-8 flex flex-col justify-between"
+            {/* Bottom-right: story carousel */}
+            <motion.div className="col-span-12 lg:col-span-7 row-span-1 rounded-3xl p-8"
               style={{ backgroundColor: '#f9f5f2' }}
               initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.2 }}>
-              <h2 className="font-bold leading-[1.2] mb-4"
-                style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.2vw, 1.8rem)', color: '#111' }}>
-                Founded on a vision of<br /><span style={{ color: '#a83a00' }}>simplified compliance.</span>
-              </h2>
-              <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: PP, color: '#666', lineHeight: 1.8 }}>
-                What started as a boutique advisory in Mumbai has grown into a pan-India powerhouse trusted by some of India&apos;s most respected corporations. We manage compliance for 500+ organisations — from dynamic startups to Fortune 500 conglomerates.
-              </p>
-              <Link to="/contact" className="inline-flex items-center gap-2 font-semibold text-sm hover:gap-3 transition-all w-fit"
-                style={{ fontFamily: PP, color: '#a83a00' }}>
-                Our full story <ArrowRight size={15} />
-              </Link>
+              <StoryCarousel />
             </motion.div>
 
           </div>
