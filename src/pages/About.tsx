@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowDown, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroVideo from '@assets/7552418-hd_1080_1920_25fps_1783420764090.mp4';
 import heroImage from '@assets/pexels-vlada-karpovich-7433855_1783420874088.jpg';
