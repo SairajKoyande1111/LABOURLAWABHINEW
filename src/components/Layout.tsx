@@ -30,8 +30,18 @@ const Layout = () => {
   useEffect(() => {
     setIsMenuOpen(false);
     setServicesOpen(false);
+    if (location.hash) {
+      const el = document.getElementById(location.hash.slice(1));
+      if (el) {
+        const prev = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = 'auto';
+        el.scrollIntoView({ block: 'start' });
+        document.documentElement.style.scrollBehavior = prev;
+        return;
+      }
+    }
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   const navLinks = [
     { name: 'Home', path: '/' },

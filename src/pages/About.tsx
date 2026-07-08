@@ -340,51 +340,69 @@ const About = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          6. MILESTONES — Giant year as background text
+          6. OUR JOURNEY — Horizontal 30-year animated timeline
          ══════════════════════════════════════════════════════ */}
-      <section className="py-20" style={{ backgroundColor: '#f9f5f2' }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center gap-4 mb-14">
+      <section id="journey" className="py-24 relative overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+        {/* Subtle dot texture, consistent with hero */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.06) 1.5px, transparent 1.5px)', backgroundSize: '28px 28px' }} />
+
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="flex items-center gap-4 mb-4">
             <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
-            <p className="font-bold text-xs uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#a83a00' }}>Our Journey</p>
+            <p className="font-bold text-xs uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#fda102' }}>Our Journey</p>
           </div>
+          <h2 className="font-bold text-white leading-[1.15] mb-16 max-w-xl"
+            style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)' }}>
+            Three decades of building India&apos;s compliance backbone.
+          </h2>
 
-          <div className="space-y-6">
-            {[
-              { year: '2003', event: 'Founded', detail: 'Established as a boutique advisory firm in Mumbai with a core focus on Factory Act compliance and statutory filings.', img: '/assets/service-statutory.png' },
-              { year: '2009', event: 'Pan-India', detail: 'Expanded operations to Delhi NCR and Bangalore — becoming a true pan-India compliance firm serving 100+ clients.', img: '/assets/service-payroll.png' },
-              { year: '2016', event: 'Tech-Enabled', detail: 'Launched proprietary compliance tracking software delivering real-time dashboards and automated reminders to enterprise clients.', img: '/assets/service-training.png' },
-              { year: '2023', event: 'New Codes Authority', detail: "Became India's go-to authority on the New Labour Codes, serving 500+ organisations across 15+ states.", img: '/assets/service-hr.png' },
-            ].map((m, i) => (
-              <motion.div key={i}
-                className="flex flex-col lg:flex-row rounded-2xl overflow-hidden group"
-                style={{ backgroundColor: '#ffffff', boxShadow: '0 2px 16px rgba(0,0,0,0.07)' }}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }} whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.05 }}>
+          {/* ── Horizontal timeline ── */}
+          <div className="relative">
+            {/* Track (background) */}
+            <div className="absolute left-0 right-0 hidden sm:block"
+              style={{ top: '28px', height: '2px', backgroundColor: 'rgba(255,255,255,0.18)' }} />
+            {/* Animated fill line — draws left to right */}
+            <motion.div className="absolute left-0 hidden sm:block"
+              style={{ top: '28px', height: '2px', backgroundColor: '#fda102', transformOrigin: 'left' }}
+              initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }} transition={{ duration: 1.6, ease: 'easeInOut' }} />
 
-                {/* Year slab */}
-                <div className="lg:w-48 shrink-0 flex items-center justify-center py-8 lg:py-0 relative overflow-hidden"
-                  style={{ backgroundColor: i % 2 === 0 ? '#a83a00' : '#111111' }}>
-                  <p className="font-bold text-white relative z-10"
-                    style={{ fontFamily: PP, fontSize: '2.2rem' }}>{m.year}</p>
-                  <p className="absolute font-bold opacity-[0.07] text-white"
-                    style={{ fontFamily: PP, fontSize: '6rem', lineHeight: 1 }}>{m.year}</p>
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-10 sm:gap-6">
+              {[
+                { year: '2003', event: 'Founded', lines: ['Established as a boutique advisory', 'firm in Mumbai with a core focus on', 'Factory Act compliance & filings.'] },
+                { year: '2009', event: 'Pan-India', lines: ['Expanded operations to Delhi NCR', 'and Bangalore — becoming a true', 'pan-India firm serving 100+ clients.'] },
+                { year: '2016', event: 'Tech-Enabled', lines: ['Launched proprietary compliance', 'tracking software with real-time', 'dashboards and automated alerts.'] },
+                { year: '2023', event: 'New Codes Authority', lines: ["Two decades on, India's go-to", 'authority on the New Labour Codes,', 'serving 500+ organisations nationwide.'] },
+              ].map((m, i) => (
+                <motion.div key={i} className="flex flex-col items-center text-center"
+                  initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 + i * 0.25 }}>
 
-                {/* Detail */}
-                <div className="flex-1 flex flex-col lg:flex-row items-center gap-6 p-7">
-                  <div className="flex-1">
-                    <p className="font-bold text-xs uppercase tracking-widest mb-2"
-                      style={{ fontFamily: PP, color: '#fda102' }}>{m.event}</p>
-                    <p className="text-sm leading-relaxed" style={{ fontFamily: PP, color: '#444', lineHeight: 1.8 }}>{m.detail}</p>
-                  </div>
-                  <div className="w-full lg:w-28 h-20 lg:h-20 rounded-xl overflow-hidden shrink-0">
-                    <img src={m.img} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                </div>
+                  {/* Circle node */}
+                  <motion.div
+                    className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center shrink-0 font-bold"
+                    style={{ backgroundColor: '#a83a00', border: '2px solid #fda102', color: '#fda102', fontFamily: PP, fontSize: '0.85rem' }}
+                    initial={{ scale: 0 }} whileInView={{ scale: 1 }}
+                    viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.2 + i * 0.25, type: 'spring', stiffness: 260, damping: 18 }}>
+                    {m.year}
+                  </motion.div>
 
-              </motion.div>
-            ))}
+                  {/* Connector to text */}
+                  <div className="w-px h-6" style={{ backgroundColor: 'rgba(255,255,255,0.25)' }} />
+
+                  {/* Event label */}
+                  <p className="font-bold text-xs uppercase tracking-widest mb-3"
+                    style={{ fontFamily: PP, color: '#fda102' }}>{m.event}</p>
+
+                  {/* 3-line justified content */}
+                  <p className="text-sm max-w-[220px]"
+                    style={{ fontFamily: PP, color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, textAlign: 'justify', textAlignLast: 'center' }}>
+                    {m.lines.join(' ')}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
