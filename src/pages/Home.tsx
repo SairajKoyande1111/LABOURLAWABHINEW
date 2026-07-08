@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import heroVideo from '@assets/7552418-hd_1080_1920_25fps_1783420764090.mp4';
 import heroImage from '@assets/pexels-vlada-karpovich-7433855_1783420874088.jpg';
+import customerReviewIcon from '@assets/customer-review_1783487769231.png';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, ChevronRight, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -482,15 +483,13 @@ const Home = () => {
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.55 }}
             className="text-center mb-6 px-6">
-            <h2 className="font-bold text-white mb-3"
+            <img src={customerReviewIcon} alt="" aria-hidden="true"
+              className="mx-auto mb-4"
+              style={{ width: '56px', height: '56px', filter: 'brightness(0) saturate(100%) invert(68%) sepia(86%) saturate(607%) hue-rotate(1deg) brightness(101%) contrast(106%)' }} />
+            <h2 className="font-bold text-white mb-0"
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.9rem, 3.2vw, 2.8rem)' }}>
               Trusted by Industry Leaders
             </h2>
-            <div className="mx-auto mb-4" style={{ width: '64px', height: '3px', backgroundColor: '#fda102', borderRadius: '2px' }} />
-            <p className="text-base max-w-xl mx-auto"
-              style={{ fontFamily: 'Poppins, sans-serif', color: '#ffffff', fontWeight: 400 }}>
-              Real results from real clients across India's most demanding industries.
-            </p>
           </motion.div>
 
           {/* ── Stats bar — count-up on scroll-into-view ── */}
