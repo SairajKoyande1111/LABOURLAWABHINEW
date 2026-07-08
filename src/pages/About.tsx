@@ -34,62 +34,138 @@ const About = () => {
     <div className="w-full overflow-x-hidden">
 
       {/* ══════════════════════════════════════════════════════
-          1. FULL-SCREEN VIDEO HERO
+          1. HERO — Hard two-panel split
          ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full overflow-hidden" style={{ height: '100vh', minHeight: '640px' }}>
-        {/* Video background */}
-        <video src={heroVideo} autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover" />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(168,58,0,0.88) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.2) 100%)' }} />
+      <section className="relative w-full overflow-hidden"
+        style={{ height: '100vh', minHeight: '640px', display: 'grid', gridTemplateColumns: '48% 52%' }}>
 
-        {/* Content */}
-        <div className="relative h-full flex flex-col justify-center px-8 lg:px-20 max-w-7xl mx-auto">
-          <p className="font-bold text-xs uppercase tracking-[0.3em] mb-6"
-            style={{ fontFamily: PP, color: '#fda102',
-              animation: 'fadeUp 0.5s ease forwards' }}>
-            Maru Consultancy Services — Est. 2003
-          </p>
+        {/* ── LEFT PANEL: solid brand colour ── */}
+        <div className="relative flex flex-col justify-between z-10 px-10 lg:px-14 pt-16 pb-10"
+          style={{ backgroundColor: '#a83a00', height: '100%' }}>
 
-          <h1 className="font-bold text-white leading-[1.05] mb-6"
-            style={{ fontFamily: PP, fontSize: 'clamp(2.8rem, 7vw, 6.5rem)',
-              animation: 'fadeUp 0.6s 0.1s ease both' }}>
-            We don&apos;t just<br />
-            file paperwork.<br />
-            <span style={{ color: '#fda102', WebkitTextStroke: '0px' }}>We architect</span><br />
-            compliance.
-          </h1>
+          {/* Subtle dot texture */}
+          <div className="absolute inset-0 pointer-events-none"
+            style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1.5px, transparent 1.5px)', backgroundSize: '28px 28px' }} />
 
-          <p className="text-sm leading-relaxed max-w-sm mb-10"
-            style={{ fontFamily: PP, color: 'rgba(255,255,255,0.75)',
-              animation: 'fadeUp 0.6s 0.2s ease both' }}>
-            Two decades of expertise protecting India&apos;s finest organisations from legal risk — and helping them thrive.
-          </p>
+          {/* Top badge */}
+          <motion.div className="relative"
+            initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}>
+            <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+              style={{ backgroundColor: 'rgba(253,161,2,0.18)', color: '#fda102', border: '1px solid rgba(253,161,2,0.35)', fontFamily: PP }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-current" />
+              Est. 2003 · Mumbai, India
+            </span>
+          </motion.div>
 
-          <div className="flex flex-wrap gap-4"
-            style={{ animation: 'fadeUp 0.6s 0.3s ease both' }}>
-            <Link to="/contact"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-semibold text-sm transition-all hover:scale-[1.04]"
-              style={{ backgroundColor: '#fda102', color: '#fff', fontFamily: PP }}>
-              Work With Us <ArrowRight size={15} />
-            </Link>
-            <Link to="/services"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-semibold text-sm border transition-all hover:scale-[1.04]"
-              style={{ borderColor: 'rgba(255,255,255,0.5)', color: '#fff', fontFamily: PP }}>
-              Our Services
-            </Link>
+          {/* Main headline */}
+          <div className="relative flex-1 flex flex-col justify-center py-10">
+            <motion.p className="font-bold text-xs uppercase tracking-[0.28em] mb-5"
+              style={{ fontFamily: PP, color: 'rgba(255,255,255,0.5)' }}
+              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45, delay: 0.1 }}>
+              About Maru Consultancy Services
+            </motion.p>
+
+            <motion.h1
+              className="font-bold text-white leading-[1.08] mb-7"
+              style={{ fontFamily: PP, fontSize: 'clamp(2.4rem, 4.5vw, 4.4rem)' }}
+              initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.55, delay: 0.18 }}>
+              India&apos;s Most<br />
+              Trusted<br />
+              <em className="not-italic" style={{ color: '#fda102' }}>Labour Law</em><br />
+              Partner.
+            </motion.h1>
+
+            <motion.p className="text-sm leading-[1.85] mb-8 max-w-[340px]"
+              style={{ fontFamily: PP, color: 'rgba(255,255,255,0.7)' }}
+              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.26 }}>
+              Two decades of expertise in labour law compliance, HR governance,
+              statutory filings, and workforce management across 15+ Indian states.
+            </motion.p>
+
+            <motion.div className="flex flex-wrap gap-3"
+              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.34 }}>
+              <Link to="/contact"
+                className="inline-flex items-center gap-2 rounded-full px-7 py-3 font-semibold text-sm transition-all hover:scale-[1.04] hover:brightness-105"
+                style={{ backgroundColor: '#fda102', color: '#fff', fontFamily: PP }}>
+                Work With Us <ArrowRight size={14} />
+              </Link>
+              <Link to="/services"
+                className="inline-flex items-center gap-2 rounded-full px-7 py-3 font-semibold text-sm border transition-all hover:bg-white/10"
+                style={{ borderColor: 'rgba(255,255,255,0.35)', color: '#fff', fontFamily: PP }}>
+                Our Services
+              </Link>
+            </motion.div>
           </div>
 
-          {/* Scroll cue */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
-            <p className="text-white text-xs uppercase tracking-widest" style={{ fontFamily: PP }}>Scroll</p>
-            <ArrowDown size={16} color="#fff" />
-          </div>
+          {/* Bottom stats strip */}
+          <motion.div
+            className="relative grid grid-cols-3 gap-px overflow-hidden rounded-2xl"
+            style={{ backgroundColor: 'rgba(255,255,255,0.12)' }}
+            initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.44 }}>
+            {[['500+','Corporate Clients'], ['21+','Years'], ['15+','States']].map(([n, l], i) => (
+              <div key={i} className="flex flex-col items-center justify-center py-5 px-2"
+                style={{ backgroundColor: i === 1 ? 'rgba(253,161,2,0.20)' : 'rgba(0,0,0,0.15)' }}>
+                <p className="font-bold text-2xl text-white" style={{ fontFamily: PP }}>{n}</p>
+                <p className="text-[10px] uppercase tracking-widest mt-0.5"
+                  style={{ fontFamily: PP, color: 'rgba(255,255,255,0.55)' }}>{l}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
-        {/* Bottom amber bar */}
-        <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: '#fda102' }} />
+        {/* ── RIGHT PANEL: image bg + video on top ── */}
+        <div className="relative overflow-hidden"
+          style={{ height: '100%', backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+          {/* Video overlays the image once loaded */}
+          <video src={heroVideo} autoPlay loop muted playsInline
+            className="absolute inset-0 w-full h-full object-cover" />
+
+          {/* Light left-edge bleed — blends panels */}
+          <div className="absolute inset-0 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, rgba(168,58,0,0.65) 0%, rgba(0,0,0,0.15) 45%, transparent 100%)' }} />
+
+          {/* Floating white card — bottom-left of video */}
+          <motion.div
+            className="absolute bottom-10 left-6 lg:left-10 right-6 lg:right-auto rounded-2xl p-5 shadow-2xl"
+            style={{ backgroundColor: '#ffffff', maxWidth: '300px' }}
+            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55 }}>
+            <p className="font-bold text-xs uppercase tracking-widest mb-3"
+              style={{ fontFamily: PP, color: '#a83a00' }}>Why Clients Choose Us</p>
+            <div className="space-y-2">
+              {[
+                'Pan-India compliance expertise',
+                'Dedicated consultant per client',
+                'Tech-enabled real-time tracking',
+              ].map((pt) => (
+                <div key={pt} className="flex items-center gap-2.5">
+                  <CheckCircle size={13} style={{ color: '#fda102', flexShrink: 0 }} />
+                  <span className="text-xs" style={{ fontFamily: PP, color: '#333' }}>{pt}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Floating amber badge — top-right */}
+          <motion.div
+            className="absolute top-10 right-8 rounded-2xl px-5 py-4 shadow-xl text-center"
+            style={{ backgroundColor: '#fda102' }}
+            initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.65 }}>
+            <p className="font-bold text-white text-2xl leading-none" style={{ fontFamily: PP }}>98%</p>
+            <p className="text-white/80 text-[10px] uppercase tracking-wider mt-1" style={{ fontFamily: PP }}>Client Retention</p>
+          </motion.div>
+        </div>
+
+        {/* Bottom amber line */}
+        <div className="absolute bottom-0 left-0 right-0 h-[3px] z-20"
+          style={{ backgroundColor: '#fda102' }} />
       </section>
 
       {/* ══════════════════════════════════════════════════════
