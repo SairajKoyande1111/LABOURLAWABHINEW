@@ -55,18 +55,15 @@ const Services = () => {
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="relative z-10 text-center px-6">
-          <p className="uppercase tracking-[0.32em] text-[11px] font-semibold mb-3" style={{ fontFamily: PP, color: '#fda102' }}>
-            Maru Consultancy Services
-          </p>
           <h1
             className="uppercase leading-[1.1] mb-4"
             style={{
               fontFamily: PP,
-              fontSize: 'clamp(2rem, 5vw, 3.6rem)',
-              fontWeight: 500,
+              fontSize: 'clamp(2.6rem, 6vw, 4.4rem)',
+              fontWeight: 700,
               letterSpacing: '0.06em',
             }}>
-            <span style={{ color: '#a83a00' }}>Our </span>
+            <span style={{ color: '#ffffff' }}>Our </span>
             <span style={{ color: '#fda102' }}>Consultancy Services</span>
           </h1>
           <p className="leading-relaxed mx-auto" style={{ fontFamily: PP, fontSize: 'clamp(1.05rem, 2vw, 1.35rem)', fontWeight: 300, color: 'rgba(255,255,255,0.82)', maxWidth: '560px' }}>
