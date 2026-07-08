@@ -289,27 +289,30 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           5. CORE VALUES — Poster image cards with overlays
          ══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white">
+      <section id="core-values" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
-            <div>
-              <div className="flex items-center gap-4 mb-3">
-                <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
-                <p className="font-bold text-xs uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#a83a00' }}>What Drives Us</p>
-              </div>
-              <h2 className="font-bold" style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)', color: '#111' }}>
-                Our Core Values
-              </h2>
+          <motion.div className="flex justify-center mb-4"
+            initial={{ opacity: 0, y: -16 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }}>
+            <div className="flex items-center gap-4">
+              <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
+              <p className="font-bold text-xs uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#a83a00' }}>What Drives Us</p>
+              <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
             </div>
-          </div>
+          </motion.div>
+          <motion.h2 className="font-bold text-center mb-12" style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)', color: '#111' }}
+            initial={{ opacity: 0, y: -16 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5, delay: 0.1 }}>
+            Our Core Values
+          </motion.h2>
 
           {/* 4 image-backed poster cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { num: '01', title: 'Absolute\nIntegrity', desc: 'No shortcuts. Every engagement is guided by the letter and spirit of the law.', img: '/assets/service-legal.png', accent: '#fda102' },
-              { num: '02', title: 'Unmatched\nExcellence', desc: 'Precision in every detail, backed by continuous learning and mastery of new regulations.', img: '/assets/service-labour.png', accent: '#fda102' },
-              { num: '03', title: 'Client\nPartnership', desc: 'A genuine extension of your team, invested in your growth and long-term success.', img: '/assets/service-staffing.png', accent: '#fda102' },
-              { num: '04', title: 'Continuous\nInnovation', desc: 'Tech-powered compliance tools that make real-time tracking effortless and accurate.', img: '/assets/service-audits.png', accent: '#fda102' },
+              { num: '01', title: 'Absolute Integrity', img: '/assets/service-legal.png' },
+              { num: '02', title: 'Unmatched Excellence', img: '/assets/service-labour.png' },
+              { num: '03', title: 'Client Partnership', img: '/assets/service-staffing.png' },
+              { num: '04', title: 'Continuous Innovation', img: '/assets/service-audits.png' },
             ].map((v, i) => (
               <motion.div key={i}
                 className="relative rounded-2xl overflow-hidden group cursor-default"
@@ -327,11 +330,7 @@ const About = () => {
                 {/* Content */}
                 <div className="absolute inset-0 p-7 flex flex-col justify-between">
                   <p className="font-bold text-5xl opacity-30 text-white" style={{ fontFamily: PP }}>{v.num}</p>
-                  <div>
-                    <div className="w-8 h-0.5 mb-4" style={{ backgroundColor: v.accent }} />
-                    <h4 className="font-bold text-white text-xl leading-tight mb-3 whitespace-pre-line" style={{ fontFamily: PP }}>{v.title}</h4>
-                    <p className="text-xs leading-relaxed text-white/70 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400" style={{ fontFamily: PP }}>{v.desc}</p>
-                  </div>
+                  <h4 className="font-bold text-white leading-tight whitespace-nowrap" style={{ fontFamily: PP, fontSize: 'clamp(0.85rem, 1.4vw, 1.125rem)' }}>{v.title}</h4>
                 </div>
               </motion.div>
             ))}
