@@ -476,7 +476,7 @@ const About = () => {
               style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)' }}>
               Meet the Experts Behind Your Success
             </h2>
-            <p className="max-w-2xl mx-auto"
+            <p className="px-4 sm:px-12 lg:px-32"
               style={{ fontFamily: PP, color: '#fda102', fontSize: 'clamp(1rem, 1.6vw, 1.25rem)', lineHeight: 1.6 }}>
               Our experienced team of labour law, payroll, HR, and compliance professionals is committed to delivering practical solutions that help your business stay compliant and grow with confidence.
             </p>
