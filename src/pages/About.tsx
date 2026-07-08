@@ -296,7 +296,7 @@ const About = () => {
             viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }}>
             <div className="flex items-center gap-4">
               <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
-              <p className="font-bold text-xs uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#a83a00' }}>What Drives Us</p>
+              <p className="font-bold text-sm uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#a83a00', fontSize: '1rem' }}>What Drives Us</p>
               <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
             </div>
           </motion.div>
@@ -330,7 +330,7 @@ const About = () => {
                 {/* Content */}
                 <div className="absolute inset-0 p-7 flex flex-col justify-between">
                   <p className="font-bold text-5xl opacity-30 text-white" style={{ fontFamily: PP }}>{v.num}</p>
-                  <h4 className="font-bold text-white leading-tight whitespace-nowrap" style={{ fontFamily: PP, fontSize: 'clamp(0.85rem, 1.4vw, 1.125rem)' }}>{v.title}</h4>
+                  <h4 className="font-bold text-white leading-tight whitespace-nowrap text-center" style={{ fontFamily: PP, fontSize: 'clamp(0.85rem, 1.4vw, 1.125rem)' }}>{v.title}</h4>
                 </div>
               </motion.div>
             ))}
