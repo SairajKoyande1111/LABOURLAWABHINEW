@@ -261,9 +261,9 @@ const About = () => {
           4. BIG PULL QUOTE
          ══════════════════════════════════════════════════════ */}
       <section id="pull-quote" className="py-10 relative overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
-        <div className="absolute inset-0 pointer-events-none select-none flex items-center justify-center overflow-hidden px-6 lg:px-12">
+        <div className="absolute inset-0 pointer-events-none select-none flex items-center justify-center overflow-hidden px-3 lg:px-4">
           <p className="font-bold text-white opacity-[0.08] text-center whitespace-nowrap"
-            style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 6.5vw, 8rem)', lineHeight: 1.05, letterSpacing: '0.02em' }}>
+            style={{ fontFamily: PP, fontSize: 'clamp(2rem, 8.2vw, 9.5rem)', lineHeight: 1.05, letterSpacing: '0.01em' }}>
             MARU CONSULTANCY<br />SERVICES
           </p>
         </div>
