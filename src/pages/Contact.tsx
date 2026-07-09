@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { ArrowRight, CheckCircle, Clock, MessageSquare } from 'lucide-react';
+import { ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroVideo from '@assets/7683053-hd_1920_1080_24fps_1783584828907.mp4';
 import iconLocation from '@assets/placeholder_1783488477011.png';
 import iconCall from '@assets/call_1783488542810.png';
 import iconMail from '@assets/communication_1783488559887.png';
+import chatIcon from '@assets/chat_1783587012486.png';
 
 const PP = 'Poppins, sans-serif';
 
@@ -103,10 +104,7 @@ const Contact = () => {
             ].map((item, i) => (
               <a key={i} href={item.href}
                 className="flex items-center gap-4 px-8 py-5 hover:bg-[#f8fafb] transition-colors group">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors"
-                  style={{ backgroundColor: 'rgba(168,58,0,0.08)' }}>
-                  <item.icon size={18} style={{ color: '#a83a00' }} />
-                </div>
+                <item.icon size={34} />
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider mb-0.5"
                     style={{ fontFamily: PP, color: '#a83a00' }}>{item.label}</p>
@@ -131,10 +129,7 @@ const Contact = () => {
 
               {/* Card header */}
               <div className="px-10 py-6 border-b border-gray-100 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: 'rgba(168,58,0,0.08)' }}>
-                  <MessageSquare size={17} style={{ color: '#a83a00' }} />
-                </div>
+                <img src={chatIcon} alt="" className="object-contain" style={{ width: 34, height: 34 }} />
                 <div>
                   <h3 className="font-bold leading-none" style={{ fontFamily: PP, fontSize: '1.1rem', color: '#111' }}>
                     Send Us a Message
@@ -265,10 +260,11 @@ const Contact = () => {
                     },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                        style={{ backgroundColor: 'rgba(168,58,0,0.08)' }}>
-                        <item.icon size={17} style={{ color: '#a83a00' }} />
-                      </div>
+                      {item.icon === Clock ? (
+                        <Clock size={32} style={{ color: '#a83a00' }} className="shrink-0" />
+                      ) : (
+                        <item.icon size={32} />
+                      )}
                       <div>
                         <p className="font-bold text-xs uppercase tracking-wider mb-1"
                           style={{ fontFamily: PP, color: '#a83a00' }}>{item.label}</p>
