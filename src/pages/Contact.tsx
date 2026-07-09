@@ -1,14 +1,22 @@
 import { useState } from 'react';
-import { ArrowRight, CheckCircle, Phone, Mail, MapPin, Clock, MessageSquare } from 'lucide-react';
+import { ArrowRight, CheckCircle, Clock, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroVideo from '@assets/7683053-hd_1920_1080_24fps_1783584828907.mp4';
-import phoneIcon from '@assets/viber_1783585147187.png';
-import emailIconGmail from '@assets/communication_(1)_1783585150612.png';
-import mapPinIcon from '@assets/placeholder_(1)_1783585153327.png';
-import clockIcon from '@assets/time_1783585157179.png';
-import messageIcon from '@assets/email_(1)_1783585304315.png';
+import iconLocation from '@assets/placeholder_1783488477011.png';
+import iconCall from '@assets/call_1783488542810.png';
+import iconMail from '@assets/communication_1783488559887.png';
 
 const PP = 'Poppins, sans-serif';
+
+const IconCall = ({ size = 18 }: { size?: number }) => (
+  <img src={iconCall} alt="" className="object-contain" style={{ width: size, height: size }} />
+);
+const IconMail = ({ size = 18 }: { size?: number }) => (
+  <img src={iconMail} alt="" className="object-contain" style={{ width: size, height: size }} />
+);
+const IconLocation = ({ size = 18 }: { size?: number }) => (
+  <img src={iconLocation} alt="" className="object-contain" style={{ width: size, height: size }} />
+);
 
 const FIELD_STYLE: React.CSSProperties = {
   fontFamily: PP,
@@ -59,7 +67,7 @@ const Contact = () => {
         <video
           autoPlay muted loop playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: 'center 65%' }}
+          style={{ objectPosition: 'center 85%' }}
           src={heroVideo}
         />
         <div className="absolute inset-0" style={{ backgroundColor: 'rgba(30,10,0,0.62)' }} />
@@ -89,9 +97,9 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100">
             {[
-              { icon: Phone, label: 'Call Us', value: '+91 98765 43210', href: 'tel:+919876543210' },
-              { icon: Mail, label: 'Email Us', value: 'contact@maruconsultancy.in', href: 'mailto:contact@maruconsultancy.in' },
-              { icon: MapPin, label: 'Our Office', value: 'Nariman Point, Mumbai', href: '#map' },
+              { icon: IconCall, label: 'Call Us', value: '+91 98765 43210', href: 'tel:+919876543210' },
+              { icon: IconMail, label: 'Email Us', value: 'contact@maruconsultancy.in', href: 'mailto:contact@maruconsultancy.in' },
+              { icon: IconLocation, label: 'Our Office', value: 'Nariman Point, Mumbai', href: '#map' },
             ].map((item, i) => (
               <a key={i} href={item.href}
                 className="flex items-center gap-4 px-8 py-5 hover:bg-[#f8fafb] transition-colors group">
@@ -234,18 +242,18 @@ const Contact = () => {
                 <div className="bg-white p-7 space-y-6">
                   {[
                     {
-                      icon: MapPin,
+                      icon: IconLocation,
                       label: 'Office Address',
                       lines: ['15th Floor, Nariman Point,', 'Mumbai, Maharashtra 400021', 'India'],
                     },
                     {
-                      icon: Phone,
+                      icon: IconCall,
                       label: 'Phone Numbers',
                       lines: ['+91 98765 43210', '022 4567 8900'],
                       hrefs: ['tel:+919876543210', 'tel:02245678900'],
                     },
                     {
-                      icon: Mail,
+                      icon: IconMail,
                       label: 'Email Addresses',
                       lines: ['contact@maruconsultancy.in', 'support@maruconsultancy.in'],
                       hrefs: ['mailto:contact@maruconsultancy.in', 'mailto:support@maruconsultancy.in'],
@@ -291,14 +299,6 @@ const Contact = () => {
                   width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade" title="Maru Consultancy Office Location"
                 />
-                <div className="absolute bottom-3 left-3 right-3">
-                  <div className="bg-white rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2 border border-gray-100">
-                    <MapPin size={15} style={{ color: '#a83a00' }} />
-                    <span className="font-semibold text-xs" style={{ fontFamily: PP, color: '#111' }}>
-                      Nariman Point, Mumbai — 400021
-                    </span>
-                  </div>
-                </div>
               </motion.div>
             </div>
           </div>
