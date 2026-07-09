@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, Phone, Mail, MapPin, Clock, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroVideo from '@assets/7683053-hd_1920_1080_24fps_1783584828907.mp4';
 import phoneIcon from '@assets/viber_1783585147187.png';
