@@ -68,7 +68,7 @@ const Contact = () => {
         <video
           autoPlay muted loop playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: 'center 85%' }}
+          style={{ objectPosition: 'center 15%' }}
           src={heroVideo}
         />
         <div className="absolute inset-0" style={{ backgroundColor: 'rgba(30,10,0,0.62)' }} />
