@@ -55,26 +55,28 @@ const Contact = () => {
 
       {/* ── Hero ── */}
       <section className="flex items-center justify-center overflow-hidden relative"
-        style={{ backgroundColor: '#a83a00', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
-        <div className="absolute top-[-60px] right-[-60px] w-[320px] h-[320px] rounded-full opacity-10 pointer-events-none"
-          style={{ backgroundColor: '#fda102' }} />
-        <div className="absolute bottom-[-80px] left-[-40px] w-[240px] h-[240px] rounded-full opacity-10 pointer-events-none"
-          style={{ backgroundColor: '#7a2900' }} />
+        style={{ minHeight: '260px', maxHeight: '420px', height: '48vh' }}>
+        <video
+          autoPlay muted loop playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src={heroVideo}
+        />
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(30,10,0,0.62)' }} />
         <motion.div
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center px-8 w-full max-w-4xl mx-auto relative z-10">
-          <p className="uppercase tracking-[0.3em] font-semibold mb-2"
-            style={{ fontFamily: PP, fontSize: '0.9rem', color: '#fda102' }}>
+          className="text-center px-8 w-full max-w-5xl mx-auto relative z-10">
+          <p className="uppercase tracking-[0.3em] font-light mb-3"
+            style={{ fontFamily: PP, fontSize: '1.05rem', color: '#fda102' }}>
             Get In Touch
           </p>
-          <h1 className="font-bold mb-3"
-            style={{ fontFamily: PP, fontSize: 'clamp(1.4rem, 3vw, 2.6rem)', color: '#fff' }}>
+          <h1 className="font-semibold mb-4"
+            style={{ fontFamily: PP, fontSize: 'clamp(2.2rem, 5vw, 4.2rem)', color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.1 }}>
             Ready to Put Your Worries to Rest?
           </h1>
           <p style={{
-            fontFamily: PP, fontSize: 'clamp(0.88rem, 1.3vw, 1rem)',
-            color: 'rgba(255,255,255,0.82)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7,
+            fontFamily: PP, fontWeight: 300, fontSize: 'clamp(1.05rem, 1.8vw, 1.35rem)',
+            color: 'rgba(255,255,255,0.88)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.7,
           }}>
             Our experts are ready to analyse your compliance situation and build a clear roadmap for you.
           </p>
@@ -277,28 +279,24 @@ const Contact = () => {
                 </div>
               </motion.div>
 
-              {/* Why reach out */}
+              {/* Map */}
               <motion.div
                 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.2 }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="px-7 py-4 text-xs font-bold uppercase tracking-widest text-center"
-                  style={{ backgroundColor: '#a83a00', color: '#fda102', fontFamily: PP }}>
-                  Why Reach Out?
-                </div>
-                <div className="p-7 space-y-4">
-                  {[
-                    'Free initial compliance assessment',
-                    'Response within 1 business day',
-                    'No obligation consultation',
-                    'Pan-India coverage — wherever you operate',
-                    'Dedicated expert assigned to your case',
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <CheckCircle size={16} className="shrink-0 mt-0.5" style={{ color: '#a83a00' }} />
-                      <span className="text-sm" style={{ fontFamily: PP, color: '#333', lineHeight: 1.6 }}>{item}</span>
-                    </div>
-                  ))}
+                className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm"
+                style={{ height: '260px', position: 'relative' }}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.9!2d72.8232!3d18.9256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c6cfb3b99b%3A0x4a5a3a6d7e5f4f1a!2sNariman%20Point%2C%20Mumbai%2C%20Maharashtra%20400021!5e0!3m2!1sen!2sin!4v1700000000000"
+                  width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade" title="Maru Consultancy Office Location"
+                />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <div className="bg-white rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2 border border-gray-100">
+                    <MapPin size={15} style={{ color: '#a83a00' }} />
+                    <span className="font-semibold text-xs" style={{ fontFamily: PP, color: '#111' }}>
+                      Nariman Point, Mumbai — 400021
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -306,38 +304,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* ── Map Section ── */}
-      <section id="map" className="bg-white pt-0 pb-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="text-center mb-8">
-            <p className="font-bold tracking-[0.25em] uppercase text-xs mb-2"
-              style={{ fontFamily: PP, color: '#a83a00' }}>Find Us</p>
-            <h2 className="font-bold"
-              style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', color: '#111' }}>
-              Our Office Location
-            </h2>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="rounded-2xl overflow-hidden border border-gray-100 shadow-md"
-            style={{ height: '400px', position: 'relative' }}>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.9!2d72.8232!3d18.9256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c6cfb3b99b%3A0x4a5a3a6d7e5f4f1a!2sNariman%20Point%2C%20Mumbai%2C%20Maharashtra%20400021!5e0!3m2!1sen!2sin!4v1700000000000"
-              width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade" title="Maru Consultancy Office Location"
-            />
-            <div className="absolute bottom-4 left-4 right-4 md:right-auto">
-              <div className="bg-white rounded-xl px-5 py-3 shadow-lg flex items-center gap-2.5 border border-gray-100">
-                <MapPin size={16} style={{ color: '#a83a00' }} />
-                <span className="font-semibold text-sm" style={{ fontFamily: PP, color: '#111' }}>
-                  Nariman Point, Mumbai — 400021
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };
