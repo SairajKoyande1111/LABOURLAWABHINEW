@@ -36,8 +36,14 @@ export default function AdminHome() {
       api.get<ServiceContent[]>('/services'),
     ])
       .then(([home, services]) => {
-        setData({ featuredServiceSlugs: [], latestInsights: [], ...home });
         setAllServices(services);
+        const merged = { featuredServiceSlugs: [], latestInsights: [], ...home };
+        // If no custom order saved yet, pre-populate with however many services
+        // are already showing (up to 8) so the admin sees the live homepage state.
+        if (!merged.featuredServiceSlugs.length && services.length > 0) {
+          merged.featuredServiceSlugs = services.slice(0, 8).map(s => s.slug);
+        }
+        setData(merged);
       })
       .catch((err) => setError(err instanceof Error ? err.message : 'Failed to load'))
       .finally(() => setLoading(false));
