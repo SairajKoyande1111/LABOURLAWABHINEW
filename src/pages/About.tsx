@@ -229,6 +229,18 @@ const About = () => {
   const heroHeadlineBottom    = apiData?.heroHeadlineBottom    || 'Partner.';
   const heroSubtext           = apiData?.heroSubtext           || 'Two decades of expertise in labour law compliance, HR governance, statutory filings, and workforce management across 15+ Indian states.';
   const videoUrl              = apiData?.videoUrl              ?? '';
+  const VIDEO_EMBED_ALLOWLIST = ['www.youtube.com', 'youtube.com', 'player.vimeo.com', 'www.youtube-nocookie.com'];
+  const safeVideoUrl = (() => {
+    if (!videoUrl) return '';
+    try {
+      const parsed = new URL(videoUrl);
+      if (parsed.protocol !== 'https:') return '';
+      if (!VIDEO_EMBED_ALLOWLIST.includes(parsed.hostname)) return '';
+      return parsed.toString();
+    } catch {
+      return '';
+    }
+  })();
 
   const styleInjected = useRef(false);
   useEffect(() => {
@@ -369,13 +381,15 @@ const About = () => {
               {/* Video side */}
               <div className="relative flex-1 flex items-center justify-center min-h-[140px] overflow-hidden"
                 style={{ backgroundColor: '#1a1a1a' }}>
-                {videoUrl ? (
+                {safeVideoUrl ? (
                   <iframe
-                    src={videoUrl}
+                    src={safeVideoUrl}
                     className="absolute inset-0 w-full h-full"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    referrerPolicy="no-referrer"
                     title="About video"
                   />
                 ) : (
