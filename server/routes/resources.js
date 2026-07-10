@@ -45,10 +45,14 @@ router.get('/:id', async (req, res) => {
 // POST /api/resources — create
 router.post('/', requireAuth, async (req, res) => {
   try {
-    const resource = await Resource.create(req.body);
+    const data = { ...req.body };
+    // Blank slug should be omitted so the sparse unique index doesn't collide
+    if (!data.slug) delete data.slug;
+    const resource = await Resource.create(data);
     res.status(201).json(resource);
   } catch (err) {
-    if (err.code === 11000) return res.status(409).json({ error: 'Slug already exists' });
+    if (err.code === 11000) return res.status(409).json({ error: 'Slug already exists — choose a different one.' });
+    if (err.name === 'ValidationError') return res.status(400).json({ error: err.message });
     console.error('[resources/create]', err);
     res.status(500).json({ error: 'Failed to create resource' });
   }
@@ -59,11 +63,18 @@ router.put('/:id', requireAuth, async (req, res) => {
   try {
     const update = { ...req.body };
     delete update._id;
-    const resource = await Resource.findByIdAndUpdate(req.params.id, update, { new: true });
+    // Blank slug should be unset so the sparse unique index doesn't collide
+    if (!update.slug) update.slug = undefined;
+    const resource = await Resource.findByIdAndUpdate(
+      req.params.id,
+      update,
+      { new: true, runValidators: true, context: 'query' }
+    );
     if (!resource) return res.status(404).json({ error: 'Resource not found' });
     res.json(resource);
   } catch (err) {
-    if (err.code === 11000) return res.status(409).json({ error: 'Slug already exists' });
+    if (err.code === 11000) return res.status(409).json({ error: 'Slug already exists — choose a different one.' });
+    if (err.name === 'ValidationError') return res.status(400).json({ error: err.message });
     console.error('[resources/update]', err);
     res.status(500).json({ error: 'Failed to update resource' });
   }
