@@ -6,6 +6,7 @@ export const aboutSeed = {
   heroSubtext:
     'Two decades of expertise in labour law compliance, HR governance, statutory filings, and workforce management across 15+ Indian states.',
 
+  heroVideoUrl: '',
   videoUrl: '',
 
   heroStats: [

@@ -31,6 +31,9 @@ const AboutSchema = new mongoose.Schema({
   heroHeadlineBottom:   String,
   heroSubtext:          String,
 
+  // Hero right-panel video (falls back to bundled hero video when blank)
+  heroVideoUrl: { type: String, default: '' },
+
   // Story-bento video panel
   videoUrl: { type: String, default: '' },
 }, { timestamps: true });

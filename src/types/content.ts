@@ -96,6 +96,8 @@ export type AboutContent = {
   heroHeadlineHighlight: string;
   heroHeadlineBottom:    string;
   heroSubtext:           string;
+  // Hero right-panel video (falls back to bundled hero video when blank)
+  heroVideoUrl:          string;
   // Bento video
   videoUrl:              string;
   // Below-hero content

@@ -229,18 +229,21 @@ const About = () => {
   const heroHeadlineBottom    = apiData?.heroHeadlineBottom    || 'Partner.';
   const heroSubtext           = apiData?.heroSubtext           || 'Two decades of expertise in labour law compliance, HR governance, statutory filings, and workforce management across 15+ Indian states.';
   const videoUrl              = apiData?.videoUrl              ?? '';
+  const heroVideoUrl          = apiData?.heroVideoUrl          ?? '';
   const VIDEO_EMBED_ALLOWLIST = ['www.youtube.com', 'youtube.com', 'player.vimeo.com', 'www.youtube-nocookie.com'];
-  const safeVideoUrl = (() => {
-    if (!videoUrl) return '';
+  const sanitizeEmbedUrl = (url: string) => {
+    if (!url) return '';
     try {
-      const parsed = new URL(videoUrl);
+      const parsed = new URL(url);
       if (parsed.protocol !== 'https:') return '';
       if (!VIDEO_EMBED_ALLOWLIST.includes(parsed.hostname)) return '';
       return parsed.toString();
     } catch {
       return '';
     }
-  })();
+  };
+  const safeVideoUrl = sanitizeEmbedUrl(videoUrl);
+  const safeHeroVideoUrl = sanitizeEmbedUrl(heroVideoUrl);
 
   const styleInjected = useRef(false);
   useEffect(() => {
@@ -316,9 +319,21 @@ const About = () => {
         <div className="relative overflow-hidden"
           style={{ height: '100%', backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           {/* Video overlays the image once loaded */}
-          <video src={heroVideo} autoPlay loop muted playsInline
-            className="absolute inset-0 w-full h-full object-cover" />
-
+          {safeHeroVideoUrl ? (
+            <iframe
+              src={safeHeroVideoUrl}
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              sandbox="allow-scripts allow-same-origin allow-presentation"
+              referrerPolicy="no-referrer"
+              title="About hero video"
+            />
+          ) : (
+            <video src={heroVideo} autoPlay loop muted playsInline
+              className="absolute inset-0 w-full h-full object-cover" />
+          )}
         </div>
 
         {/* Bottom amber line */}

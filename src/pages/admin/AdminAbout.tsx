@@ -16,6 +16,7 @@ const EMPTY: AboutContent = {
   heroHeadlineHighlight: 'Labour Law',
   heroHeadlineBottom:    'Partner.',
   heroSubtext:           'Two decades of expertise in labour law compliance, HR governance, statutory filings, and workforce management across 15+ Indian states.',
+  heroVideoUrl:          '',
   videoUrl:              '',
   heroStats: [
     { value: '500+', label: 'Corporate Clients' },
@@ -81,6 +82,7 @@ export default function AdminAbout() {
           heroHeadlineHighlight: res.heroHeadlineHighlight ?? EMPTY.heroHeadlineHighlight,
           heroHeadlineBottom:    res.heroHeadlineBottom    ?? EMPTY.heroHeadlineBottom,
           heroSubtext:           res.heroSubtext           ?? EMPTY.heroSubtext,
+          heroVideoUrl:          res.heroVideoUrl          ?? EMPTY.heroVideoUrl,
           videoUrl:              res.videoUrl              ?? EMPTY.videoUrl,
           heroStats:            res.heroStats?.length            ? res.heroStats            : EMPTY.heroStats,
           marqueeServices:      res.marqueeServices?.length      ? res.marqueeServices      : EMPTY.marqueeServices,
@@ -220,10 +222,10 @@ export default function AdminAbout() {
         )}
       </Section>
 
-      {/* ── Story Bento — Video ── */}
-      <Section title="Story Bento — Video" description="Paste a YouTube/Vimeo embed URL to show a video in the dark panel of the bento grid. Leave blank to show the 'Video coming soon' placeholder.">
+      {/* ── Hero Video ── */}
+      <Section title="Hero Video" description="Right-side video in the hero section. Paste a YouTube/Vimeo embed URL to override the default hero video. Leave blank to keep the default.">
         <Field label="Video embed URL (e.g. https://www.youtube.com/embed/xxxxx)">
-          <TextInput value={data.videoUrl} onChange={e => set('videoUrl', e.target.value)}
+          <TextInput value={data.heroVideoUrl} onChange={e => set('heroVideoUrl', e.target.value)}
             placeholder="https://www.youtube.com/embed/..." />
         </Field>
       </Section>
@@ -245,6 +247,14 @@ export default function AdminAbout() {
             <Plus size={13} /> Add service
           </SecondaryButton>
         </div>
+      </Section>
+
+      {/* ── Story Bento — Video ── */}
+      <Section title="Story Bento — Video" description="Paste a YouTube/Vimeo embed URL to show a video in the dark panel of the bento grid (the stats + video card below the 'Est.' photo). Leave blank to show the 'Video coming soon' placeholder.">
+        <Field label="Video embed URL (e.g. https://www.youtube.com/embed/xxxxx)">
+          <TextInput value={data.videoUrl} onChange={e => set('videoUrl', e.target.value)}
+            placeholder="https://www.youtube.com/embed/..." />
+        </Field>
       </Section>
 
       {/* ── Story Slides ── */}
