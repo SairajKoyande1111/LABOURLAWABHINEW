@@ -17,6 +17,7 @@ import AdminLogin from './pages/admin/AdminLogin';
 import AdminHome from './pages/admin/AdminHome';
 import AdminServices from './pages/admin/AdminServices';
 import AdminCareers from './pages/admin/AdminCareers';
+import AdminResources from './pages/admin/AdminResources';
 import { Navigate } from 'react-router-dom';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
                 <Route path="home" element={<AdminHome />} />
                 <Route path="services" element={<AdminServices />} />
                 <Route path="careers" element={<AdminCareers />} />
+                <Route path="resources" element={<AdminResources />} />
               </Route>
             </Routes>
           </AdminAuthProvider>

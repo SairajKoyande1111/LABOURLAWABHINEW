@@ -7,9 +7,11 @@ import Admin from './models/Admin.js';
 import Home from './models/Home.js';
 import Service from './models/Service.js';
 import Job from './models/Job.js';
+import Resource from './models/Resource.js';
 import { servicesSeed } from './seedData/services.js';
 import { jobsSeed } from './seedData/jobs.js';
 import { homeSeed } from './seedData/home.js';
+import { resourcesSeed } from './seedData/resources.js';
 
 async function run() {
   await connectDB();
@@ -51,6 +53,15 @@ async function run() {
     console.log(`[seed] Inserted ${jobsSeed.length} jobs`);
   } else {
     console.log('[seed] Jobs already exist — skipped');
+  }
+
+  // Resources
+  const resourceCount = await Resource.countDocuments();
+  if (resourceCount === 0) {
+    await Resource.insertMany(resourcesSeed);
+    console.log(`[seed] Inserted ${resourcesSeed.length} resources`);
+  } else {
+    console.log('[seed] Resources already exist — skipped');
   }
 
   console.log('[seed] Done.');

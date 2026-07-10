@@ -3,6 +3,31 @@ export type Testimonial = { text: string; author: string; role: string };
 export type StatItem = { target: number; decimals: number; suffix: string; label: string };
 export type OneStopCard = { title: string; desc: string };
 
+export type ResourceSection = { heading: string; body: string };
+
+export type ResourceItem = {
+  _id: string;
+  tab: 'articles' | 'downloads';
+  title: string;
+  category?: string;
+  order: number;
+  // article fields
+  slug?: string;
+  excerpt?: string;
+  date?: string;
+  readTime?: string;
+  author?: string;
+  img?: string;
+  sections?: ResourceSection[];
+  keyTakeaways?: string[];
+  // download fields
+  desc?: string;
+  size?: string;
+  format?: string;
+  downloadType?: 'Download' | 'Resource';
+  fileUrl?: string;
+};
+
 export type InsightCard = {
   category: string;
   title: string;

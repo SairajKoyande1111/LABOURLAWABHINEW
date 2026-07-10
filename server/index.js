@@ -9,6 +9,7 @@ import authRoutes from './routes/auth.js';
 import homeRoutes from './routes/home.js';
 import servicesRoutes from './routes/services.js';
 import careersRoutes from './routes/careers.js';
+import resourcesRoutes from './routes/resources.js';
 import uploadRoutes from './routes/upload.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -23,6 +24,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/home', homeRoutes);
 app.use('/api/services', servicesRoutes);
 app.use('/api/careers', careersRoutes);
+app.use('/api/resources', resourcesRoutes);
 app.use('/api/upload', uploadRoutes);
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
