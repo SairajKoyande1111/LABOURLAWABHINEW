@@ -1,5 +1,6 @@
 import express from 'express';
 import multer from 'multer';
+import crypto from 'crypto';
 import cloudinary from '../cloudinary.js';
 import { requireAuth } from '../middleware/auth.js';
 
@@ -62,6 +63,25 @@ function sanitizeSection(raw) {
   return ALLOWED_SECTIONS.has(section) ? section : 'misc';
 }
 
+// Derive a Cloudinary public_id from the uploaded file's original name so the
+// asset is identifiable in the media library and — more importantly — so
+// downloads on the site are served back with that same filename instead of a
+// random Cloudinary-generated id (e.g. "ftwepllyjtjvm13mis2v").
+function sanitizeFilename(originalName) {
+  const name = String(originalName || 'file');
+  const dot = name.lastIndexOf('.');
+  const hasExt = dot > 0 && dot < name.length - 1;
+  const base = hasExt ? name.slice(0, dot) : name;
+  const ext = hasExt ? name.slice(dot) : '';
+  const safeBase = base
+    .replace(/[^a-zA-Z0-9-_ ]+/g, '')
+    .trim()
+    .replace(/\s+/g, '_')
+    .slice(0, 100) || 'file';
+  const safeExt = ext.replace(/[^a-zA-Z0-9.]+/g, '').slice(0, 10);
+  return { safeBase, safeExt };
+}
+
 router.post('/', requireAuth, (req, res) => {
   upload.single('file')(req, res, async (err) => {
     if (err) return handleMulterError(err, res);
@@ -75,11 +95,28 @@ router.post('/', requireAuth, (req, res) => {
       const resourceType = isVideo ? 'video' : isImage ? 'image' : 'raw';
       const section = sanitizeSection(req.body?.section);
 
+      // Only raw files (PDF/DOC/XLSX etc.) need a filename-derived id — that's
+      // what gets downloaded by end users and should show the original name.
+      // Images/videos keep Cloudinary's auto-generated id (unaffected).
+      let folder = `labourcodes/${section}`;
+      let publicId;
+      if (resourceType === 'raw') {
+        const { safeBase, safeExt } = sanitizeFilename(req.file.originalname);
+        // Uniqueness lives in a random subfolder, not the filename itself, so
+        // two uploads named "form.pdf" never collide/overwrite each other,
+        // while the final path segment — the one Cloudinary uses as the
+        // downloaded filename — stays exactly the original name.
+        const unique = crypto.randomBytes(4).toString('hex');
+        folder = `${folder}/${unique}`;
+        publicId = `${safeBase}${safeExt}`;
+      }
+
       const b64 = req.file.buffer.toString('base64');
       const dataUri = `data:${mime};base64,${b64}`;
       const result = await cloudinary.uploader.upload(dataUri, {
-        folder: `labourcodes/${section}`,
+        folder,
         resource_type: resourceType,
+        ...(publicId ? { public_id: publicId } : {}),
       });
       res.json({ url: result.secure_url, publicId: result.public_id });
     } catch (err) {
