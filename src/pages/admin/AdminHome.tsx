@@ -43,6 +43,17 @@ export default function AdminHome() {
         if (!merged.featuredServiceSlugs.length && services.length > 0) {
           merged.featuredServiceSlugs = services.slice(0, 8).map(s => s.slug);
         }
+        // Pre-populate insights with first 3 articles so admin sees what's live
+        if (!merged.latestInsights.length && articles.length > 0) {
+          merged.latestInsights = articles.slice(0, 3).map(a => ({
+            category: a.category ?? '',
+            title: a.title,
+            desc: a.excerpt ?? '',
+            img: a.img ?? '',
+            date: a.date ?? '',
+            articleUrl: `/resources/${a.slug}`,
+          }));
+        }
         setData(merged);
       })
       .catch((err) => setError(err instanceof Error ? err.message : 'Failed to load'))
