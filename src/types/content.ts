@@ -100,6 +100,8 @@ export type AboutContent = {
   heroVideoUrl:          string;
   // Bento video
   videoUrl:              string;
+  // Rotating images in the "Our Story" bento's large left panel
+  storyImages:          string[];
   // Below-hero content
   heroStats:            AboutHeroStat[];
   marqueeServices:      string[];

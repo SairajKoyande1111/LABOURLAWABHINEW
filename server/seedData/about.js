@@ -9,6 +9,12 @@ export const aboutSeed = {
   heroVideoUrl: '',
   videoUrl: '',
 
+  storyImages: [
+    '/assets/hero-office.png',
+    '/assets/service-audits.png',
+    '/assets/service-legal.png',
+  ],
+
   heroStats: [
     { value: '500+', label: 'Corporate Clients' },
     { value: '21+', label: 'Years' },

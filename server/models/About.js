@@ -36,6 +36,9 @@ const AboutSchema = new mongoose.Schema({
 
   // Story-bento video panel
   videoUrl: { type: String, default: '' },
+
+  // Rotating images in the "Our Story" bento's large left panel
+  storyImages: [String],
 }, { timestamps: true });
 
 export default mongoose.models.About || mongoose.model('About', AboutSchema);

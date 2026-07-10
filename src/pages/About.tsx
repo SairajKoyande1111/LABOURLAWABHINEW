@@ -105,26 +105,29 @@ const CountUpStat = ({ value, label }: { value: string; label: string }) => {
   );
 };
 
-const OFFICE_IMAGES = [
+const DEFAULT_OFFICE_IMAGES = [
   '/assets/hero-office.png',
   '/assets/service-audits.png',
   '/assets/service-legal.png',
 ];
 
-const OfficeImageCarousel = () => {
+const OfficeImageCarousel = ({ images }: { images: string[] }) => {
   const [index, setIndex] = useState(0);
+  const officeImages = images.length ? images : DEFAULT_OFFICE_IMAGES;
 
   useEffect(() => {
+    setIndex(0);
+    if (officeImages.length < 2) return;
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % OFFICE_IMAGES.length);
+      setIndex((i) => (i + 1) % officeImages.length);
     }, 4000);
     return () => clearInterval(id);
-  }, []);
+  }, [officeImages.length]);
 
   return (
     <div className="absolute inset-0">
       <AnimatePresence>
-        {OFFICE_IMAGES.map((src, i) => (
+        {officeImages.map((src, i) => (
           i === index && (
             <motion.img key={src} src={src} alt="Our office"
               className="absolute inset-0 w-full h-full object-cover"
@@ -370,7 +373,7 @@ const About = () => {
             <motion.div className="col-span-12 lg:col-span-5 row-span-2 rounded-3xl overflow-hidden relative group"
               initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.65 }}>
-              <OfficeImageCarousel />
+              <OfficeImageCarousel images={apiData?.storyImages ?? []} />
               <div className="absolute inset-0 pointer-events-none"
                 style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)' }} />
               <div className="absolute bottom-0 left-0 p-8">

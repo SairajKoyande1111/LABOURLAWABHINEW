@@ -18,6 +18,11 @@ const EMPTY: AboutContent = {
   heroSubtext:           'Two decades of expertise in labour law compliance, HR governance, statutory filings, and workforce management across 15+ Indian states.',
   heroVideoUrl:          '',
   videoUrl:              '',
+  storyImages: [
+    '/assets/hero-office.png',
+    '/assets/service-audits.png',
+    '/assets/service-legal.png',
+  ],
   heroStats: [
     { value: '500+', label: 'Corporate Clients' },
     { value: '21+',  label: 'Years' },
@@ -84,6 +89,11 @@ export default function AdminAbout() {
           heroSubtext:           res.heroSubtext           ?? EMPTY.heroSubtext,
           heroVideoUrl:          res.heroVideoUrl          ?? EMPTY.heroVideoUrl,
           videoUrl:              res.videoUrl              ?? EMPTY.videoUrl,
+          // Unlike other list fields, an empty array here is a valid saved
+          // state (admin removed all images) and must round-trip as empty,
+          // not silently repopulate with defaults — only missing/undefined
+          // falls back to defaults (e.g. brand-new About doc).
+          storyImages:          res.storyImages !== undefined              ? res.storyImages          : EMPTY.storyImages,
           heroStats:            res.heroStats?.length            ? res.heroStats            : EMPTY.heroStats,
           marqueeServices:      res.marqueeServices?.length      ? res.marqueeServices      : EMPTY.marqueeServices,
           storySlides:          res.storySlides?.length          ? res.storySlides          : EMPTY.storySlides,
@@ -245,6 +255,28 @@ export default function AdminAbout() {
           ))}
           <SecondaryButton type="button" onClick={() => set('marqueeServices', [...data.marqueeServices, ''])}>
             <Plus size={13} /> Add service
+          </SecondaryButton>
+        </div>
+      </Section>
+
+      {/* ── Story Bento — Side Image Carousel ── */}
+      <Section title="Story Bento — Side Images" description="The rotating photos in the large left panel of the bento grid (behind the 'Est. 2003' label). Add 1 or more images — they cross-fade automatically on the site.">
+        <div className="space-y-3">
+          {data.storyImages.map((img, i) => (
+            <div key={i} className="flex gap-2 items-start">
+              <div className="flex-1">
+                <ImageUploader label={`Image ${i + 1}`} value={img}
+                  onChange={url => { const n = [...data.storyImages]; n[i] = url; set('storyImages', n); }}
+                  section="about" />
+              </div>
+              <DangerButton type="button" className="mt-8"
+                onClick={() => set('storyImages', data.storyImages.filter((_, j) => j !== i))}>
+                <Trash2 size={13} />
+              </DangerButton>
+            </div>
+          ))}
+          <SecondaryButton type="button" onClick={() => set('storyImages', [...data.storyImages, ''])}>
+            <Plus size={13} /> Add image
           </SecondaryButton>
         </div>
       </Section>
