@@ -1,8 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, CheckCircle, ChevronRight, ArrowRight } from 'lucide-react';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { ResourceItem } from '../types/content';
 
 const PP = 'Poppins, sans-serif';
@@ -13,21 +14,30 @@ const ResourceDetail = () => {
   const [allArticles, setAllArticles] = useState<ResourceItem[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'not-found' | 'error'>('loading');
 
-  useEffect(() => {
-    setStatus('loading');
+  const reqRef = useRef(0);
+  const fetchArticle = () => {
+    const reqId = ++reqRef.current;
+    const currentSlug = slug;
     Promise.all([
-      api.get<ResourceItem>(`/resources/slug/${slug}`),
+      api.get<ResourceItem>(`/resources/slug/${currentSlug}`),
       api.get<ResourceItem[]>('/resources?tab=articles'),
     ])
       .then(([article, articles]) => {
+        if (reqId !== reqRef.current) return; // superseded by a newer request
         setPost(article);
-        setAllArticles(articles.filter(a => a.slug !== slug));
+        setAllArticles(articles.filter(a => a.slug !== currentSlug));
         setStatus('ready');
       })
       .catch((err: unknown) => {
+        if (reqId !== reqRef.current) return;
         const status = (err as { status?: number }).status;
         setStatus(status === 404 ? 'not-found' : 'error');
       });
+  };
+  useLiveContent(fetchArticle);
+  useEffect(() => {
+    setStatus('loading');
+    fetchArticle();
   }, [slug]);
 
   if (status === 'loading') {

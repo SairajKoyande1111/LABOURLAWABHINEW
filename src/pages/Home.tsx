@@ -15,6 +15,7 @@ import animPayrollPlanning from '../assets/animations/anim-payroll-planning.json
 import animPayrollRecords from '../assets/animations/anim-payroll-records.json';
 import animHr from '../assets/animations/anim-hr.json';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { HomeContent, ServiceContent } from '../types/content';
 
 /* ── Lottie player wrapper (uses lottie-web directly, no duplicate-React risk) ── */
@@ -112,7 +113,7 @@ const Home = () => {
   const [content, setContent] = useState<HomeContent | null>(null);
   const [previewServices, setPreviewServices] = useState<ServiceContent[]>([]);
 
-  useEffect(() => {
+  const fetchHome = () => {
     Promise.all([
       api.get<HomeContent>('/home'),
       api.get<ServiceContent[]>('/services'),
@@ -128,7 +129,9 @@ const Home = () => {
         setPreviewServices(services.slice(0, 8));
       }
     }).catch(() => {});
-  }, []);
+  };
+  useEffect(fetchHome, []);
+  useLiveContent(fetchHome);
 
   const phrases = content?.heroPhrases?.length ? content.heroPhrases : defaultPhrases;
 

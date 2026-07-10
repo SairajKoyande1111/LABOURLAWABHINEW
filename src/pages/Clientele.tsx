@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star } from 'lucide-react';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { ClienteleContent } from '../types/content';
 import { ALL_CLIENTS, HdfcLogo, TataLogo, RelianceLogo, InfosysLogo, WiproLogo, MahindraLogo, LandTLogo, ItcLogo, GodrejLogo, BajajLogo } from '../components/ClientLogos';
 import { useInView } from 'framer-motion';
@@ -99,9 +100,11 @@ const DEFAULT_PORTFOLIO = [
 
 const Clientele = () => {
   const [apiData, setApiData] = useState<ClienteleContent | null>(null);
-  useEffect(() => {
+  const fetchClientele = () => {
     api.get<ClienteleContent>('/clientele').then(setApiData).catch(() => {/* use hardcoded defaults */});
-  }, []);
+  };
+  useEffect(fetchClientele, []);
+  useLiveContent(fetchClientele);
 
   const stats        = apiData?.stats?.length        ? apiData.stats        : DEFAULT_STATS;
   const industries   = apiData?.industries?.length   ? apiData.industries   : DEFAULT_INDUSTRIES;

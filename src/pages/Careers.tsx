@@ -3,6 +3,7 @@ import { MapPin, Briefcase, Clock, ArrowRight, ChevronRight, Calendar } from 'lu
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { JobContent } from '../types/content';
 
 const PP = 'Poppins, sans-serif';
@@ -12,11 +13,13 @@ const Careers = () => {
   const [jobs, setJobs] = useState<JobContent[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
-  useEffect(() => {
+  const fetchJobs = () => {
     api.get<JobContent[]>('/careers')
       .then((data) => { setJobs(data); setStatus('ready'); })
       .catch(() => setStatus('error'));
-  }, []);
+  };
+  useEffect(fetchJobs, []);
+  useLiveContent(fetchJobs);
 
   const internalJobs = jobs.filter(j => j.category === 'internal');
   const clientJobs = jobs.filter(j => j.category === 'client');

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLiveContent } from '../hooks/useLiveContent';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CheckCircle, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -206,9 +207,11 @@ const StoryCarousel = ({ slides }: { slides: SlideData[] }) => {
 
 const About = () => {
   const [apiData, setApiData] = useState<AboutContent | null>(null);
-  useEffect(() => {
+  const fetchAbout = () => {
     api.get<AboutContent>('/about').then(setApiData).catch(() => {/* use hardcoded defaults */});
-  }, []);
+  };
+  useEffect(fetchAbout, []);
+  useLiveContent(fetchAbout);
 
   const heroStats      = apiData?.heroStats?.length       ? apiData.heroStats       : DEFAULT_HERO_STATS;
   const marqueeServices= apiData?.marqueeServices?.length ? apiData.marqueeServices : DEFAULT_MARQUEE_SERVICES;

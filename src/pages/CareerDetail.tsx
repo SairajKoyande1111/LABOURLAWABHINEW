@@ -3,6 +3,7 @@ import { MapPin, Briefcase, Clock, ArrowLeft, CheckCircle, ChevronRight, Upload,
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { JobContent } from '../types/content';
 
 const PP = 'Poppins, sans-serif';
@@ -19,13 +20,26 @@ const CareerDetail = () => {
   const [dragOver, setDragOver] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  const jobReqRef = useRef(0);
+  const fetchJob = () => {
+    const reqId = ++jobReqRef.current;
+    api.get<JobContent>(`/careers/${slug}`)
+      .then((data) => {
+        if (reqId !== jobReqRef.current) return; // superseded by a newer request
+        setJob(data);
+        setNotFound(false); // clear any transient error from a prior failed poll
+      })
+      .catch(() => {
+        if (reqId !== jobReqRef.current) return;
+        setNotFound(true);
+      });
+  };
   useEffect(() => {
     setJob(null);
     setNotFound(false);
-    api.get<JobContent>(`/careers/${slug}`)
-      .then(setJob)
-      .catch(() => setNotFound(true));
+    fetchJob();
   }, [slug]);
+  useLiveContent(fetchJob);
 
   useEffect(() => {
     if (!job) return;

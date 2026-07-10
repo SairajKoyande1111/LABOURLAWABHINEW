@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { ServiceContent } from '../types/content';
 
 const PP = 'Poppins, sans-serif';
@@ -13,11 +14,13 @@ const Services = () => {
   const [services, setServices] = useState<ServiceContent[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
-  useEffect(() => {
+  const fetchServices = () => {
     api.get<ServiceContent[]>('/services')
       .then((data) => { setServices(data); setStatus('ready'); })
       .catch(() => setStatus('error'));
-  }, []);
+  };
+  useEffect(fetchServices, []);
+  useLiveContent(fetchServices);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');

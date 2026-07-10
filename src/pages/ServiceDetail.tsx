@@ -1,9 +1,10 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FileText, Phone, ChevronRight, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { ServiceContent } from '../types/content';
 
 const PP = 'Poppins, sans-serif';
@@ -14,17 +15,32 @@ const ServiceDetail = () => {
   const [allServices, setAllServices] = useState<ServiceContent[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'not-found' | 'error'>('loading');
 
+  const detailReqRef = useRef(0);
+  const fetchDetail = () => {
+    const reqId = ++detailReqRef.current;
+    const currentSlug = slug;
+    api.get<ServiceContent>(`/services/${currentSlug}`)
+      .then((data) => {
+        if (reqId !== detailReqRef.current) return; // a newer request already resolved/superseded this one
+        setDetail(data); setStatus('ready');
+      })
+      .catch((err) => {
+        if (reqId !== detailReqRef.current) return;
+        setStatus(err?.status === 404 ? 'not-found' : 'error');
+      });
+  };
   useEffect(() => {
     setDetail(null);
     setStatus('loading');
-    api.get<ServiceContent>(`/services/${slug}`)
-      .then((data) => { setDetail(data); setStatus('ready'); })
-      .catch((err) => setStatus(err?.status === 404 ? 'not-found' : 'error'));
+    fetchDetail();
   }, [slug]);
+  useLiveContent(fetchDetail);
 
-  useEffect(() => {
+  const fetchAllServices = () => {
     api.get<ServiceContent[]>('/services').then(setAllServices).catch(() => {});
-  }, []);
+  };
+  useEffect(fetchAllServices, []);
+  useLiveContent(fetchAllServices);
 
   const title = detail?.title || slug?.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') || 'Service';
   const otherServices = allServices.filter((s) => s.slug !== slug);

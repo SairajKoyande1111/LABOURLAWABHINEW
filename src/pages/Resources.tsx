@@ -3,6 +3,7 @@ import { Download, ChevronRight, Calendar, Clock, ArrowRight, FileText, BookOpen
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { ResourceItem } from '../types/content';
 
 const PP = 'Poppins, sans-serif';
@@ -16,7 +17,7 @@ const Resources = () => {
   const [downloads, setDownloads] = useState<ResourceItem[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
-  useEffect(() => {
+  const fetchResources = () => {
     api.get<ResourceItem[]>('/resources')
       .then(data => {
         setBlogPosts(data.filter(r => r.tab === 'articles'));
@@ -24,7 +25,9 @@ const Resources = () => {
         setStatus('ready');
       })
       .catch(() => setStatus('error'));
-  }, []);
+  };
+  useEffect(fetchResources, []);
+  useLiveContent(fetchResources);
 
   const filteredBlogs = catFilter === 'All'
     ? blogPosts
