@@ -211,7 +211,7 @@ export default function AdminClientele() {
                 </DangerButton>
               </div>
               <ImageUploader label="Card image (optional — leave blank to use built-in photo)" value={ind.image}
-                onChange={url => { const n = [...data.industries]; n[i] = { ...ind, image: url }; set('industries', n); }} />
+                onChange={url => { const n = [...data.industries]; n[i] = { ...ind, image: url }; set('industries', n); }} section="clientele" />
             </div>
           ))}
           <SecondaryButton type="button"

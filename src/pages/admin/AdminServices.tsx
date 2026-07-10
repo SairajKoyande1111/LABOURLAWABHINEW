@@ -84,7 +84,7 @@ export default function AdminServices() {
             <Field label="Slug (URL)"><TextInput value={editing.slug} onChange={(e) => set('slug', e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))} /></Field>
           </div>
           <Field label="Short description"><TextArea rows={2} value={editing.desc} onChange={(e) => set('desc', e.target.value)} /></Field>
-          <ImageUploader label="Card image" value={editing.img} onChange={(v) => set('img', v)} />
+          <ImageUploader label="Card image" value={editing.img} onChange={(v) => set('img', v)} section="services" />
         </Section>
 
         <Section title="Detail Page" description="Shown on this service's dedicated page.">

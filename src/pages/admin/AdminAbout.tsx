@@ -309,7 +309,7 @@ export default function AdminAbout() {
                   onChange={e => onChange({ ...item, title: e.target.value })} />
                 <DangerButton type="button" onClick={onRemove}><Trash2 size={13} /></DangerButton>
               </div>
-              <ImageUploader label="Background image" value={item.img} onChange={url => onChange({ ...item, img: url })} />
+              <ImageUploader label="Background image" value={item.img} onChange={url => onChange({ ...item, img: url })} section="about" />
             </div>
           ),
           { title: '', img: '' },
@@ -331,7 +331,7 @@ export default function AdminAbout() {
               </div>
               <TextArea rows={2} placeholder="Description paragraph" value={item.description}
                 onChange={e => onChange({ ...item, description: e.target.value })} />
-              <ImageUploader label="Milestone image" value={item.img} onChange={url => onChange({ ...item, img: url })} />
+              <ImageUploader label="Milestone image" value={item.img} onChange={url => onChange({ ...item, img: url })} section="about" />
             </div>
           ),
           { year: '', event: '', img: '', description: '' },
@@ -372,7 +372,7 @@ export default function AdminAbout() {
                 onChange={e => onChange({ ...item, qualification: e.target.value })} />
               <TextInput placeholder="Role / title" value={item.role}
                 onChange={e => onChange({ ...item, role: e.target.value })} />
-              <ImageUploader label="Photo" value={item.img} onChange={url => onChange({ ...item, img: url })} />
+              <ImageUploader label="Photo" value={item.img} onChange={url => onChange({ ...item, img: url })} section="team" />
             </div>
           ),
           { name: '', qualification: '', role: '', img: '' },

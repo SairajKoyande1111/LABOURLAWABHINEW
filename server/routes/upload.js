@@ -20,6 +20,17 @@ function handleMulterError(err, res) {
   return res.status(500).json({ error: 'Upload failed' });
 }
 
+// Only known section names may be used as folder segments — keeps the
+// Cloudinary media library organized and prevents arbitrary folder injection.
+const ALLOWED_SECTIONS = new Set([
+  'home', 'about', 'clientele', 'services', 'resources', 'careers', 'team', 'misc',
+]);
+
+function sanitizeSection(raw) {
+  const section = String(raw || 'misc').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  return ALLOWED_SECTIONS.has(section) ? section : 'misc';
+}
+
 router.post('/', requireAuth, (req, res) => {
   upload.single('file')(req, res, async (err) => {
     if (err) return handleMulterError(err, res);
@@ -31,11 +42,12 @@ router.post('/', requireAuth, (req, res) => {
       const isImage = mime.startsWith('image/');
       // PDFs, XLSX, DOCX, etc. are uploaded as raw
       const resourceType = isVideo ? 'video' : isImage ? 'image' : 'raw';
+      const section = sanitizeSection(req.body?.section);
 
       const b64 = req.file.buffer.toString('base64');
       const dataUri = `data:${mime};base64,${b64}`;
       const result = await cloudinary.uploader.upload(dataUri, {
-        folder: 'labourcodes',
+        folder: `labourcodes/${section}`,
         resource_type: resourceType,
       });
       res.json({ url: result.secure_url, publicId: result.public_id });

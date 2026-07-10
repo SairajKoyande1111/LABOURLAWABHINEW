@@ -37,9 +37,10 @@ export const api = {
   del: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
 };
 
-export async function uploadFile(file: File): Promise<{ url: string; publicId: string }> {
+export async function uploadFile(file: File, section: string = 'misc'): Promise<{ url: string; publicId: string }> {
   const formData = new FormData();
   formData.append('file', file);
+  formData.append('section', section);
   const res = await fetch(`${BASE}/upload`, {
     method: 'POST',
     credentials: 'include',

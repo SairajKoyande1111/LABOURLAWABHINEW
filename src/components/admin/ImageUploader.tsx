@@ -22,11 +22,14 @@ export default function ImageUploader({
   value,
   onChange,
   accept = 'image/*',
+  section = 'misc',
 }: {
   label: string;
   value: string;
   onChange: (url: string) => void;
   accept?: string;
+  /** Cloudinary folder to organize this upload under, e.g. "about", "clientele", "team". */
+  section?: string;
 }) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
@@ -42,7 +45,7 @@ export default function ImageUploader({
     }
     setUploading(true);
     try {
-      const { url } = await uploadFile(file);
+      const { url } = await uploadFile(file, section);
       onChange(url);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed');
