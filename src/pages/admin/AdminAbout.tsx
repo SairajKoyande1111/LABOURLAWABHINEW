@@ -11,6 +11,12 @@ import ImageUploader from '../../components/admin/ImageUploader';
 const PP = 'Poppins, sans-serif';
 
 const EMPTY: AboutContent = {
+  heroEyebrow:           'About Maru Consultancy Services',
+  heroHeadlineTop:       "India's Most\nTrusted",
+  heroHeadlineHighlight: 'Labour Law',
+  heroHeadlineBottom:    'Partner.',
+  heroSubtext:           'Two decades of expertise in labour law compliance, HR governance, statutory filings, and workforce management across 15+ Indian states.',
+  videoUrl:              '',
   heroStats: [
     { value: '500+', label: 'Corporate Clients' },
     { value: '21+',  label: 'Years' },
@@ -70,6 +76,12 @@ export default function AdminAbout() {
       .then(res => {
         // Merge: use fetched arrays only if non-empty, else keep EMPTY defaults
         setData({
+          heroEyebrow:           res.heroEyebrow           ?? EMPTY.heroEyebrow,
+          heroHeadlineTop:       res.heroHeadlineTop       ?? EMPTY.heroHeadlineTop,
+          heroHeadlineHighlight: res.heroHeadlineHighlight ?? EMPTY.heroHeadlineHighlight,
+          heroHeadlineBottom:    res.heroHeadlineBottom    ?? EMPTY.heroHeadlineBottom,
+          heroSubtext:           res.heroSubtext           ?? EMPTY.heroSubtext,
+          videoUrl:              res.videoUrl              ?? EMPTY.videoUrl,
           heroStats:            res.heroStats            ?? EMPTY.heroStats,
           marqueeServices:      res.marqueeServices      ?? EMPTY.marqueeServices,
           storySlides:          res.storySlides          ?? EMPTY.storySlides,
@@ -163,6 +175,34 @@ export default function AdminAbout() {
         </div>
       )}
 
+      {/* ── Hero Content ── */}
+      <Section title="Hero Content" description="The left-panel headline and subtext shown on the About page hero.">
+        <Field label="Eyebrow (small caps above the headline)">
+          <TextInput value={data.heroEyebrow} onChange={e => set('heroEyebrow', e.target.value)}
+            placeholder="e.g. About Maru Consultancy Services" />
+        </Field>
+        <Field label="Headline — lines before the amber highlight (use ↵ Enter for a line break)">
+          <TextArea rows={2} value={data.heroHeadlineTop}
+            onChange={e => set('heroHeadlineTop', e.target.value)}
+            placeholder={"India's Most\nTrusted"} />
+        </Field>
+        <Field label="Headline — amber highlight line">
+          <TextInput value={data.heroHeadlineHighlight}
+            onChange={e => set('heroHeadlineHighlight', e.target.value)}
+            placeholder="Labour Law" />
+        </Field>
+        <Field label="Headline — final line">
+          <TextInput value={data.heroHeadlineBottom}
+            onChange={e => set('heroHeadlineBottom', e.target.value)}
+            placeholder="Partner." />
+        </Field>
+        <Field label="Subtext paragraph">
+          <TextArea rows={3} value={data.heroSubtext}
+            onChange={e => set('heroSubtext', e.target.value)}
+            placeholder="Two decades of expertise in labour law compliance..." />
+        </Field>
+      </Section>
+
       {/* ── Hero Stats ── */}
       <Section title="Hero Stats" description="Three numbers shown at the bottom of the hero panel (e.g. 500+, Corporate Clients).">
         {listOf<AboutHeroStat>(
@@ -178,6 +218,14 @@ export default function AdminAbout() {
           ),
           { value: '', label: '' },
         )}
+      </Section>
+
+      {/* ── Story Bento — Video ── */}
+      <Section title="Story Bento — Video" description="Paste a YouTube/Vimeo embed URL to show a video in the dark panel of the bento grid. Leave blank to show the 'Video coming soon' placeholder.">
+        <Field label="Video embed URL (e.g. https://www.youtube.com/embed/xxxxx)">
+          <TextInput value={data.videoUrl} onChange={e => set('videoUrl', e.target.value)}
+            placeholder="https://www.youtube.com/embed/..." />
+        </Field>
       </Section>
 
       {/* ── Marquee Strip ── */}

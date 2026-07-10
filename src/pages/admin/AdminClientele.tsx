@@ -1,13 +1,28 @@
 import { useEffect, useState } from 'react';
 import { Plus, Trash2, Save, Loader2, CheckCircle2 } from 'lucide-react';
 import { api } from '../../lib/api';
-import type { ClienteleContent, ClienteleStat, ClienteleIndustry, ClienteleTestimonial } from '../../types/content';
+import type { ClienteleContent, ClienteleStat, ClienteleIndustry, ClienteleTestimonial, PortfolioSector } from '../../types/content';
 import { Section, Field, TextInput, TextArea, PrimaryButton, SecondaryButton, DangerButton } from '../../components/admin/FormBits';
 import ImageUploader from '../../components/admin/ImageUploader';
 
 const PP = 'Poppins, sans-serif';
 
 const EMPTY: ClienteleContent = {
+  heroEyebrow:  'Trusted Partners',
+  heroHeadline: 'Our Esteemed Clientele',
+  heroSubtext:  'Trusted by 500+ corporations across India to navigate complex labour law and stay fully compliant.',
+  portfolio: [
+    { sector: 'Manufacturing & Conglomerates', clients: [
+      { name: 'Tata', logoUrl: '' }, { name: 'Mahindra', logoUrl: '' }, { name: 'L&T', logoUrl: '' },
+      { name: 'Reliance', logoUrl: '' }, { name: 'ITC', logoUrl: '' }, { name: 'Godrej', logoUrl: '' },
+    ]},
+    { sector: 'Banking & Finance', clients: [
+      { name: 'HDFC Bank', logoUrl: '' }, { name: 'Bajaj', logoUrl: '' },
+    ]},
+    { sector: 'Information Technology', clients: [
+      { name: 'Infosys', logoUrl: '' }, { name: 'Wipro', logoUrl: '' },
+    ]},
+  ],
   stats: [
     { target: 500, suffix: '+', decimals: 0, label: 'Clients Served' },
     { target: 15,  suffix: '+', decimals: 0, label: 'Years of Expertise' },
@@ -48,6 +63,10 @@ export default function AdminClientele() {
     api.get<ClienteleContent>('/clientele')
       .then(res => {
         setData({
+          heroEyebrow:  res.heroEyebrow  ?? EMPTY.heroEyebrow,
+          heroHeadline: res.heroHeadline ?? EMPTY.heroHeadline,
+          heroSubtext:  res.heroSubtext  ?? EMPTY.heroSubtext,
+          portfolio:    res.portfolio    ?? EMPTY.portfolio,
           stats:        res.stats        ?? EMPTY.stats,
           industries:   res.industries   ?? EMPTY.industries,
           testimonials: res.testimonials ?? EMPTY.testimonials,
@@ -107,6 +126,22 @@ export default function AdminClientele() {
           </button>
         </div>
       )}
+
+      {/* ── Hero Content ── */}
+      <Section title="Hero Content" description="The text shown in the brand-colour hero section at the top of the Clientele page.">
+        <Field label="Eyebrow (small caps above the headline)">
+          <TextInput value={data.heroEyebrow} onChange={e => set('heroEyebrow', e.target.value)}
+            placeholder="e.g. Trusted Partners" />
+        </Field>
+        <Field label="Headline">
+          <TextInput value={data.heroHeadline} onChange={e => set('heroHeadline', e.target.value)}
+            placeholder="e.g. Our Esteemed Clientele" />
+        </Field>
+        <Field label="Subtext paragraph">
+          <TextArea rows={2} value={data.heroSubtext} onChange={e => set('heroSubtext', e.target.value)}
+            placeholder="Trusted by 500+ corporations across India..." />
+        </Field>
+      </Section>
 
       {/* ── Stats ── */}
       <Section title="Stats Bar" description="The four animated count-up numbers shown at the top of the page.">
@@ -205,6 +240,59 @@ export default function AdminClientele() {
           <SecondaryButton type="button"
             onClick={() => set('testimonials', [...data.testimonials, { text: '', author: '', role: '' } as ClienteleTestimonial])}>
             <Plus size={13} /> Add testimonial
+          </SecondaryButton>
+        </div>
+      </Section>
+
+      {/* ── Our Portfolio ── */}
+      <Section title="Our Portfolio" description="The sector tabs and client logos grid. For built-in logos (Tata, HDFC Bank, etc.) the name alone is enough — leave Logo URL blank. For other clients paste a logo image URL.">
+        <div className="space-y-4">
+          {data.portfolio.map((sector, si) => (
+            <div key={si} className="p-4 rounded-xl border border-gray-100 space-y-3">
+              <div className="flex gap-2 items-center">
+                <TextInput placeholder="Sector name (e.g. Manufacturing & Conglomerates)" value={sector.sector}
+                  onChange={e => {
+                    const n = [...data.portfolio]; n[si] = { ...sector, sector: e.target.value }; set('portfolio', n);
+                  }} />
+                <DangerButton type="button" onClick={() => set('portfolio', data.portfolio.filter((_, j) => j !== si))}>
+                  <Trash2 size={13} />
+                </DangerButton>
+              </div>
+              <div className="space-y-2 pl-3 border-l-2 border-gray-100">
+                {sector.clients.map((client, ci) => (
+                  <div key={ci} className="flex gap-2 items-center">
+                    <TextInput placeholder="Client name" value={client.name}
+                      onChange={e => {
+                        const n = [...data.portfolio]; const cs = [...n[si].clients];
+                        cs[ci] = { ...client, name: e.target.value }; n[si] = { ...n[si], clients: cs }; set('portfolio', n);
+                      }} />
+                    <TextInput placeholder="Logo URL (blank = built-in SVG)" value={client.logoUrl}
+                      onChange={e => {
+                        const n = [...data.portfolio]; const cs = [...n[si].clients];
+                        cs[ci] = { ...client, logoUrl: e.target.value }; n[si] = { ...n[si], clients: cs }; set('portfolio', n);
+                      }} />
+                    <DangerButton type="button" onClick={() => {
+                      const n = [...data.portfolio];
+                      n[si] = { ...n[si], clients: sector.clients.filter((_, j) => j !== ci) };
+                      set('portfolio', n);
+                    }}>
+                      <Trash2 size={13} />
+                    </DangerButton>
+                  </div>
+                ))}
+                <SecondaryButton type="button" onClick={() => {
+                  const n = [...data.portfolio];
+                  n[si] = { ...n[si], clients: [...sector.clients, { name: '', logoUrl: '' }] };
+                  set('portfolio', n);
+                }}>
+                  <Plus size={13} /> Add client
+                </SecondaryButton>
+              </div>
+            </div>
+          ))}
+          <SecondaryButton type="button"
+            onClick={() => set('portfolio', [...data.portfolio, { sector: '', clients: [] } as PortfolioSector])}>
+            <Plus size={13} /> Add sector
           </SecondaryButton>
         </div>
       </Section>

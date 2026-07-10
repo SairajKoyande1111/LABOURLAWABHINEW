@@ -90,6 +90,15 @@ export type AboutTeamMember   = { name: string; qualification: string; role: str
 
 export type AboutContent = {
   _id?: string;
+  // Hero
+  heroEyebrow:           string;
+  heroHeadlineTop:       string;
+  heroHeadlineHighlight: string;
+  heroHeadlineBottom:    string;
+  heroSubtext:           string;
+  // Bento video
+  videoUrl:              string;
+  // Below-hero content
   heroStats:            AboutHeroStat[];
   marqueeServices:      string[];
   storySlides:          AboutStorySlide[];
@@ -107,11 +116,18 @@ export type ClienteleStat        = { target: number; decimals: number; suffix: s
 export type ClienteleIndustry    = { name: string; count: string; image: string };
 export type ClienteleTestimonial = { text: string; author: string; role: string };
 
+export type PortfolioClient = { name: string; logoUrl: string };
+export type PortfolioSector = { sector: string; clients: PortfolioClient[] };
+
 export type ClienteleContent = {
   _id?: string;
+  heroEyebrow:  string;
+  heroHeadline: string;
+  heroSubtext:  string;
   stats:        ClienteleStat[];
   industries:   ClienteleIndustry[];
   testimonials: ClienteleTestimonial[];
+  portfolio:    PortfolioSector[];
 };
 
 export type JobContent = {

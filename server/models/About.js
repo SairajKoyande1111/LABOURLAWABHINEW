@@ -23,6 +23,16 @@ const AboutSchema = new mongoose.Schema({
   journeyMilestones:  [Milestone],
   whyChooseItems:     [WhyItem],
   teamMembers:        [TeamMember],
+
+  // Hero section
+  heroEyebrow:          String,
+  heroHeadlineTop:      String,
+  heroHeadlineHighlight:String,
+  heroHeadlineBottom:   String,
+  heroSubtext:          String,
+
+  // Story-bento video panel
+  videoUrl: { type: String, default: '' },
 }, { timestamps: true });
 
 export default mongoose.models.About || mongoose.model('About', AboutSchema);

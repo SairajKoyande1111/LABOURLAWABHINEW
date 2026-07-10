@@ -223,6 +223,13 @@ const About = () => {
   const whyChooseItems = apiData?.whyChooseItems?.length  ? apiData.whyChooseItems  : DEFAULT_WHY_CHOOSE;
   const teamMembers    = apiData?.teamMembers?.length     ? apiData.teamMembers     : DEFAULT_TEAM;
 
+  const heroEyebrow           = apiData?.heroEyebrow           || 'About Maru Consultancy Services';
+  const heroHeadlineTop       = apiData?.heroHeadlineTop       || "India's Most\nTrusted";
+  const heroHeadlineHighlight = apiData?.heroHeadlineHighlight || 'Labour Law';
+  const heroHeadlineBottom    = apiData?.heroHeadlineBottom    || 'Partner.';
+  const heroSubtext           = apiData?.heroSubtext           || 'Two decades of expertise in labour law compliance, HR governance, statutory filings, and workforce management across 15+ Indian states.';
+  const videoUrl              = apiData?.videoUrl              ?? '';
+
   const styleInjected = useRef(false);
   useEffect(() => {
     if (styleInjected.current) return;
@@ -255,7 +262,7 @@ const About = () => {
               style={{ fontFamily: PP, color: '#ffffff' }}
               initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.45, delay: 0.1 }}>
-              About Maru Consultancy Services
+              {heroEyebrow}
             </motion.p>
 
             <motion.h1
@@ -263,18 +270,18 @@ const About = () => {
               style={{ fontFamily: PP, fontSize: 'clamp(2.4rem, 4.5vw, 4.4rem)' }}
               initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.55, delay: 0.18 }}>
-              India&apos;s Most<br />
-              Trusted<br />
-              <em className="not-italic" style={{ color: '#fda102' }}>Labour Law</em><br />
-              Partner.
+              {heroHeadlineTop.split('\n').map((line, i, arr) => (
+                <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+              ))}<br />
+              <em className="not-italic" style={{ color: '#fda102' }}>{heroHeadlineHighlight}</em><br />
+              {heroHeadlineBottom}
             </motion.h1>
 
             <motion.p className="text-base leading-[1.85] max-w-[460px] mb-8 text-justify"
               style={{ fontFamily: PP, color: '#ffffff' }}
               initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.26 }}>
-              Two decades of expertise in labour law compliance, HR governance,
-              statutory filings, and workforce management across 15+ Indian states.
+              {heroSubtext}
             </motion.p>
           </div>
 
@@ -359,18 +366,31 @@ const About = () => {
                   ))}
                 </div>
               </div>
-              {/* Video side — placeholder until a client video is provided */}
-              <div className="relative flex-1 flex items-center justify-center min-h-[140px]"
+              {/* Video side */}
+              <div className="relative flex-1 flex items-center justify-center min-h-[140px] overflow-hidden"
                 style={{ backgroundColor: '#1a1a1a' }}>
-                <div className="absolute inset-0 opacity-40"
-                  style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px)', backgroundSize: '20px 20px' }} />
-                <div className="relative flex flex-col items-center gap-2">
-                  <div className="w-11 h-11 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: '#fda102' }}>
-                    <Play size={16} style={{ color: '#fff' }} fill="#fff" />
-                  </div>
-                  <p className="text-[11px] uppercase tracking-widest" style={{ fontFamily: PP, color: 'rgba(255,255,255,0.55)' }}>Video coming soon</p>
-                </div>
+                {videoUrl ? (
+                  <iframe
+                    src={videoUrl}
+                    className="absolute inset-0 w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title="About video"
+                  />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 opacity-40"
+                      style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px)', backgroundSize: '20px 20px' }} />
+                    <div className="relative flex flex-col items-center gap-2">
+                      <div className="w-11 h-11 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: '#fda102' }}>
+                        <Play size={16} style={{ color: '#fff' }} fill="#fff" />
+                      </div>
+                      <p className="text-[11px] uppercase tracking-widest" style={{ fontFamily: PP, color: 'rgba(255,255,255,0.55)' }}>Video coming soon</p>
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
 

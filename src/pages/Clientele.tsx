@@ -75,25 +75,27 @@ const DEFAULT_TESTIMONIALS = [
   { text: "Their HR policy advisory helped us modernise our standing orders in line with the new codes. Employees and management are both happy.", author: "Kavitha Rao", role: "CHRO, NovaMed Healthcare" },
 ];
 
-/* ── Sector-wise clients ── */
-const SECTOR_CLIENTS: Record<string, { name: string; Logo: () => React.JSX.Element }[]> = {
-  'Manufacturing & Conglomerates': [
-    { name: 'Tata', Logo: TataLogo },
-    { name: 'Mahindra', Logo: MahindraLogo },
-    { name: 'L&T', Logo: LandTLogo },
-    { name: 'Reliance', Logo: RelianceLogo },
-    { name: 'ITC', Logo: ItcLogo },
-    { name: 'Godrej', Logo: GodrejLogo },
-  ],
-  'Banking & Finance': [
-    { name: 'HDFC Bank', Logo: HdfcLogo },
-    { name: 'Bajaj', Logo: BajajLogo },
-  ],
-  'Information Technology': [
-    { name: 'Infosys', Logo: InfosysLogo },
-    { name: 'Wipro', Logo: WiproLogo },
-  ],
+/* ── Built-in SVG logo map (name → component) ── */
+const BUILTIN_LOGOS: Record<string, () => React.JSX.Element> = {
+  'Tata': TataLogo, 'Mahindra': MahindraLogo, 'L&T': LandTLogo,
+  'Reliance': RelianceLogo, 'ITC': ItcLogo, 'Godrej': GodrejLogo,
+  'HDFC Bank': HdfcLogo, 'Bajaj': BajajLogo,
+  'Infosys': InfosysLogo, 'Wipro': WiproLogo,
 };
+
+/* ── Default portfolio (fallback when DB is empty) ── */
+const DEFAULT_PORTFOLIO = [
+  { sector: 'Manufacturing & Conglomerates', clients: [
+    { name: 'Tata', logoUrl: '' }, { name: 'Mahindra', logoUrl: '' }, { name: 'L&T', logoUrl: '' },
+    { name: 'Reliance', logoUrl: '' }, { name: 'ITC', logoUrl: '' }, { name: 'Godrej', logoUrl: '' },
+  ]},
+  { sector: 'Banking & Finance', clients: [
+    { name: 'HDFC Bank', logoUrl: '' }, { name: 'Bajaj', logoUrl: '' },
+  ]},
+  { sector: 'Information Technology', clients: [
+    { name: 'Infosys', logoUrl: '' }, { name: 'Wipro', logoUrl: '' },
+  ]},
+];
 
 const Clientele = () => {
   const [apiData, setApiData] = useState<ClienteleContent | null>(null);
@@ -104,9 +106,15 @@ const Clientele = () => {
   const stats        = apiData?.stats?.length        ? apiData.stats        : DEFAULT_STATS;
   const industries   = apiData?.industries?.length   ? apiData.industries   : DEFAULT_INDUSTRIES;
   const testimonials = apiData?.testimonials?.length ? apiData.testimonials : DEFAULT_TESTIMONIALS;
+  const portfolio    = apiData?.portfolio?.length    ? apiData.portfolio    : DEFAULT_PORTFOLIO;
 
-  const [activeSector, setActiveSector] = useState('Manufacturing & Conglomerates');
-  const sectors = Object.keys(SECTOR_CLIENTS);
+  const heroEyebrow  = apiData?.heroEyebrow  || 'Trusted Partners';
+  const heroHeadline = apiData?.heroHeadline || 'Our Esteemed Clientele';
+  const heroSubtext  = apiData?.heroSubtext  || 'Trusted by 500+ corporations across India to navigate complex labour law and stay fully compliant.';
+
+  const [activeSector, setActiveSector] = useState('');
+  const sectors = portfolio.map(p => p.sector);
+  const effectiveSector = activeSector && sectors.includes(activeSector) ? activeSector : (sectors[0] ?? '');
 
   return (
     <div className="w-full" style={{ fontFamily: PP }}>
@@ -124,17 +132,17 @@ const Clientele = () => {
           className="text-center px-8 w-full max-w-4xl mx-auto relative z-10">
           <p className="uppercase tracking-[0.3em] font-semibold mb-2"
             style={{ fontFamily: PP, fontSize: '0.9rem', color: '#fda102' }}>
-            Trusted Partners
+            {heroEyebrow}
           </p>
           <h1 className="font-bold mb-3"
             style={{ fontFamily: PP, fontSize: 'clamp(1.4rem, 3vw, 2.6rem)', color: '#fff' }}>
-            Our Esteemed Clientele
+            {heroHeadline}
           </h1>
           <p style={{
             fontFamily: PP, fontSize: 'clamp(0.88rem, 1.3vw, 1rem)',
             color: 'rgba(255,255,255,0.82)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7,
           }}>
-            Trusted by 500+ corporations across India to navigate complex labour law and stay fully compliant.
+            {heroSubtext}
           </p>
         </motion.div>
       </section>
@@ -220,9 +228,9 @@ const Clientele = () => {
                 className="px-5 py-2.5 rounded-full font-semibold text-sm transition-all border"
                 style={{
                   fontFamily: PP,
-                  backgroundColor: activeSector === sector ? '#a83a00' : '#fff',
-                  color: activeSector === sector ? '#fff' : '#a83a00',
-                  borderColor: activeSector === sector ? '#a83a00' : 'rgba(168,58,0,0.25)',
+                  backgroundColor: effectiveSector === sector ? '#a83a00' : '#fff',
+                  color: effectiveSector === sector ? '#fff' : '#a83a00',
+                  borderColor: effectiveSector === sector ? '#a83a00' : 'rgba(168,58,0,0.25)',
                 }}>
                 {sector}
               </button>
@@ -231,19 +239,25 @@ const Clientele = () => {
 
           {/* Logos grid */}
           <motion.div
-            key={activeSector}
+            key={effectiveSector}
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {(SECTOR_CLIENTS[activeSector] || []).map(({ name, Logo }, i) => (
-              <motion.div key={i}
-                initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.07 }}
-                className="bg-[#f8fafb] border border-gray-100 aspect-[3/2] rounded-2xl flex items-center justify-center px-8 shadow-sm hover:shadow-md hover:border-[rgba(168,58,0,0.2)] transition-all"
-                title={name}>
-                <Logo />
-              </motion.div>
-            ))}
+            {(portfolio.find(p => p.sector === effectiveSector)?.clients ?? []).map((client, i) => {
+              const LogoComp = BUILTIN_LOGOS[client.name];
+              return (
+                <motion.div key={i}
+                  initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.07 }}
+                  className="bg-[#f8fafb] border border-gray-100 aspect-[3/2] rounded-2xl flex items-center justify-center px-8 shadow-sm hover:shadow-md hover:border-[rgba(168,58,0,0.2)] transition-all"
+                  title={client.name}>
+                  {LogoComp ? <LogoComp /> : client.logoUrl
+                    ? <img src={client.logoUrl} alt={client.name} className="max-h-12 max-w-full object-contain" />
+                    : <span className="font-semibold text-sm text-center" style={{ fontFamily: PP, color: '#a83a00' }}>{client.name}</span>
+                  }
+                </motion.div>
+              );
+            })}
           </motion.div>
 
           {/* Scrolling all-client strip */}
