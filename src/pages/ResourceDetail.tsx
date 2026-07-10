@@ -1,15 +1,44 @@
 import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, CheckCircle, ChevronRight, ArrowRight } from 'lucide-react';
-import { blogPosts } from '../data/resourcesData';
+import { api } from '../lib/api';
+import type { ResourceItem } from '../types/content';
 
 const PP = 'Poppins, sans-serif';
 
 const ResourceDetail = () => {
   const { slug } = useParams();
-  const post = blogPosts.find(p => p.slug === slug);
+  const [post, setPost] = useState<ResourceItem | null>(null);
+  const [allArticles, setAllArticles] = useState<ResourceItem[]>([]);
+  const [status, setStatus] = useState<'loading' | 'ready' | 'not-found' | 'error'>('loading');
 
-  if (!post) {
+  useEffect(() => {
+    setStatus('loading');
+    Promise.all([
+      api.get<ResourceItem>(`/resources/slug/${slug}`),
+      api.get<ResourceItem[]>('/resources?tab=articles'),
+    ])
+      .then(([article, articles]) => {
+        setPost(article);
+        setAllArticles(articles.filter(a => a.slug !== slug));
+        setStatus('ready');
+      })
+      .catch((err: unknown) => {
+        const status = (err as { status?: number }).status;
+        setStatus(status === 404 ? 'not-found' : 'error');
+      });
+  }, [slug]);
+
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ fontFamily: PP }}>
+        <p className="text-gray-400 text-sm">Loading…</p>
+      </div>
+    );
+  }
+
+  if (status === 'not-found' || !post) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center" style={{ fontFamily: PP }}>
         <p className="text-gray-500 mb-4">Article not found.</p>
@@ -20,7 +49,18 @@ const ResourceDetail = () => {
     );
   }
 
-  const related = blogPosts.filter(p => p.slug !== slug).slice(0, 3);
+  if (status === 'error') {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center" style={{ fontFamily: PP }}>
+        <p className="text-gray-500 mb-4">Failed to load article. Please try again.</p>
+        <Link to="/resources" className="font-semibold" style={{ color: '#a83a00' }}>
+          ← Back to Resources
+        </Link>
+      </div>
+    );
+  }
+
+  const related = allArticles.slice(0, 3);
 
   return (
     <div className="w-full" style={{ fontFamily: PP }}>
@@ -226,7 +266,7 @@ const ResourceDetail = () => {
                     All Articles
                   </h4>
                   <ul className="space-y-0.5">
-                    {blogPosts.filter(p => p.slug !== slug).map((p, i) => (
+                    {allArticles.map((p, i) => (
                       <li key={i}>
                         <Link to={`/resources/${p.slug}`}
                           className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[#a83a00]"

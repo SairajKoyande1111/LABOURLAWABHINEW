@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Download, ChevronRight, Calendar, Clock, ArrowRight, FileText, BookOpen } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { blogPosts, downloads } from '../data/resourcesData';
+import { api } from '../lib/api';
+import type { ResourceItem } from '../types/content';
 
 const PP = 'Poppins, sans-serif';
 
@@ -11,6 +12,19 @@ const CATEGORIES = ['All', 'New Labour Codes', 'Compliance', 'Labour Audit', 'PO
 const Resources = () => {
   const [activeTab, setActiveTab] = useState<'blogs' | 'downloads'>('blogs');
   const [catFilter, setCatFilter] = useState('All');
+  const [blogPosts, setBlogPosts] = useState<ResourceItem[]>([]);
+  const [downloads, setDownloads] = useState<ResourceItem[]>([]);
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+
+  useEffect(() => {
+    api.get<ResourceItem[]>('/resources')
+      .then(data => {
+        setBlogPosts(data.filter(r => r.tab === 'articles'));
+        setDownloads(data.filter(r => r.tab === 'downloads'));
+        setStatus('ready');
+      })
+      .catch(() => setStatus('error'));
+  }, []);
 
   const filteredBlogs = catFilter === 'All'
     ? blogPosts
