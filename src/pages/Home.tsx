@@ -335,15 +335,14 @@ const Home = () => {
                   className="w-36 h-36 lg:w-40 lg:h-40 mb-6 shrink-0"
                 />
 
-                {/* Title — single line */}
-                <h3 className="font-semibold text-gray-900 whitespace-nowrap mb-2"
+                {/* Title */}
+                <h3 className="font-semibold text-gray-900 mb-2"
                   style={{ fontFamily: 'Poppins, sans-serif', fontSize: '1rem', lineHeight: 1.3 }}>
                   {item.title}
                 </h3>
 
-                {/* Desc — single line */}
-                <p className="whitespace-nowrap"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.83rem', fontWeight: 400, color: '#6b7280', lineHeight: 1.5 }}>
+                {/* Desc */}
+                <p style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.83rem', fontWeight: 400, color: '#6b7280', lineHeight: 1.5 }}>
                   {item.desc}
                 </p>
 
