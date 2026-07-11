@@ -18,8 +18,10 @@ export function parseCloudinaryUrl(url) {
     const match = u.pathname.match(/\/(image|video|raw)\/upload\/v\d+\/(.+)$/);
     if (!match) return null;
     const resourceType = match[1]; // 'image' | 'video' | 'raw'
-    // Strip file extension — Cloudinary public_ids don't include it
-    const publicId = match[2].replace(/\.[^./]+$/, '');
+    // raw assets (PDF/XLSX/DOCX) are uploaded with the extension as part of the
+    // public_id; image and video assets are not. Strip only for image/video.
+    const withExt = match[2];
+    const publicId = resourceType === 'raw' ? withExt : withExt.replace(/\.[^./]+$/, '');
     return { publicId, resourceType };
   } catch {
     return null;
