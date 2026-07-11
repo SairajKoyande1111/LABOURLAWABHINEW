@@ -129,4 +129,24 @@ router.post('/', requireAuth, (req, res) => {
   });
 });
 
+// DELETE  /api/upload  — remove a Cloudinary asset by its public_id.
+// Called by the admin UI whenever an image/video is removed or replaced so
+// orphaned assets don't accumulate in the media library.
+router.delete('/', requireAuth, async (req, res) => {
+  try {
+    const publicId = String(req.body?.publicId || '').trim();
+    if (!publicId) return res.status(400).json({ error: 'publicId is required' });
+
+    // Derive resource_type from what the client sent, defaulting to 'image'.
+    const raw = String(req.body?.resourceType || 'image').toLowerCase();
+    const resourceType = ['image', 'video', 'raw'].includes(raw) ? raw : 'image';
+
+    await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('[upload/delete]', err);
+    res.status(500).json({ error: 'Delete failed' });
+  }
+});
+
 export default router;

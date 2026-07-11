@@ -37,6 +37,34 @@ export const api = {
   del: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
 };
 
+/** Extract Cloudinary public_id and resource_type from a secure_url, or null if not a Cloudinary URL. */
+export function parseCloudinaryUrl(url: string): { publicId: string; resourceType: 'image' | 'video' | 'raw' } | null {
+  try {
+    const u = new URL(url);
+    if (!u.hostname.endsWith('cloudinary.com')) return null;
+    // Path: /{cloud}/image|video|raw/upload/v{ver}/{public_id}.{ext}
+    const match = u.pathname.match(/\/(image|video|raw)\/upload\/v\d+\/(.+)$/);
+    if (!match) return null;
+    const resourceType = match[1] as 'image' | 'video' | 'raw';
+    // Strip the file extension — Cloudinary public_ids don't include it
+    const withExt = match[2];
+    const publicId = withExt.replace(/\.[^./]+$/, '');
+    return { publicId, resourceType };
+  } catch {
+    return null;
+  }
+}
+
+/** Delete a Cloudinary asset by its secure_url. Silently no-ops for non-Cloudinary URLs. */
+export async function deleteCloudinaryAsset(url: string): Promise<void> {
+  const info = parseCloudinaryUrl(url);
+  if (!info) return; // external URL — nothing to delete from our Cloudinary
+  await request<void>(`/upload`, {
+    method: 'DELETE',
+    body: JSON.stringify({ publicId: info.publicId, resourceType: info.resourceType }),
+  });
+}
+
 export async function uploadFile(file: File, section: string = 'misc'): Promise<{ url: string; publicId: string }> {
   const formData = new FormData();
   formData.append('file', file);

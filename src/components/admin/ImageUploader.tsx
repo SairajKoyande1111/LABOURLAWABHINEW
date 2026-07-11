@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Upload, Loader2, X, FileText } from 'lucide-react';
-import { uploadFile } from '../../lib/api';
+import { uploadFile, deleteCloudinaryAsset } from '../../lib/api';
 
 const PP = 'Poppins, sans-serif';
 
@@ -47,14 +47,22 @@ export default function ImageUploader({
       return;
     }
     setUploading(true);
+    const oldUrl = value;
     try {
       const { url } = await uploadFile(file, section);
       onChange(url);
+      // Delete the old Cloudinary asset after the new one is confirmed uploaded
+      if (oldUrl) deleteCloudinaryAsset(oldUrl).catch(() => {});
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed');
     } finally {
       setUploading(false);
     }
+  };
+
+  const handleClear = () => {
+    if (value) deleteCloudinaryAsset(value).catch(() => {});
+    onChange('');
   };
 
   const preview = value ? (
@@ -73,7 +81,7 @@ export default function ImageUploader({
       )}
       <button
         type="button"
-        onClick={() => onChange('')}
+        onClick={handleClear}
         className="absolute top-0.5 right-0.5 bg-black/60 rounded-full p-0.5 text-white hover:bg-black/80"
       >
         <X size={11} />
