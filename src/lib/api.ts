@@ -60,12 +60,10 @@ export function parseCloudinaryUrl(url: string): { publicId: string; resourceTyp
 export async function deleteCloudinaryAsset(url: string): Promise<void> {
   const info = parseCloudinaryUrl(url);
   if (!info) return; // external URL — nothing to delete from our Cloudinary
-  console.log('[deleteCloudinaryAsset] attempting delete', info);
-  const result = await request<unknown>(`/upload`, {
+  await request<void>(`/upload`, {
     method: 'DELETE',
     body: JSON.stringify({ publicId: info.publicId, resourceType: info.resourceType }),
   });
-  console.log('[deleteCloudinaryAsset] server response', result);
 }
 
 export async function uploadFile(file: File, section: string = 'misc'): Promise<{ url: string; publicId: string }> {

@@ -157,10 +157,8 @@ router.delete('/', requireAuth, async (req, res) => {
     const raw = String(req.body?.resourceType || 'image').toLowerCase();
     const resourceType = ['image', 'video', 'raw'].includes(raw) ? raw : 'image';
 
-    console.log(`[upload/delete] publicId="${publicId}" resourceType="${resourceType}"`);
-    const result = await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
-    console.log(`[upload/delete] Cloudinary result:`, result);
-    res.json({ ok: true, result });
+    await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
+    res.json({ ok: true });
   } catch (err) {
     console.error('[upload/delete]', err);
     res.status(500).json({ error: 'Delete failed' });
