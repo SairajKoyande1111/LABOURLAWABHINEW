@@ -65,20 +65,17 @@ export default function AdminServices() {
     }
   };
 
+  // Renumbers every service (not just the two swapped) so the list still ends up in a
+  // stable, correct order even if `order` values were stale/duplicated beforehand.
   const move = async (index: number, direction: -1 | 1) => {
     const target = index + direction;
     if (target < 0 || target >= services.length) return;
-    const a = services[index];
-    const b = services[target];
-    // Optimistically reorder locally so the UI responds immediately
     const next = [...services];
     [next[index], next[target]] = [next[target], next[index]];
-    setServices(next);
+    // Optimistically reorder locally so the UI responds immediately
+    setServices(next.map((s, i) => ({ ...s, order: i })));
     try {
-      await Promise.all([
-        api.put(`/services/${a._id}`, { ...a, order: target }),
-        api.put(`/services/${b._id}`, { ...b, order: index }),
-      ]);
+      await Promise.all(next.map((s, i) => api.put(`/services/${s._id}`, { ...s, order: i })));
       await load();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to reorder');

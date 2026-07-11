@@ -81,23 +81,20 @@ export default function AdminCareers() {
 
   // Reorder within a category group. `groupIndex` is the position of the job inside its
   // filtered (internal/client) list, not the raw `jobs` array.
+  // Renumbers every item in the group (not just the two swapped) so a group that starts
+  // with duplicate/stale `order` values (e.g. all 0) still ends up in a stable, correct order.
   const move = async (category: JobContent['category'], groupIndex: number, direction: -1 | 1) => {
     const group = jobs.filter(j => j.category === category);
     const target = groupIndex + direction;
     if (target < 0 || target >= group.length) return;
-    const a = group[groupIndex];
-    const b = group[target];
     const nextGroup = [...group];
     [nextGroup[groupIndex], nextGroup[target]] = [nextGroup[target], nextGroup[groupIndex]];
     setJobs(prev => {
       const others = prev.filter(j => j.category !== category);
-      return [...others, ...nextGroup];
+      return [...others, ...nextGroup.map((j, i) => ({ ...j, order: i }))];
     });
     try {
-      await Promise.all([
-        api.put(`/careers/${a._id}`, { ...a, order: target }),
-        api.put(`/careers/${b._id}`, { ...b, order: groupIndex }),
-      ]);
+      await Promise.all(nextGroup.map((j, i) => api.put(`/careers/${j._id}`, { ...j, order: i })));
       await load();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to reorder');
