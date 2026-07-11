@@ -71,6 +71,7 @@ export default function AdminResources() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<ResourceItem | Omit<ResourceItem, '_id'> | null>(null);
   const [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
 
@@ -83,14 +84,16 @@ export default function AdminResources() {
   }, []);
 
   const startCreate = (tab: 'articles' | 'downloads') => {
-    setError('');
+    setError(''); setDirty(false);
     setEditing(tab === 'articles' ? { ...EMPTY_ARTICLE } : { ...EMPTY_DOWNLOAD });
   };
-  const startEdit = (r: ResourceItem) => { setError(''); setEditing({ ...r }); };
-  const cancel = () => setEditing(null);
+  const startEdit = (r: ResourceItem) => { setError(''); setDirty(false); setEditing({ ...r }); };
+  const cancel = () => { setEditing(null); setDirty(false); };
 
-  const set = <K extends keyof ResourceItem>(key: K, value: ResourceItem[K]) =>
+  const set = <K extends keyof ResourceItem>(key: K, value: ResourceItem[K]) => {
+    setDirty(true);
     setEditing(e => e ? { ...e, [key]: value } : e);
+  };
 
   const save = async () => {
     if (!editing) return;
@@ -103,6 +106,7 @@ export default function AdminResources() {
       }
       await load();
       setEditing(null);
+      setDirty(false);
       setNotice('Saved — changes are live on the site.');
       setTimeout(() => setNotice(''), 2500);
     } catch (err) {
@@ -136,8 +140,27 @@ export default function AdminResources() {
               ? `Edit ${isArticle ? 'Article' : 'Download'}`
               : `New ${isArticle ? 'Article' : 'Download'}`}
           </h1>
-          <SecondaryButton onClick={cancel}><X size={13} /> Cancel</SecondaryButton>
+          <div className="flex items-center gap-3">
+            <SecondaryButton onClick={cancel}><X size={13} /> Cancel</SecondaryButton>
+            <PrimaryButton onClick={save} disabled={saving || !editing.title}>
+              {saving ? <Loader2 size={15} className="animate-spin" /> : <Save size={15} />}
+              {saving ? 'Saving…' : 'Save'}
+            </PrimaryButton>
+          </div>
         </div>
+
+        {dirty && !saving && (
+          <div className="sticky top-0 z-20 mb-5 flex items-center justify-between gap-3 rounded-xl px-4 py-3 shadow-md"
+            style={{ backgroundColor: '#7c2d00', fontFamily: PP }}>
+            <span className="text-sm font-semibold text-white">You have unsaved changes.</span>
+            <button onClick={save} disabled={!editing.title}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-opacity hover:opacity-90 disabled:opacity-50"
+              style={{ backgroundColor: '#fda102', color: '#111' }}>
+              <Save size={13} /> Save now
+            </button>
+          </div>
+        )}
+
         {error && <div className="mb-5 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5">{error}</div>}
 
         {isArticle ? (
