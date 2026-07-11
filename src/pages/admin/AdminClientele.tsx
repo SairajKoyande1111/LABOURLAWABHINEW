@@ -260,7 +260,11 @@ export default function AdminClientele() {
                   onChange={e => {
                     const n = [...data.portfolio]; n[si] = { ...sector, sector: e.target.value }; set('portfolio', n);
                   }} />
-                <DangerButton type="button" onClick={() => set('portfolio', data.portfolio.filter((_, j) => j !== si))}>
+                <DangerButton type="button" onClick={() => {
+                  // Delete any Cloudinary logo assets belonging to this sector's clients
+                  sector.clients.forEach(c => { if (c.logoUrl) deleteCloudinaryAsset(c.logoUrl).catch(() => {}); });
+                  set('portfolio', data.portfolio.filter((_, j) => j !== si));
+                }}>
                   <Trash2 size={13} />
                 </DangerButton>
               </div>
@@ -278,6 +282,7 @@ export default function AdminClientele() {
                         cs[ci] = { ...client, logoUrl: e.target.value }; n[si] = { ...n[si], clients: cs }; set('portfolio', n);
                       }} />
                     <DangerButton type="button" onClick={() => {
+                      if (client.logoUrl) deleteCloudinaryAsset(client.logoUrl).catch(() => {});
                       const n = [...data.portfolio];
                       n[si] = { ...n[si], clients: sector.clients.filter((_, j) => j !== ci) };
                       set('portfolio', n);
