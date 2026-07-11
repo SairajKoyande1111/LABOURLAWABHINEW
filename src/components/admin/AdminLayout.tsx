@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import { LayoutDashboard, Briefcase, FileText, LogOut, ExternalLink, ChevronLeft, ChevronRight, BookOpen, Info, Users } from 'lucide-react';
+import { LayoutDashboard, Briefcase, FileText, LogOut, ExternalLink, ChevronLeft, ChevronRight, BookOpen, Info, Users, Phone } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ const navItems = [
   { to: '/admin/clientele', label: 'Clientele', icon: Users },
   { to: '/admin/resources', label: 'Resources', icon: BookOpen },
   { to: '/admin/careers',   label: 'Careers',   icon: FileText },
+  { to: '/admin/contact',   label: 'Contact',   icon: Phone },
 ];
 
 export default function AdminLayout() {

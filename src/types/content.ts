@@ -134,6 +134,26 @@ export type ClienteleContent = {
   portfolio:    PortfolioSector[];
 };
 
+export type ContactContent = {
+  _id?: string;
+  heroEyebrow:   string;
+  heroHeading:   string;
+  heroSubtext:   string;
+  formTitle:     string;
+  formSubtext:   string;
+  phone1:        string;
+  phone2:        string;
+  email1:        string;
+  email2:        string;
+  addressLine1:  string;
+  addressLine2:  string;
+  addressLine3:  string;
+  hoursWeekdays: string;
+  hoursWeekend:  string;
+  serviceOptions: string[];
+  mapEmbedUrl:   string;
+};
+
 export type JobContent = {
   _id: string;
   slug: string;

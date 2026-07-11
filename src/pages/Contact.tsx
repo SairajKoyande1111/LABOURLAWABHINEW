@@ -1,11 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { api } from '../lib/api';
+import type { ContactContent } from '../types/content';
 import heroVideo from '@assets/7683053-hd_1920_1080_24fps_1783584828907.mp4';
 import iconLocation from '@assets/placeholder_1783488477011.png';
 import iconCall from '@assets/call_1783488542810.png';
 import iconMail from '@assets/communication_1783488559887.png';
 import chatIcon from '@assets/chat_1783587012486.png';
+
+const DEFAULTS: ContactContent = {
+  heroEyebrow:    'Get In Touch',
+  heroHeading:    'Ready to Put Your Worries to Rest?',
+  heroSubtext:    'Our experts are ready to analyse your compliance situation and build a clear roadmap for you.',
+  formTitle:      'Send Us a Message',
+  formSubtext:    "We'll get back to you within 1 business day.",
+  phone1:         '+91 98765 43210',
+  phone2:         '022 4567 8900',
+  email1:         'contact@maruconsultancy.in',
+  email2:         'support@maruconsultancy.in',
+  addressLine1:   '15th Floor, Nariman Point,',
+  addressLine2:   'Mumbai, Maharashtra 400021',
+  addressLine3:   'India',
+  hoursWeekdays:  'Monday – Friday: 9:30 AM – 6:30 PM',
+  hoursWeekend:   'Saturday & Sunday: Closed',
+  serviceOptions: [
+    'Labour Law Compliance',
+    'Payroll & Salary Structuring',
+    'Statutory Compliance & Filings',
+    'Audits & Governance',
+    'Contract Staffing',
+    'Registrations & Licensing',
+    'HR Policy & Advisory',
+    'Legal Representation',
+    'Training & Workshops',
+    'Other / General Inquiry',
+  ],
+  mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.9!2d72.8232!3d18.9256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c6cfb3b99b%3A0x4a5a3a6d7e5f4f1a!2sNariman%20Point%2C%20Mumbai%2C%20Maharashtra%20400021!5e0!3m2!1sen!2sin!4v1700000000000',
+};
 
 const PP = 'Poppins, sans-serif';
 
@@ -44,9 +76,31 @@ const LABEL_STYLE: React.CSSProperties = {
 };
 
 const Contact = () => {
+  const [apiData, setApiData] = useState<ContactContent>(DEFAULTS);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', service: '', message: '' });
   const [focused, setFocused] = useState('');
+
+  useEffect(() => {
+    api.get<ContactContent>('/contact').then(res => setApiData({
+      heroEyebrow:    res.heroEyebrow    ?? DEFAULTS.heroEyebrow,
+      heroHeading:    res.heroHeading    ?? DEFAULTS.heroHeading,
+      heroSubtext:    res.heroSubtext    ?? DEFAULTS.heroSubtext,
+      formTitle:      res.formTitle      ?? DEFAULTS.formTitle,
+      formSubtext:    res.formSubtext    ?? DEFAULTS.formSubtext,
+      phone1:         res.phone1         ?? DEFAULTS.phone1,
+      phone2:         res.phone2         ?? DEFAULTS.phone2,
+      email1:         res.email1         ?? DEFAULTS.email1,
+      email2:         res.email2         ?? DEFAULTS.email2,
+      addressLine1:   res.addressLine1   ?? DEFAULTS.addressLine1,
+      addressLine2:   res.addressLine2   ?? DEFAULTS.addressLine2,
+      addressLine3:   res.addressLine3   ?? DEFAULTS.addressLine3,
+      hoursWeekdays:  res.hoursWeekdays  ?? DEFAULTS.hoursWeekdays,
+      hoursWeekend:   res.hoursWeekend   ?? DEFAULTS.hoursWeekend,
+      serviceOptions: res.serviceOptions?.length ? res.serviceOptions : DEFAULTS.serviceOptions,
+      mapEmbedUrl:    res.mapEmbedUrl    ?? DEFAULTS.mapEmbedUrl,
+    })).catch(() => {/* keep defaults on error */});
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -78,17 +132,17 @@ const Contact = () => {
           className="text-center px-8 w-full max-w-6xl mx-auto relative z-10">
           <p className="uppercase tracking-[0.3em] font-light mb-3"
             style={{ fontFamily: PP, fontSize: '1.4rem', color: '#fda102' }}>
-            Get In Touch
+            {apiData.heroEyebrow}
           </p>
-          <h1 className="font-medium mb-4 whitespace-nowrap"
+          <h1 className="font-medium mb-4"
             style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 4.2vw, 3.6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.15 }}>
-            Ready to Put Your Worries to Rest?
+            {apiData.heroHeading}
           </h1>
           <p style={{
             fontFamily: PP, fontWeight: 300, fontSize: 'clamp(1.05rem, 1.8vw, 1.35rem)',
             color: 'rgba(255,255,255,0.88)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.7,
           }}>
-            Our experts are ready to analyse your compliance situation and build a clear roadmap for you.
+            {apiData.heroSubtext}
           </p>
         </motion.div>
       </section>
@@ -98,9 +152,9 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100">
             {[
-              { icon: IconCall, label: 'Call Us', value: '+91 98765 43210', href: 'tel:+919876543210' },
-              { icon: IconMail, label: 'Email Us', value: 'contact@maruconsultancy.in', href: 'mailto:contact@maruconsultancy.in' },
-              { icon: IconLocation, label: 'Our Office', value: 'Nariman Point, Mumbai', href: '#map' },
+              { icon: IconCall, label: 'Call Us', value: apiData.phone1, href: `tel:${apiData.phone1.replace(/\s/g, '')}` },
+              { icon: IconMail, label: 'Email Us', value: apiData.email1, href: `mailto:${apiData.email1}` },
+              { icon: IconLocation, label: 'Our Office', value: apiData.addressLine2, href: '#map' },
             ].map((item, i) => (
               <a key={i} href={item.href}
                 className="flex items-center gap-4 px-8 py-5 hover:bg-[#f8fafb] transition-colors group">
@@ -132,10 +186,10 @@ const Contact = () => {
                 <img src={chatIcon} alt="" className="object-contain" style={{ width: 34, height: 34 }} />
                 <div>
                   <h3 className="font-bold leading-none" style={{ fontFamily: PP, fontSize: '1.1rem', color: '#111' }}>
-                    Send Us a Message
+                    {apiData.formTitle}
                   </h3>
                   <p className="text-gray-400 text-xs mt-0.5" style={{ fontFamily: PP }}>
-                    We'll get back to you within 1 business day.
+                    {apiData.formSubtext}
                   </p>
                 </div>
               </div>
@@ -193,16 +247,9 @@ const Contact = () => {
                         style={{ ...FIELD_STYLE, borderColor: focused === 'service' ? '#a83a00' : '#e5e7eb', appearance: 'none' }}
                         onFocus={() => setFocused('service')} onBlur={() => setFocused('')}>
                         <option value="">Select a service...</option>
-                        <option>Labour Law Compliance</option>
-                        <option>Payroll &amp; Salary Structuring</option>
-                        <option>Statutory Compliance &amp; Filings</option>
-                        <option>Audits &amp; Governance</option>
-                        <option>Contract Staffing</option>
-                        <option>Registrations &amp; Licensing</option>
-                        <option>HR Policy &amp; Advisory</option>
-                        <option>Legal Representation</option>
-                        <option>Training &amp; Workshops</option>
-                        <option>Other / General Inquiry</option>
+                        {apiData.serviceOptions.map((opt, i) => (
+                          <option key={i}>{opt}</option>
+                        ))}
                       </select>
                     </div>
                     <div>
@@ -239,24 +286,27 @@ const Contact = () => {
                     {
                       icon: IconLocation,
                       label: 'Office Address',
-                      lines: ['15th Floor, Nariman Point,', 'Mumbai, Maharashtra 400021', 'India'],
+                      lines: [apiData.addressLine1, apiData.addressLine2, apiData.addressLine3].filter(Boolean),
                     },
                     {
                       icon: IconCall,
                       label: 'Phone Numbers',
-                      lines: ['+91 98765 43210', '022 4567 8900'],
-                      hrefs: ['tel:+919876543210', 'tel:02245678900'],
+                      lines: [apiData.phone1, apiData.phone2].filter(Boolean),
+                      hrefs: [
+                        `tel:${apiData.phone1.replace(/\s/g, '')}`,
+                        `tel:${apiData.phone2.replace(/\s/g, '')}`,
+                      ],
                     },
                     {
                       icon: IconMail,
                       label: 'Email Addresses',
-                      lines: ['contact@maruconsultancy.in', 'support@maruconsultancy.in'],
-                      hrefs: ['mailto:contact@maruconsultancy.in', 'mailto:support@maruconsultancy.in'],
+                      lines: [apiData.email1, apiData.email2].filter(Boolean),
+                      hrefs: [`mailto:${apiData.email1}`, `mailto:${apiData.email2}`],
                     },
                     {
                       icon: Clock,
                       label: 'Working Hours',
-                      lines: ['Monday – Friday: 9:30 AM – 6:30 PM', 'Saturday & Sunday: Closed'],
+                      lines: [apiData.hoursWeekdays, apiData.hoursWeekend].filter(Boolean),
                     },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-4">
@@ -291,7 +341,7 @@ const Contact = () => {
                 className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm"
                 style={{ height: '260px', position: 'relative' }}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.9!2d72.8232!3d18.9256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c6cfb3b99b%3A0x4a5a3a6d7e5f4f1a!2sNariman%20Point%2C%20Mumbai%2C%20Maharashtra%20400021!5e0!3m2!1sen!2sin!4v1700000000000"
+                  src={apiData.mapEmbedUrl}
                   width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade" title="Maru Consultancy Office Location"
                 />
