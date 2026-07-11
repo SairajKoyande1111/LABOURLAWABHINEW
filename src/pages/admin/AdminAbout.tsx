@@ -316,7 +316,7 @@ export default function AdminAbout() {
               <div className="flex-1">
                 <ImageUploader label={`Image ${i + 1}`} value={img}
                   onChange={url => { const n = [...data.storyImages]; n[i] = url; set('storyImages', n); }}
-                  section="about" />
+                  section="about" hint="Portrait or square, min 800 × 580 px — fills the large left panel" />
               </div>
               <DangerButton type="button" className="mt-8"
                 onClick={() => set('storyImages', data.storyImages.filter((_, j) => j !== i))}>
@@ -390,7 +390,7 @@ export default function AdminAbout() {
                   onChange={e => onChange({ ...item, title: e.target.value })} />
                 <DangerButton type="button" onClick={onRemove}><Trash2 size={13} /></DangerButton>
               </div>
-              <ImageUploader label="Background image" value={item.img} onChange={url => onChange({ ...item, img: url })} section="about" />
+              <ImageUploader label="Background image" value={item.img} onChange={url => onChange({ ...item, img: url })} section="about" hint="Portrait, min 600 × 380 px — shown as card background" />
             </div>
           ),
           { title: '', img: '' },
@@ -412,7 +412,7 @@ export default function AdminAbout() {
               </div>
               <TextArea rows={2} placeholder="Description paragraph" value={item.description}
                 onChange={e => onChange({ ...item, description: e.target.value })} />
-              <ImageUploader label="Milestone image" value={item.img} onChange={url => onChange({ ...item, img: url })} section="about" />
+              <ImageUploader label="Milestone image" value={item.img} onChange={url => onChange({ ...item, img: url })} section="about" hint="Landscape 16:9, min 800 × 176 px — wide horizontal strip on the timeline" />
             </div>
           ),
           { year: '', event: '', img: '', description: '' },
@@ -453,7 +453,7 @@ export default function AdminAbout() {
                 onChange={e => onChange({ ...item, qualification: e.target.value })} />
               <TextInput placeholder="Role / title" value={item.role}
                 onChange={e => onChange({ ...item, role: e.target.value })} />
-              <ImageUploader label="Photo" value={item.img} onChange={url => onChange({ ...item, img: url })} section="team" />
+              <ImageUploader label="Photo" value={item.img} onChange={url => onChange({ ...item, img: url })} section="team" hint="Portrait 5:4, min 400 × 320 px — face centred, cropped to fill the card" />
             </div>
           ),
           { name: '', qualification: '', role: '', img: '' },

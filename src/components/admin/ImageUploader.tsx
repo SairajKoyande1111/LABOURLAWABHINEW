@@ -23,6 +23,7 @@ export default function ImageUploader({
   onChange,
   accept = 'image/*',
   section = 'misc',
+  hint,
 }: {
   label: string;
   value: string;
@@ -30,6 +31,8 @@ export default function ImageUploader({
   accept?: string;
   /** Cloudinary folder to organize this upload under, e.g. "about", "clientele", "team". */
   section?: string;
+  /** Recommended dimensions / aspect ratio shown as a hint, e.g. "1200 × 675 px (16:9)". */
+  hint?: string;
 }) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
@@ -84,10 +87,15 @@ export default function ImageUploader({
 
   return (
     <div>
-      <label className="block text-sm font-semibold mb-2" style={{ fontFamily: PP, color: '#333' }}>
+      <label className="block text-sm font-semibold mb-1" style={{ fontFamily: PP, color: '#333' }}>
         {label}
         <span className="ml-2 text-xs font-normal text-gray-400">max 1 MB</span>
       </label>
+      {hint && (
+        <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5 mb-2 leading-snug" style={{ fontFamily: PP }}>
+          Recommended: {hint}
+        </p>
+      )}
       <div className="flex items-center gap-3">
         {preview}
         <div className="flex-1">

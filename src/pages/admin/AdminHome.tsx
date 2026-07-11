@@ -151,8 +151,8 @@ export default function AdminHome() {
           <Field label="Secondary button text"><TextInput value={data.ctaSecondaryText} onChange={(e) => update('ctaSecondaryText', e.target.value)} /></Field>
         </div>
         <ImageUploader label="Hero video" value={data.heroVideoUrl} onChange={(v) => update('heroVideoUrl', v)} accept="video/*" section="home" />
-        <ImageUploader label="Hero image 1" value={data.heroImage1Url} onChange={(v) => update('heroImage1Url', v)} section="home" />
-        <ImageUploader label="Hero image 2" value={data.heroImage2Url} onChange={(v) => update('heroImage2Url', v)} section="home" />
+        <ImageUploader label="Hero image 1" value={data.heroImage1Url} onChange={(v) => update('heroImage1Url', v)} section="home" hint="Portrait 2:3, e.g. 600 × 900 px — displayed tall in the right-side photo collage" />
+        <ImageUploader label="Hero image 2" value={data.heroImage2Url} onChange={(v) => update('heroImage2Url', v)} section="home" hint="Portrait 2:3, e.g. 600 × 900 px — displayed tall in the right-side photo collage" />
       </Section>
 
       <Section title="One Stop Consultancy Partner">
@@ -181,7 +181,7 @@ export default function AdminHome() {
       </Section>
 
       <Section title="Why Choose Us">
-        <ImageUploader label="Logo" value={data.whyUsLogoUrl} onChange={(v) => update('whyUsLogoUrl', v)} section="home" />
+        <ImageUploader label="Logo" value={data.whyUsLogoUrl} onChange={(v) => update('whyUsLogoUrl', v)} section="home" hint="Any width × ~80 px tall — PNG with transparent background works best" />
         <Field label="Heading"><TextInput value={data.whyUsHeading} onChange={(e) => update('whyUsHeading', e.target.value)} /></Field>
         <Field label="Body text"><TextArea rows={3} value={data.whyUsBody} onChange={(e) => update('whyUsBody', e.target.value)} /></Field>
         <Field label="Reasons">

@@ -158,7 +158,7 @@ export default function AdminResources() {
                 <Field label="Read time"><TextInput placeholder="7 min read" value={editing.readTime ?? ''} onChange={e => set('readTime', e.target.value)} /></Field>
               </div>
               <Field label="Excerpt"><TextArea rows={3} value={editing.excerpt ?? ''} onChange={e => set('excerpt', e.target.value)} /></Field>
-              <ImageUploader label="Cover image" value={editing.img ?? ''} onChange={v => set('img', v)} section="resources" />
+              <ImageUploader label="Cover image" value={editing.img ?? ''} onChange={v => set('img', v)} section="resources" hint="Landscape 16:9, min 800 × 450 px — shown as article thumbnail and featured banner" />
             </Section>
             <Section title="Article Body">
               <SectionsEditor sections={editing.sections ?? []} onChange={v => set('sections', v)} />
