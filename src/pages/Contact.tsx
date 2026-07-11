@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
 import type { ContactContent } from '../types/content';
 import heroVideo from '@assets/7683053-hd_1920_1080_24fps_1783584828907.mp4';
 import iconLocation from '@assets/placeholder_1783488477011.png';
@@ -81,7 +82,7 @@ const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', service: '', message: '' });
   const [focused, setFocused] = useState('');
 
-  useEffect(() => {
+  const fetchContact = () => {
     api.get<ContactContent>('/contact').then(res => setApiData({
       heroEyebrow:    res.heroEyebrow    ?? DEFAULTS.heroEyebrow,
       heroHeading:    res.heroHeading    ?? DEFAULTS.heroHeading,
@@ -100,7 +101,9 @@ const Contact = () => {
       serviceOptions: res.serviceOptions?.length ? res.serviceOptions : DEFAULTS.serviceOptions,
       mapEmbedUrl:    res.mapEmbedUrl    ?? DEFAULTS.mapEmbedUrl,
     })).catch(() => {/* keep defaults on error */});
-  }, []);
+  };
+  useEffect(fetchContact, []);
+  useLiveContent(fetchContact);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
