@@ -1,6 +1,7 @@
 import express from 'express';
 import Resource from '../models/Resource.js';
 import { requireAuth } from '../middleware/auth.js';
+import { deleteCloudinaryAssets } from '../cloudinaryUtils.js';
 
 const router = express.Router();
 
@@ -85,6 +86,8 @@ router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const resource = await Resource.findByIdAndDelete(req.params.id);
     if (!resource) return res.status(404).json({ error: 'Resource not found' });
+    // Clean up both the cover image and the downloadable file from Cloudinary.
+    await deleteCloudinaryAssets([resource.img, resource.fileUrl]);
     res.json({ ok: true });
   } catch (err) {
     console.error('[resources/delete]', err);

@@ -1,6 +1,7 @@
 import express from 'express';
 import Service from '../models/Service.js';
 import { requireAuth } from '../middleware/auth.js';
+import { deleteCloudinaryAssets } from '../cloudinaryUtils.js';
 
 const router = express.Router();
 
@@ -54,6 +55,9 @@ router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const service = await Service.findByIdAndDelete(req.params.id);
     if (!service) return res.status(404).json({ error: 'Service not found' });
+    // Clean up Cloudinary assets after the DB record is gone so a DB failure
+    // never leaves the record alive with a deleted asset.
+    await deleteCloudinaryAssets([service.img]);
     res.json({ ok: true });
   } catch (err) {
     console.error('[services/delete]', err);
