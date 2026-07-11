@@ -77,11 +77,14 @@ export default function AdminAbout() {
   const [dirty, setDirty] = useState(false);
   const [error, setError] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [initialEyebrow, setInitialEyebrow] = useState('');
+  const [confirmEmptyEyebrow, setConfirmEmptyEyebrow] = useState(false);
 
   useEffect(() => {
     api.get<AboutContent>('/about')
       .then(res => {
         // Merge: use fetched arrays only if non-empty, else keep EMPTY defaults
+        setInitialEyebrow(res.heroEyebrow ?? '');
         setData({
           heroEyebrow:           res.heroEyebrow           ?? EMPTY.heroEyebrow,
           heroHeadlineTop:       res.heroHeadlineTop       ?? EMPTY.heroHeadlineTop,
@@ -112,13 +115,9 @@ export default function AdminAbout() {
       .finally(() => setLoading(false));
   }, []);
 
-  const save = async () => {
-    // Field-level validation
-    const fe: Record<string, string> = {};
-    if (!data.heroEyebrow.trim()) fe.heroEyebrow = 'Eyebrow text is required.';
-    if (Object.keys(fe).length) { setFieldErrors(fe); return; }
+  const doSave = async () => {
+    setConfirmEmptyEyebrow(false);
     setFieldErrors({});
-
     setSaving(true); setError(''); setSaved(false);
     try {
       await api.put<AboutContent>('/about', data);
@@ -130,6 +129,22 @@ export default function AdminAbout() {
       setSaving(false);
     }
   };
+
+  const save = async () => {
+    if (!data.heroEyebrow.trim()) {
+      // Had a value originally but admin cleared it → hard error
+      if (initialEyebrow.trim()) {
+        setFieldErrors({ heroEyebrow: 'Eyebrow text is required.' });
+        return;
+      }
+      // Was always empty → ask
+      setConfirmEmptyEyebrow(true);
+      return;
+    }
+    setConfirmEmptyEyebrow(false);
+    await doSave();
+  };
+
 
   const set = <K extends keyof AboutContent>(key: K, value: AboutContent[K]) => {
     setDirty(true);
@@ -198,9 +213,34 @@ export default function AdminAbout() {
       <Section title="Hero Content" description="The left-panel headline and subtext shown on the About page hero.">
         <Field label="Eyebrow (small caps above the headline)" error={fieldErrors.heroEyebrow}>
           <TextInput value={data.heroEyebrow}
-            onChange={e => { set('heroEyebrow', e.target.value); setFieldErrors(fe => ({ ...fe, heroEyebrow: '' })); }}
+            onChange={e => {
+              set('heroEyebrow', e.target.value);
+              setFieldErrors(fe => ({ ...fe, heroEyebrow: '' }));
+              setConfirmEmptyEyebrow(false);
+            }}
             placeholder="e.g. About Maru Consultancy Services"
             style={{ borderColor: fieldErrors.heroEyebrow ? '#dc2626' : undefined }} />
+          {confirmEmptyEyebrow && (
+            <div className="mt-2 flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+              <span className="text-sm text-amber-800 font-medium flex-1" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                Eyebrow is empty — the label above the headline won't appear on the page. Save anyway?
+              </span>
+              <button
+                type="button"
+                onClick={doSave}
+                className="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition-opacity hover:opacity-80"
+                style={{ backgroundColor: '#a83a00', color: '#fff', fontFamily: 'Poppins, sans-serif' }}>
+                Keep empty
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirmEmptyEyebrow(false)}
+                className="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold border border-gray-300 bg-white text-gray-700 transition-opacity hover:opacity-80"
+                style={{ fontFamily: 'Poppins, sans-serif' }}>
+                Fill in
+              </button>
+            </div>
+          )}
         </Field>
         <Field label="Headline — lines before the amber highlight (use ↵ Enter for a line break)">
           <TextArea rows={2} value={data.heroHeadlineTop}
