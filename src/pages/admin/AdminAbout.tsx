@@ -93,11 +93,11 @@ export default function AdminAbout() {
           heroSubtext:           res.heroSubtext           ?? EMPTY.heroSubtext,
           heroVideoUrl:          res.heroVideoUrl          ?? EMPTY.heroVideoUrl,
           videoUrl:              res.videoUrl              ?? EMPTY.videoUrl,
-          // Unlike other list fields, an empty array here is a valid saved
-          // state (admin removed all images) and must round-trip as empty,
-          // not silently repopulate with defaults — only missing/undefined
-          // falls back to defaults (e.g. brand-new About doc).
-          storyImages:          res.storyImages !== undefined              ? res.storyImages          : EMPTY.storyImages,
+          // Fall back to the same defaults the public page uses when no images
+          // have been uploaded — this keeps the admin in sync with what the
+          // visitor actually sees.  The admin can still clear all images by
+          // saving an empty list; it will simply re-show the defaults on reload.
+          storyImages:          res.storyImages?.length ? res.storyImages : EMPTY.storyImages,
           heroStats:            res.heroStats?.length            ? res.heroStats            : EMPTY.heroStats,
           marqueeServices:      res.marqueeServices?.length      ? res.marqueeServices      : EMPTY.marqueeServices,
           storySlides:          res.storySlides?.length          ? res.storySlides          : EMPTY.storySlides,
