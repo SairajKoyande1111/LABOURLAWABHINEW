@@ -229,7 +229,7 @@ const About = () => {
   const whyChooseItems = apiData?.whyChooseItems?.length  ? apiData.whyChooseItems  : DEFAULT_WHY_CHOOSE;
   const teamMembers    = apiData?.teamMembers?.length     ? apiData.teamMembers     : DEFAULT_TEAM;
 
-  const heroEyebrow           = apiData?.heroEyebrow           || 'About Maru Consultancy Services';
+  const heroEyebrow           = apiData?.heroEyebrow           || '';
   const heroHeadlineTop       = apiData?.heroHeadlineTop       || "India's Most\nTrusted";
   const heroHeadlineHighlight = apiData?.heroHeadlineHighlight || 'Labour Law';
   const heroHeadlineBottom    = apiData?.heroHeadlineBottom    || 'Partner.';
@@ -279,12 +279,14 @@ const About = () => {
 
           {/* Main headline */}
           <div className="relative flex flex-col justify-center">
-            <motion.p className="font-bold text-xs uppercase tracking-[0.28em] mb-5"
-              style={{ fontFamily: PP, color: '#ffffff' }}
-              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.45, delay: 0.1 }}>
-              {heroEyebrow}
-            </motion.p>
+            {heroEyebrow && (
+              <motion.p className="font-bold text-xs uppercase tracking-[0.28em] mb-5"
+                style={{ fontFamily: PP, color: '#ffffff' }}
+                initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.45, delay: 0.1 }}>
+                {heroEyebrow}
+              </motion.p>
+            )}
 
             <motion.h1
               className="font-bold text-white leading-[1.08] mb-7"
