@@ -288,11 +288,9 @@ export default function AdminAbout() {
       </Section>
 
       {/* ── Hero Video ── */}
-      <Section title="Hero Video" description="Right-side video in the hero section. Paste a YouTube/Vimeo embed URL to override the default hero video. Leave blank to keep the default.">
-        <Field label="Video embed URL (e.g. https://www.youtube.com/embed/xxxxx)">
-          <TextInput value={data.heroVideoUrl} onChange={e => set('heroVideoUrl', e.target.value)}
-            placeholder="https://www.youtube.com/embed/..." />
-        </Field>
+      <Section title="Hero Video" description="Right-side video in the hero section. Upload a video file from your device, or paste a YouTube/Vimeo embed URL below the upload button. Leave blank to keep the default.">
+        <ImageUploader label="Hero video" value={data.heroVideoUrl} onChange={(v) => set('heroVideoUrl', v)}
+          accept="video/*" section="about" hint="Leave blank to keep the default background video." />
       </Section>
 
       {/* ── Marquee Strip ── */}
@@ -340,11 +338,9 @@ export default function AdminAbout() {
       </Section>
 
       {/* ── Story Bento — Video ── */}
-      <Section title="Story Bento — Video" description="Paste a YouTube/Vimeo embed URL to show a video in the dark panel of the bento grid (the stats + video card below the 'Est.' photo). Leave blank to show the 'Video coming soon' placeholder.">
-        <Field label="Video embed URL (e.g. https://www.youtube.com/embed/xxxxx)">
-          <TextInput value={data.videoUrl} onChange={e => set('videoUrl', e.target.value)}
-            placeholder="https://www.youtube.com/embed/..." />
-        </Field>
+      <Section title="Story Bento — Video" description="Video shown in the dark panel of the bento grid (the stats + video card below the 'Est.' photo). Upload a video file from your device, or paste a YouTube/Vimeo embed URL below the upload button. Leave blank to show the 'Video coming soon' placeholder.">
+        <ImageUploader label="Bento video" value={data.videoUrl} onChange={(v) => set('videoUrl', v)}
+          accept="video/*" section="about" />
       </Section>
 
       {/* ── Story Slides ── */}

@@ -250,6 +250,10 @@ const About = () => {
   };
   const safeVideoUrl = sanitizeEmbedUrl(videoUrl);
   const safeHeroVideoUrl = sanitizeEmbedUrl(heroVideoUrl);
+  // Directly-uploaded video files (e.g. Cloudinary mp4s) play via <video>, not an <iframe> embed.
+  const isDirectVideoUrl = (url: string) => /\.(mp4|webm|mov|m4v)(\?|$)/i.test(url) || /res\.cloudinary\.com\/.*\/video\/upload\//i.test(url);
+  const directVideoUrl = isDirectVideoUrl(videoUrl) ? videoUrl : '';
+  const directHeroVideoUrl = isDirectVideoUrl(heroVideoUrl) ? heroVideoUrl : '';
 
   const styleInjected = useRef(false);
   useEffect(() => {
@@ -327,7 +331,10 @@ const About = () => {
         <div className="relative overflow-hidden"
           style={{ height: '100%', backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           {/* Video overlays the image once loaded */}
-          {safeHeroVideoUrl ? (
+          {directHeroVideoUrl ? (
+            <video src={directHeroVideoUrl} autoPlay loop muted playsInline
+              className="absolute inset-0 w-full h-full object-cover" />
+          ) : safeHeroVideoUrl ? (
             <iframe
               src={safeHeroVideoUrl}
               className="absolute inset-0 w-full h-full"
@@ -404,7 +411,10 @@ const About = () => {
               {/* Video side */}
               <div className="relative flex-1 flex items-center justify-center min-h-[140px] overflow-hidden"
                 style={{ backgroundColor: '#1a1a1a' }}>
-                {safeVideoUrl ? (
+                {directVideoUrl ? (
+                  <video src={directVideoUrl} autoPlay loop muted playsInline
+                    className="absolute inset-0 w-full h-full object-cover" />
+                ) : safeVideoUrl ? (
                   <iframe
                     src={safeVideoUrl}
                     className="absolute inset-0 w-full h-full"
