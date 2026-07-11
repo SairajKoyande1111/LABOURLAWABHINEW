@@ -158,6 +158,22 @@ router.delete('/', requireAuth, async (req, res) => {
     const resourceType = ['image', 'video', 'raw'].includes(raw) ? raw : 'image';
 
     await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
+
+    // After deleting the file, attempt to clean up the now-empty parent folder.
+    // Raw files live in a unique per-upload subfolder (e.g. labourcodes/resources/<hash>/).
+    // Cloudinary won't auto-remove empty folders, so we do it explicitly.
+    // We only target the immediate parent and only if it's a leaf subfolder
+    // (3+ levels deep) so we never accidentally remove top-level folders.
+    const slashIdx = publicId.lastIndexOf('/');
+    if (slashIdx > 0) {
+      const parentFolder = publicId.slice(0, slashIdx);
+      const depth = (parentFolder.match(/\//g) || []).length; // number of slashes = depth - 1
+      if (depth >= 2) {
+        // Silently ignore errors: folder may not be empty or may not exist
+        cloudinary.api.delete_folder(parentFolder).catch(() => {});
+      }
+    }
+
     res.json({ ok: true });
   } catch (err) {
     console.error('[upload/delete]', err);
