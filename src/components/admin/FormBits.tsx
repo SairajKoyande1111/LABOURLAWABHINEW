@@ -10,11 +10,12 @@ export function Section({ title, description, children }: { title: string; descr
   );
 }
 
-export function Field({ label, children }: { label: string; children: React.ReactNode }) {
+export function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div>
       <label className="block text-sm font-semibold mb-2" style={{ fontFamily: PP, color: '#333' }}>{label}</label>
       {children}
+      {error && <p className="mt-1.5 text-xs font-medium text-red-600" style={{ fontFamily: PP }}>{error}</p>}
     </div>
   );
 }

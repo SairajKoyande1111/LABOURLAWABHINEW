@@ -76,6 +76,7 @@ export default function AdminAbout() {
   const [saved, setSaved] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     api.get<AboutContent>('/about')
@@ -112,6 +113,12 @@ export default function AdminAbout() {
   }, []);
 
   const save = async () => {
+    // Field-level validation
+    const fe: Record<string, string> = {};
+    if (!data.heroEyebrow.trim()) fe.heroEyebrow = 'Eyebrow text is required.';
+    if (Object.keys(fe).length) { setFieldErrors(fe); return; }
+    setFieldErrors({});
+
     setSaving(true); setError(''); setSaved(false);
     try {
       await api.put<AboutContent>('/about', data);
@@ -189,9 +196,11 @@ export default function AdminAbout() {
 
       {/* ── Hero Content ── */}
       <Section title="Hero Content" description="The left-panel headline and subtext shown on the About page hero.">
-        <Field label="Eyebrow (small caps above the headline)">
-          <TextInput value={data.heroEyebrow} onChange={e => set('heroEyebrow', e.target.value)}
-            placeholder="e.g. About Maru Consultancy Services" />
+        <Field label="Eyebrow (small caps above the headline)" error={fieldErrors.heroEyebrow}>
+          <TextInput value={data.heroEyebrow}
+            onChange={e => { set('heroEyebrow', e.target.value); setFieldErrors(fe => ({ ...fe, heroEyebrow: '' })); }}
+            placeholder="e.g. About Maru Consultancy Services"
+            style={{ borderColor: fieldErrors.heroEyebrow ? '#dc2626' : undefined }} />
         </Field>
         <Field label="Headline — lines before the amber highlight (use ↵ Enter for a line break)">
           <TextArea rows={2} value={data.heroHeadlineTop}
