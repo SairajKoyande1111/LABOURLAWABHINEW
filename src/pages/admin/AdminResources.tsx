@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Trash2, Save, Loader2, Pencil, X, CheckCircle2, BookOpen, FileText } from 'lucide-react';
-import { api } from '../../lib/api';
+import { api, deleteCloudinaryAsset } from '../../lib/api';
 import type { ResourceItem, ResourceSection } from '../../types/content';
 import { Section, Field, TextInput, TextArea, PrimaryButton, SecondaryButton, DangerButton } from '../../components/admin/FormBits';
 import ImageUploader from '../../components/admin/ImageUploader';
@@ -114,8 +114,13 @@ export default function AdminResources() {
 
   const remove = async (id: string) => {
     if (!confirm('Delete this resource? This cannot be undone.')) return;
-    try { await api.del(`/resources/${id}`); await load(); }
-    catch (err) { setError(err instanceof Error ? err.message : 'Failed to delete'); }
+    try {
+      const res = resources.find(r => r._id === id);
+      await api.del(`/resources/${id}`);
+      if (res?.img) deleteCloudinaryAsset(res.img).catch(() => {});
+      if (res?.fileUrl) deleteCloudinaryAsset(res.fileUrl).catch(() => {});
+      await load();
+    } catch (err) { setError(err instanceof Error ? err.message : 'Failed to delete'); }
   };
 
   if (loading) return <p className="text-gray-400 text-sm">Loading…</p>;

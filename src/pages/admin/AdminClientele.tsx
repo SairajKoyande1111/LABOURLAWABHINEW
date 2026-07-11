@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Trash2, Save, Loader2, CheckCircle2 } from 'lucide-react';
-import { api } from '../../lib/api';
+import { api, deleteCloudinaryAsset } from '../../lib/api';
 import type { ClienteleContent, ClienteleStat, ClienteleIndustry, ClienteleTestimonial, PortfolioSector } from '../../types/content';
 import { Section, Field, TextInput, TextArea, PrimaryButton, SecondaryButton, DangerButton } from '../../components/admin/FormBits';
 import ImageUploader from '../../components/admin/ImageUploader';
@@ -206,7 +206,10 @@ export default function AdminClientele() {
                 <TextInput placeholder="Count (e.g. 120+)" value={ind.count} className="w-24"
                   onChange={e => { const n = [...data.industries]; n[i] = { ...ind, count: e.target.value }; set('industries', n); }} />
                 <DangerButton type="button"
-                  onClick={() => set('industries', data.industries.filter((_, j) => j !== i))}>
+                  onClick={() => {
+                    if (ind.image) deleteCloudinaryAsset(ind.image).catch(() => {});
+                    set('industries', data.industries.filter((_, j) => j !== i));
+                  }}>
                   <Trash2 size={13} />
                 </DangerButton>
               </div>

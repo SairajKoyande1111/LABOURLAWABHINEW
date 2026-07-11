@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Trash2, Save, Loader2, CheckCircle2 } from 'lucide-react';
-import { api } from '../../lib/api';
+import { api, deleteCloudinaryAsset } from '../../lib/api';
 import type {
   AboutContent, AboutHeroStat, AboutStorySlide,
   AboutCoreValue, AboutMilestone, AboutWhyItem, AboutTeamMember,
@@ -160,6 +160,8 @@ export default function AdminAbout() {
     items: T[],
     render: (item: T, i: number, onChange: (updated: T) => void, onRemove: () => void) => React.ReactNode,
     empty: T,
+    /** Return all Cloudinary image URLs from an item so they're cleaned up when the item is removed. */
+    getImages?: (item: T) => string[],
   ) => (
     <div className="space-y-3">
       {items.map((item, i) => (
@@ -168,7 +170,11 @@ export default function AdminAbout() {
             item,
             i,
             (updated) => { const n = [...items]; n[i] = updated; set(key, n as AboutContent[typeof key]); },
-            () => set(key, items.filter((_, j) => j !== i) as AboutContent[typeof key]),
+            () => {
+              // Delete any Cloudinary assets belonging to this item before removing it
+              if (getImages) getImages(item).forEach(url => { if (url) deleteCloudinaryAsset(url).catch(() => {}); });
+              set(key, items.filter((_, j) => j !== i) as AboutContent[typeof key]);
+            },
           )}
         </div>
       ))}
@@ -319,7 +325,10 @@ export default function AdminAbout() {
                   section="about" hint="Portrait or square, min 800 × 580 px — fills the large left panel" />
               </div>
               <DangerButton type="button" className="mt-8"
-                onClick={() => set('storyImages', data.storyImages.filter((_, j) => j !== i))}>
+                onClick={() => {
+                  if (img) deleteCloudinaryAsset(img).catch(() => {});
+                  set('storyImages', data.storyImages.filter((_, j) => j !== i));
+                }}>
                 <Trash2 size={13} />
               </DangerButton>
             </div>
@@ -394,6 +403,7 @@ export default function AdminAbout() {
             </div>
           ),
           { title: '', img: '' },
+          (item) => [item.img],
         )}
       </Section>
 
@@ -416,6 +426,7 @@ export default function AdminAbout() {
             </div>
           ),
           { year: '', event: '', img: '', description: '' },
+          (item) => [item.img],
         )}
       </Section>
 
@@ -457,6 +468,7 @@ export default function AdminAbout() {
             </div>
           ),
           { name: '', qualification: '', role: '', img: '' },
+          (item) => [item.img],
         )}
       </Section>
     </div>

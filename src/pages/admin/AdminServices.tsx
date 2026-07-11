@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Trash2, Save, Loader2, Pencil, X, CheckCircle2 } from 'lucide-react';
-import { api } from '../../lib/api';
+import { api, deleteCloudinaryAsset } from '../../lib/api';
 import type { ServiceContent } from '../../types/content';
 import { Section, Field, TextInput, TextArea, PrimaryButton, SecondaryButton, DangerButton } from '../../components/admin/FormBits';
 import ImageUploader from '../../components/admin/ImageUploader';
@@ -54,7 +54,9 @@ export default function AdminServices() {
   const remove = async (id: string) => {
     if (!confirm('Delete this service? This cannot be undone.')) return;
     try {
+      const svc = services.find(s => s._id === id);
       await api.del(`/services/${id}`);
+      if (svc?.img) deleteCloudinaryAsset(svc.img).catch(() => {});
       await load();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to delete');
