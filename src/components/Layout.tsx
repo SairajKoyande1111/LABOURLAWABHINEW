@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import iconLocation from '@assets/placeholder_1783488477011.png';
 import iconCall from '@assets/call_1783488542810.png';
 import iconMail from '@assets/communication_1783488559887.png';
+import { api } from '../lib/api';
+import { useLiveContent } from '../hooks/useLiveContent';
+import type { ServiceContent } from '../types/content';
 
 const socialLinks = [
   { href: 'https://wa.me/919876543210',               img: '/assets/social-whatsapp.png',  label: 'WhatsApp'  },
@@ -19,7 +22,14 @@ const Layout = () => {
   const [scrolled, setScrolled] = useState(false);
   const [, setServicesOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [services, setServices] = useState<ServiceContent[]>([]);
   const location = useLocation();
+
+  const fetchServices = () => {
+    api.get<ServiceContent[]>('/services').then(setServices).catch(() => {});
+  };
+  useEffect(fetchServices, []);
+  useLiveContent(fetchServices);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -52,17 +62,8 @@ const Layout = () => {
     { name: 'Careers', path: '/careers' },
   ];
 
-  const serviceLinks = [
-    { name: 'Labour Law Compliance', slug: 'labour-law-compliance' },
-    { name: 'Payroll & Salary Structuring', slug: 'payroll-structuring' },
-    { name: 'Statutory Filings', slug: 'statutory-filings' },
-    { name: 'Contract Staffing', slug: 'contract-staffing' },
-    { name: 'Audits & Governance', slug: 'audits-governance' },
-    { name: 'Registrations & Licensing', slug: 'registrations-licensing' },
-    { name: 'HR Policy & Advisory', slug: 'hr-policy-advisory' },
-    { name: 'Legal Representation', slug: 'litigation-support' },
-    { name: 'Training & Workshops', slug: 'training-workshops' },
-  ];
+  // Live from the CMS (Admin → Services), already sorted by rank via the API.
+  const serviceLinks = services.map((s) => ({ name: s.title, slug: s.slug }));
 
   const isActive = (path: string) =>
     path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
