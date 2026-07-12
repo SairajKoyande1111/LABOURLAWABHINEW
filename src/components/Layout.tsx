@@ -74,16 +74,16 @@ const Layout = () => {
     <div className="min-h-screen flex flex-col font-sans">
 
       {/* Sticky Header */}
-      <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-lg' : 'shadow-md'} border-b border-gray-100`}>
+      <header className={`sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-xl' : 'shadow-lg'}`} style={{ backgroundColor: '#1c3447' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[76px] flex justify-between items-center">
 
-          {/* Logo — switches with theme */}
-          <Link to="/" className="shrink-0">
+          {/* Logo */}
+          <Link to="/" className="shrink-0 flex items-center">
             <img
-              src={theme === 'blue' ? '/assets/maru-logo-blue.png' : '/assets/maru-logo.png'}
-              alt="Maru Consultancy Services"
-              className="w-auto object-contain transition-all duration-300"
-              style={{ height: '52px', maxHeight: '52px' }}
+              src="/assets/maru-logo-new.png"
+              alt="Maru Labour Laws — Consultants & Practitioners"
+              className="w-auto object-contain"
+              style={{ height: '70px', maxHeight: '70px' }}
             />
           </Link>
 
@@ -102,7 +102,7 @@ const Layout = () => {
                   <Link
                     to={link.path}
                     className="flex items-center gap-1 font-semibold text-[1.05rem] px-4 py-2.5 transition-colors duration-200"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: highlighted ? 'var(--primary)' : '#111111' }}
+                    style={{ fontFamily: 'Poppins, sans-serif', color: highlighted ? '#fda102' : '#ffffff' }}
                   >
                     {link.name}
                     <ChevronDown size={13} className="group-hover:rotate-180 transition-transform duration-200" />
@@ -134,7 +134,7 @@ const Layout = () => {
                   <Link
                     to={link.path}
                     className="font-semibold text-[1.05rem] px-4 py-2.5 block transition-colors duration-200"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: highlighted ? 'var(--primary)' : '#111111' }}
+                    style={{ fontFamily: 'Poppins, sans-serif', color: highlighted ? '#fda102' : '#ffffff' }}
                   >
                     {link.name}
                   </Link>
@@ -157,23 +157,18 @@ const Layout = () => {
               className="flex items-center gap-2 px-3 py-1.5 rounded-full border-2 transition-all duration-300 text-xs font-bold"
               style={{
                 fontFamily: 'Poppins, sans-serif',
-                borderColor: theme === 'red' ? '#fda102' : '#c9a84c',
-                backgroundColor: theme === 'red' ? 'rgba(168,58,0,0.06)' : 'rgba(28,52,71,0.08)',
-                color: 'var(--primary)',
+                borderColor: '#fda102',
+                backgroundColor: 'rgba(255,255,255,0.08)',
+                color: '#ffffff',
               }}
             >
-              {/* Track */}
               <span
                 className="relative inline-flex items-center rounded-full transition-colors duration-300"
-                style={{ width: 36, height: 20, backgroundColor: 'var(--primary)' }}
+                style={{ width: 36, height: 20, backgroundColor: '#fda102' }}
               >
                 <span
                   className="absolute rounded-full bg-white shadow transition-all duration-300"
-                  style={{
-                    width: 14, height: 14,
-                    left: theme === 'blue' ? 18 : 3,
-                    top: 3,
-                  }}
+                  style={{ width: 14, height: 14, left: theme === 'blue' ? 18 : 3, top: 3 }}
                 />
               </span>
               <span style={{ letterSpacing: '0.04em' }}>
@@ -182,10 +177,10 @@ const Layout = () => {
             </button>
 
             <Link to="/contact"
-              className="text-white px-7 py-2.5 rounded-full font-bold text-[0.9rem] transition-colors duration-200 shadow-sm whitespace-nowrap"
-              style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#fff'; }}>
+              className="px-7 py-2.5 rounded-full font-bold text-[0.9rem] transition-all duration-200 shadow-sm whitespace-nowrap"
+              style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102', color: '#1c3447', border: '2px solid #fda102' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLElement).style.color = '#fda102'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#1c3447'; }}>
               Contact Us
             </Link>
           </div>
@@ -197,14 +192,14 @@ const Layout = () => {
               onClick={toggleTheme}
               title="Toggle theme"
               className="relative flex items-center rounded-full border-2 transition-all duration-300"
-              style={{ width: 40, height: 22, borderColor: '#fda102', backgroundColor: 'var(--primary)' }}
+              style={{ width: 40, height: 22, borderColor: '#fda102', backgroundColor: '#fda102' }}
             >
               <span
                 className="absolute rounded-full bg-white shadow transition-all duration-300"
                 style={{ width: 14, height: 14, left: theme === 'blue' ? 21 : 3, top: 2 }}
               />
             </button>
-            <button className="text-navy-900 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            <button className="p-2 rounded-lg transition-colors" style={{ color: '#ffffff' }}
               onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menu">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
