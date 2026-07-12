@@ -149,9 +149,9 @@ const Layout = () => {
 
             <Link to="/contact"
               className="px-7 py-2.5 rounded-full font-bold text-[0.9rem] transition-all duration-200 shadow-sm whitespace-nowrap"
-              style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102', color: '#1c3447', border: '2px solid #fda102' }}
+              style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102', color: '#ffffff', border: '2px solid #fda102' }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLElement).style.color = '#fda102'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#1c3447'; }}>
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
               Contact Us
             </Link>
           </div>
@@ -207,7 +207,7 @@ const Layout = () => {
                       transition={{ delay: i * 0.045 }}>
                       <Link
                         to={link.path}
-                        className="block px-5 py-4 border-b border-gray-100 font-bold text-sm transition-colors"
+                        className="block px-5 py-4 border-b border-gray-100 font-bold text-base transition-colors"
                         style={{ fontFamily: 'Poppins, sans-serif', color: isActive(link.path) ? '#fda102' : '#111111', backgroundColor: isActive(link.path) ? '#fff8ed' : '' }}
                         onClick={() => setIsMenuOpen(false)}>
                         {link.name}
@@ -216,7 +216,7 @@ const Layout = () => {
                         <div className="bg-gray-50">
                           {serviceLinks.map((s) => (
                             <Link key={s.slug} to={`/services/${s.slug}`}
-                              className="block pl-9 pr-5 py-2.5 border-b border-gray-100 text-xs font-semibold transition-colors"
+                              className="block pl-9 pr-5 py-3 border-b border-gray-100 text-sm font-semibold transition-colors"
                               style={{ fontFamily: 'Poppins, sans-serif', color: '#555555' }}
                               onClick={() => setIsMenuOpen(false)}>
                               › {s.name}
@@ -266,7 +266,7 @@ const Layout = () => {
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5 }}>
               <div className="mb-3 lg:mb-5">
-                <img src="/assets/maru-logo-full.png" alt="Maru Consultancy Services"
+                <img src="/assets/maru-logo-new.png" alt="Maru Consultancy Services"
                   className="h-12 lg:h-16 w-auto object-contain" />
               </div>
               <p className="text-xs lg:text-sm leading-relaxed mb-4 lg:mb-6 text-justify"

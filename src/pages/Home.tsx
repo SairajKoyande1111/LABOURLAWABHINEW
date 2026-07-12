@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import heroVideoDefault from '@assets/7552418-hd_1080_1920_25fps_1783420764090.mp4';
 import heroImageDefault from '@assets/pexels-vlada-karpovich-7433855_1783420874088.jpg';
 import customerReviewIcon from '@assets/customer-review_1783487769231.png';
-import maruLogoDefault from '@assets/image_1783488818937.png';
+const maruLogoDefault = '/assets/maru-logo-new.png';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, ChevronRight, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -158,7 +158,7 @@ const Home = () => {
     <div className="w-full">
 
       {/* ── Hero ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white pt-4 pb-8 lg:py-0 lg:min-h-[700px] lg:flex lg:items-center">
+      <section className="relative overflow-hidden bg-white pt-4 pb-8 lg:py-14 lg:flex lg:items-center">
         {/* Subtle dot pattern background */}
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
@@ -168,12 +168,12 @@ const Home = () => {
             Mobile:  flex-col with CSS order → h1(1), collage(2), p(3), buttons(4)
             Desktop: 2-col grid → col1: h1/p/buttons, col2: collage spanning all rows
           */}
-          <div className="flex flex-col lg:grid lg:gap-8 lg:items-center"
+          <div className="flex flex-col lg:grid lg:gap-x-8 lg:gap-y-2 lg:items-center"
             style={{ gridTemplateColumns: '50fr 50fr' }}>
 
             {/* ── H1 ── order-1 on mobile, grid col-1 row-1 on desktop */}
             <motion.h1
-              className="font-semibold order-1 lg:order-none mb-4 lg:mb-5"
+              className="font-semibold order-1 lg:order-none mb-4 lg:mb-2"
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2rem, 4.2vw, 3.6rem)', lineHeight: 1.15 }}>
@@ -223,7 +223,7 @@ const Home = () => {
 
             {/* ── Paragraph ── order-3 on mobile, grid col-1 row-2 on desktop */}
             <motion.p
-              className="order-3 lg:order-none text-sm lg:text-base leading-relaxed mb-4 lg:mb-8"
+              className="order-3 lg:order-none text-sm lg:text-base leading-relaxed mb-4 lg:mb-0"
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
               style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#444444', textAlign: 'justify' }}>
