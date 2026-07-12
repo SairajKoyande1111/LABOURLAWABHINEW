@@ -270,12 +270,11 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           1. HERO — Hard two-panel split
          ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full overflow-hidden"
-        style={{ height: 'calc(100vh - 76px)', maxHeight: '620px', minHeight: '460px', display: 'grid', gridTemplateColumns: '48% 52%' }}>
+      <section className="relative w-full overflow-hidden grid grid-cols-1 lg:grid-cols-[48%_52%] lg:h-[calc(100vh-76px)] lg:max-h-[620px] lg:min-h-[460px]">
 
         {/* ── LEFT PANEL: solid brand colour ── */}
-        <div className="relative flex flex-col justify-center z-10 px-10 lg:px-14 py-10"
-          style={{ backgroundColor: 'var(--primary)', height: '100%' }}>
+        <div className="relative flex flex-col justify-center z-10 px-6 py-10 lg:px-14"
+          style={{ backgroundColor: 'var(--primary)' }}>
 
           {/* Subtle dot texture */}
           <div className="absolute inset-0 pointer-events-none"
@@ -284,7 +283,7 @@ const About = () => {
           {/* Main headline */}
           <div className="relative flex flex-col justify-center">
             {heroEyebrow && (
-              <motion.p className="font-bold text-xs uppercase tracking-[0.28em] mb-5"
+              <motion.p className="font-bold text-xs uppercase tracking-[0.28em] mb-3 lg:mb-5"
                 style={{ fontFamily: PP, color: '#ffffff' }}
                 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.45, delay: 0.1 }}>
@@ -293,8 +292,8 @@ const About = () => {
             )}
 
             <motion.h1
-              className="font-bold text-white leading-[1.08] mb-7"
-              style={{ fontFamily: PP, fontSize: 'clamp(2.4rem, 4.5vw, 4.4rem)' }}
+              className="font-bold text-white leading-[1.12] lg:leading-[1.08] mb-4 lg:mb-7"
+              style={{ fontFamily: PP, fontSize: 'clamp(2rem, 4.5vw, 4.4rem)' }}
               initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.55, delay: 0.18 }}>
               {heroHeadlineTop.split('\n').map((line, i, arr) => (
@@ -304,7 +303,7 @@ const About = () => {
               {heroHeadlineBottom}
             </motion.h1>
 
-            <motion.p className="text-base leading-[1.85] max-w-[460px] mb-8 text-justify"
+            <motion.p className="text-sm lg:text-base leading-[1.7] lg:leading-[1.85] max-w-[460px] mb-6 lg:mb-8 text-justify"
               style={{ fontFamily: PP, color: '#ffffff' }}
               initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.26 }}>
@@ -319,7 +318,7 @@ const About = () => {
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.44 }}>
             {heroStats.map(({value, label}, i) => (
-              <div key={i} className="flex flex-col items-center justify-center py-5 px-2"
+              <div key={i} className="flex flex-col items-center justify-center py-4 lg:py-5 px-1 lg:px-2"
                 style={{ backgroundColor: i === 1 ? 'rgba(253,161,2,0.20)' : 'rgba(0,0,0,0.15)' }}>
                 <CountUpStat value={value} label={label} />
               </div>
@@ -328,8 +327,8 @@ const About = () => {
         </div>
 
         {/* ── RIGHT PANEL: image bg + video on top ── */}
-        <div className="relative overflow-hidden"
-          style={{ height: '100%', backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="relative overflow-hidden h-[320px] lg:h-auto"
+          style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           {/* Video overlays the image once loaded */}
           {directHeroVideoUrl ? (
             <video src={directHeroVideoUrl} autoPlay loop muted playsInline
@@ -376,40 +375,40 @@ const About = () => {
       <section id="our-story" className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
-          <div className="grid grid-cols-12 grid-rows-2 gap-4" style={{ height: '580px' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-2 gap-4 lg:h-[580px]">
 
             {/* Large left cell */}
-            <motion.div className="col-span-12 lg:col-span-5 row-span-2 rounded-3xl overflow-hidden relative group"
+            <motion.div className="col-span-1 lg:col-span-5 lg:row-span-2 rounded-3xl overflow-hidden relative group h-[280px] lg:h-auto"
               initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.65 }}>
               <OfficeImageCarousel images={apiData?.storyImages ?? []} />
               <div className="absolute inset-0 pointer-events-none"
                 style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)' }} />
-              <div className="absolute bottom-0 left-0 p-8">
-                <p className="font-bold text-4xl text-white mb-1" style={{ fontFamily: PP }}>Est.</p>
-                <p className="font-bold text-white" style={{ fontFamily: PP, fontSize: '6rem', lineHeight: 1, color: '#fda102' }}>2003</p>
+              <div className="absolute bottom-0 left-0 p-5 lg:p-8">
+                <p className="font-bold text-2xl lg:text-4xl text-white mb-1" style={{ fontFamily: PP }}>Est.</p>
+                <p className="font-bold text-white" style={{ fontFamily: PP, fontSize: 'clamp(3rem, 8vw, 6rem)', lineHeight: 1, color: '#fda102' }}>2003</p>
               </div>
             </motion.div>
 
             {/* Top-right: combined horizontal card — stats + video */}
-            <motion.div className="col-span-12 lg:col-span-7 row-span-1 rounded-3xl overflow-hidden flex flex-col sm:flex-row"
+            <motion.div className="col-span-1 lg:col-span-7 lg:row-span-1 rounded-3xl overflow-hidden flex flex-col sm:flex-row"
               initial={{ opacity: 0, y: -24 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.1 }}>
               {/* Stats side */}
-              <div className="flex-1 flex flex-col justify-center px-8 py-7"
+              <div className="flex-1 flex flex-col justify-center px-5 py-6 lg:px-8 lg:py-7"
                 style={{ backgroundColor: 'var(--primary)' }}>
                 <p className="font-bold text-xs uppercase tracking-[0.2em] mb-3" style={{ fontFamily: PP, color: '#fda102' }}>By the Numbers</p>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-2 lg:gap-4">
                   {heroStats.map(({value, label}) => (
                     <div key={label}>
-                      <p className="font-bold text-2xl text-white" style={{ fontFamily: PP }}>{value}</p>
-                      <p className="text-xs text-white/60 uppercase tracking-wide" style={{ fontFamily: PP }}>{label}</p>
+                      <p className="font-bold text-xl lg:text-2xl text-white" style={{ fontFamily: PP }}>{value}</p>
+                      <p className="text-[10px] lg:text-xs text-white/60 uppercase tracking-wide" style={{ fontFamily: PP }}>{label}</p>
                     </div>
                   ))}
                 </div>
               </div>
               {/* Video side */}
-              <div className="relative flex-1 flex items-center justify-center min-h-[140px] overflow-hidden"
+              <div className="relative flex-1 flex items-center justify-center min-h-[160px] lg:min-h-[140px] overflow-hidden"
                 style={{ backgroundColor: '#1a1a1a' }}>
                 {directVideoUrl ? (
                   <video src={directVideoUrl} autoPlay loop muted playsInline
@@ -442,7 +441,7 @@ const About = () => {
             </motion.div>
 
             {/* Bottom-right: story carousel */}
-            <motion.div className="col-span-12 lg:col-span-7 row-span-1 rounded-3xl p-8"
+            <motion.div className="col-span-1 lg:col-span-7 lg:row-span-1 rounded-3xl p-5 lg:p-8"
               style={{ backgroundColor: '#f9f5f2' }}
               initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.2 }}>
@@ -463,7 +462,7 @@ const About = () => {
             MARU CONSULTANCY<br />SERVICES
           </p>
         </div>
-        <div className="relative max-w-[1400px] mx-auto px-10 lg:px-20 text-center">
+        <div className="relative max-w-[1400px] mx-auto px-5 lg:px-20 text-center">
           <motion.div className="font-bold text-white mb-8 flex flex-col items-center"
             style={{ fontFamily: PP, fontSize: 'clamp(2rem, 5vw, 4.2rem)' }}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
@@ -505,8 +504,7 @@ const About = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {coreValues.map((v, i) => (
               <motion.div key={i}
-                className="relative rounded-2xl overflow-hidden group cursor-default"
-                style={{ height: '380px' }}
+                className="relative rounded-2xl overflow-hidden group cursor-default h-[220px] lg:h-[380px]"
                 initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.55, delay: i * 0.1 }}>
                 {/* Background photo */}
@@ -518,8 +516,8 @@ const About = () => {
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500"
                   style={{ backgroundColor: 'var(--primary)' }} />
                 {/* Content */}
-                <div className="absolute inset-0 p-7 flex flex-col justify-between">
-                  <p className="font-bold text-5xl opacity-30 text-white" style={{ fontFamily: PP }}>{String(i + 1).padStart(2, '0')}</p>
+                <div className="absolute inset-0 p-4 lg:p-7 flex flex-col justify-between">
+                  <p className="font-bold text-3xl lg:text-5xl opacity-30 text-white" style={{ fontFamily: PP }}>{String(i + 1).padStart(2, '0')}</p>
                   <h4 className="font-bold text-white leading-tight whitespace-nowrap text-center" style={{ fontFamily: PP, fontSize: 'clamp(0.85rem, 1.4vw, 1.125rem)' }}>{v.title}</h4>
                 </div>
               </motion.div>
@@ -645,7 +643,7 @@ const About = () => {
             initial={{ opacity: 0, y: -16 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <img src="/assets/maru-logo-full.png" alt="Maru Consultancy Services"
-              className="w-auto object-contain" style={{ height: '110px' }} />
+              className="w-auto object-contain h-[70px] lg:h-[110px]" />
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -654,20 +652,20 @@ const About = () => {
             <motion.div className="relative"
               initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.65 }}>
-              <div className="rounded-3xl overflow-hidden" style={{ height: '520px' }}>
+              <div className="rounded-3xl overflow-hidden h-[300px] lg:h-[520px]">
                 <img src={heroImage} alt="" className="w-full h-full object-cover" />
               </div>
               {/* Floating amber badge */}
-              <div className="absolute -bottom-6 -right-4 rounded-2xl p-6 shadow-2xl"
+              <div className="absolute -bottom-4 -right-2 lg:-bottom-6 lg:-right-4 rounded-2xl p-3 lg:p-6 shadow-2xl"
                 style={{ backgroundColor: '#fda102' }}>
-                <p className="font-bold text-white text-3xl" style={{ fontFamily: PP }}>98%</p>
-                <p className="font-semibold text-white/80 text-xs uppercase tracking-wider" style={{ fontFamily: PP }}>Client Retention</p>
+                <p className="font-bold text-white text-lg lg:text-3xl" style={{ fontFamily: PP }}>98%</p>
+                <p className="font-semibold text-white/80 text-[9px] lg:text-xs uppercase tracking-wider whitespace-nowrap" style={{ fontFamily: PP }}>Client Retention</p>
               </div>
               {/* Floating dark badge */}
-              <div className="absolute -top-5 -left-4 rounded-2xl px-6 py-4 shadow-xl"
+              <div className="absolute -top-3 -left-2 lg:-top-5 lg:-left-4 rounded-2xl px-3 py-2 lg:px-6 lg:py-4 shadow-xl"
                 style={{ backgroundColor: '#111111' }}>
-                <p className="font-bold text-xl" style={{ fontFamily: PP, color: '#fda102' }}>500+</p>
-                <p className="text-xs text-white/60 uppercase tracking-wide" style={{ fontFamily: PP }}>Clients Served</p>
+                <p className="font-bold text-sm lg:text-xl" style={{ fontFamily: PP, color: '#fda102' }}>500+</p>
+                <p className="text-[9px] lg:text-xs text-white/60 uppercase tracking-wide whitespace-nowrap" style={{ fontFamily: PP }}>Clients Served</p>
               </div>
             </motion.div>
 
@@ -704,7 +702,7 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           8. TEAM — 4 white cards on brand-colour band
          ══════════════════════════════════════════════════════ */}
-      <section className="py-16 overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
+      <section className="py-10 lg:py-16 overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="w-full px-6 lg:px-10">
 
           {/* Section header */}
@@ -733,7 +731,7 @@ const About = () => {
                 style={{ backgroundColor: '#ffffff' }}>
 
                 {/* Photo */}
-                <div className="relative overflow-hidden" style={{ height: '360px' }}>
+                <div className="relative overflow-hidden h-[260px] lg:h-[360px]">
                   <img src={m.img} alt={m.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-400"
@@ -741,7 +739,7 @@ const About = () => {
                 </div>
 
                 {/* Details */}
-                <div className="flex-1 flex flex-col items-center text-center px-6 py-7">
+                <div className="flex-1 flex flex-col items-center text-center px-5 py-5 lg:px-6 lg:py-7">
                   <h4 className="font-bold text-lg mb-1" style={{ fontFamily: PP, color: '#111' }}>{m.name}</h4>
                   <p className="text-xs mb-2" style={{ fontFamily: PP, color: '#999' }}>{m.qualification}</p>
                   <p className="font-semibold text-xs uppercase tracking-wide whitespace-pre-line leading-relaxed"
@@ -763,7 +761,7 @@ const About = () => {
         <div className="absolute inset-0"
           style={{ backgroundColor: 'rgba(0,0,0,0.45)' }} />
 
-        <div className="relative max-w-5xl mx-auto px-8 py-24 text-center">
+        <div className="relative max-w-5xl mx-auto px-5 py-16 lg:px-8 lg:py-24 text-center">
           <motion.p className="font-bold uppercase tracking-[0.3em] mb-5"
             style={{ fontFamily: PP, color: '#fda102', fontSize: 'clamp(1rem, 1.8vw, 1.35rem)' }}
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
@@ -780,12 +778,12 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.18 }}>
             <Link to="/contact"
-              className="inline-flex items-center gap-2 rounded-full px-10 py-4 font-semibold text-sm transition-all hover:scale-[1.04] shadow-xl"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 lg:px-10 lg:py-4 font-semibold text-sm transition-all hover:scale-[1.04] shadow-xl whitespace-nowrap"
               style={{ backgroundColor: '#fda102', color: '#fff', fontFamily: PP }}>
               Schedule a Consultation <ArrowRight size={16} />
             </Link>
             <Link to="/careers"
-              className="inline-flex items-center gap-2 rounded-full px-10 py-4 font-semibold text-sm border transition-all hover:scale-[1.04]"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 lg:px-10 lg:py-4 font-semibold text-sm border transition-all hover:scale-[1.04] whitespace-nowrap"
               style={{ borderColor: 'rgba(255,255,255,0.5)', color: '#fff', fontFamily: PP }}>
               Join Our Team
             </Link>
