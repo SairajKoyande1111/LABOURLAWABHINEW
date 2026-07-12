@@ -232,19 +232,19 @@ const Home = () => {
 
             {/* ── Buttons ── order-4 on mobile, grid col-1 row-3 on desktop */}
             <motion.div
-              className="order-4 lg:order-none flex flex-wrap gap-2 lg:gap-3 items-center w-full"
+              className="order-4 lg:order-none flex flex-nowrap gap-2 lg:gap-3 items-center w-full"
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2 }}>
               <Link to="/contact"
-                className="inline-flex items-center gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02]"
-                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 'clamp(0.68rem, 2.2vw, 1rem)', letterSpacing: '0.01em', padding: 'clamp(0.5rem,1.8vw,0.85rem) clamp(0.8rem,2.5vw,1.75rem)', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
+                className="inline-flex items-center gap-1 lg:gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] shrink-0 text-[0.72rem] lg:text-[1rem] px-3 py-2 lg:px-7 lg:py-3.5"
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, letterSpacing: '0.01em', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111111'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
-                {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={13} />
+                {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={12} />
               </Link>
               <Link to="/services"
-                className="inline-flex items-center gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02]"
-                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 'clamp(0.68rem, 2.2vw, 1rem)', letterSpacing: '0.01em', padding: 'clamp(0.5rem,1.8vw,0.85rem) clamp(0.8rem,2.5vw,1.75rem)', backgroundColor: '#ffffff', color: '#111111', border: '2px solid #fda102' }}
+                className="inline-flex items-center gap-1 lg:gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02] shrink-0 text-[0.72rem] lg:text-[1rem] px-3 py-2 lg:px-7 lg:py-3.5"
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, letterSpacing: '0.01em', backgroundColor: '#ffffff', color: '#111111', border: '2px solid #fda102' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#ffffff'; }}>
                 {content?.ctaSecondaryText ?? 'Compliance Solutions'}
@@ -357,11 +357,11 @@ const Home = () => {
               <div className="bg-white rounded-2xl pt-4 pb-6 px-4 lg:pt-6 lg:pb-12 lg:px-12 shadow-xl">
 
                 <img src={maruLogo} alt="Maru Consultancy Services" className="h-14 lg:h-20 w-auto object-contain mb-3 lg:mb-5 mx-auto block" />
-                <h2 className="font-bold leading-[1.2] mb-3 lg:mb-5"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.05rem, 2.4vw, 2rem)', color: '#111111' }}>
+                <h2 className="font-bold leading-[1.2] mb-3 lg:mb-5 line-clamp-2 lg:line-clamp-none"
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.85rem, 2.4vw, 2rem)', color: '#111111' }}>
                   {content?.whyUsHeading ?? "Expertise that protects your business & empowers your workforce."}
                 </h2>
-                <p className="leading-relaxed text-xs lg:text-sm mb-5 lg:mb-8 text-justify"
+                <p className="leading-relaxed text-xs lg:text-sm mb-4 lg:mb-8 text-justify"
                   style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#555555' }}>
                   {content?.whyUsBody ?? "We don't just file paperwork — we architect robust compliance frameworks. With India's labour law landscape shifting under the New Codes, you need a partner who anticipates regulatory changes before they impact your bottom line."}
                 </p>
@@ -372,15 +372,15 @@ const Home = () => {
                     <motion.div key={i}
                       initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className="flex gap-5 py-5 first:pt-0 last:pb-0">
-                      <span className="font-bold shrink-0 text-xl leading-none mt-0.5"
+                      className="flex gap-4 py-3 lg:py-5 first:pt-0 last:pb-0">
+                      <span className="font-bold shrink-0 text-base lg:text-xl leading-none mt-0.5"
                         style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102' }}>
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <div>
-                        <h4 className="font-semibold mb-1 text-sm"
+                        <h4 className="font-semibold mb-1 text-xs lg:text-sm"
                           style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>{item.title}</h4>
-                        <p className="text-xs leading-relaxed"
+                        <p className="text-[0.68rem] lg:text-xs leading-relaxed text-justify"
                           style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#666666' }}>{item.desc}</p>
                       </div>
                     </motion.div>
@@ -402,18 +402,18 @@ const Home = () => {
           <div className="text-center mb-8 lg:mb-12 mx-auto">
             <p className="font-bold text-sm lg:text-base uppercase tracking-wider mb-2 lg:mb-3"
               style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>{content?.servicesPreviewLabel ?? 'Our Expertise'}</p>
-            <h2 className="font-bold text-navy-900 mb-2 lg:mb-3"
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.2rem, 2.8vw, 2.2rem)' }}>
+            <h2 className="font-bold text-navy-900 mb-2 lg:mb-3 whitespace-nowrap overflow-hidden text-ellipsis"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.9rem, 2.8vw, 2.2rem)' }}>
               {content?.servicesPreviewTitle ?? 'Comprehensive Compliance Solutions'}
             </h2>
-            <p className="text-gray-500 text-xs lg:text-sm leading-relaxed"
+            <p className="text-gray-500 text-xs lg:text-sm leading-relaxed line-clamp-2 lg:line-clamp-none text-justify lg:text-center"
               style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}>
               {content?.servicesPreviewDescription ?? 'Strategic guidance across the entire spectrum of Indian labour laws and human resource management.'}
             </p>
           </div>
 
-          {/* 8-card grid — 2 cols mobile, 4 cols desktop */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
+          {/* 8-card grid — 1 col mobile, 4 cols desktop */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-6">
             {previewServices.map((service, i) => (
               <motion.div key={service._id}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -421,17 +421,17 @@ const Home = () => {
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group overflow-hidden flex flex-col">
 
                 {/* Image */}
-                <div className="h-40 overflow-hidden relative shrink-0">
+                <div className="h-32 lg:h-40 overflow-hidden relative shrink-0">
                   <img src={service.img} alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
 
                 {/* Body */}
-                <div className="p-5 flex-grow flex flex-col">
-                  <h3 className="font-semibold text-navy-900 mb-2 leading-snug text-[0.9rem]"
+                <div className="p-3 lg:p-5 flex-grow flex flex-col">
+                  <h3 className="font-semibold text-navy-900 mb-2 leading-snug text-[0.82rem] lg:text-[0.9rem]"
                     style={{ fontFamily: 'Poppins, sans-serif' }}>{service.title}</h3>
-                  <p className="text-gray-500 text-xs leading-relaxed flex-grow mb-4"
+                  <p className="text-gray-500 text-xs leading-relaxed flex-grow mb-3 hidden lg:block"
                     style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}>{service.desc}</p>
                   <Link to={`/services/${service.slug}`}
                     className="inline-flex items-center gap-1 text-xs font-semibold mt-auto group-hover:gap-2 transition-all"
@@ -459,12 +459,10 @@ const Home = () => {
       {/* ── Testimonials ──────────────────────────────────── */}
       <section className="py-8 lg:py-10 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
 
-        {/* Decorative ambient glows */}
+        {/* Decorative ambient glow — dark only, no yellow */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
             style={{ backgroundColor: '#7a2900' }} />
-          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full opacity-20 blur-3xl"
-            style={{ backgroundColor: '#fda102' }} />
           <div className="absolute inset-0 opacity-5"
             style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
         </div>
@@ -563,7 +561,7 @@ const Home = () => {
       <section className="py-8 lg:py-14 bg-white border-y border-gray-100 overflow-hidden">
         {/* Section label — one line, tighter tracking */}
         <p className="text-center font-semibold uppercase whitespace-nowrap mb-6 lg:mb-10"
-          style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(8px, 2vw, 11px)', letterSpacing: '0.12em', color: 'var(--primary)' }}>
+          style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(9.5px, 2.2vw, 11px)', letterSpacing: '0.10em', color: 'var(--primary)' }}>
           Serving 500+ Corporations Across India
         </p>
 
@@ -649,19 +647,19 @@ const Home = () => {
             viewport={{ once: true }} transition={{ duration: 0.55 }}
             className="md:w-1/2 flex flex-col justify-center px-6 py-10 lg:px-16 lg:py-20">
             <h2
-              className="font-bold text-white mb-3 lg:mb-5 leading-tight"
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.3rem, 3.5vw, 3rem)' }}>
+              className="font-bold text-white mb-3 lg:mb-5 leading-tight whitespace-nowrap overflow-hidden text-ellipsis"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.92rem, 3.5vw, 3rem)' }}>
               Ready to secure your compliance?
             </h2>
             <p
-              className="text-xs lg:text-base leading-relaxed mb-5 lg:mb-8"
+              className="text-xs lg:text-base leading-relaxed mb-5 lg:mb-8 text-justify"
               style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.85)' }}>
               Schedule a detailed consultation with our legal experts to audit your current HR practices and identify risks before they become liabilities.
             </p>
-            <div>
+            <div className="flex justify-center md:justify-start">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-6 lg:px-9 py-3 lg:py-4 rounded-full font-bold text-white text-sm lg:text-base shadow-lg transition-all duration-200"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-white text-sm lg:text-base shadow-lg transition-all duration-200"
                 style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102' }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.backgroundColor = '#e8920a';

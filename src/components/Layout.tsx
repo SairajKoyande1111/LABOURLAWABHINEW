@@ -258,47 +258,45 @@ const Layout = () => {
       <footer className="bg-white border-t-4" style={{ borderTopColor: 'var(--primary)' }}>
 
         {/* Main content grid */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-14 pb-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10 pt-8 lg:pt-14 pb-8 lg:pb-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10 mb-8 lg:mb-12">
 
-            {/* ── Col 1: Brand ── */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            {/* ── Col 1: Brand — full width on mobile ── */}
+            <motion.div className="col-span-2 lg:col-span-1"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              {/* Logo image */}
-              <div className="mb-5">
+              <div className="mb-3 lg:mb-5">
                 <img src="/assets/maru-logo-full.png" alt="Maru Consultancy Services"
-                  className="h-16 w-auto object-contain" />
+                  className="h-12 lg:h-16 w-auto object-contain" />
               </div>
-              {/* Description — black text, base size */}
-              <p className="text-base leading-relaxed mb-6"
+              <p className="text-xs lg:text-sm leading-relaxed mb-4 lg:mb-6 text-justify"
                 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#111111' }}>
                 India's trusted labour law consultancy specializing in HR compliance, statutory filings, payroll, and staffing solutions across 15+ states.
               </p>
-              {/* Social icons — uploaded images */}
-              <div className="flex gap-3 flex-wrap">
+              <div className="flex gap-2.5 flex-wrap">
                 {socialLinks.map(({ href, img, label }) => (
                   <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}
-                    className="w-10 h-10 hover:scale-110 transition-transform duration-200">
+                    className="w-8 h-8 lg:w-10 lg:h-10 hover:scale-110 transition-transform duration-200">
                     <img src={img} alt={label} className="w-full h-full object-contain" />
                   </a>
                 ))}
               </div>
             </motion.div>
 
-            {/* ── Col 2: Our Services — all 8 ── */}
+            {/* ── Col 2: Our Services ── */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
-              <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
+              <h3 className="font-bold text-xs lg:text-sm mb-4 lg:mb-6 uppercase tracking-wider"
                 style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Our Services</h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2 lg:space-y-3">
                 {serviceLinks.slice(0, 8).map((s) => (
                   <li key={s.slug}>
                     <Link to={`/services/${s.slug}`}
-                      className="text-base flex items-center gap-2.5 transition-colors duration-200"
+                      className="text-xs lg:text-sm flex items-center gap-2 transition-colors duration-200"
                       style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#111111'; }}>
-                      <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: '#fda102' }} />
+                      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#fda102' }} />
                       {s.name}
                     </Link>
                   </li>
@@ -309,16 +307,16 @@ const Layout = () => {
             {/* ── Col 3: Contact Us ── */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
-              <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
+              <h3 className="font-bold text-xs lg:text-sm mb-4 lg:mb-6 uppercase tracking-wider"
                 style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Contact Us</h3>
-              <ul className="space-y-5">
-                <li className="flex gap-3" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
-                  <img src={iconLocation} alt="" aria-hidden="true" className="w-5 h-5 shrink-0 mt-0.5 object-contain" />
-                  <span className="text-base leading-snug">15th Floor, Nariman Point, Mumbai, Maharashtra 400021</span>
+              <ul className="space-y-3 lg:space-y-5">
+                <li className="flex gap-2.5" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
+                  <img src={iconLocation} alt="" aria-hidden="true" className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 mt-0.5 object-contain" />
+                  <span className="text-xs lg:text-sm leading-snug">15th Floor, Nariman Point, Mumbai, Maharashtra 400021</span>
                 </li>
-                <li className="flex gap-3" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
-                  <img src={iconCall} alt="" aria-hidden="true" className="w-5 h-5 shrink-0 mt-0.5 object-contain" />
-                  <div className="text-base">
+                <li className="flex gap-2.5" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
+                  <img src={iconCall} alt="" aria-hidden="true" className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 mt-0.5 object-contain" />
+                  <div className="text-xs lg:text-sm">
                     <a href="tel:+919876543210" className="block transition-colors duration-200 font-medium"
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}>
@@ -331,10 +329,10 @@ const Layout = () => {
                     </a>
                   </div>
                 </li>
-                <li className="flex gap-3" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
-                  <img src={iconMail} alt="" aria-hidden="true" className="w-5 h-5 shrink-0 mt-0.5 object-contain" />
+                <li className="flex gap-2.5" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
+                  <img src={iconMail} alt="" aria-hidden="true" className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 mt-0.5 object-contain" />
                   <a href="mailto:contact@labourcodes.in"
-                    className="text-base transition-colors duration-200 font-medium"
+                    className="text-xs lg:text-sm transition-colors duration-200 font-medium break-all"
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}>
                     contact@labourcodes.in
@@ -346,17 +344,17 @@ const Layout = () => {
             {/* ── Col 4: Newsletter ── */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}>
-              <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
+              <h3 className="font-bold text-xs lg:text-sm mb-4 lg:mb-6 uppercase tracking-wider"
                 style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Newsletter</h3>
-              <p className="text-base mb-5 leading-relaxed"
+              <p className="text-xs lg:text-sm mb-3 lg:mb-5 leading-relaxed"
                 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#111111' }}>
                 Subscribe for critical compliance alerts and regulatory updates.
               </p>
-              <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex flex-col gap-2.5 lg:gap-3" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
                   placeholder="Your Email Address"
-                  className="rounded-lg px-4 py-3 text-base focus:outline-none transition-colors"
+                  className="rounded-lg px-3 py-2.5 lg:px-4 lg:py-3 text-xs lg:text-sm focus:outline-none transition-colors"
                   style={{
                     fontFamily: 'Poppins, sans-serif',
                     backgroundColor: '#f9fafb',
@@ -367,7 +365,7 @@ const Layout = () => {
                   onBlur={e => { (e.currentTarget as HTMLElement).style.borderColor = '#e5e7eb'; }}
                 />
                 <button type="submit"
-                  className="px-4 py-3 rounded-lg text-base font-bold text-white transition-all duration-200"
+                  className="px-3 py-2.5 lg:px-4 lg:py-3 rounded-lg text-xs lg:text-sm font-bold text-white transition-all duration-200"
                   style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: 'var(--primary)' }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102';
@@ -387,13 +385,13 @@ const Layout = () => {
           <motion.div
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="w-full rounded-2xl overflow-hidden border border-gray-200 shadow-sm mb-10"
-            style={{ height: '300px' }}>
+            className="w-full rounded-xl lg:rounded-2xl overflow-hidden border border-gray-200 shadow-sm mb-6 lg:mb-10"
+            style={{ height: '220px' }}>
             <iframe
               title="Maru Consultancy Services Location"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.0530!2d72.82161!3d18.92556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c2a26c9969%3A0x9b74cf8ec1c57f40!2sNariman%20Point%2C%20Mumbai%2C%20Maharashtra%20400021!5e0!3m2!1sen!2sin!4v1720343000000!5m2!1sen!2sin"
               width="100%"
-              height="300"
+              height="220"
               style={{ border: 0, display: 'block' }}
               allowFullScreen
               loading="lazy"
@@ -402,13 +400,12 @@ const Layout = () => {
           </motion.div>
 
           {/* ── Bottom bar ── */}
-          <div className="pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
-            {/* Left: copyright + Airavata */}
+          <div className="pt-4 lg:pt-6 border-t border-gray-200 flex flex-col items-center gap-3 md:flex-row md:justify-between">
             <div className="text-center md:text-left" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              <p className="text-sm font-medium" style={{ color: '#111111' }}>
+              <p className="text-xs font-medium" style={{ color: '#111111' }}>
                 &copy; {new Date().getFullYear()} Maru Consultancy Services Pvt. Ltd. All rights reserved.
               </p>
-              <p className="text-sm mt-0.5" style={{ color: '#6b7280' }}>
+              <p className="text-xs mt-0.5" style={{ color: '#6b7280' }}>
                 Designed &amp; Developed by{' '}
                 <a href="https://www.airavatatechnologies.com/" target="_blank" rel="noreferrer"
                   className="font-semibold transition-colors duration-200"
@@ -419,11 +416,10 @@ const Layout = () => {
                 </a>
               </p>
             </div>
-            {/* Right: policy links */}
-            <div className="flex gap-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
+            <div className="flex gap-4 flex-wrap justify-center" style={{ fontFamily: 'Poppins, sans-serif' }}>
               {['Privacy Policy', 'Terms of Service', 'Sitemap'].map((label) => (
                 <Link key={label} to="#"
-                  className="text-sm font-medium transition-colors duration-200"
+                  className="text-xs font-medium transition-colors duration-200"
                   style={{ color: '#111111' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#111111'; }}>
