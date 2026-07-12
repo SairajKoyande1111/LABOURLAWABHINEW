@@ -169,7 +169,7 @@ const StoryCarousel = ({ slides }: { slides: SlideData[] }) => {
             {slide.heading}<br />
             <span style={{ color: 'var(--primary)' }}>{slide.headingHighlight}</span>
           </h2>
-          <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: PP, color: '#666', lineHeight: 1.8 }}>
+          <p className="text-sm leading-relaxed mb-4 text-justify" style={{ fontFamily: PP, color: '#666', lineHeight: 1.8 }}>
             {slide.body}
           </p>
         </motion.div>
@@ -378,7 +378,7 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-2 gap-4 lg:h-[580px]">
 
             {/* Large left cell */}
-            <motion.div className="col-span-1 lg:col-span-5 lg:row-span-2 rounded-3xl overflow-hidden relative group h-[280px] lg:h-auto"
+            <motion.div className="order-2 lg:order-none col-span-1 lg:col-span-5 lg:row-span-2 rounded-3xl overflow-hidden relative group h-[280px] lg:h-auto"
               initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.65 }}>
               <OfficeImageCarousel images={apiData?.storyImages ?? []} />
@@ -391,7 +391,7 @@ const About = () => {
             </motion.div>
 
             {/* Top-right: combined horizontal card — stats + video */}
-            <motion.div className="col-span-1 lg:col-span-7 lg:row-span-1 rounded-3xl overflow-hidden flex flex-col sm:flex-row"
+            <motion.div className="order-3 lg:order-none col-span-1 lg:col-span-7 lg:row-span-1 rounded-3xl overflow-hidden flex flex-col sm:flex-row"
               initial={{ opacity: 0, y: -24 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.1 }}>
               {/* Stats side */}
@@ -441,7 +441,7 @@ const About = () => {
             </motion.div>
 
             {/* Bottom-right: story carousel */}
-            <motion.div className="col-span-1 lg:col-span-7 lg:row-span-1 rounded-3xl p-5 lg:p-8"
+            <motion.div className="order-1 lg:order-none col-span-1 lg:col-span-7 lg:row-span-1 rounded-3xl p-5 lg:p-8"
               style={{ backgroundColor: '#f9f5f2' }}
               initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.2 }}>
@@ -462,8 +462,22 @@ const About = () => {
             MARU CONSULTANCY<br />SERVICES
           </p>
         </div>
-        <div className="relative max-w-[1400px] mx-auto px-5 lg:px-20 text-center">
-          <motion.div className="font-bold text-white mb-8 flex flex-col items-center"
+        <div className="relative max-w-[1400px] mx-auto px-5 lg:px-20 text-center overflow-x-auto">
+          {/* Mobile: everything collapsed onto a single line */}
+          <motion.div className="flex lg:hidden items-center justify-center gap-2 font-bold text-white mb-2 whitespace-nowrap w-fit mx-auto"
+            style={{ fontFamily: PP, fontSize: 'clamp(0.6rem, 3.4vw, 0.95rem)' }}
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <span>{pullQuoteLine1}</span>
+            <span>{pullQuoteLine2}</span>
+            <span style={{ color: '#fda102' }}>{pullQuoteLine3}</span>
+            <span className="font-semibold uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.85)' }}>
+              — {pullQuoteAttribution}
+            </span>
+          </motion.div>
+
+          {/* Desktop: original stacked treatment */}
+          <motion.div className="hidden lg:flex font-bold text-white mb-8 flex-col items-center"
             style={{ fontFamily: PP, fontSize: 'clamp(2rem, 5vw, 4.2rem)' }}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -471,7 +485,7 @@ const About = () => {
             <span style={{ lineHeight: 1.2 }}>{pullQuoteLine2}</span>
             <span style={{ lineHeight: 1.2, color: '#fda102' }}>{pullQuoteLine3}</span>
           </motion.div>
-          <motion.p className="font-semibold uppercase tracking-widest"
+          <motion.p className="hidden lg:block font-semibold uppercase tracking-widest"
             style={{ fontFamily: PP, color: 'rgba(255,255,255,0.85)', fontSize: '1.05rem' }}
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
@@ -500,11 +514,11 @@ const About = () => {
             Our Core Values
           </motion.h2>
 
-          {/* 4 image-backed poster cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* 4 image-backed poster cards — 2x2 on mobile, single row on desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
             {coreValues.map((v, i) => (
               <motion.div key={i}
-                className="relative rounded-2xl overflow-hidden group cursor-default h-[220px] lg:h-[380px]"
+                className="relative rounded-2xl overflow-hidden group cursor-default h-[170px] lg:h-[380px]"
                 initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.55, delay: i * 0.1 }}>
                 {/* Background photo */}
@@ -516,9 +530,9 @@ const About = () => {
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500"
                   style={{ backgroundColor: 'var(--primary)' }} />
                 {/* Content */}
-                <div className="absolute inset-0 p-4 lg:p-7 flex flex-col justify-between">
-                  <p className="font-bold text-3xl lg:text-5xl opacity-30 text-white" style={{ fontFamily: PP }}>{String(i + 1).padStart(2, '0')}</p>
-                  <h4 className="font-bold text-white leading-tight whitespace-nowrap text-center" style={{ fontFamily: PP, fontSize: 'clamp(0.85rem, 1.4vw, 1.125rem)' }}>{v.title}</h4>
+                <div className="absolute inset-0 p-3 lg:p-7 flex flex-col justify-between">
+                  <p className="font-bold text-xl lg:text-5xl opacity-30 text-white" style={{ fontFamily: PP }}>{String(i + 1).padStart(2, '0')}</p>
+                  <h4 className="font-bold text-white leading-tight text-center" style={{ fontFamily: PP, fontSize: 'clamp(0.72rem, 3.4vw, 1.125rem)' }}>{v.title}</h4>
                 </div>
               </motion.div>
             ))}
@@ -673,9 +687,9 @@ const About = () => {
             <motion.div
               initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.65, delay: 0.1 }}>
-              <h2 className="font-bold leading-[1.15] mb-8"
-                style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.8vw, 2.6rem)', color: '#111' }}>
-                What sets us apart<br />from the <span style={{ color: 'var(--primary)' }}>rest.</span>
+              <h2 className="font-bold leading-[1.15] mb-8 whitespace-nowrap lg:whitespace-normal"
+                style={{ fontFamily: PP, fontSize: 'clamp(1.05rem, 5.5vw, 2.6rem)', color: '#111' }}>
+                What sets us apart<br className="hidden lg:inline" /> from the <span style={{ color: 'var(--primary)' }}>rest.</span>
               </h2>
 
               <div className="space-y-6">
@@ -688,8 +702,8 @@ const About = () => {
                       <CheckCircle size={16} color="#fff" />
                     </div>
                     <div>
-                      <p className="font-semibold text-base" style={{ fontFamily: PP, color: '#111' }}>{item.point}</p>
-                      <p className="text-sm leading-relaxed mt-1" style={{ fontFamily: PP, color: '#777' }}>{item.sub}</p>
+                      <p className="font-semibold text-base text-justify lg:text-left" style={{ fontFamily: PP, color: '#111' }}>{item.point}</p>
+                      <p className="text-sm leading-relaxed mt-1 text-justify lg:text-left" style={{ fontFamily: PP, color: '#777' }}>{item.sub}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -709,18 +723,18 @@ const About = () => {
           <motion.div className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="font-bold text-white leading-[1.15] mb-4"
-              style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)' }}>
+            <h2 className="font-bold text-white leading-[1.15] mb-4 whitespace-nowrap lg:whitespace-normal"
+              style={{ fontFamily: PP, fontSize: 'clamp(1rem, 5.5vw, 2.4rem)' }}>
               Meet the Experts Behind Your Success
             </h2>
-            <p className="px-4 sm:px-12 lg:px-32"
+            <p className="px-4 sm:px-12 lg:px-32 text-justify lg:text-center"
               style={{ fontFamily: PP, color: '#fda102', fontSize: 'clamp(1rem, 1.6vw, 1.25rem)', lineHeight: 1.6 }}>
               Our experienced team of labour law, payroll, HR, and compliance professionals is committed to delivering practical solutions that help your business stay compliant and grow with confidence.
             </p>
           </motion.div>
 
-          {/* 4-card grid — single row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* 4-card grid — 2x2 on mobile, single row on desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
             {teamMembers.map((m, i) => (
               <motion.div key={i}
                 initial={{ opacity: 0, y: 28 }}
@@ -731,7 +745,7 @@ const About = () => {
                 style={{ backgroundColor: '#ffffff' }}>
 
                 {/* Photo */}
-                <div className="relative overflow-hidden h-[260px] lg:h-[360px]">
+                <div className="relative overflow-hidden h-[150px] lg:h-[360px]">
                   <img src={m.img} alt={m.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-400"
@@ -739,10 +753,10 @@ const About = () => {
                 </div>
 
                 {/* Details */}
-                <div className="flex-1 flex flex-col items-center text-center px-5 py-5 lg:px-6 lg:py-7">
-                  <h4 className="font-bold text-lg mb-1" style={{ fontFamily: PP, color: '#111' }}>{m.name}</h4>
-                  <p className="text-xs mb-2" style={{ fontFamily: PP, color: '#999' }}>{m.qualification}</p>
-                  <p className="font-semibold text-xs uppercase tracking-wide whitespace-pre-line leading-relaxed"
+                <div className="flex-1 flex flex-col items-center text-center px-3 py-3 lg:px-6 lg:py-7">
+                  <h4 className="font-bold text-sm lg:text-lg mb-1" style={{ fontFamily: PP, color: '#111' }}>{m.name}</h4>
+                  <p className="text-[10px] lg:text-xs mb-2" style={{ fontFamily: PP, color: '#999' }}>{m.qualification}</p>
+                  <p className="font-semibold text-[9px] lg:text-xs uppercase tracking-wide whitespace-pre-line leading-relaxed"
                     style={{ fontFamily: PP, color: 'var(--primary)' }}>{m.role}</p>
                 </div>
               </motion.div>
@@ -755,26 +769,26 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           9. VIDEO CTA — Video background, bold overlay
          ══════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ minHeight: '440px' }}>
+      <section className="relative lg:overflow-hidden" style={{ minHeight: '440px' }}>
         <video src={ctaVideo} autoPlay loop muted playsInline
           className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0"
           style={{ backgroundColor: 'rgba(0,0,0,0.45)' }} />
 
-        <div className="relative max-w-5xl mx-auto px-5 py-16 lg:px-8 lg:py-24 text-center">
-          <motion.p className="font-bold uppercase tracking-[0.3em] mb-5"
+        <div className="relative max-w-5xl mx-auto px-5 py-16 lg:px-8 lg:py-24 text-center overflow-x-auto">
+          <motion.p className="font-bold uppercase tracking-[0.3em] mb-5 whitespace-nowrap"
             style={{ fontFamily: PP, color: '#fda102', fontSize: 'clamp(1rem, 1.8vw, 1.35rem)' }}
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.4 }}>
             Ready to Get Compliant?
           </motion.p>
-          <motion.h2 className="font-bold text-white leading-[1.1] mb-8"
+          <motion.h2 className="font-bold text-white leading-[1.1] mb-8 whitespace-nowrap w-fit mx-auto"
             style={{ fontFamily: PP, fontSize: 'clamp(2rem, 5vw, 4rem)' }}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.08 }}>
-            Let's build your compliance<br /><span style={{ color: '#fda102' }}>framework together</span>
+            Let's build your compliance <span style={{ color: '#fda102' }}>framework together</span>
           </motion.h2>
-          <motion.div className="flex flex-wrap gap-4 justify-center"
+          <motion.div className="flex flex-nowrap lg:flex-wrap gap-4 justify-center w-fit mx-auto"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.18 }}>
             <Link to="/contact"
