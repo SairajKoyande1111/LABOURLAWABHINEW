@@ -74,7 +74,7 @@ const Layout = () => {
     <div className="min-h-screen flex flex-col font-sans">
 
       {/* Sticky Header */}
-      <header className={`sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-xl' : 'shadow-lg'}`} style={{ backgroundColor: '#1c3447' }}>
+      <header className={`sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-xl' : 'shadow-lg'}`} style={{ backgroundColor: '#172632' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[76px] flex justify-between items-center">
 
           {/* Logo — full header height, no gaps */}
