@@ -232,18 +232,18 @@ const Home = () => {
 
             {/* ── Buttons ── order-4 on mobile, grid col-1 row-3 on desktop */}
             <motion.div
-              className="order-4 lg:order-none flex flex-nowrap gap-2 lg:gap-3 items-center w-full"
+              className="order-4 lg:order-none flex flex-nowrap gap-3 items-center justify-center lg:justify-start"
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2 }}>
               <Link to="/contact"
-                className="inline-flex items-center gap-1 lg:gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] shrink-0 text-[0.72rem] lg:text-[1rem] px-3 py-2 lg:px-7 lg:py-3.5"
+                className="inline-flex items-center gap-1 lg:gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] text-[0.72rem] lg:text-[1rem] px-4 py-2 lg:px-7 lg:py-3.5"
                 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, letterSpacing: '0.01em', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111111'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
                 {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={12} />
               </Link>
               <Link to="/services"
-                className="inline-flex items-center gap-1 lg:gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02] shrink-0 text-[0.72rem] lg:text-[1rem] px-3 py-2 lg:px-7 lg:py-3.5"
+                className="inline-flex items-center gap-1 lg:gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02] text-[0.72rem] lg:text-[1rem] px-4 py-2 lg:px-7 lg:py-3.5"
                 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, letterSpacing: '0.01em', backgroundColor: '#ffffff', color: '#111111', border: '2px solid #fda102' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#ffffff'; }}>

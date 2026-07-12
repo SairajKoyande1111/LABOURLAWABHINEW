@@ -181,14 +181,14 @@ const Layout = () => {
                 onClick={() => setIsMenuOpen(false)}
               />
 
-              {/* Drawer panel */}
+              {/* Drawer panel — full width on mobile */}
               <motion.div
                 key="drawer"
                 initial={{ x: '100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
                 transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                className="lg:hidden fixed top-0 right-0 h-full w-[78vw] max-w-[300px] bg-white shadow-2xl z-[60] flex flex-col overflow-y-auto">
+                className="lg:hidden fixed top-0 right-0 h-full w-full bg-white shadow-2xl z-[60] flex flex-col overflow-y-auto">
 
                 {/* Drawer header */}
                 <div className="flex justify-between items-center px-5 py-4 shrink-0" style={{ backgroundColor: '#172632' }}>
@@ -431,8 +431,8 @@ const Layout = () => {
         </div>
       </footer>
 
-      {/* Scroll to Top */}
-      {scrolled && (
+      {/* Scroll to Top — hidden when mobile menu is open */}
+      {scrolled && !isMenuOpen && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="fixed bottom-6 right-6 z-50 w-11 h-11 text-white rounded-full flex items-center justify-center shadow-xl transition-all hover:scale-110"
