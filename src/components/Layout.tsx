@@ -73,15 +73,14 @@ const Layout = () => {
 
       {/* Sticky Header */}
       <header className={`sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-xl' : 'shadow-lg'}`} style={{ backgroundColor: '#172632' }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[76px] flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10 h-[56px] lg:h-[76px] flex justify-between items-center">
 
           {/* Logo */}
-          <Link to="/" className="self-stretch flex items-stretch -ml-6 lg:-ml-10">
+          <Link to="/" className="self-stretch flex items-center lg:-ml-10">
             <img
               src="/assets/maru-logo-new.png"
               alt="Maru Labour Laws — Consultants & Practitioners"
-              className="w-auto object-cover block"
-              style={{ height: '68px', marginTop: '4px', marginBottom: '4px' }}
+              className="w-auto object-contain block h-[46px] lg:h-[68px]"
             />
           </Link>
 
@@ -157,68 +156,95 @@ const Layout = () => {
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
-          <div className="lg:hidden flex items-center gap-2">
-            <button className="p-2 rounded-lg transition-colors" style={{ color: '#ffffff' }}
-              onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menu">
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Mobile Hamburger */}
+          <button
+            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors"
+            style={{ color: '#ffffff' }}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Menu">
+            <Menu size={22} />
+          </button>
         </div>
 
-        {/* Mobile Nav */}
+        {/* Mobile Nav — slides in from the RIGHT */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.22 }}
-              className="lg:hidden absolute top-[72px] left-0 w-full bg-white shadow-xl border-t border-gray-100 z-50 max-h-[80vh] overflow-y-auto">
-              {navLinks.map((link, i) => (
-                <motion.div key={link.name}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.04 }}>
-                  <Link
-                    to={link.path}
-                    className="block px-6 py-4 border-b border-gray-100 font-bold text-sm transition-colors"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: isActive(link.path) ? 'var(--primary)' : '#111111', backgroundColor: isActive(link.path) ? '#fff7ed' : '' }}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.name}
+            <>
+              {/* Backdrop */}
+              <motion.div
+                key="backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="lg:hidden fixed inset-0 bg-black/50 z-[55]"
+                onClick={() => setIsMenuOpen(false)}
+              />
+
+              {/* Drawer panel */}
+              <motion.div
+                key="drawer"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                className="lg:hidden fixed top-0 right-0 h-full w-[78vw] max-w-[300px] bg-white shadow-2xl z-[60] flex flex-col overflow-y-auto">
+
+                {/* Drawer header */}
+                <div className="flex justify-between items-center px-5 py-4 shrink-0" style={{ backgroundColor: '#172632' }}>
+                  <img src="/assets/maru-logo-new.png" alt="Maru Labour Laws" className="h-9 w-auto object-contain" />
+                  <button onClick={() => setIsMenuOpen(false)} style={{ color: '#ffffff' }} aria-label="Close menu">
+                    <X size={22} />
+                  </button>
+                </div>
+
+                {/* Nav links */}
+                <div className="flex-1 overflow-y-auto">
+                  {navLinks.map((link, i) => (
+                    <motion.div key={link.name}
+                      initial={{ opacity: 0, x: 18 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.045 }}>
+                      <Link
+                        to={link.path}
+                        className="block px-5 py-4 border-b border-gray-100 font-bold text-sm transition-colors"
+                        style={{ fontFamily: 'Poppins, sans-serif', color: isActive(link.path) ? '#fda102' : '#111111', backgroundColor: isActive(link.path) ? '#fff8ed' : '' }}
+                        onClick={() => setIsMenuOpen(false)}>
+                        {link.name}
+                      </Link>
+                      {link.hasDropdown && (
+                        <div className="bg-gray-50">
+                          {serviceLinks.map((s) => (
+                            <Link key={s.slug} to={`/services/${s.slug}`}
+                              className="block pl-9 pr-5 py-2.5 border-b border-gray-100 text-xs font-semibold transition-colors"
+                              style={{ fontFamily: 'Poppins, sans-serif', color: '#555555' }}
+                              onClick={() => setIsMenuOpen(false)}>
+                              › {s.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Bottom contacts */}
+                <div className="p-5 border-t border-gray-100 shrink-0 flex flex-col gap-3">
+                  <a href="tel:+919876543210" className="flex items-center gap-2 text-sm text-gray-600">
+                    <img src={iconCall} alt="" className="w-4 h-4 object-contain" /> +91 98765 43210
+                  </a>
+                  <a href="mailto:contact@labourcodes.in" className="flex items-center gap-2 text-sm text-gray-600">
+                    <img src={iconMail} alt="" className="w-4 h-4 object-contain" /> contact@labourcodes.in
+                  </a>
+                  <Link to="/contact"
+                    className="mt-1 block w-full text-center text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors"
+                    style={{ backgroundColor: 'var(--primary)' }}
+                    onClick={() => setIsMenuOpen(false)}>
+                    Contact Us
                   </Link>
-                  {link.hasDropdown && (
-                    <div className="bg-gray-50">
-                      {serviceLinks.map((s) => (
-                        <Link key={s.slug} to={`/services/${s.slug}`}
-                          className="block pl-10 pr-6 py-3 border-b border-gray-100 text-xs font-semibold transition-colors"
-                          style={{ fontFamily: 'Poppins, sans-serif', color: '#444444' }}
-                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
-                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#444444'; }}
-                          onClick={() => setIsMenuOpen(false)}>
-                          › {s.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              ))}
-              <div className="p-5 flex flex-col gap-3">
-                <a href="tel:+919876543210" className="flex items-center gap-2 text-sm text-gray-600">
-                  <img src={iconCall} alt="" className="w-4 h-4 object-contain" /> +91 98765 43210
-                </a>
-                <a href="mailto:contact@labourcodes.in" className="flex items-center gap-2 text-sm text-gray-600">
-                  <img src={iconMail} alt="" className="w-4 h-4 object-contain" /> contact@labourcodes.in
-                </a>
-                <Link to="/contact"
-                  className="mt-2 block w-full text-center text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors"
-                  style={{ backgroundColor: 'var(--primary)' }}
-                  onClick={() => setIsMenuOpen(false)}>
-                  Contact Us
-                </Link>
-              </div>
-            </motion.div>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </header>

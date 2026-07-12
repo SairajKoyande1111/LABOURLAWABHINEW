@@ -163,137 +163,92 @@ const Home = () => {
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-6 w-full">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6 w-full">
           {/*
-            Fixed grid — text col never squishes the collage col.
-            Text: 50% | Collage: 50%
+            Mobile:  flex-col with CSS order → h1(1), collage(2), p(3), buttons(4)
+            Desktop: 2-col grid → col1: h1/p/buttons, col2: collage spanning all rows
           */}
-          <div className="flex flex-col lg:grid lg:gap-8 items-center"
+          <div className="flex flex-col lg:grid lg:gap-8 lg:items-center"
             style={{ gridTemplateColumns: '50fr 50fr' }}>
 
-            {/* ── Left: Text Content ── */}
+            {/* ── H1 ── order-1 on mobile, grid col-1 row-1 on desktop */}
+            <motion.h1
+              className="font-semibold order-1 lg:order-none mb-4 lg:mb-5"
+              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.65rem, 4.2vw, 3.6rem)', lineHeight: 1.15 }}>
+              <span className="text-navy-900 block" style={{ marginBottom: '0.2em' }}>{content?.heroLine1 ?? 'We bring'}</span>
+              <span style={{ position: 'relative', display: 'block', height: '1.15em', overflow: 'visible', clipPath: 'inset(0 -9999px 0 0)', marginBottom: '0.2em' }}>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={phraseIndex}
+                    initial={{ y: '100%', opacity: 0 }}
+                    animate={{ y: '0%', opacity: 1 }}
+                    exit={{ y: '-100%', opacity: 0 }}
+                    transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+                    className="font-semibold"
+                    style={{ position: 'absolute', left: 0, top: 0, color: '#fda102', whiteSpace: 'nowrap', fontSize: 'inherit', lineHeight: 1.15 }}>
+                    {phrases[phraseIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+              <span className="text-navy-900 block">{content?.heroLine2 ?? 'to your growth'}</span>
+            </motion.h1>
+
+            {/* ── Collage ── order-2 on mobile, grid col-2 row-span-3 on desktop */}
             <motion.div
-              className="w-full flex flex-col"
-              initial="hidden" animate="show"
-              variants={{ show: { transition: { staggerChildren: 0.13 } } }}>
-
-              <motion.h1 variants={fadeUp}
-                className="font-semibold mb-6"
-                style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2.4rem, 4.2vw, 3.6rem)', lineHeight: 1.1 }}>
-                <span className="text-navy-900 block" style={{ marginBottom: '0.2em' }}>{content?.heroLine1 ?? 'We bring'}</span>
-
-                {/* Sliding amber phrase — absolutely positioned so its width never
-                    affects the grid column or button row layout.
-                    inset(0 -9999px 0 0) clips only top/bottom (slide animation)
-                    while extending the clipping region far to the right so even
-                    the longest phrase ("Labour Compliance") is never cut off. */}
-                <span style={{ position: 'relative', display: 'block', height: '1.1em', overflow: 'visible', clipPath: 'inset(0 -9999px 0 0)', marginBottom: '0.2em' }}>
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={phraseIndex}
-                      initial={{ y: '100%', opacity: 0 }}
-                      animate={{ y: '0%', opacity: 1 }}
-                      exit={{ y: '-100%', opacity: 0 }}
-                      transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                      className="font-semibold"
-                      style={{ position: 'absolute', left: 0, top: 0, color: '#fda102', whiteSpace: 'nowrap', fontSize: 'inherit', lineHeight: 1.1 }}>
-                      {phrases[phraseIndex]}
-                    </motion.span>
-                  </AnimatePresence>
-                </span>
-
-                <span className="text-navy-900 block">{content?.heroLine2 ?? 'to your growth'}</span>
-              </motion.h1>
-
-              <motion.p variants={fadeUp}
-                className="text-base leading-relaxed mb-8 max-w-md"
-                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#444444', textAlign: 'justify' }}>
-                {content?.heroDescription ?? 'Unlock the potential of your business with our comprehensive HR and compliance solutions. From recruitment to payroll management to compliance, we provide tailored services that ensure your business runs smoothly, efficiently, and in full compliance with all regulations.'}
-              </motion.p>
-
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-                {/* Button 1: Book a Consultation */}
-                <Link to="/contact"
-                  className="inline-flex items-center gap-2 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '1rem', letterSpacing: '0.02em', padding: '0.85rem 1.75rem', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111111'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
-                  {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={16} />
-                </Link>
-
-                {/* Button 2: Compliance Solutions → /services */}
-                <Link to="/services"
-                  className="inline-flex items-center gap-2 rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '1rem', letterSpacing: '0.02em', padding: '0.85rem 1.75rem', backgroundColor: '#ffffff', color: '#111111', border: '2px solid #fda102' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#ffffff'; }}>
-                  {content?.ctaSecondaryText ?? 'Compliance Solutions'}
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* ── Right: Collage — photo-frame mosaic ──────────────
-                Layout (matches reference image):
-                ┌───────────────┬──────────────────────────┐
-                │               │  Card B (small portrait) │
-                │  Card A       ├──────────────────────────┤
-                │  (BIG tall    │  Card C (big landscape/  │
-                │   portrait)   │   portrait)              │
-                └───────────────┴──────────────────────────┘
-                Two flex-columns side by side; left is one full-height card,
-                right has two stacked cards.
-            ──────────────────────────────────────────────── */}
-            <motion.div
-              className="w-full mt-10 lg:mt-0"
+              className="w-full order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-3 my-5 lg:my-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}>
-
-              <div className="flex gap-3 h-[360px] lg:h-[620px]" style={{ paddingLeft: '2%' }}>
-
-                {/* ── Left column: one big tall portrait — VIDEO ── */}
+              transition={{ duration: 0.5, delay: 0.15 }}>
+              <div className="flex gap-2.5 h-[280px] sm:h-[340px] lg:h-[620px]">
+                {/* Left column: tall video */}
                 <div className="flex flex-col" style={{ width: '58%' }}>
-                  <motion.div
-                    initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.55, delay: 0.3 }}
-                    className="rounded-2xl overflow-hidden shadow-sm"
-                    style={{ flex: 1 }}>
-                    <video
-                      src={heroVideo}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      aria-hidden="true"
-                      className="w-full h-full object-cover"
-                      style={{ display: 'block' }}
-                    />
-                  </motion.div>
+                  <div className="rounded-xl lg:rounded-2xl overflow-hidden shadow-sm" style={{ flex: 1 }}>
+                    <video src={heroVideo} autoPlay loop muted playsInline aria-hidden="true"
+                      className="w-full h-full object-cover" style={{ display: 'block' }} />
+                  </div>
                 </div>
-
-                {/* ── Right column: small card on top + big card on bottom ── */}
-                <div className="flex flex-col gap-3" style={{ width: '42%' }}>
-
-                  {/* Card B — smaller portrait/square on top — IMAGE */}
-                  <motion.div
-                    initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.55, delay: 0.4 }}
-                    className="rounded-2xl overflow-hidden shadow-sm"
-                    style={{ flex: '0 0 42%' }}>
+                {/* Right column: two stacked images */}
+                <div className="flex flex-col gap-2.5" style={{ width: '42%' }}>
+                  <div className="rounded-xl lg:rounded-2xl overflow-hidden shadow-sm" style={{ flex: '0 0 42%' }}>
                     <img src={heroImage1} alt="" aria-hidden="true" className="w-full h-full object-cover" />
-                  </motion.div>
-
-                  {/* Card C — big card on bottom — IMAGE */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.55, delay: 0.5 }}
-                    className="rounded-2xl overflow-hidden shadow-sm"
-                    style={{ flex: 1 }}>
+                  </div>
+                  <div className="rounded-xl lg:rounded-2xl overflow-hidden shadow-sm" style={{ flex: 1 }}>
                     <img src={heroImage2} alt="" aria-hidden="true" className="w-full h-full object-cover" />
-                  </motion.div>
-
+                  </div>
                 </div>
               </div>
+            </motion.div>
+
+            {/* ── Paragraph ── order-3 on mobile, grid col-1 row-2 on desktop */}
+            <motion.p
+              className="order-3 lg:order-none text-sm lg:text-base leading-relaxed mb-4 lg:mb-8"
+              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#444444', textAlign: 'justify' }}>
+              {content?.heroDescription ?? 'Unlock the potential of your business with our comprehensive HR and compliance solutions. From recruitment to payroll management to compliance, we provide tailored services that ensure your business runs smoothly, efficiently, and in full compliance with all regulations.'}
+            </motion.p>
+
+            {/* ── Buttons ── order-4 on mobile, grid col-1 row-3 on desktop */}
+            <motion.div
+              className="order-4 lg:order-none flex flex-nowrap gap-3 items-center"
+              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.2 }}>
+              <Link to="/contact"
+                className="inline-flex items-center gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap"
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 'clamp(0.72rem, 2.5vw, 1rem)', letterSpacing: '0.02em', padding: 'clamp(0.55rem,2vw,0.85rem) clamp(0.9rem,3vw,1.75rem)', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111111'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
+                {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={14} />
+              </Link>
+              <Link to="/services"
+                className="inline-flex items-center gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap"
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 'clamp(0.72rem, 2.5vw, 1rem)', letterSpacing: '0.02em', padding: 'clamp(0.55rem,2vw,0.85rem) clamp(0.9rem,3vw,1.75rem)', backgroundColor: '#ffffff', color: '#111111', border: '2px solid #fda102' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#ffffff'; }}>
+                {content?.ctaSecondaryText ?? 'Compliance Solutions'}
+              </Link>
             </motion.div>
 
           </div>
@@ -301,48 +256,48 @@ const Home = () => {
       </section>
 
       {/* ── One Stop Consultancy Partner ─────────────────── */}
-      <section className="py-16 overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
-        <div className="w-full px-6 lg:px-10">
+      <section className="py-10 lg:py-16 overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
+        <div className="w-full px-4 lg:px-10">
 
           {/* Section header */}
-          <motion.div className="text-center mb-12"
+          <motion.div className="text-center mb-8 lg:mb-12"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <p className="font-bold text-sm uppercase tracking-widest mb-3"
-              style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.7)' }}>
+            <p className="font-bold uppercase mb-2 lg:mb-3 whitespace-nowrap overflow-hidden text-ellipsis"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.6rem, 2.5vw, 0.875rem)', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.7)' }}>
               {content?.oneStopLabel ?? 'Your Complete HR & Compliance Partner'}
             </p>
             <h2 className="font-bold text-white leading-[1.15]"
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)' }}>
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.3rem, 2.8vw, 2.4rem)' }}>
               {content?.oneStopTitle ?? 'One Stop Consultancy Partner'}
             </h2>
           </motion.div>
 
-          {/* 6-card horizontal grid — responsive */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {/* 6-card grid — 2 cols mobile, 3 cols tablet, 6 cols desktop */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
             {oneStopCards.map((item, i) => (
               <motion.div key={i}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="flex flex-col items-center text-center rounded-2xl p-5 lg:p-10 xl:p-12"
+                className="flex flex-col items-center text-center rounded-xl lg:rounded-2xl p-3 lg:p-10 xl:p-12"
                 style={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb' }}>
 
                 {/* Lottie animation */}
                 <LottieAnim
                   animationData={item.anim}
-                  className="w-20 h-20 lg:w-36 lg:h-36 xl:w-40 xl:h-40 mb-4 lg:mb-6 shrink-0"
+                  className="w-16 h-16 lg:w-36 lg:h-36 xl:w-40 xl:h-40 mb-2 lg:mb-6 shrink-0"
                 />
 
                 {/* Title */}
-                <h3 className="font-semibold text-gray-900 mb-2"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: '1rem', lineHeight: 1.3 }}>
+                <h3 className="font-semibold text-gray-900 mb-1 lg:mb-2"
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.68rem, 2vw, 1rem)', lineHeight: 1.3 }}>
                   {item.title}
                 </h3>
 
                 {/* Desc */}
-                <p style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.83rem', fontWeight: 400, color: '#6b7280', lineHeight: 1.5 }}>
+                <p style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.6rem, 1.8vw, 0.83rem)', fontWeight: 400, color: '#6b7280', lineHeight: 1.4 }}>
                   {item.desc}
                 </p>
 
