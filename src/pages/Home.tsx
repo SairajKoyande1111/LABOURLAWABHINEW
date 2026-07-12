@@ -232,18 +232,18 @@ const Home = () => {
 
             {/* ── Buttons ── order-4 on mobile, grid col-1 row-3 on desktop */}
             <motion.div
-              className="order-4 lg:order-none flex flex-nowrap gap-3 items-center justify-center lg:justify-start"
+              className="order-4 lg:order-none flex flex-nowrap gap-2 lg:gap-3 items-center justify-center lg:justify-start w-full"
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2 }}>
               <Link to="/contact"
-                className="inline-flex items-center gap-1 lg:gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] text-[0.72rem] lg:text-[1rem] px-4 py-2 lg:px-7 lg:py-3.5"
+                className="inline-flex items-center justify-center gap-1 lg:gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap text-[0.78rem] lg:text-[1rem] px-3.5 py-2.5 lg:px-7 lg:py-3.5 flex-1 lg:flex-initial"
                 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, letterSpacing: '0.01em', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111111'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
-                {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={12} />
+                {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={13} />
               </Link>
               <Link to="/services"
-                className="inline-flex items-center gap-1 lg:gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02] text-[0.72rem] lg:text-[1rem] px-4 py-2 lg:px-7 lg:py-3.5"
+                className="inline-flex items-center justify-center gap-1 lg:gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap text-[0.78rem] lg:text-[1rem] px-3.5 py-2.5 lg:px-7 lg:py-3.5 flex-1 lg:flex-initial"
                 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, letterSpacing: '0.01em', backgroundColor: '#ffffff', color: '#111111', border: '2px solid #fda102' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#ffffff'; }}>
@@ -264,7 +264,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="font-bold uppercase mb-2 lg:mb-3 whitespace-nowrap overflow-hidden text-ellipsis"
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.6rem, 2.5vw, 0.875rem)', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.7)' }}>
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.72rem, 2.5vw, 0.875rem)', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.7)' }}>
               {content?.oneStopLabel ?? 'Your Complete HR & Compliance Partner'}
             </p>
             <h2 className="font-bold text-white leading-[1.15]"
@@ -287,17 +287,17 @@ const Home = () => {
                 {/* Lottie animation */}
                 <LottieAnim
                   animationData={item.anim}
-                  className="w-16 h-16 lg:w-36 lg:h-36 xl:w-40 xl:h-40 mb-2 lg:mb-6 shrink-0"
+                  className="w-20 h-20 lg:w-36 lg:h-36 xl:w-40 xl:h-40 mb-2.5 lg:mb-6 shrink-0"
                 />
 
                 {/* Title */}
                 <h3 className="font-semibold text-gray-900 mb-1 lg:mb-2"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.68rem, 2vw, 1rem)', lineHeight: 1.3 }}>
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.82rem, 2.4vw, 1rem)', lineHeight: 1.3 }}>
                   {item.title}
                 </h3>
 
                 {/* Desc */}
-                <p style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.6rem, 1.8vw, 0.83rem)', fontWeight: 400, color: '#6b7280', lineHeight: 1.4 }}>
+                <p style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.72rem, 2vw, 0.83rem)', fontWeight: 400, color: '#6b7280', lineHeight: 1.4 }}>
                   {item.desc}
                 </p>
 
@@ -412,8 +412,8 @@ const Home = () => {
             </p>
           </div>
 
-          {/* 8-card grid — 1 col mobile, 4 cols desktop */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-6">
+          {/* 8-card grid — 2 cols mobile, 4 cols desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
             {previewServices.map((service, i) => (
               <motion.div key={service._id}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -421,22 +421,22 @@ const Home = () => {
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group overflow-hidden flex flex-col">
 
                 {/* Image */}
-                <div className="h-32 lg:h-40 overflow-hidden relative shrink-0">
+                <div className="h-24 lg:h-40 overflow-hidden relative shrink-0">
                   <img src={service.img} alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
 
                 {/* Body */}
-                <div className="p-3 lg:p-5 flex-grow flex flex-col">
-                  <h3 className="font-semibold text-navy-900 mb-2 leading-snug text-[0.82rem] lg:text-[0.9rem]"
+                <div className="p-2.5 lg:p-5 flex-grow flex flex-col">
+                  <h3 className="font-semibold text-navy-900 mb-2 leading-snug text-[0.72rem] lg:text-[0.9rem]"
                     style={{ fontFamily: 'Poppins, sans-serif' }}>{service.title}</h3>
                   <p className="text-gray-500 text-xs leading-relaxed flex-grow mb-3 hidden lg:block"
                     style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}>{service.desc}</p>
                   <Link to={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1 text-xs font-semibold mt-auto group-hover:gap-2 transition-all"
+                    className="inline-flex items-center gap-1 text-[0.68rem] lg:text-xs font-semibold mt-auto group-hover:gap-2 transition-all"
                     style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>
-                    Explore Details <ChevronRight size={13} />
+                    Explore Details <ChevronRight size={12} />
                   </Link>
                 </div>
 
@@ -490,11 +490,11 @@ const Home = () => {
             className="flex justify-center gap-8 md:gap-16 mb-8 px-6 flex-wrap">
             {stats.map(({ target, decimals, suffix, label }) => (
               <div key={label} className="text-center">
-                <p className="font-bold text-3xl mb-1"
+                <p className="font-bold text-xl lg:text-3xl mb-1"
                   style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102', WebkitTextFillColor: '#fda102', background: 'none' }}>
                   <StatCounter target={target} decimals={decimals} suffix={suffix} />
                 </p>
-                <p className="text-xs uppercase tracking-widest"
+                <p className="text-[9px] lg:text-xs uppercase tracking-widest"
                   style={{ fontFamily: 'Poppins, sans-serif', color: '#ffffff' }}>{label}</p>
               </div>
             ))}
@@ -593,12 +593,12 @@ const Home = () => {
       {/* ── Recent Insights ───────────────────────────────── */}
       <section className="py-10 lg:py-20 bg-[#f8fafb]">
         <div className="max-w-7xl mx-auto px-4 lg:px-10">
-          <div className="flex justify-between items-end mb-12">
+          <div className="flex justify-between items-end mb-8 lg:mb-12">
             <div>
-              <p className="font-bold tracking-[0.18em] uppercase text-xs mb-2"
+              <p className="font-bold tracking-[0.12em] lg:tracking-[0.18em] uppercase text-[10px] lg:text-xs mb-1.5 lg:mb-2 whitespace-nowrap"
                 style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Latest Insights</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-navy-900"
-                style={{ fontFamily: 'Poppins, sans-serif' }}>Stay informed with expert guidance</h2>
+              <h2 className="font-bold text-navy-900 whitespace-nowrap"
+                style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.05rem, 4vw, 2.25rem)' }}>Stay informed with expert guidance</h2>
             </div>
             <Link to="/resources"
               className="hidden md:flex items-center gap-2 text-navy-900 font-semibold text-sm hover:text-teal-600 transition-colors border-b border-navy-900 hover:border-teal-600 pb-0.5">
@@ -659,7 +659,7 @@ const Home = () => {
             <div className="flex justify-center md:justify-start">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-white text-sm lg:text-base shadow-lg transition-all duration-200"
+                className="inline-flex items-center gap-1.5 lg:gap-2 px-5 py-2.5 lg:px-8 lg:py-3.5 rounded-full font-bold text-white text-xs lg:text-base shadow-lg transition-all duration-200"
                 style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102' }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.backgroundColor = '#e8920a';
@@ -671,21 +671,21 @@ const Home = () => {
                   (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
                   (e.currentTarget as HTMLElement).style.boxShadow = '';
                 }}>
-                Schedule Consultation <ArrowRight size={17} />
+                Schedule Consultation <ArrowRight size={15} />
               </Link>
             </div>
           </motion.div>
 
-          {/* Right — image, flush to edge */}
+          {/* Right — image, flush to edge; full, uncropped on mobile */}
           <motion.div
             initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.1 }}
-            className="flex-1 min-h-[320px] md:min-h-0 relative">
+            className="flex-1 md:min-h-0 relative flex items-center bg-black/5">
             <img
               src="/assets/cta-gavel.png"
               alt="Labour law compliance gavel"
-              className="w-full h-full object-cover object-center"
-              style={{ display: 'block', minHeight: '320px', maxHeight: '480px' }}
+              className="w-full h-auto object-contain md:h-full md:object-cover object-center md:min-h-[320px] md:max-h-[480px]"
+              style={{ display: 'block' }}
             />
           </motion.div>
 

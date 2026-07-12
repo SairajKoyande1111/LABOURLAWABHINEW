@@ -341,8 +341,9 @@ const Layout = () => {
               </ul>
             </motion.div>
 
-            {/* ── Col 4: Newsletter ── */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            {/* ── Col 4: Newsletter — full width on mobile ── */}
+            <motion.div className="col-span-2 lg:col-span-1"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}>
               <h3 className="font-bold text-xs lg:text-sm mb-4 lg:mb-6 uppercase tracking-wider"
                 style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Newsletter</h3>
