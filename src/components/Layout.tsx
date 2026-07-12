@@ -78,12 +78,12 @@ const Layout = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[76px] flex justify-between items-center">
 
           {/* Logo */}
-          <Link to="/" className="shrink-0 flex items-center">
+          <Link to="/" className="shrink-0 flex items-stretch self-stretch">
             <img
               src="/assets/maru-logo-new.png"
               alt="Maru Labour Laws — Consultants & Practitioners"
-              className="w-auto object-contain"
-              style={{ height: '70px', maxHeight: '70px' }}
+              className="w-auto object-cover"
+              style={{ height: '76px' }}
             />
           </Link>
 
