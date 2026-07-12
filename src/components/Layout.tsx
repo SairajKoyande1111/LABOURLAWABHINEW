@@ -77,12 +77,13 @@ const Layout = () => {
       <header className={`sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-xl' : 'shadow-lg'}`} style={{ backgroundColor: '#172632' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[76px] flex justify-between items-center">
 
-          {/* Logo — full header height, no gaps */}
+          {/* Logo */}
           <Link to="/" className="self-stretch flex items-stretch -ml-6 lg:-ml-10">
             <img
               src="/assets/maru-logo-new.png"
               alt="Maru Labour Laws — Consultants & Practitioners"
-              className="h-full w-auto object-cover block"
+              className="w-auto object-cover block"
+              style={{ height: '68px', marginTop: '4px', marginBottom: '4px' }}
             />
           </Link>
 
