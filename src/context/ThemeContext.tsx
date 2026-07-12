@@ -1,35 +1,23 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 
-export type Theme = 'red' | 'blue';
+export type Theme = 'blue';
 
 interface ThemeContextValue {
   theme: Theme;
-  toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  theme: 'red',
-  toggleTheme: () => {},
+  theme: 'blue',
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    try {
-      return (localStorage.getItem('mcs-theme') as Theme) || 'red';
-    } catch {
-      return 'red';
-    }
-  });
-
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    try { localStorage.setItem('mcs-theme', theme); } catch { /* ignore */ }
-  }, [theme]);
-
-  const toggleTheme = () => setTheme(t => t === 'red' ? 'blue' : 'red');
+    document.documentElement.setAttribute('data-theme', 'blue');
+    try { localStorage.setItem('mcs-theme', 'blue'); } catch { /* ignore */ }
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: 'blue' }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -8,7 +8,6 @@ import iconMail from '@assets/communication_1783488559887.png';
 import { api } from '../lib/api';
 import { useLiveContent } from '../hooks/useLiveContent';
 import type { ServiceContent } from '../types/content';
-import { useTheme } from '../context/ThemeContext';
 
 const socialLinks = [
   { href: 'https://wa.me/919876543210',               img: '/assets/social-whatsapp.png',  label: 'WhatsApp'  },
@@ -25,7 +24,6 @@ const Layout = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [services, setServices] = useState<ServiceContent[]>([]);
   const location = useLocation();
-  const { theme, toggleTheme } = useTheme();
 
   const fetchServices = () => {
     api.get<ServiceContent[]>('/services').then(setServices).catch(() => {});
@@ -150,32 +148,6 @@ const Layout = () => {
 
           <div className="hidden lg:flex items-center gap-3">
 
-            {/* Theme toggle */}
-            <button
-              onClick={toggleTheme}
-              title={theme === 'red' ? 'Switch to Blue & Gold theme' : 'Switch to Red & Yellow theme'}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full border-2 transition-all duration-300 text-xs font-bold"
-              style={{
-                fontFamily: 'Poppins, sans-serif',
-                borderColor: '#fda102',
-                backgroundColor: 'rgba(255,255,255,0.08)',
-                color: '#ffffff',
-              }}
-            >
-              <span
-                className="relative inline-flex items-center rounded-full transition-colors duration-300"
-                style={{ width: 36, height: 20, backgroundColor: '#fda102' }}
-              >
-                <span
-                  className="absolute rounded-full bg-white shadow transition-all duration-300"
-                  style={{ width: 14, height: 14, left: theme === 'blue' ? 18 : 3, top: 3 }}
-                />
-              </span>
-              <span style={{ letterSpacing: '0.04em' }}>
-                {theme === 'red' ? '🔴 Red' : '🔵 Blue'}
-              </span>
-            </button>
-
             <Link to="/contact"
               className="px-7 py-2.5 rounded-full font-bold text-[0.9rem] transition-all duration-200 shadow-sm whitespace-nowrap"
               style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102', color: '#1c3447', border: '2px solid #fda102' }}
@@ -187,18 +159,6 @@ const Layout = () => {
 
           {/* Mobile Toggle */}
           <div className="lg:hidden flex items-center gap-2">
-            {/* Mobile theme toggle — compact */}
-            <button
-              onClick={toggleTheme}
-              title="Toggle theme"
-              className="relative flex items-center rounded-full border-2 transition-all duration-300"
-              style={{ width: 40, height: 22, borderColor: '#fda102', backgroundColor: '#fda102' }}
-            >
-              <span
-                className="absolute rounded-full bg-white shadow transition-all duration-300"
-                style={{ width: 14, height: 14, left: theme === 'blue' ? 21 : 3, top: 2 }}
-              />
-            </button>
             <button className="p-2 rounded-lg transition-colors" style={{ color: '#ffffff' }}
               onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menu">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

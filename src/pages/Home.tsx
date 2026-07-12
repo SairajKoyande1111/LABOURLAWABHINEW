@@ -211,7 +211,7 @@ const Home = () => {
                 {content?.heroDescription ?? 'Unlock the potential of your business with our comprehensive HR and compliance solutions. From recruitment to payroll management to compliance, we provide tailored services that ensure your business runs smoothly, efficiently, and in full compliance with all regulations.'}
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex flex-nowrap gap-4 items-center">
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
                 {/* Button 1: Book a Consultation */}
                 <Link to="/contact"
                   className="inline-flex items-center gap-2 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap"
@@ -249,7 +249,7 @@ const Home = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}>
 
-              <div className="flex gap-3" style={{ height: '620px', paddingLeft: '2%' }}>
+              <div className="flex gap-3 h-[360px] lg:h-[620px]" style={{ paddingLeft: '2%' }}>
 
                 {/* ── Left column: one big tall portrait — VIDEO ── */}
                 <div className="flex flex-col" style={{ width: '58%' }}>
@@ -318,21 +318,21 @@ const Home = () => {
             </h2>
           </motion.div>
 
-          {/* 6-card horizontal grid — always single row */}
-          <div className="grid grid-cols-6 gap-4">
+          {/* 6-card horizontal grid — responsive */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {oneStopCards.map((item, i) => (
               <motion.div key={i}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="flex flex-col items-center text-center rounded-2xl p-10 lg:p-12"
+                className="flex flex-col items-center text-center rounded-2xl p-5 lg:p-10 xl:p-12"
                 style={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb' }}>
 
-                {/* Lottie animation — larger */}
+                {/* Lottie animation */}
                 <LottieAnim
                   animationData={item.anim}
-                  className="w-36 h-36 lg:w-40 lg:h-40 mb-6 shrink-0"
+                  className="w-20 h-20 lg:w-36 lg:h-36 xl:w-40 xl:h-40 mb-4 lg:mb-6 shrink-0"
                 />
 
                 {/* Title */}
@@ -365,7 +365,7 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}>
-              <div className="flex gap-3 h-full">
+              <div className="flex gap-3 h-72 lg:h-full">
 
                 {/* Left column: tall video */}
                 <div className="flex flex-col" style={{ width: '58%' }}>
@@ -447,8 +447,8 @@ const Home = () => {
           <div className="text-center mb-12 mx-auto">
             <p className="font-bold text-base uppercase tracking-wider mb-3"
               style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>{content?.servicesPreviewLabel ?? 'Our Expertise'}</p>
-            <h2 className="font-bold text-navy-900 mb-3 whitespace-nowrap"
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)' }}>
+            <h2 className="font-bold text-navy-900 mb-3"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.4rem, 2.8vw, 2.2rem)' }}>
               {content?.servicesPreviewTitle ?? 'Comprehensive Compliance Solutions'}
             </h2>
             <p className="text-gray-500 text-sm leading-relaxed"
