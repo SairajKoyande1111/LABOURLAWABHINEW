@@ -158,7 +158,7 @@ const Home = () => {
     <div className="w-full">
 
       {/* ── Hero ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white py-16 lg:py-0 lg:min-h-[700px] lg:flex lg:items-center">
+      <section className="relative overflow-hidden bg-white pt-4 pb-8 lg:py-0 lg:min-h-[700px] lg:flex lg:items-center">
         {/* Subtle dot pattern background */}
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
@@ -176,7 +176,7 @@ const Home = () => {
               className="font-semibold order-1 lg:order-none mb-4 lg:mb-5"
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.65rem, 4.2vw, 3.6rem)', lineHeight: 1.15 }}>
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2rem, 4.2vw, 3.6rem)', lineHeight: 1.15 }}>
               <span className="text-navy-900 block" style={{ marginBottom: '0.2em' }}>{content?.heroLine1 ?? 'We bring'}</span>
               <span style={{ position: 'relative', display: 'block', height: '1.15em', overflow: 'visible', clipPath: 'inset(0 -9999px 0 0)', marginBottom: '0.2em' }}>
                 <AnimatePresence mode="wait">
@@ -232,19 +232,19 @@ const Home = () => {
 
             {/* ── Buttons ── order-4 on mobile, grid col-1 row-3 on desktop */}
             <motion.div
-              className="order-4 lg:order-none flex flex-nowrap gap-3 items-center"
+              className="order-4 lg:order-none flex flex-wrap gap-2 lg:gap-3 items-center w-full"
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2 }}>
               <Link to="/contact"
-                className="inline-flex items-center gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap"
-                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 'clamp(0.72rem, 2.5vw, 1rem)', letterSpacing: '0.02em', padding: 'clamp(0.55rem,2vw,0.85rem) clamp(0.9rem,3vw,1.75rem)', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
+                className="inline-flex items-center gap-1.5 text-white rounded-full transition-all shadow-lg hover:scale-[1.02]"
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 'clamp(0.68rem, 2.2vw, 1rem)', letterSpacing: '0.01em', padding: 'clamp(0.5rem,1.8vw,0.85rem) clamp(0.8rem,2.5vw,1.75rem)', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111111'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
-                {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={14} />
+                {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={13} />
               </Link>
               <Link to="/services"
-                className="inline-flex items-center gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap"
-                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 'clamp(0.72rem, 2.5vw, 1rem)', letterSpacing: '0.02em', padding: 'clamp(0.55rem,2vw,0.85rem) clamp(0.9rem,3vw,1.75rem)', backgroundColor: '#ffffff', color: '#111111', border: '2px solid #fda102' }}
+                className="inline-flex items-center gap-1.5 rounded-full transition-all shadow-lg hover:scale-[1.02]"
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 'clamp(0.68rem, 2.2vw, 1rem)', letterSpacing: '0.01em', padding: 'clamp(0.5rem,1.8vw,0.85rem) clamp(0.8rem,2.5vw,1.75rem)', backgroundColor: '#ffffff', color: '#111111', border: '2px solid #fda102' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#ffffff'; }}>
                 {content?.ctaSecondaryText ?? 'Compliance Solutions'}
@@ -309,9 +309,9 @@ const Home = () => {
       </section>
 
       {/* ── Why Labour Law ────────────────────────────────── */}
-      <section className="py-16" style={{ backgroundColor: '#f9f5f2' }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-stretch">
+      <section className="py-8 lg:py-16" style={{ backgroundColor: '#f9f5f2' }}>
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-stretch">
 
             {/* ── Left: collage (same as hero) ── */}
             <motion.div
@@ -320,7 +320,7 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}>
-              <div className="flex gap-3 h-72 lg:h-full">
+              <div className="flex gap-2.5 h-[280px] sm:h-[340px] lg:h-full">
 
                 {/* Left column: tall video */}
                 <div className="flex flex-col" style={{ width: '58%' }}>
@@ -354,14 +354,14 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}>
-              <div className="bg-white rounded-2xl pt-5 pb-8 px-8 lg:pt-6 lg:pb-12 lg:px-12 shadow-xl">
+              <div className="bg-white rounded-2xl pt-4 pb-6 px-4 lg:pt-6 lg:pb-12 lg:px-12 shadow-xl">
 
-                <img src={maruLogo} alt="Maru Consultancy Services" className="h-20 w-auto object-contain mb-5 mx-auto block" />
-                <h2 className="font-bold leading-[1.2] mb-5"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.4rem, 2.4vw, 2rem)', color: '#111111' }}>
+                <img src={maruLogo} alt="Maru Consultancy Services" className="h-14 lg:h-20 w-auto object-contain mb-3 lg:mb-5 mx-auto block" />
+                <h2 className="font-bold leading-[1.2] mb-3 lg:mb-5"
+                  style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.05rem, 2.4vw, 2rem)', color: '#111111' }}>
                   {content?.whyUsHeading ?? "Expertise that protects your business & empowers your workforce."}
                 </h2>
-                <p className="leading-relaxed text-sm mb-8"
+                <p className="leading-relaxed text-xs lg:text-sm mb-5 lg:mb-8 text-justify"
                   style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#555555' }}>
                   {content?.whyUsBody ?? "We don't just file paperwork — we architect robust compliance frameworks. With India's labour law landscape shifting under the New Codes, you need a partner who anticipates regulatory changes before they impact your bottom line."}
                 </p>
@@ -395,25 +395,25 @@ const Home = () => {
       </section>
 
       {/* ── Services Preview ──────────────────────────────── */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <section className="py-10 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
 
           {/* Header */}
-          <div className="text-center mb-12 mx-auto">
-            <p className="font-bold text-base uppercase tracking-wider mb-3"
+          <div className="text-center mb-8 lg:mb-12 mx-auto">
+            <p className="font-bold text-sm lg:text-base uppercase tracking-wider mb-2 lg:mb-3"
               style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>{content?.servicesPreviewLabel ?? 'Our Expertise'}</p>
-            <h2 className="font-bold text-navy-900 mb-3"
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.4rem, 2.8vw, 2.2rem)' }}>
+            <h2 className="font-bold text-navy-900 mb-2 lg:mb-3"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.2rem, 2.8vw, 2.2rem)' }}>
               {content?.servicesPreviewTitle ?? 'Comprehensive Compliance Solutions'}
             </h2>
-            <p className="text-gray-500 text-sm leading-relaxed"
+            <p className="text-gray-500 text-xs lg:text-sm leading-relaxed"
               style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}>
               {content?.servicesPreviewDescription ?? 'Strategic guidance across the entire spectrum of Indian labour laws and human resource management.'}
             </p>
           </div>
 
-          {/* 8-card grid — 4 columns × 2 rows */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* 8-card grid — 2 cols mobile, 4 cols desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
             {previewServices.map((service, i) => (
               <motion.div key={service._id}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -457,7 +457,7 @@ const Home = () => {
       </section>
 
       {/* ── Testimonials ──────────────────────────────────── */}
-      <section className="py-10 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
+      <section className="py-8 lg:py-10 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
 
         {/* Decorative ambient glows */}
         <div className="absolute inset-0 pointer-events-none">
@@ -479,8 +479,8 @@ const Home = () => {
             <img src={customerReviewIcon} alt="" aria-hidden="true"
               className="mx-auto mb-4"
               style={{ width: '56px', height: '56px', filter: 'brightness(0) saturate(100%) invert(68%) sepia(86%) saturate(607%) hue-rotate(1deg) brightness(101%) contrast(106%)' }} />
-            <h2 className="font-bold text-white mb-0"
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.9rem, 3.2vw, 2.8rem)' }}>
+            <h2 className="font-bold text-white mb-0 whitespace-nowrap"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.15rem, 3.2vw, 2.8rem)' }}>
               {content?.testimonialsHeading ?? 'Trusted by Industry Leaders'}
             </h2>
           </motion.div>
@@ -508,46 +508,46 @@ const Home = () => {
             <div className="animate-marquee-testimonials pb-2">
               {[...testimonials, ...testimonials].map((test, i) => (
                 <div key={i}
-                  className="shrink-0 mx-4 rounded-2xl flex flex-col relative overflow-hidden bg-white"
+                  className="shrink-0 mx-2.5 rounded-xl flex flex-col relative overflow-hidden bg-white"
                   style={{
-                    width: '360px',
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+                    width: '260px',
+                    boxShadow: '0 6px 24px rgba(0,0,0,0.15)',
                   }}>
                   {/* Solid amber top accent bar */}
-                  <div className="h-[4px] w-full"
+                  <div className="h-[3px] w-full"
                     style={{ backgroundColor: '#fda102' }} />
 
-                  <div className="p-7 flex flex-col flex-grow">
+                  <div className="p-4 flex flex-col flex-grow">
                     {/* Stars */}
-                    <div className="flex gap-1 mb-4">
+                    <div className="flex gap-0.5 mb-2.5">
                       {[...Array(5)].map((_, j) => (
-                        <Star key={j} size={14} fill="#fda102" color="#fda102" />
+                        <Star key={j} size={11} fill="#fda102" color="#fda102" />
                       ))}
                     </div>
 
                     {/* Quote text */}
-                    <p className="text-sm leading-relaxed mb-7 flex-grow"
+                    <p className="text-xs leading-relaxed mb-4 flex-grow"
                       style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#333333' }}>
                       {test.text}
                     </p>
 
                     {/* Divider */}
-                    <div className="h-px mb-5" style={{ backgroundColor: '#f0f0f0' }} />
+                    <div className="h-px mb-3" style={{ backgroundColor: '#f0f0f0' }} />
 
                     {/* Author row */}
-                    <div className="flex items-center gap-3.5">
+                    <div className="flex items-center gap-2.5">
                       {/* Avatar with amber ring */}
-                      <div className="p-[2.5px] rounded-full shrink-0"
+                      <div className="p-[2px] rounded-full shrink-0"
                         style={{ background: 'linear-gradient(135deg, #fda102, var(--primary))' }}>
-                        <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
+                        <div className="w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs"
                           style={{ backgroundColor: '#fff7ed', color: 'var(--primary)', fontFamily: 'Poppins, sans-serif' }}>
                           {test.author.charAt(0)}
                         </div>
                       </div>
                       <div>
-                        <p className="font-semibold text-sm leading-none mb-1"
+                        <p className="font-semibold text-xs leading-none mb-0.5"
                           style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>{test.author}</p>
-                        <p className="text-xs"
+                        <p className="text-[10px]"
                           style={{ fontFamily: 'Poppins, sans-serif', color: '#888888' }}>{test.role}</p>
                       </div>
                     </div>
@@ -560,35 +560,31 @@ const Home = () => {
       </section>
 
       {/* ── Scrolling Client Logos — two rows, opposite directions ── */}
-      <section className="py-14 bg-white border-y border-gray-100 overflow-hidden">
-        {/* Section label */}
-        <p className="text-center font-semibold uppercase tracking-[0.25em] mb-10"
-          style={{ fontFamily: 'Poppins, sans-serif', fontSize: '11px', color: 'var(--primary)' }}>
+      <section className="py-8 lg:py-14 bg-white border-y border-gray-100 overflow-hidden">
+        {/* Section label — one line, tighter tracking */}
+        <p className="text-center font-semibold uppercase whitespace-nowrap mb-6 lg:mb-10"
+          style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(8px, 2vw, 11px)', letterSpacing: '0.12em', color: 'var(--primary)' }}>
           Serving 500+ Corporations Across India
         </p>
 
         {/* Row 1 — scrolls LEFT */}
-        <div className="overflow-hidden relative mb-8">
-          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        <div className="overflow-hidden relative mb-5 lg:mb-8">
           <div className="animate-marquee">
             {[...ALL_CLIENTS, ...ALL_CLIENTS].map(({ name, Logo }, i) => (
               <div key={i} title={name}
-                className="flex items-center justify-center mx-12 shrink-0 h-20 cursor-default opacity-75 hover:opacity-100 transition-opacity duration-300">
+                className="flex items-center justify-center mx-6 lg:mx-12 shrink-0 h-14 lg:h-20 cursor-default opacity-75 hover:opacity-100 transition-opacity duration-300">
                 <Logo />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Row 2 — scrolls RIGHT (reversed list for visual variety) */}
+        {/* Row 2 — scrolls RIGHT */}
         <div className="overflow-hidden relative">
-          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
           <div className="animate-marquee-reverse">
             {[...[...ALL_CLIENTS].reverse(), ...[...ALL_CLIENTS].reverse()].map(({ name, Logo }, i) => (
               <div key={i} title={name}
-                className="flex items-center justify-center mx-12 shrink-0 h-20 cursor-default opacity-75 hover:opacity-100 transition-opacity duration-300">
+                className="flex items-center justify-center mx-6 lg:mx-12 shrink-0 h-14 lg:h-20 cursor-default opacity-75 hover:opacity-100 transition-opacity duration-300">
                 <Logo />
               </div>
             ))}
@@ -597,8 +593,8 @@ const Home = () => {
       </section>
 
       {/* ── Recent Insights ───────────────────────────────── */}
-      <section className="py-20 bg-[#f8fafb]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <section className="py-10 lg:py-20 bg-[#f8fafb]">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="flex justify-between items-end mb-12">
             <div>
               <p className="font-bold tracking-[0.18em] uppercase text-xs mb-2"
@@ -651,21 +647,21 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.55 }}
-            className="md:w-1/2 flex flex-col justify-center px-10 py-16 lg:px-16 lg:py-20">
+            className="md:w-1/2 flex flex-col justify-center px-6 py-10 lg:px-16 lg:py-20">
             <h2
-              className="font-bold text-white mb-5 leading-tight"
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}>
+              className="font-bold text-white mb-3 lg:mb-5 leading-tight"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.3rem, 3.5vw, 3rem)' }}>
               Ready to secure your compliance?
             </h2>
             <p
-              className="text-base leading-relaxed mb-8"
+              className="text-xs lg:text-base leading-relaxed mb-5 lg:mb-8"
               style={{ fontFamily: 'Poppins, sans-serif', color: 'rgba(255,255,255,0.85)' }}>
               Schedule a detailed consultation with our legal experts to audit your current HR practices and identify risks before they become liabilities.
             </p>
             <div>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full font-bold text-white text-base shadow-lg transition-all duration-200"
+                className="inline-flex items-center gap-2 px-6 lg:px-9 py-3 lg:py-4 rounded-full font-bold text-white text-sm lg:text-base shadow-lg transition-all duration-200"
                 style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#fda102' }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.backgroundColor = '#e8920a';
