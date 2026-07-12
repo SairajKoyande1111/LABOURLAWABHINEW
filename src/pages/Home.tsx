@@ -421,7 +421,7 @@ const Home = () => {
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group overflow-hidden flex flex-col">
 
                 {/* Image */}
-                <div className="h-24 lg:h-40 overflow-hidden relative shrink-0">
+                <div className="h-36 lg:h-40 overflow-hidden relative shrink-0">
                   <img src={service.img} alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -487,14 +487,14 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex justify-center gap-8 md:gap-16 mb-8 px-6 flex-wrap">
+            className="flex justify-center flex-nowrap gap-2.5 sm:gap-8 md:gap-16 mb-8 px-3 sm:px-6">
             {stats.map(({ target, decimals, suffix, label }) => (
-              <div key={label} className="text-center">
-                <p className="font-bold text-xl lg:text-3xl mb-1"
+              <div key={label} className="text-center flex-1 sm:flex-initial min-w-0">
+                <p className="font-bold text-base sm:text-xl lg:text-3xl mb-1 whitespace-nowrap"
                   style={{ fontFamily: 'Poppins, sans-serif', color: '#fda102', WebkitTextFillColor: '#fda102', background: 'none' }}>
                   <StatCounter target={target} decimals={decimals} suffix={suffix} />
                 </p>
-                <p className="text-[9px] lg:text-xs uppercase tracking-widest"
+                <p className="text-[7px] sm:text-[9px] lg:text-xs uppercase tracking-widest leading-tight"
                   style={{ fontFamily: 'Poppins, sans-serif', color: '#ffffff' }}>{label}</p>
               </div>
             ))}
@@ -645,7 +645,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.55 }}
-            className="md:w-1/2 flex flex-col justify-center px-6 py-10 lg:px-16 lg:py-20">
+            className="md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 py-10 lg:px-16 lg:py-20">
             <h2
               className="font-bold text-white mb-3 lg:mb-5 leading-tight whitespace-nowrap overflow-hidden text-ellipsis"
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(0.92rem, 3.5vw, 3rem)' }}>
