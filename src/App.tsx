@@ -21,6 +21,8 @@ import AdminServices from './pages/admin/AdminServices';
 import AdminCareers from './pages/admin/AdminCareers';
 import AdminResources from './pages/admin/AdminResources';
 import AdminContact from './pages/admin/AdminContact';
+import AdminApplications from './pages/admin/AdminApplications';
+import AdminEnquiries from './pages/admin/AdminEnquiries';
 import { Navigate } from 'react-router-dom';
 
 function App() {
@@ -60,6 +62,8 @@ function App() {
                 <Route path="careers" element={<AdminCareers />} />
                 <Route path="resources" element={<AdminResources />} />
                 <Route path="contact" element={<AdminContact />} />
+                <Route path="applications" element={<AdminApplications />} />
+                <Route path="enquiries" element={<AdminEnquiries />} />
               </Route>
             </Routes>
           </AdminAuthProvider>

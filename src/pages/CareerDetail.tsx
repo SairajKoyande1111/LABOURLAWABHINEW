@@ -17,6 +17,8 @@ const CareerDetail = () => {
   const [form, setForm] = useState({ name: '', phone: '', email: '', coverNote: '' });
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [dragOver, setDragOver] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -70,10 +72,38 @@ const CareerDetail = () => {
     if (allowed.includes(file.type)) setResumeFile(file);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.email || !resumeFile) return;
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      const fd = new FormData();
+      fd.append('name', form.name);
+      fd.append('email', form.email);
+      fd.append('phone', form.phone);
+      fd.append('coverNote', form.coverNote);
+      fd.append('resume', resumeFile, resumeFile.name);
+      if (job?._id) fd.append('careerId', job._id);
+      if (job?.title) fd.append('careerTitle', job.title);
+      if (job?.slug) fd.append('careerSlug', job.slug);
+      if (job?.category) fd.append('careerCategory', job.category);
+
+      const res = await fetch('/api/applications', {
+        method: 'POST',
+        credentials: 'include',
+        body: fd,
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || `Submission failed (${res.status})`);
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Submission failed. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -367,10 +397,15 @@ const CareerDetail = () => {
                       />
                     </div>
 
-                    <button type="submit"
-                      className="w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 shadow-md transition-all hover:opacity-90 hover:shadow-lg"
+                    {submitError && (
+                      <p className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-2.5" style={{ fontFamily: PP }}>
+                        {submitError}
+                      </p>
+                    )}
+                    <button type="submit" disabled={submitting}
+                      className="w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 shadow-md transition-all hover:opacity-90 hover:shadow-lg disabled:opacity-60"
                       style={{ fontFamily: PP, backgroundColor: '#a83a00', fontSize: '0.97rem' }}>
-                      <Send size={16} /> Submit Application
+                      <Send size={16} /> {submitting ? 'Submitting…' : 'Submit Application'}
                     </button>
                   </form>
                 )}

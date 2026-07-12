@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../lib/api';
@@ -108,7 +108,31 @@ const Contact = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      const res = await fetch('/api/enquiries', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || `Submission failed (${res.status})`);
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to send. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const inputProps = (name: string) => ({
     style: { ...FIELD_STYLE, borderColor: focused === name ? '#a83a00' : '#e5e7eb' },
@@ -262,10 +286,15 @@ const Contact = () => {
                         style={{ ...FIELD_STYLE, borderColor: focused === 'message' ? '#a83a00' : '#e5e7eb', resize: 'none' }}
                         onFocus={() => setFocused('message')} onBlur={() => setFocused('')} />
                     </div>
-                    <button type="submit"
-                      className="w-full py-4 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90"
+                    {submitError && (
+                      <p className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-2.5" style={{ fontFamily: PP }}>
+                        {submitError}
+                      </p>
+                    )}
+                    <button type="submit" disabled={submitting}
+                      className="w-full py-4 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90 disabled:opacity-60"
                       style={{ fontFamily: PP, backgroundColor: '#a83a00', color: '#fff' }}>
-                      Send Message <ArrowRight size={16} />
+                      {submitting ? 'Sending…' : <><span>Send Message</span><ArrowRight size={16} /></>}
                     </button>
                   </form>
                 )}
