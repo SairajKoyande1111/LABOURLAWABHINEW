@@ -24,7 +24,7 @@ export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className={`w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-all focus:border-[#a83a00] ${props.className || ''}`}
+      className={`w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)] ${props.className || ''}`}
       style={{ fontFamily: PP, borderColor: '#e5e7eb', ...props.style }}
     />
   );
@@ -34,7 +34,7 @@ export function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement
   return (
     <textarea
       {...props}
-      className={`w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-all focus:border-[#a83a00] resize-none ${props.className || ''}`}
+      className={`w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)] resize-none ${props.className || ''}`}
       style={{ fontFamily: PP, borderColor: '#e5e7eb', ...props.style }}
     />
   );
@@ -45,7 +45,7 @@ export function PrimaryButton(props: React.ButtonHTMLAttributes<HTMLButtonElemen
     <button
       {...props}
       className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-opacity hover:opacity-90 disabled:opacity-60 ${props.className || ''}`}
-      style={{ fontFamily: PP, backgroundColor: '#a83a00', ...props.style }}
+      style={{ fontFamily: PP, backgroundColor: 'var(--primary)', ...props.style }}
     />
   );
 }
@@ -55,7 +55,7 @@ export function SecondaryButton(props: React.ButtonHTMLAttributes<HTMLButtonElem
     <button
       {...props}
       className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-xs border transition-colors hover:bg-gray-50 disabled:opacity-60 ${props.className || ''}`}
-      style={{ fontFamily: PP, color: '#a83a00', borderColor: '#a83a00', ...props.style }}
+      style={{ fontFamily: PP, color: 'var(--primary)', borderColor: 'var(--primary)', ...props.style }}
     />
   );
 }

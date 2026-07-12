@@ -52,7 +52,7 @@ const ResourceDetail = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center" style={{ fontFamily: PP }}>
         <p className="text-gray-500 mb-4">Article not found.</p>
-        <Link to="/resources" className="font-semibold" style={{ color: '#a83a00' }}>
+        <Link to="/resources" className="font-semibold" style={{ color: 'var(--primary)' }}>
           ← Back to Resources
         </Link>
       </div>
@@ -63,7 +63,7 @@ const ResourceDetail = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center" style={{ fontFamily: PP }}>
         <p className="text-gray-500 mb-4">Failed to load article. Please try again.</p>
-        <Link to="/resources" className="font-semibold" style={{ color: '#a83a00' }}>
+        <Link to="/resources" className="font-semibold" style={{ color: 'var(--primary)' }}>
           ← Back to Resources
         </Link>
       </div>
@@ -77,7 +77,7 @@ const ResourceDetail = () => {
 
       {/* ── Hero ── */}
       <section className="flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: '#a83a00', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
         <div className="absolute top-[-60px] right-[-60px] w-[300px] h-[300px] rounded-full opacity-10 pointer-events-none"
           style={{ backgroundColor: '#fda102' }} />
 
@@ -119,7 +119,7 @@ const ResourceDetail = () => {
           {/* Back link */}
           <Link to="/resources"
             className="inline-flex items-center gap-2 text-sm font-semibold mb-8 transition-opacity hover:opacity-70"
-            style={{ fontFamily: PP, color: '#a83a00' }}>
+            style={{ fontFamily: PP, color: 'var(--primary)' }}>
             <ArrowLeft size={15} /> Back to Resources
           </Link>
 
@@ -133,7 +133,7 @@ const ResourceDetail = () => {
 
               {/* Excerpt */}
               <div className="rounded-2xl p-7 border-l-4"
-                style={{ backgroundColor: 'rgba(168,58,0,0.05)', borderColor: '#a83a00' }}>
+                style={{ backgroundColor: 'var(--p-a05)', borderColor: 'var(--primary)' }}>
                 <p className="leading-relaxed font-medium"
                   style={{ fontFamily: PP, fontSize: '1.08rem', color: '#333', fontStyle: 'italic' }}>
                   {post.excerpt}
@@ -172,7 +172,7 @@ const ResourceDetail = () => {
                       initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }} transition={{ delay: i * 0.07 }}
                       className="flex items-start gap-3">
-                      <CheckCircle size={18} className="shrink-0 mt-0.5" style={{ color: '#a83a00' }} />
+                      <CheckCircle size={18} className="shrink-0 mt-0.5" style={{ color: 'var(--primary)' }} />
                       <span style={{ fontFamily: PP, fontSize: '0.97rem', color: '#333', lineHeight: 1.7 }}>
                         {item}
                       </span>
@@ -190,16 +190,16 @@ const ResourceDetail = () => {
                 <div className="space-y-4">
                   {related.map((r, i) => (
                     <Link key={i} to={`/resources/${r.slug}`}
-                      className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 hover:border-[rgba(168,58,0,0.3)] hover:shadow-sm transition-all group">
+                      className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--p-a30)] hover:shadow-sm transition-all group">
                       <img src={r.img} alt={r.title}
                         className="w-16 h-16 rounded-xl object-cover shrink-0" />
                       <div className="flex-1 min-w-0">
                         <span className="text-xs font-bold uppercase tracking-wider"
-                          style={{ color: '#a83a00', fontFamily: PP }}>{r.category}</span>
+                          style={{ color: 'var(--primary)', fontFamily: PP }}>{r.category}</span>
                         <p className="font-semibold mt-0.5 line-clamp-2"
                           style={{ fontFamily: PP, fontSize: '0.95rem', color: '#111' }}>{r.title}</p>
                       </div>
-                      <ChevronRight size={16} className="shrink-0 text-gray-300 group-hover:text-[#a83a00] transition-colors" />
+                      <ChevronRight size={16} className="shrink-0 text-gray-300 group-hover:text-[var(--primary)] transition-colors" />
                     </Link>
                   ))}
                 </div>
@@ -216,7 +216,7 @@ const ResourceDetail = () => {
                   transition={{ duration: 0.5, delay: 0.15 }}
                   className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                   <div className="p-2 text-center text-xs font-bold uppercase tracking-widest"
-                    style={{ backgroundColor: '#a83a00', color: '#fda102', fontFamily: PP }}>
+                    style={{ backgroundColor: 'var(--primary)', color: '#fda102', fontFamily: PP }}>
                     Article Info
                   </div>
                   <div className="p-7 space-y-4">
@@ -242,7 +242,7 @@ const ResourceDetail = () => {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
                   <div className="p-2 text-center text-xs font-bold uppercase tracking-widest"
-                    style={{ backgroundColor: '#a83a00', color: '#fda102', fontFamily: PP }}>
+                    style={{ backgroundColor: 'var(--primary)', color: '#fda102', fontFamily: PP }}>
                     Need Expert Help?
                   </div>
                   <div className="bg-white p-7">
@@ -255,12 +255,12 @@ const ResourceDetail = () => {
                     </p>
                     <Link to="/contact"
                       className="w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90 mb-3"
-                      style={{ fontFamily: PP, backgroundColor: '#a83a00', color: '#fff' }}>
+                      style={{ fontFamily: PP, backgroundColor: 'var(--primary)', color: '#fff' }}>
                       Book a Consultation <ArrowRight size={14} />
                     </Link>
                     <Link to="/resources"
-                      className="w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 border-2 transition-all hover:bg-[#a83a00] hover:text-white"
-                      style={{ fontFamily: PP, color: '#a83a00', borderColor: '#a83a00' }}>
+                      className="w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 border-2 transition-all hover:bg-[var(--primary)] hover:text-white"
+                      style={{ fontFamily: PP, color: 'var(--primary)', borderColor: 'var(--primary)' }}>
                       More Articles
                     </Link>
                   </div>
@@ -272,16 +272,16 @@ const ResourceDetail = () => {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
                   <h4 className="font-bold mb-5 uppercase tracking-widest text-xs"
-                    style={{ fontFamily: PP, color: '#a83a00' }}>
+                    style={{ fontFamily: PP, color: 'var(--primary)' }}>
                     All Articles
                   </h4>
                   <ul className="space-y-0.5">
                     {allArticles.map((p, i) => (
                       <li key={i}>
                         <Link to={`/resources/${p.slug}`}
-                          className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[#a83a00]"
+                          className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[var(--primary)]"
                           style={{ fontFamily: PP, color: '#333', fontSize: '0.88rem', fontWeight: 500 }}>
-                          <ChevronRight size={13} className="text-gray-300 group-hover:text-[#a83a00] transition-colors shrink-0" />
+                          <ChevronRight size={13} className="text-gray-300 group-hover:text-[var(--primary)] transition-colors shrink-0" />
                           <span className="line-clamp-2">{p.title}</span>
                         </Link>
                       </li>

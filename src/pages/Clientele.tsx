@@ -124,7 +124,7 @@ const Clientele = () => {
 
       {/* ── Hero ── */}
       <section className="flex items-center justify-center overflow-hidden relative"
-        style={{ backgroundColor: '#a83a00', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
         <div className="absolute top-[-60px] right-[-60px] w-[320px] h-[320px] rounded-full opacity-10 pointer-events-none"
           style={{ backgroundColor: '#fda102' }} />
         <div className="absolute bottom-[-80px] left-[-40px] w-[240px] h-[240px] rounded-full opacity-8 pointer-events-none"
@@ -156,7 +156,7 @@ const Clientele = () => {
           {stats.map(({ target, suffix, decimals, label }) => (
             <div key={label} className="text-center">
               <p className="font-bold text-3xl mb-1"
-                style={{ fontFamily: PP, color: '#a83a00' }}>
+                style={{ fontFamily: PP, color: 'var(--primary)' }}>
                 <StatCounter target={target} suffix={suffix} decimals={decimals} />
               </p>
               <p className="text-xs uppercase tracking-widest text-gray-400 font-semibold"
@@ -171,7 +171,7 @@ const Clientele = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-12">
             <p className="font-bold tracking-[0.25em] uppercase text-xs mb-2"
-              style={{ fontFamily: PP, color: '#a83a00' }}>Industry Spread</p>
+              style={{ fontFamily: PP, color: 'var(--primary)' }}>Industry Spread</p>
             <h2 className="font-bold mb-3"
               style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: '#111' }}>
               Sectors We Serve
@@ -187,12 +187,12 @@ const Clientele = () => {
               <motion.div key={i}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.45 }}
-                className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg hover:border-[rgba(168,58,0,0.2)] transition-all group">
+                className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg hover:border-[var(--p-a20)] transition-all group">
                 <div className="relative w-full aspect-[4/3] overflow-hidden">
                   <img src={ind.image || FALLBACK_IMAGES[i] || ''} alt={ind.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <span className="absolute top-3 right-3 font-medium text-sm px-3 py-1 rounded-full"
-                    style={{ fontFamily: PP, backgroundColor: 'rgba(255,255,255,0.92)', color: '#a83a00' }}>
+                    style={{ fontFamily: PP, backgroundColor: 'rgba(255,255,255,0.92)', color: 'var(--primary)' }}>
                     {ind.count}
                   </span>
                 </div>
@@ -212,7 +212,7 @@ const Clientele = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-10">
             <p className="font-bold tracking-[0.25em] uppercase text-xs mb-2"
-              style={{ fontFamily: PP, color: '#a83a00' }}>Our Portfolio</p>
+              style={{ fontFamily: PP, color: 'var(--primary)' }}>Our Portfolio</p>
             <h2 className="font-bold mb-3"
               style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: '#111' }}>
               Companies We've Served
@@ -231,9 +231,9 @@ const Clientele = () => {
                 className="px-5 py-2.5 rounded-full font-semibold text-sm transition-all border"
                 style={{
                   fontFamily: PP,
-                  backgroundColor: effectiveSector === sector ? '#a83a00' : '#fff',
-                  color: effectiveSector === sector ? '#fff' : '#a83a00',
-                  borderColor: effectiveSector === sector ? '#a83a00' : 'rgba(168,58,0,0.25)',
+                  backgroundColor: effectiveSector === sector ? 'var(--primary)' : '#fff',
+                  color: effectiveSector === sector ? '#fff' : 'var(--primary)',
+                  borderColor: effectiveSector === sector ? 'var(--primary)' : 'var(--p-a25)',
                 }}>
                 {sector}
               </button>
@@ -252,11 +252,11 @@ const Clientele = () => {
                 <motion.div key={i}
                   initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.07 }}
-                  className="bg-[#f8fafb] border border-gray-100 aspect-[3/2] rounded-2xl flex items-center justify-center px-8 shadow-sm hover:shadow-md hover:border-[rgba(168,58,0,0.2)] transition-all"
+                  className="bg-[#f8fafb] border border-gray-100 aspect-[3/2] rounded-2xl flex items-center justify-center px-8 shadow-sm hover:shadow-md hover:border-[var(--p-a20)] transition-all"
                   title={client.name}>
                   {LogoComp ? <LogoComp /> : client.logoUrl
                     ? <img src={client.logoUrl} alt={client.name} className="max-h-12 max-w-full object-contain" />
-                    : <span className="font-semibold text-sm text-center" style={{ fontFamily: PP, color: '#a83a00' }}>{client.name}</span>
+                    : <span className="font-semibold text-sm text-center" style={{ fontFamily: PP, color: 'var(--primary)' }}>{client.name}</span>
                   }
                 </motion.div>
               );
@@ -266,7 +266,7 @@ const Clientele = () => {
           {/* Scrolling all-client strip */}
           <div className="mt-14 pt-10 border-t border-gray-100">
             <p className="text-center font-semibold uppercase tracking-[0.25em] mb-8 text-xs"
-              style={{ fontFamily: PP, color: '#a83a00' }}>
+              style={{ fontFamily: PP, color: 'var(--primary)' }}>
               Serving 500+ Corporations Across India
             </p>
             <div className="overflow-hidden relative">
@@ -277,7 +277,7 @@ const Clientele = () => {
               <div className="animate-marquee pb-2">
                 {[...ALL_CLIENTS, ...ALL_CLIENTS].map(({ name, Logo }, i) => (
                   <div key={i} title={name}
-                    className="shrink-0 mx-4 bg-[#f8fafb] border border-gray-100 rounded-xl px-8 flex items-center justify-center hover:border-[rgba(168,58,0,0.2)] transition-all"
+                    className="shrink-0 mx-4 bg-[#f8fafb] border border-gray-100 rounded-xl px-8 flex items-center justify-center hover:border-[var(--p-a20)] transition-all"
                     style={{ width: '180px', height: '80px' }}>
                     <Logo />
                   </div>
@@ -289,7 +289,7 @@ const Clientele = () => {
       </section>
 
       {/* ── Testimonials (same marquee as Home) ── */}
-      <section className="py-10 relative overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+      <section className="py-10 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
             style={{ backgroundColor: '#7a2900' }} />
@@ -353,9 +353,9 @@ const Clientele = () => {
                     <div className="h-px mb-5" style={{ backgroundColor: '#f0f0f0' }} />
                     <div className="flex items-center gap-3.5">
                       <div className="p-[2.5px] rounded-full shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #fda102, #a83a00)' }}>
+                        style={{ background: 'linear-gradient(135deg, #fda102, var(--primary))' }}>
                         <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
-                          style={{ backgroundColor: '#fff7ed', color: '#a83a00', fontFamily: PP }}>
+                          style={{ backgroundColor: '#fff7ed', color: 'var(--primary)', fontFamily: PP }}>
                           {test.author.charAt(0)}
                         </div>
                       </div>
@@ -380,7 +380,7 @@ const Clientele = () => {
             initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.4 }}
             className="font-bold uppercase tracking-[0.25em] text-xs mb-3"
-            style={{ fontFamily: PP, color: '#a83a00' }}>
+            style={{ fontFamily: PP, color: 'var(--primary)' }}>
             Join Our Clientele
           </motion.p>
           <motion.h2
@@ -402,7 +402,7 @@ const Clientele = () => {
             viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.2 }}>
             <Link to="/contact"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm shadow-lg transition-opacity hover:opacity-90"
-              style={{ fontFamily: PP, backgroundColor: '#a83a00', color: '#fff' }}>
+              style={{ fontFamily: PP, backgroundColor: 'var(--primary)', color: '#fff' }}>
               Discuss Your Requirements <ArrowRight size={16} />
             </Link>
           </motion.div>

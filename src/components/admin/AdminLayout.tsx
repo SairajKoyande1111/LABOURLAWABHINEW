@@ -43,7 +43,7 @@ export default function AdminLayout() {
         >
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <p className="font-bold text-sm truncate" style={{ color: '#a83a00' }}>Maru Consultancy</p>
+              <p className="font-bold text-sm truncate" style={{ color: 'var(--primary)' }}>Maru Consultancy</p>
               <p className="text-xs text-gray-400 mt-0.5">Admin Panel</p>
             </div>
           )}
@@ -70,7 +70,7 @@ export default function AdminLayout() {
                 }`
               }
               style={({ isActive }) => ({
-                backgroundColor: isActive ? '#a83a00' : 'transparent',
+                backgroundColor: isActive ? 'var(--primary)' : 'transparent',
                 padding: collapsed ? '10px 14px' : '10px 12px',
                 justifyContent: collapsed ? 'center' : 'flex-start',
               })}

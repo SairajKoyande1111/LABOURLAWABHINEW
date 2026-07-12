@@ -75,7 +75,7 @@ const Resources = () => {
       {/* ── Hero ── */}
       <section
         className="relative flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: '#a83a00', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
 
         {hero.heroBgType === 'image' && hero.heroImageUrl && (
           <img src={hero.heroImageUrl} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ zIndex: 0 }} />
@@ -128,8 +128,8 @@ const Resources = () => {
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all"
               style={{
                 fontFamily: PP,
-                backgroundColor: activeTab === tab.key ? '#a83a00' : 'transparent',
-                color: activeTab === tab.key ? '#fff' : '#a83a00',
+                backgroundColor: activeTab === tab.key ? 'var(--primary)' : 'transparent',
+                color: activeTab === tab.key ? '#fff' : 'var(--primary)',
               }}>
               <tab.icon size={14} /> {tab.label}
             </button>
@@ -150,9 +150,9 @@ const Resources = () => {
                   className="px-5 py-2 rounded-full font-semibold text-sm transition-all border"
                   style={{
                     fontFamily: PP,
-                    backgroundColor: catFilter === cat ? '#a83a00' : '#fff',
-                    color: catFilter === cat ? '#fff' : '#a83a00',
-                    borderColor: catFilter === cat ? '#a83a00' : 'rgba(168,58,0,0.25)',
+                    backgroundColor: catFilter === cat ? 'var(--primary)' : '#fff',
+                    color: catFilter === cat ? '#fff' : 'var(--primary)',
+                    borderColor: catFilter === cat ? 'var(--primary)' : 'var(--p-a25)',
                   }}>
                   {cat}
                 </button>
@@ -176,7 +176,7 @@ const Resources = () => {
                       <div className="lg:w-1/2 p-10 lg:p-14 flex flex-col justify-center">
                         <div className="flex items-center gap-3 mb-4">
                           <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full"
-                            style={{ backgroundColor: 'rgba(168,58,0,0.1)', color: '#a83a00', fontFamily: PP }}>
+                            style={{ backgroundColor: 'var(--p-a10)', color: 'var(--primary)', fontFamily: PP }}>
                             {filteredBlogs[0].category}
                           </span>
                           <span className="text-xs text-gray-400 flex items-center gap-1" style={{ fontFamily: PP }}>
@@ -195,7 +195,7 @@ const Resources = () => {
                           {filteredBlogs[0].excerpt}
                         </p>
                         <span className="inline-flex items-center gap-2 font-bold text-sm transition-opacity group-hover:opacity-70"
-                          style={{ color: '#a83a00', fontFamily: PP }}>
+                          style={{ color: 'var(--primary)', fontFamily: PP }}>
                           Read Full Article <ArrowRight size={15} />
                         </span>
                       </div>
@@ -218,7 +218,7 @@ const Resources = () => {
                         <img src={post.img} alt={post.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                         <div className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
-                          style={{ backgroundColor: '#a83a00', color: '#fff', fontFamily: PP }}>
+                          style={{ backgroundColor: 'var(--primary)', color: '#fff', fontFamily: PP }}>
                           {post.category}
                         </div>
                       </div>
@@ -236,7 +236,7 @@ const Resources = () => {
                           {post.excerpt}
                         </p>
                         <span className="flex items-center gap-1.5 font-bold text-sm transition-opacity group-hover:opacity-70 mt-auto"
-                          style={{ color: '#a83a00', fontFamily: PP }}>
+                          style={{ color: 'var(--primary)', fontFamily: PP }}>
                           Read Article <ChevronRight size={14} />
                         </span>
                       </div>
@@ -261,7 +261,7 @@ const Resources = () => {
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
             <div className="mb-10">
               <p className="font-bold tracking-[0.2em] uppercase text-xs mb-2"
-                style={{ fontFamily: PP, color: '#a83a00' }}>Free Resources</p>
+                style={{ fontFamily: PP, color: 'var(--primary)' }}>Free Resources</p>
               <h2 className="font-bold" style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', color: '#111' }}>
                 Templates & Downloads
               </h2>
@@ -279,13 +279,13 @@ const Resources = () => {
 
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: 'rgba(168,58,0,0.09)' }}>
-                      <FileText size={22} style={{ color: '#a83a00' }} />
+                      style={{ backgroundColor: 'var(--p-a09)' }}>
+                      <FileText size={22} style={{ color: 'var(--primary)' }} />
                     </div>
                     <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
                       style={{
-                        backgroundColor: item.downloadType === 'Resource' ? 'rgba(253,161,2,0.12)' : 'rgba(168,58,0,0.08)',
-                        color: item.downloadType === 'Resource' ? '#b07000' : '#a83a00',
+                        backgroundColor: item.downloadType === 'Resource' ? 'rgba(253,161,2,0.12)' : 'var(--p-a08)',
+                        color: item.downloadType === 'Resource' ? '#b07000' : 'var(--primary)',
                         fontFamily: PP,
                       }}>
                       {item.downloadType ?? 'Download'}
@@ -312,7 +312,7 @@ const Resources = () => {
                         rel="noopener noreferrer"
                         download
                         className="flex items-center gap-1.5 text-sm font-bold px-4 py-2 rounded-full transition-all hover:opacity-80"
-                        style={{ fontFamily: PP, backgroundColor: 'rgba(168,58,0,0.09)', color: '#a83a00' }}>
+                        style={{ fontFamily: PP, backgroundColor: 'var(--p-a09)', color: 'var(--primary)' }}>
                         <Download size={13} /> Download
                       </a>
                     ) : (
@@ -332,7 +332,7 @@ const Resources = () => {
       )}
 
       {/* ── Newsletter ── */}
-      <section className="py-16" style={{ backgroundColor: '#a83a00' }}>
+      <section className="py-16" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="max-w-2xl mx-auto px-6 text-center">
           <motion.p
             initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}

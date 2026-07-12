@@ -8,6 +8,7 @@ import iconMail from '@assets/communication_1783488559887.png';
 import { api } from '../lib/api';
 import { useLiveContent } from '../hooks/useLiveContent';
 import type { ServiceContent } from '../types/content';
+import { useTheme } from '../context/ThemeContext';
 
 const socialLinks = [
   { href: 'https://wa.me/919876543210',               img: '/assets/social-whatsapp.png',  label: 'WhatsApp'  },
@@ -24,6 +25,7 @@ const Layout = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [services, setServices] = useState<ServiceContent[]>([]);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const fetchServices = () => {
     api.get<ServiceContent[]>('/services').then(setServices).catch(() => {});
@@ -75,9 +77,14 @@ const Layout = () => {
       <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-lg' : 'shadow-md'} border-b border-gray-100`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[76px] flex justify-between items-center">
 
-          {/* Logo — actual brand image */}
+          {/* Logo — switches with theme */}
           <Link to="/" className="shrink-0">
-            <img src="/assets/maru-logo.png" alt="Maru Consultancy Services" className="h-16 w-auto object-contain" style={{ maxHeight: '64px' }} />
+            <img
+              src={theme === 'blue' ? '/assets/maru-logo-blue.png' : '/assets/maru-logo.png'}
+              alt="Maru Consultancy Services"
+              className="w-auto object-contain transition-all duration-300"
+              style={{ height: '52px', maxHeight: '52px' }}
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -95,7 +102,7 @@ const Layout = () => {
                   <Link
                     to={link.path}
                     className="flex items-center gap-1 font-semibold text-[1.05rem] px-4 py-2.5 transition-colors duration-200"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: highlighted ? '#a83a00' : '#111111' }}
+                    style={{ fontFamily: 'Poppins, sans-serif', color: highlighted ? 'var(--primary)' : '#111111' }}
                   >
                     {link.name}
                     <ChevronDown size={13} className="group-hover:rotate-180 transition-transform duration-200" />
@@ -127,7 +134,7 @@ const Layout = () => {
                   <Link
                     to={link.path}
                     className="font-semibold text-[1.05rem] px-4 py-2.5 block transition-colors duration-200"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: highlighted ? '#a83a00' : '#111111' }}
+                    style={{ fontFamily: 'Poppins, sans-serif', color: highlighted ? 'var(--primary)' : '#111111' }}
                   >
                     {link.name}
                   </Link>
@@ -142,20 +149,66 @@ const Layout = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
+
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              title={theme === 'red' ? 'Switch to Blue & Gold theme' : 'Switch to Red & Yellow theme'}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full border-2 transition-all duration-300 text-xs font-bold"
+              style={{
+                fontFamily: 'Poppins, sans-serif',
+                borderColor: theme === 'red' ? '#fda102' : '#c9a84c',
+                backgroundColor: theme === 'red' ? 'rgba(168,58,0,0.06)' : 'rgba(28,52,71,0.08)',
+                color: 'var(--primary)',
+              }}
+            >
+              {/* Track */}
+              <span
+                className="relative inline-flex items-center rounded-full transition-colors duration-300"
+                style={{ width: 36, height: 20, backgroundColor: 'var(--primary)' }}
+              >
+                <span
+                  className="absolute rounded-full bg-white shadow transition-all duration-300"
+                  style={{
+                    width: 14, height: 14,
+                    left: theme === 'blue' ? 18 : 3,
+                    top: 3,
+                  }}
+                />
+              </span>
+              <span style={{ letterSpacing: '0.04em' }}>
+                {theme === 'red' ? '🔴 Red' : '🔵 Blue'}
+              </span>
+            </button>
+
             <Link to="/contact"
               className="text-white px-7 py-2.5 rounded-full font-bold text-[0.9rem] transition-colors duration-200 shadow-sm whitespace-nowrap"
-              style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#a83a00', border: '2px solid #fda102' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00'; }}>
+              style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#fff'; }}>
               Contact Us
             </Link>
           </div>
 
           {/* Mobile Toggle */}
-          <button className="lg:hidden text-navy-900 p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menu">
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="lg:hidden flex items-center gap-2">
+            {/* Mobile theme toggle — compact */}
+            <button
+              onClick={toggleTheme}
+              title="Toggle theme"
+              className="relative flex items-center rounded-full border-2 transition-all duration-300"
+              style={{ width: 40, height: 22, borderColor: '#fda102', backgroundColor: 'var(--primary)' }}
+            >
+              <span
+                className="absolute rounded-full bg-white shadow transition-all duration-300"
+                style={{ width: 14, height: 14, left: theme === 'blue' ? 21 : 3, top: 2 }}
+              />
+            </button>
+            <button className="text-navy-900 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menu">
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Nav */}
@@ -175,7 +228,7 @@ const Layout = () => {
                   <Link
                     to={link.path}
                     className="block px-6 py-4 border-b border-gray-100 font-bold text-sm transition-colors"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: isActive(link.path) ? '#a83a00' : '#111111', backgroundColor: isActive(link.path) ? '#fff7ed' : '' }}
+                    style={{ fontFamily: 'Poppins, sans-serif', color: isActive(link.path) ? 'var(--primary)' : '#111111', backgroundColor: isActive(link.path) ? '#fff7ed' : '' }}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.name}
@@ -186,7 +239,7 @@ const Layout = () => {
                         <Link key={s.slug} to={`/services/${s.slug}`}
                           className="block pl-10 pr-6 py-3 border-b border-gray-100 text-xs font-semibold transition-colors"
                           style={{ fontFamily: 'Poppins, sans-serif', color: '#444444' }}
-                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#444444'; }}
                           onClick={() => setIsMenuOpen(false)}>
                           › {s.name}
@@ -205,7 +258,7 @@ const Layout = () => {
                 </a>
                 <Link to="/contact"
                   className="mt-2 block w-full text-center text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors"
-                  style={{ backgroundColor: '#a83a00' }}
+                  style={{ backgroundColor: 'var(--primary)' }}
                   onClick={() => setIsMenuOpen(false)}>
                   Contact Us
                 </Link>
@@ -221,7 +274,7 @@ const Layout = () => {
       </main>
 
       {/* ── Footer ─────────────────────────────────────────── */}
-      <footer className="bg-white border-t-4" style={{ borderTopColor: '#a83a00' }}>
+      <footer className="bg-white border-t-4" style={{ borderTopColor: 'var(--primary)' }}>
 
         {/* Main content grid */}
         <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-14 pb-10">
@@ -255,14 +308,14 @@ const Layout = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
               <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
-                style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Our Services</h3>
+                style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Our Services</h3>
               <ul className="space-y-3">
                 {serviceLinks.slice(0, 8).map((s) => (
                   <li key={s.slug}>
                     <Link to={`/services/${s.slug}`}
                       className="text-base flex items-center gap-2.5 transition-colors duration-200"
                       style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#111111'; }}>
                       <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: '#fda102' }} />
                       {s.name}
@@ -276,7 +329,7 @@ const Layout = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
               <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
-                style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Contact Us</h3>
+                style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Contact Us</h3>
               <ul className="space-y-5">
                 <li className="flex gap-3" style={{ fontFamily: 'Poppins, sans-serif', color: '#111111' }}>
                   <img src={iconLocation} alt="" aria-hidden="true" className="w-5 h-5 shrink-0 mt-0.5 object-contain" />
@@ -286,12 +339,12 @@ const Layout = () => {
                   <img src={iconCall} alt="" aria-hidden="true" className="w-5 h-5 shrink-0 mt-0.5 object-contain" />
                   <div className="text-base">
                     <a href="tel:+919876543210" className="block transition-colors duration-200 font-medium"
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}>
                       +91 98765 43210
                     </a>
                     <a href="tel:02245678900" className="block transition-colors duration-200"
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}>
                       022 4567 8900
                     </a>
@@ -301,7 +354,7 @@ const Layout = () => {
                   <img src={iconMail} alt="" aria-hidden="true" className="w-5 h-5 shrink-0 mt-0.5 object-contain" />
                   <a href="mailto:contact@labourcodes.in"
                     className="text-base transition-colors duration-200 font-medium"
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}>
                     contact@labourcodes.in
                   </a>
@@ -313,7 +366,7 @@ const Layout = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}>
               <h3 className="font-bold text-base mb-6 uppercase tracking-wider"
-                style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Newsletter</h3>
+                style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Newsletter</h3>
               <p className="text-base mb-5 leading-relaxed"
                 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#111111' }}>
                 Subscribe for critical compliance alerts and regulatory updates.
@@ -329,18 +382,18 @@ const Layout = () => {
                     border: '1.5px solid #e5e7eb',
                     color: '#111111',
                   }}
-                  onFocus={e => { (e.currentTarget as HTMLElement).style.borderColor = '#a83a00'; }}
+                  onFocus={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--primary)'; }}
                   onBlur={e => { (e.currentTarget as HTMLElement).style.borderColor = '#e5e7eb'; }}
                 />
                 <button type="submit"
                   className="px-4 py-3 rounded-lg text-base font-bold text-white transition-all duration-200"
-                  style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#a83a00' }}
+                  style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: 'var(--primary)' }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102';
                     (e.currentTarget as HTMLElement).style.color = '#1a1a1a';
                   }}
                   onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00';
+                    (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)';
                     (e.currentTarget as HTMLElement).style.color = '#ffffff';
                   }}>
                   Subscribe Now
@@ -378,9 +431,9 @@ const Layout = () => {
                 Designed &amp; Developed by{' '}
                 <a href="https://www.airavatatechnologies.com/" target="_blank" rel="noreferrer"
                   className="font-semibold transition-colors duration-200"
-                  style={{ color: '#a83a00' }}
+                  style={{ color: 'var(--primary)' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fda102'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}>
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}>
                   Airavata Technologies
                 </a>
               </p>
@@ -391,7 +444,7 @@ const Layout = () => {
                 <Link key={label} to="#"
                   className="text-sm font-medium transition-colors duration-200"
                   style={{ color: '#111111' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#a83a00'; }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--primary)'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#111111'; }}>
                   {label}
                 </Link>
@@ -406,9 +459,9 @@ const Layout = () => {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="fixed bottom-6 right-6 z-50 w-11 h-11 text-white rounded-full flex items-center justify-center shadow-xl transition-all hover:scale-110"
-          style={{ backgroundColor: '#a83a00' }}
+          style={{ backgroundColor: 'var(--primary)' }}
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; }}
           aria-label="Scroll to top">
           <ArrowUp size={18} />
         </button>

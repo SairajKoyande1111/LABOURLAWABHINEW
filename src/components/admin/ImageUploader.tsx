@@ -79,7 +79,7 @@ export default function ImageUploader({
         <img src={value} className="w-full h-full object-cover" alt="" />
       ) : (
         <div className="flex flex-col items-center gap-1 px-1 text-center">
-          <FileText size={20} style={{ color: '#a83a00' }} />
+          <FileText size={20} style={{ color: 'var(--primary)' }} />
           <span className="text-[9px] text-gray-500 leading-tight break-all line-clamp-2" style={{ fontFamily: PP }}>
             {filenameFromUrl(value)}
           </span>
@@ -125,7 +125,7 @@ export default function ImageUploader({
             disabled={uploading}
             onClick={() => inputRef.current?.click()}
             className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-semibold transition-colors disabled:opacity-60"
-            style={{ fontFamily: PP, color: '#a83a00', borderColor: '#a83a00' }}
+            style={{ fontFamily: PP, color: 'var(--primary)', borderColor: 'var(--primary)' }}
           >
             {uploading ? <Loader2 size={13} className="animate-spin" /> : <Upload size={13} />}
             {uploading ? 'Uploading…' : value ? 'Replace' : 'Upload'}

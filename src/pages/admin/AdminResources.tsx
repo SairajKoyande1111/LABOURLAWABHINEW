@@ -195,7 +195,7 @@ export default function AdminResources() {
 
         {dirty && !saving && (
           <div className="sticky top-0 z-20 mb-5 flex items-center justify-between gap-3 rounded-xl px-4 py-3 shadow-md"
-            style={{ backgroundColor: '#7c2d00', fontFamily: PP }}>
+            style={{ backgroundColor: 'var(--primary-dark)', fontFamily: PP }}>
             <span className="text-sm font-semibold text-white">You have unsaved changes.</span>
             <button onClick={save} disabled={!editing.title}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-opacity hover:opacity-90 disabled:opacity-50"
@@ -295,7 +295,7 @@ export default function AdminResources() {
         <Section title="Hero Section" description="The banner shown at the top of the public Resources page.">
           {heroDirty && !heroSaving && (
             <div className="flex items-center justify-between gap-3 rounded-xl px-4 py-3 shadow-sm -mt-2 mb-2"
-              style={{ backgroundColor: '#7c2d00', fontFamily: PP }}>
+              style={{ backgroundColor: 'var(--primary-dark)', fontFamily: PP }}>
               <span className="text-sm font-semibold text-white">You have unsaved changes.</span>
               <button onClick={saveHero}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-opacity hover:opacity-90"
@@ -359,7 +359,7 @@ export default function AdminResources() {
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-3">
           <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
-            style={{ backgroundColor: 'rgba(168,58,0,0.08)', color: '#a83a00', fontFamily: PP }}>
+            style={{ backgroundColor: 'var(--p-a08)', color: 'var(--primary)', fontFamily: PP }}>
             <BookOpen size={12} /> Articles & Insights
           </span>
           <span className="text-xs text-gray-400">{articles.length} item{articles.length !== 1 ? 's' : ''}</span>
@@ -368,7 +368,7 @@ export default function AdminResources() {
         <div className="space-y-3">
           {articles.map(r => (
             <div key={r._id} className="bg-white rounded-2xl border shadow-sm p-4 flex items-center gap-4"
-              style={{ borderColor: 'rgba(168,58,0,0.12)' }}>
+              style={{ borderColor: 'var(--p-a12)' }}>
               {r.img && <img src={r.img} alt="" className="w-12 h-12 rounded-xl object-cover shrink-0" />}
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-sm truncate" style={{ fontFamily: PP, color: '#111' }}>{r.title}</p>
@@ -397,8 +397,8 @@ export default function AdminResources() {
             <div key={r._id} className="bg-white rounded-2xl border shadow-sm p-4 flex items-center gap-4"
               style={{ borderColor: 'rgba(253,161,2,0.18)' }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                style={{ backgroundColor: 'rgba(168,58,0,0.08)' }}>
-                <FileText size={18} style={{ color: '#a83a00' }} />
+                style={{ backgroundColor: 'var(--p-a08)' }}>
+                <FileText size={18} style={{ color: 'var(--primary)' }} />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-sm truncate" style={{ fontFamily: PP, color: '#111' }}>{r.title}</p>

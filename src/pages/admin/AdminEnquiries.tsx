@@ -83,10 +83,10 @@ function EnquiryCard({ enq, onDelete, onReadChange }: {
         <div className="border-t border-gray-50 px-5 py-5 space-y-4">
           {/* Contact info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm" style={{ fontFamily: PP }}>
-            <a href={`mailto:${enq.email}`} className="flex items-center gap-2 text-gray-600 hover:text-[#a83a00] transition-colors">
+            <a href={`mailto:${enq.email}`} className="flex items-center gap-2 text-gray-600 hover:text-[var(--primary)] transition-colors">
               <Mail size={13} className="shrink-0" /> {enq.email}
             </a>
-            <a href={`tel:${enq.phone}`} className="flex items-center gap-2 text-gray-600 hover:text-[#a83a00] transition-colors">
+            <a href={`tel:${enq.phone}`} className="flex items-center gap-2 text-gray-600 hover:text-[var(--primary)] transition-colors">
               <Phone size={13} className="shrink-0" /> {enq.phone}
             </a>
             {enq.company && (
@@ -105,7 +105,7 @@ function EnquiryCard({ enq, onDelete, onReadChange }: {
           {enq.message && (
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider mb-2"
-                style={{ fontFamily: PP, color: '#a83a00' }}>
+                style={{ fontFamily: PP, color: 'var(--primary)' }}>
                 <MessageSquare size={11} className="inline mr-1" />Message
               </p>
               <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line bg-gray-50 rounded-xl px-4 py-3"
@@ -213,7 +213,7 @@ export default function AdminEnquiries() {
           placeholder="Search by name, email, service or message…"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="flex-1 min-w-[220px] px-4 py-2 rounded-xl border text-sm outline-none focus:border-[#a83a00] transition-colors"
+          className="flex-1 min-w-[220px] px-4 py-2 rounded-xl border text-sm outline-none focus:border-[var(--primary)] transition-colors"
           style={{ fontFamily: PP, borderColor: '#e5e7eb' }}
         />
         <select value={filterRead} onChange={e => setFilterRead(e.target.value as typeof filterRead)}

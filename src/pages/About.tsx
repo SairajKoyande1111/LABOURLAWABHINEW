@@ -167,7 +167,7 @@ const StoryCarousel = ({ slides }: { slides: SlideData[] }) => {
           <h2 className="font-bold leading-[1.2] mb-4"
             style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.2vw, 1.8rem)', color: '#111' }}>
             {slide.heading}<br />
-            <span style={{ color: '#a83a00' }}>{slide.headingHighlight}</span>
+            <span style={{ color: 'var(--primary)' }}>{slide.headingHighlight}</span>
           </h2>
           <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: PP, color: '#666', lineHeight: 1.8 }}>
             {slide.body}
@@ -182,7 +182,7 @@ const StoryCarousel = ({ slides }: { slides: SlideData[] }) => {
             document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' });
           }}
           className="inline-flex items-center gap-2 font-semibold text-sm hover:gap-3 transition-all w-fit cursor-pointer"
-          style={{ fontFamily: PP, color: '#a83a00' }}>
+          style={{ fontFamily: PP, color: 'var(--primary)' }}>
           Our full story <ArrowRight size={15} />
         </a>
 
@@ -192,10 +192,10 @@ const StoryCarousel = ({ slides }: { slides: SlideData[] }) => {
             <button key={i} type="button" aria-label={`Go to slide ${i + 1}`}
               onClick={() => setIndex(i)}
               className="relative h-1.5 rounded-full overflow-hidden transition-all duration-300"
-              style={{ width: i === index ? '28px' : '8px', backgroundColor: 'rgba(168,58,0,0.18)' }}>
+              style={{ width: i === index ? '28px' : '8px', backgroundColor: 'var(--p-a18)' }}>
               {i === index && (
                 <motion.div key={index} className="absolute inset-0 rounded-full"
-                  style={{ backgroundColor: '#a83a00', transformOrigin: 'left' }}
+                  style={{ backgroundColor: 'var(--primary)', transformOrigin: 'left' }}
                   initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
                   transition={{ duration: 4.5, ease: 'linear' }}
                 />
@@ -275,7 +275,7 @@ const About = () => {
 
         {/* ── LEFT PANEL: solid brand colour ── */}
         <div className="relative flex flex-col justify-center z-10 px-10 lg:px-14 py-10"
-          style={{ backgroundColor: '#a83a00', height: '100%' }}>
+          style={{ backgroundColor: 'var(--primary)', height: '100%' }}>
 
           {/* Subtle dot texture */}
           <div className="absolute inset-0 pointer-events-none"
@@ -359,7 +359,7 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           2. MARQUEE STRIP
          ══════════════════════════════════════════════════════ */}
-      <div className="overflow-hidden py-3" style={{ backgroundColor: '#a83a00' }}>
+      <div className="overflow-hidden py-3" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="marquee-track">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span key={i} className="font-light text-xl mx-6 whitespace-nowrap"
@@ -397,7 +397,7 @@ const About = () => {
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.1 }}>
               {/* Stats side */}
               <div className="flex-1 flex flex-col justify-center px-8 py-7"
-                style={{ backgroundColor: '#a83a00' }}>
+                style={{ backgroundColor: 'var(--primary)' }}>
                 <p className="font-bold text-xs uppercase tracking-[0.2em] mb-3" style={{ fontFamily: PP, color: '#fda102' }}>By the Numbers</p>
                 <div className="grid grid-cols-3 gap-4">
                   {heroStats.map(({value, label}) => (
@@ -456,7 +456,7 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           4. BIG PULL QUOTE
          ══════════════════════════════════════════════════════ */}
-      <section id="pull-quote" className="py-10 relative overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+      <section id="pull-quote" className="py-10 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="absolute inset-0 pointer-events-none select-none flex items-center justify-center overflow-hidden px-3 lg:px-4">
           <p className="font-bold text-white opacity-[0.14] text-center whitespace-nowrap"
             style={{ fontFamily: PP, fontSize: 'clamp(2.2rem, 9vw, 10.5rem)', lineHeight: 1.05, letterSpacing: '0.01em' }}>
@@ -491,7 +491,7 @@ const About = () => {
             viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }}>
             <div className="flex items-center gap-4">
               <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
-              <p className="font-bold uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: '#a83a00', fontSize: '1.25rem' }}>What Drives Us</p>
+              <p className="font-bold uppercase tracking-[0.25em]" style={{ fontFamily: PP, color: 'var(--primary)', fontSize: '1.25rem' }}>What Drives Us</p>
               <div className="w-8 h-0.5" style={{ backgroundColor: '#fda102' }} />
             </div>
           </motion.div>
@@ -516,7 +516,7 @@ const About = () => {
                   style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.15) 100%)' }} />
                 {/* Hover tint */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500"
-                  style={{ backgroundColor: '#a83a00' }} />
+                  style={{ backgroundColor: 'var(--primary)' }} />
                 {/* Content */}
                 <div className="absolute inset-0 p-7 flex flex-col justify-between">
                   <p className="font-bold text-5xl opacity-30 text-white" style={{ fontFamily: PP }}>{String(i + 1).padStart(2, '0')}</p>
@@ -531,7 +531,7 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           6. OUR JOURNEY — Horizontal 30-year animated timeline
          ══════════════════════════════════════════════════════ */}
-      <section id="journey" className="py-12 relative overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+      <section id="journey" className="py-12 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         {/* Subtle dot texture, consistent with hero */}
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.06) 1.5px, transparent 1.5px)', backgroundSize: '28px 28px' }} />
@@ -677,7 +677,7 @@ const About = () => {
               viewport={{ once: true }} transition={{ duration: 0.65, delay: 0.1 }}>
               <h2 className="font-bold leading-[1.15] mb-8"
                 style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 2.8vw, 2.6rem)', color: '#111' }}>
-                What sets us apart<br />from the <span style={{ color: '#a83a00' }}>rest.</span>
+                What sets us apart<br />from the <span style={{ color: 'var(--primary)' }}>rest.</span>
               </h2>
 
               <div className="space-y-6">
@@ -704,7 +704,7 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           8. TEAM — 4 white cards on brand-colour band
          ══════════════════════════════════════════════════════ */}
-      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+      <section className="py-16 overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="w-full px-6 lg:px-10">
 
           {/* Section header */}
@@ -737,7 +737,7 @@ const About = () => {
                   <img src={m.img} alt={m.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-400"
-                    style={{ backgroundColor: '#a83a00' }} />
+                    style={{ backgroundColor: 'var(--primary)' }} />
                 </div>
 
                 {/* Details */}
@@ -745,7 +745,7 @@ const About = () => {
                   <h4 className="font-bold text-lg mb-1" style={{ fontFamily: PP, color: '#111' }}>{m.name}</h4>
                   <p className="text-xs mb-2" style={{ fontFamily: PP, color: '#999' }}>{m.qualification}</p>
                   <p className="font-semibold text-xs uppercase tracking-wide whitespace-pre-line leading-relaxed"
-                    style={{ fontFamily: PP, color: '#a83a00' }}>{m.role}</p>
+                    style={{ fontFamily: PP, color: 'var(--primary)' }}>{m.role}</p>
                 </div>
               </motion.div>
             ))}

@@ -96,7 +96,7 @@ const Services = () => {
                 <div className="h-52 relative overflow-hidden">
                   <img src={service.img} alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600" />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(168,58,0,0.35), transparent)' }} />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--p-a35), transparent)' }} />
                   <div className="absolute top-3 right-3 w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
                     style={{ backgroundColor: '#fda102' }}>
                     <ArrowRight size={13} className="text-white" />
@@ -107,9 +107,9 @@ const Services = () => {
                   <p className="text-gray-500 mb-6 flex-grow leading-relaxed font-light text-base" style={{ fontFamily: PP }}>{service.desc}</p>
                   <Link to={`/services/${service.slug}`}
                     className="flex items-center justify-between mt-auto border-t border-gray-100 pt-5 group/link">
-                    <span className="font-medium text-base transition-colors" style={{ fontFamily: PP, color: '#a83a00' }}>Explore Details</span>
+                    <span className="font-medium text-base transition-colors" style={{ fontFamily: PP, color: 'var(--primary)' }}>Explore Details</span>
                     <span className="w-9 h-9 rounded-full flex items-center justify-center transition-all"
-                      style={{ backgroundColor: 'rgba(253,161,2,0.12)', color: '#a83a00' }}>
+                      style={{ backgroundColor: 'rgba(253,161,2,0.12)', color: 'var(--primary)' }}>
                       <ChevronRight size={15} />
                     </span>
                   </Link>
@@ -121,7 +121,7 @@ const Services = () => {
       </section>
 
       {/* ── CTA ───────────────────────────────────────────── */}
-      <section className="py-10 text-white text-center" style={{ backgroundColor: '#a83a00' }}>
+      <section className="py-10 text-white text-center" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="max-w-4xl mx-auto px-6">
           <motion.p
             initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}

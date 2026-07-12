@@ -7,7 +7,7 @@
   --color-navy-700: #334155;
 
   /* Primary brand: burnt orange */
-  --color-teal-500: #a83a00;
+  --color-teal-500: var(--primary);
   --color-teal-600: #8a2f00;
   --color-teal-700: #6b2500;
 
@@ -56,6 +56,56 @@
   width: max-content;
 }
 .animate-marquee-testimonials:hover { animation-play-state: paused; }
+
+/* ─── Theme: CSS custom properties ─── */
+:root, [data-theme="red"] {
+  --primary:      var(--primary);
+  --primary-dark: var(--primary-dark);
+  /* rgba tints of primary (168, 58, 0) */
+  --p-a03: var(--p-a03);
+  --p-a04: var(--p-a04);
+  --p-a05: var(--p-a05);
+  --p-a06: var(--p-a06);
+  --p-a08: var(--p-a08);
+  --p-a09: var(--p-a09);
+  --p-a10: var(--p-a10);
+  --p-a12: var(--p-a12);
+  --p-a15: var(--p-a15);
+  --p-a18: var(--p-a18);
+  --p-a20: var(--p-a20);
+  --p-a22: var(--p-a22);
+  --p-a25: var(--p-a25);
+  --p-a30: var(--p-a30);
+  --p-a35: var(--p-a35);
+}
+
+[data-theme="blue"] {
+  --primary:      #1c3447;
+  --primary-dark: #0f2030;
+  /* rgba tints of primary (28, 52, 71) */
+  --p-a03: rgba(28,52,71,0.03);
+  --p-a04: rgba(28,52,71,0.04);
+  --p-a05: rgba(28,52,71,0.05);
+  --p-a06: rgba(28,52,71,0.06);
+  --p-a08: rgba(28,52,71,0.08);
+  --p-a09: rgba(28,52,71,0.09);
+  --p-a10: rgba(28,52,71,0.1);
+  --p-a12: rgba(28,52,71,0.12);
+  --p-a15: rgba(28,52,71,0.15);
+  --p-a18: rgba(28,52,71,0.18);
+  --p-a20: rgba(28,52,71,0.2);
+  --p-a22: rgba(28,52,71,0.22);
+  --p-a25: rgba(28,52,71,0.25);
+  --p-a30: rgba(28,52,71,0.3);
+  --p-a35: rgba(28,52,71,0.35);
+}
+
+/* Utility classes to replace Tailwind arbitrary-value colour classes */
+.thm-hover-text:hover          { color: var(--primary) !important; }
+.thm-hover-bg:hover            { background-color: var(--primary) !important; }
+.thm-focus-border:focus        { border-color: var(--primary) !important; }
+.thm-ghover-text               { color: inherit; }
+.group:hover .thm-ghover-text  { color: var(--primary) !important; }
 
 * {
   box-sizing: border-box;

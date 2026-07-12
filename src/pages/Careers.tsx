@@ -106,7 +106,7 @@ const Careers = () => {
 
           <div className="mb-10">
             <p className="font-bold tracking-[0.2em] uppercase text-xs mb-3"
-              style={{ fontFamily: PP, color: '#a83a00' }}>Open Positions</p>
+              style={{ fontFamily: PP, color: 'var(--primary)' }}>Open Positions</p>
             <h2 className="font-bold"
               style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: '#111' }}>
               Current Openings
@@ -115,7 +115,7 @@ const Careers = () => {
 
           {/* Tabs */}
           <div className="flex gap-1 p-1 rounded-xl mb-10 w-fit"
-            style={{ backgroundColor: 'rgba(168,58,0,0.08)' }}>
+            style={{ backgroundColor: 'var(--p-a08)' }}>
             {[
               { key: 'internal', label: `At Maru Consultancy (${internalJobs.length})` },
               { key: 'client', label: `Client Postings (${clientJobs.length})` },
@@ -125,8 +125,8 @@ const Careers = () => {
                 className="px-5 py-2.5 rounded-lg font-semibold text-sm transition-all"
                 style={{
                   fontFamily: PP,
-                  backgroundColor: activeTab === tab.key ? '#a83a00' : 'transparent',
-                  color: activeTab === tab.key ? '#fff' : '#a83a00',
+                  backgroundColor: activeTab === tab.key ? 'var(--primary)' : 'transparent',
+                  color: activeTab === tab.key ? '#fff' : 'var(--primary)',
                 }}>
                 {tab.label}
               </button>
@@ -168,8 +168,8 @@ const Careers = () => {
                     <div className="flex flex-wrap items-center gap-2 mb-3">
                       <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
                         style={{
-                          backgroundColor: job.category === 'internal' ? 'rgba(168,58,0,0.10)' : 'rgba(253,161,2,0.12)',
-                          color: job.category === 'internal' ? '#a83a00' : '#c07a00',
+                          backgroundColor: job.category === 'internal' ? 'var(--p-a10)' : 'rgba(253,161,2,0.12)',
+                          color: job.category === 'internal' ? 'var(--primary)' : '#c07a00',
                           fontFamily: PP,
                         }}>
                         {job.category === 'internal' ? 'In-house' : 'Client Role'}
@@ -188,15 +188,15 @@ const Careers = () => {
                     {/* Meta */}
                     <div className="flex flex-wrap gap-5" style={{ fontSize: '0.97rem', color: '#555' }}>
                       <span className="flex items-center gap-1.5 font-medium">
-                        <MapPin size={15} style={{ color: '#a83a00' }} /> {job.location}
+                        <MapPin size={15} style={{ color: 'var(--primary)' }} /> {job.location}
                       </span>
                       <span className="flex items-center gap-1.5 font-medium">
-                        <Clock size={15} style={{ color: '#a83a00' }} /> {job.type}
+                        <Clock size={15} style={{ color: 'var(--primary)' }} /> {job.type}
                       </span>
                       <span className="flex items-center gap-1.5 font-medium">
-                        <Briefcase size={15} style={{ color: '#a83a00' }} /> {job.experience} exp
+                        <Briefcase size={15} style={{ color: 'var(--primary)' }} /> {job.experience} exp
                       </span>
-                      <span className="flex items-center gap-1.5 font-semibold" style={{ color: '#a83a00' }}>
+                      <span className="flex items-center gap-1.5 font-semibold" style={{ color: 'var(--primary)' }}>
                         {job.ctc}
                       </span>
                       <span className="flex items-center gap-1.5 text-gray-400 font-normal" style={{ fontSize: '0.88rem' }}>
@@ -209,12 +209,12 @@ const Careers = () => {
                   <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                     <Link to={`/careers/${job.slug}`}
                       className="px-6 py-3 rounded-xl font-semibold text-sm border-2 flex items-center justify-center gap-2 transition-all hover:opacity-80"
-                      style={{ fontFamily: PP, color: '#a83a00', borderColor: '#a83a00', backgroundColor: 'transparent' }}>
+                      style={{ fontFamily: PP, color: 'var(--primary)', borderColor: 'var(--primary)', backgroundColor: 'transparent' }}>
                       View JD <ChevronRight size={15} />
                     </Link>
                     <Link to={`/careers/${job.slug}#apply`}
                       className="px-6 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all hover:opacity-90 shadow-sm"
-                      style={{ fontFamily: PP, backgroundColor: '#a83a00', color: '#fff' }}>
+                      style={{ fontFamily: PP, backgroundColor: 'var(--primary)', color: '#fff' }}>
                       Apply Now <ArrowRight size={15} />
                     </Link>
                   </div>
@@ -228,7 +228,7 @@ const Careers = () => {
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}
             className="mt-14 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6"
-            style={{ backgroundColor: '#a83a00' }}>
+            style={{ backgroundColor: 'var(--primary)' }}>
             <div>
               <h3 className="font-bold text-white mb-2"
                 style={{ fontFamily: PP, fontSize: '1.4rem' }}>

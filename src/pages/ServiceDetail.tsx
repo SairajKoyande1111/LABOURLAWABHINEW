@@ -56,7 +56,7 @@ const ServiceDetail = () => {
         <p className="text-gray-500 mb-4">
           {status === 'not-found' ? 'Service not found.' : 'Unable to load this service right now.'}
         </p>
-        <Link to="/services" className="font-semibold" style={{ color: '#a83a00' }}>
+        <Link to="/services" className="font-semibold" style={{ color: 'var(--primary)' }}>
           ← Back to Services
         </Link>
       </div>
@@ -69,7 +69,7 @@ const ServiceDetail = () => {
       {/* ── Hero ── */}
       <section
         className="flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: '#a83a00', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
@@ -178,7 +178,7 @@ const ServiceDetail = () => {
                     {/* Number badge */}
                     <div
                       className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm mt-0.5 transition-all group-hover:scale-110"
-                      style={{ backgroundColor: 'rgba(168,58,0,0.08)', color: '#a83a00', fontFamily: PP }}>
+                      style={{ backgroundColor: 'var(--p-a08)', color: 'var(--primary)', fontFamily: PP }}>
                       {String(i + 1).padStart(2, '0')}
                     </div>
 
@@ -220,9 +220,9 @@ const ServiceDetail = () => {
                         style={{
                           fontFamily: PP,
                           fontSize: '0.92rem',
-                          color: '#a83a00',
-                          backgroundColor: 'rgba(168,58,0,0.06)',
-                          borderColor: 'rgba(168,58,0,0.2)',
+                          color: 'var(--primary)',
+                          backgroundColor: 'var(--p-a06)',
+                          borderColor: 'var(--p-a20)',
                         }}>
                         <ArrowRight size={14} /> {r.name}
                       </Link>
@@ -243,7 +243,7 @@ const ServiceDetail = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
 
-                <div className="p-2" style={{ backgroundColor: '#a83a00' }}>
+                <div className="p-2" style={{ backgroundColor: 'var(--primary)' }}>
                   <p className="text-center text-xs font-semibold uppercase tracking-widest" style={{ color: '#fda102', fontFamily: PP }}>
                     Get Expert Advice
                   </p>
@@ -264,13 +264,13 @@ const ServiceDetail = () => {
                     <Link
                       to="/contact"
                       className="w-full text-white py-4 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90"
-                      style={{ backgroundColor: '#a83a00', fontFamily: PP, fontSize: '0.95rem' }}>
+                      style={{ backgroundColor: 'var(--primary)', fontFamily: PP, fontSize: '0.95rem' }}>
                       <FileText size={16} /> Request Proposal
                     </Link>
                     <a
                       href="tel:+919876543210"
-                      className="w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 border-2 transition-all hover:bg-[#a83a00] hover:text-white"
-                      style={{ fontFamily: PP, fontSize: '0.95rem', color: '#a83a00', borderColor: '#a83a00', backgroundColor: 'transparent' }}>
+                      className="w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 border-2 transition-all hover:bg-[var(--primary)] hover:text-white"
+                      style={{ fontFamily: PP, fontSize: '0.95rem', color: 'var(--primary)', borderColor: 'var(--primary)', backgroundColor: 'transparent' }}>
                       <Phone size={16} /> Call Now
                     </a>
                   </div>
@@ -284,7 +284,7 @@ const ServiceDetail = () => {
                 className="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
                 <h4
                   className="font-bold mb-5 uppercase tracking-widest text-xs"
-                  style={{ fontFamily: PP, color: '#a83a00' }}>
+                  style={{ fontFamily: PP, color: 'var(--primary)' }}>
                   Other Services
                 </h4>
                 <ul className="space-y-0.5">
@@ -292,9 +292,9 @@ const ServiceDetail = () => {
                     <li key={s._id}>
                       <Link
                         to={`/services/${s.slug}`}
-                        className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[#a83a00]"
+                        className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[var(--primary)]"
                         style={{ fontFamily: PP, color: '#333', fontSize: '0.9rem', fontWeight: 500 }}>
-                        <ChevronRight size={14} className="text-gray-300 group-hover:text-[#a83a00] transition-colors shrink-0" />
+                        <ChevronRight size={14} className="text-gray-300 group-hover:text-[var(--primary)] transition-colors shrink-0" />
                         {s.title}
                       </Link>
                     </li>
@@ -313,7 +313,7 @@ const ServiceDetail = () => {
           <div className="flex justify-between items-end mb-12">
             <div>
               <p className="font-bold tracking-[0.18em] uppercase text-xs mb-2"
-                style={{ fontFamily: PP, color: '#a83a00' }}>Latest Insights</p>
+                style={{ fontFamily: PP, color: 'var(--primary)' }}>Latest Insights</p>
               <h2 className="text-3xl md:text-4xl font-bold"
                 style={{ fontFamily: PP, color: '#111' }}>Stay informed with expert guidance</h2>
             </div>
@@ -337,20 +337,20 @@ const ServiceDetail = () => {
                   <img src={post.img} alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute top-3 left-3 text-white text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider"
-                    style={{ backgroundColor: '#a83a00' }}>
+                    style={{ backgroundColor: 'var(--primary)' }}>
                     {post.category}
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
                   <p className="text-[11px] font-semibold mb-2 uppercase tracking-wider"
-                    style={{ color: '#a83a00', fontFamily: PP }}>{post.date}</p>
+                    style={{ color: 'var(--primary)', fontFamily: PP }}>{post.date}</p>
                   <h3 className="text-base font-bold mb-3 line-clamp-2"
                     style={{ fontFamily: PP, color: '#111' }}>{post.title}</h3>
                   <p className="text-gray-500 text-sm mb-5 flex-grow leading-relaxed"
                     style={{ fontFamily: PP }}>{post.desc}</p>
                   <Link to="/resources"
                     className="font-bold text-sm flex items-center gap-1.5 transition-colors mt-auto hover:opacity-70"
-                    style={{ color: '#a83a00', fontFamily: PP }}>
+                    style={{ color: 'var(--primary)', fontFamily: PP }}>
                     Read Article <ChevronRight size={14} />
                   </Link>
                 </div>

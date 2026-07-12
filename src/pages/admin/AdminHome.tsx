@@ -113,7 +113,7 @@ export default function AdminHome() {
       {/* Sticky unsaved-changes bar */}
       {dirty && !saving && (
         <div className="sticky top-0 z-20 mb-5 flex items-center justify-between gap-3 rounded-xl px-4 py-3 shadow-md"
-          style={{ backgroundColor: '#7c2d00', fontFamily: PP }}>
+          style={{ backgroundColor: 'var(--primary-dark)', fontFamily: PP }}>
           <span className="text-sm font-semibold text-white">You have unsaved changes.</span>
           <button onClick={save}
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-opacity hover:opacity-90"
@@ -247,7 +247,7 @@ export default function AdminHome() {
                   {featured.map((svc, i) => (
                     <div key={svc.slug}
                       className="flex items-center gap-3 p-3 rounded-xl border bg-white"
-                      style={{ borderColor: 'rgba(168,58,0,0.15)' }}>
+                      style={{ borderColor: 'var(--p-a15)' }}>
                       {svc.img && <img src={svc.img} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" />}
                       <span className="flex-1 text-sm font-medium truncate" style={{ fontFamily: PP, color: '#111' }}>{svc.title}</span>
                       <div className="flex items-center gap-1 shrink-0">
@@ -341,7 +341,7 @@ export default function AdminHome() {
                   </p>
                   {picked.map((card, i) => (
                     <div key={i} className="flex items-center gap-3 p-3 rounded-xl border bg-white"
-                      style={{ borderColor: 'rgba(168,58,0,0.15)' }}>
+                      style={{ borderColor: 'var(--p-a15)' }}>
                       {card.img && <img src={card.img} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" />}
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate" style={{ fontFamily: PP, color: '#111' }}>{card.title}</p>

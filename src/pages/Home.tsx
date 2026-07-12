@@ -215,9 +215,9 @@ const Home = () => {
                 {/* Button 1: Book a Consultation */}
                 <Link to="/contact"
                   className="inline-flex items-center gap-2 text-white rounded-full transition-all shadow-lg hover:scale-[1.02] whitespace-nowrap"
-                  style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '1rem', letterSpacing: '0.02em', padding: '0.85rem 1.75rem', backgroundColor: '#a83a00', border: '2px solid #fda102' }}
+                  style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '1rem', letterSpacing: '0.02em', padding: '0.85rem 1.75rem', backgroundColor: 'var(--primary)', border: '2px solid #fda102' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#fda102'; (e.currentTarget as HTMLElement).style.color = '#111111'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#a83a00'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--primary)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}>
                   {content?.ctaPrimaryText ?? 'Book a Consultation'} <ArrowRight size={16} />
                 </Link>
 
@@ -301,7 +301,7 @@ const Home = () => {
       </section>
 
       {/* ── One Stop Consultancy Partner ─────────────────── */}
-      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+      <section className="py-16 overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="w-full px-6 lg:px-10">
 
           {/* Section header */}
@@ -446,7 +446,7 @@ const Home = () => {
           {/* Header */}
           <div className="text-center mb-12 mx-auto">
             <p className="font-bold text-base uppercase tracking-wider mb-3"
-              style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>{content?.servicesPreviewLabel ?? 'Our Expertise'}</p>
+              style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>{content?.servicesPreviewLabel ?? 'Our Expertise'}</p>
             <h2 className="font-bold text-navy-900 mb-3 whitespace-nowrap"
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)' }}>
               {content?.servicesPreviewTitle ?? 'Comprehensive Compliance Solutions'}
@@ -480,7 +480,7 @@ const Home = () => {
                     style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}>{service.desc}</p>
                   <Link to={`/services/${service.slug}`}
                     className="inline-flex items-center gap-1 text-xs font-semibold mt-auto group-hover:gap-2 transition-all"
-                    style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>
+                    style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>
                     Explore Details <ChevronRight size={13} />
                   </Link>
                 </div>
@@ -493,7 +493,7 @@ const Home = () => {
           <div className="text-center mt-10">
             <Link to="/services"
               className="inline-flex items-center gap-2 text-white px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:opacity-90 hover:scale-[1.02] shadow-md"
-              style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#a83a00' }}>
+              style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: 'var(--primary)' }}>
               View All Services <ArrowRight size={15} />
             </Link>
           </div>
@@ -502,7 +502,7 @@ const Home = () => {
       </section>
 
       {/* ── Testimonials ──────────────────────────────────── */}
-      <section className="py-10 relative overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+      <section className="py-10 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
 
         {/* Decorative ambient glows */}
         <div className="absolute inset-0 pointer-events-none">
@@ -583,9 +583,9 @@ const Home = () => {
                     <div className="flex items-center gap-3.5">
                       {/* Avatar with amber ring */}
                       <div className="p-[2.5px] rounded-full shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #fda102, #a83a00)' }}>
+                        style={{ background: 'linear-gradient(135deg, #fda102, var(--primary))' }}>
                         <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
-                          style={{ backgroundColor: '#fff7ed', color: '#a83a00', fontFamily: 'Poppins, sans-serif' }}>
+                          style={{ backgroundColor: '#fff7ed', color: 'var(--primary)', fontFamily: 'Poppins, sans-serif' }}>
                           {test.author.charAt(0)}
                         </div>
                       </div>
@@ -608,7 +608,7 @@ const Home = () => {
       <section className="py-14 bg-white border-y border-gray-100 overflow-hidden">
         {/* Section label */}
         <p className="text-center font-semibold uppercase tracking-[0.25em] mb-10"
-          style={{ fontFamily: 'Poppins, sans-serif', fontSize: '11px', color: '#a83a00' }}>
+          style={{ fontFamily: 'Poppins, sans-serif', fontSize: '11px', color: 'var(--primary)' }}>
           Serving 500+ Corporations Across India
         </p>
 
@@ -647,7 +647,7 @@ const Home = () => {
           <div className="flex justify-between items-end mb-12">
             <div>
               <p className="font-bold tracking-[0.18em] uppercase text-xs mb-2"
-                style={{ fontFamily: 'Poppins, sans-serif', color: '#a83a00' }}>Latest Insights</p>
+                style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Latest Insights</p>
               <h2 className="text-3xl md:text-4xl font-bold text-navy-900"
                 style={{ fontFamily: 'Poppins, sans-serif' }}>Stay informed with expert guidance</h2>
             </div>
@@ -689,7 +689,7 @@ const Home = () => {
       </section>
 
       {/* ── CTA Banner ────────────────────────────────────── */}
-      <section className="py-0 overflow-hidden" style={{ backgroundColor: '#a83a00' }}>
+      <section className="py-0 overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="w-full flex flex-col md:flex-row items-stretch">
 
           {/* Left — text content */}

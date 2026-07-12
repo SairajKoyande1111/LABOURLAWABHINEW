@@ -66,8 +66,8 @@ function ApplicationCard({ app, onDelete, onStatusChange }: {
       {/* Header row */}
       <div className="flex items-center gap-4 px-5 py-4">
         <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-          style={{ backgroundColor: 'rgba(168,58,0,0.09)' }}>
-          <User size={16} style={{ color: '#a83a00' }} />
+          style={{ backgroundColor: 'var(--p-a09)' }}>
+          <User size={16} style={{ color: 'var(--primary)' }} />
         </div>
 
         <div className="flex-1 min-w-0">
@@ -96,20 +96,20 @@ function ApplicationCard({ app, onDelete, onStatusChange }: {
         <div className="border-t border-gray-50 px-5 py-5 space-y-4">
           {/* Contact row */}
           <div className="flex flex-wrap gap-4 text-sm" style={{ fontFamily: PP }}>
-            <a href={`mailto:${app.email}`} className="flex items-center gap-1.5 text-gray-600 hover:text-[#a83a00] transition-colors">
+            <a href={`mailto:${app.email}`} className="flex items-center gap-1.5 text-gray-600 hover:text-[var(--primary)] transition-colors">
               <Mail size={13} /> {app.email}
             </a>
-            <a href={`tel:${app.phone}`} className="flex items-center gap-1.5 text-gray-600 hover:text-[#a83a00] transition-colors">
+            <a href={`tel:${app.phone}`} className="flex items-center gap-1.5 text-gray-600 hover:text-[var(--primary)] transition-colors">
               <Phone size={13} /> {app.phone}
             </a>
           </div>
 
           {/* Resume */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ fontFamily: PP, color: '#a83a00' }}>Resume</p>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ fontFamily: PP, color: 'var(--primary)' }}>Resume</p>
             <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70"
-              style={{ fontFamily: PP, color: '#a83a00' }}>
+              style={{ fontFamily: PP, color: 'var(--primary)' }}>
               <FileText size={14} /> {app.resumeName || 'View Resume'} <ExternalLink size={11} />
             </a>
           </div>
@@ -117,7 +117,7 @@ function ApplicationCard({ app, onDelete, onStatusChange }: {
           {/* Cover note */}
           {app.coverNote && (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ fontFamily: PP, color: '#a83a00' }}>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ fontFamily: PP, color: 'var(--primary)' }}>
                 <MessageSquare size={12} className="inline mr-1" />Cover Note
               </p>
               <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line" style={{ fontFamily: PP }}>
@@ -232,7 +232,7 @@ export default function AdminApplications() {
           placeholder="Search by name, email or role…"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="flex-1 min-w-[200px] px-4 py-2 rounded-xl border text-sm outline-none focus:border-[#a83a00] transition-colors"
+          className="flex-1 min-w-[200px] px-4 py-2 rounded-xl border text-sm outline-none focus:border-[var(--primary)] transition-colors"
           style={{ fontFamily: PP, borderColor: '#e5e7eb' }}
         />
         <select value={filterCat} onChange={e => setFilterCat(e.target.value as typeof filterCat)}
@@ -264,8 +264,8 @@ export default function AdminApplications() {
       {/* Grouped by role */}
       {Object.entries(groups).map(([roleTitle, { category, apps: roleApps }]) => {
         const isClient = category === 'client';
-        const accent = isClient ? '#c07a00' : '#a83a00';
-        const bg = isClient ? 'rgba(253,161,2,0.10)' : 'rgba(168,58,0,0.08)';
+        const accent = isClient ? '#c07a00' : 'var(--primary)';
+        const bg = isClient ? 'rgba(253,161,2,0.10)' : 'var(--p-a08)';
         return (
           <div key={roleTitle} className="mb-8">
             {/* Role header */}

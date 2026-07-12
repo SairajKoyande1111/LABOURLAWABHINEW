@@ -110,7 +110,7 @@ export default function AdminServices() {
 
         {dirty && !saving && (
           <div className="sticky top-0 z-20 mb-5 flex items-center justify-between gap-3 rounded-xl px-4 py-3 shadow-md"
-            style={{ backgroundColor: '#7c2d00', fontFamily: PP }}>
+            style={{ backgroundColor: 'var(--primary-dark)', fontFamily: PP }}>
             <span className="text-sm font-semibold text-white">You have unsaved changes.</span>
             <button onClick={save} disabled={!editing.title || !editing.slug}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-opacity hover:opacity-90 disabled:opacity-50"

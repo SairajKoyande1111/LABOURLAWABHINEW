@@ -120,7 +120,7 @@ export default function AdminClientele() {
 
       {dirty && !saving && (
         <div className="sticky top-0 z-20 mb-5 flex items-center justify-between gap-3 rounded-xl px-4 py-3 shadow-md"
-          style={{ backgroundColor: '#7c2d00', fontFamily: PP }}>
+          style={{ backgroundColor: 'var(--primary-dark)', fontFamily: PP }}>
           <span className="text-sm font-semibold text-white">You have unsaved changes.</span>
           <button onClick={save}
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-opacity hover:opacity-90"
@@ -155,7 +155,7 @@ export default function AdminClientele() {
                 <input
                   type="number" value={stat.target}
                   onChange={e => { const n = [...data.stats]; n[i] = { ...stat, target: Number(e.target.value) }; set('stats', n); }}
-                  className="w-24 px-4 py-2.5 rounded-xl border text-sm outline-none focus:border-[#a83a00]"
+                  className="w-24 px-4 py-2.5 rounded-xl border text-sm outline-none focus:border-[var(--primary)]"
                   style={{ borderColor: '#e5e7eb', fontFamily: PP }}
                 />
               </Field>
@@ -163,7 +163,7 @@ export default function AdminClientele() {
                 <input
                   type="text" value={stat.suffix} placeholder="e.g. +"
                   onChange={e => { const n = [...data.stats]; n[i] = { ...stat, suffix: e.target.value }; set('stats', n); }}
-                  className="w-16 px-4 py-2.5 rounded-xl border text-sm outline-none focus:border-[#a83a00]"
+                  className="w-16 px-4 py-2.5 rounded-xl border text-sm outline-none focus:border-[var(--primary)]"
                   style={{ borderColor: '#e5e7eb', fontFamily: PP }}
                 />
               </Field>
@@ -171,7 +171,7 @@ export default function AdminClientele() {
                 <input
                   type="number" value={stat.decimals} min={0} max={2}
                   onChange={e => { const n = [...data.stats]; n[i] = { ...stat, decimals: Number(e.target.value) }; set('stats', n); }}
-                  className="w-16 px-4 py-2.5 rounded-xl border text-sm outline-none focus:border-[#a83a00]"
+                  className="w-16 px-4 py-2.5 rounded-xl border text-sm outline-none focus:border-[var(--primary)]"
                   style={{ borderColor: '#e5e7eb', fontFamily: PP }}
                 />
               </Field>

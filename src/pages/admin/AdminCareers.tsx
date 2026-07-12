@@ -174,7 +174,7 @@ export default function AdminCareers() {
 
         {dirty && !saving && (
           <div className="sticky top-0 z-20 mb-5 flex items-center justify-between gap-3 rounded-xl px-4 py-3 shadow-md"
-            style={{ backgroundColor: '#7c2d00', fontFamily: PP }}>
+            style={{ backgroundColor: 'var(--primary-dark)', fontFamily: PP }}>
             <span className="text-sm font-semibold text-white">You have unsaved changes.</span>
             <button onClick={save} disabled={!editing.title || !editing.slug}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-opacity hover:opacity-90 disabled:opacity-50"
@@ -253,7 +253,7 @@ export default function AdminCareers() {
         <Section title="Hero Section" description="The banner shown at the top of the public Careers page.">
           {heroDirty && !heroSaving && (
             <div className="flex items-center justify-between gap-3 rounded-xl px-4 py-3 shadow-sm -mt-2 mb-2"
-              style={{ backgroundColor: '#7c2d00', fontFamily: PP }}>
+              style={{ backgroundColor: 'var(--primary-dark)', fontFamily: PP }}>
               <span className="text-sm font-semibold text-white">You have unsaved changes.</span>
               <button onClick={saveHero}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-opacity hover:opacity-90"
@@ -317,8 +317,8 @@ export default function AdminCareers() {
         const group = jobs.filter(j => j.category === cat);
         if (group.length === 0) return null;
         const label = cat === 'internal' ? 'At Maru Consultancy' : 'Client Postings';
-        const accent = cat === 'internal' ? '#a83a00' : '#c07a00';
-        const bg = cat === 'internal' ? 'rgba(168,58,0,0.08)' : 'rgba(253,161,2,0.10)';
+        const accent = cat === 'internal' ? 'var(--primary)' : '#c07a00';
+        const bg = cat === 'internal' ? 'var(--p-a08)' : 'rgba(253,161,2,0.10)';
         return (
           <div key={cat} className="mb-6">
             <div className="flex items-center gap-3 mb-3">
@@ -335,7 +335,7 @@ export default function AdminCareers() {
             <div className="space-y-3">
               {group.map((j, i) => (
                 <div key={j._id} className="bg-white rounded-2xl border shadow-sm p-4 flex items-center gap-4"
-                  style={{ borderColor: cat === 'internal' ? 'rgba(168,58,0,0.12)' : 'rgba(253,161,2,0.18)' }}>
+                  style={{ borderColor: cat === 'internal' ? 'var(--p-a12)' : 'rgba(253,161,2,0.18)' }}>
                   <div className="flex flex-col items-center gap-0.5 shrink-0">
                     <button onClick={() => move(cat, i, -1)} disabled={i === 0}
                       className="p-1 rounded hover:bg-gray-100 disabled:opacity-30 transition-colors" title="Move up">

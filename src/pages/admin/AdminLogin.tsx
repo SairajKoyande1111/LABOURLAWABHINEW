@@ -35,7 +35,7 @@ export default function AdminLogin() {
     >
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <div className="text-center mb-8">
-          <p className="font-bold text-lg" style={{ color: '#a83a00' }}>Maru Consultancy</p>
+          <p className="font-bold text-lg" style={{ color: 'var(--primary)' }}>Maru Consultancy</p>
           <p className="text-gray-400 text-sm mt-1">Admin Panel Login</p>
         </div>
 
@@ -50,7 +50,7 @@ export default function AdminLogin() {
                 value={form.username}
                 onChange={(e) => setForm({ ...form, username: e.target.value })}
                 required
-                className="w-full pl-10 pr-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[#a83a00]"
+                className="w-full pl-10 pr-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)]"
                 style={{ borderColor: '#e5e7eb' }}
               />
             </div>
@@ -64,7 +64,7 @@ export default function AdminLogin() {
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 required
-                className="w-full pl-10 pr-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[#a83a00]"
+                className="w-full pl-10 pr-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)]"
                 style={{ borderColor: '#e5e7eb' }}
               />
             </div>
@@ -76,7 +76,7 @@ export default function AdminLogin() {
             type="submit"
             disabled={submitting}
             className="w-full py-3 rounded-xl font-semibold text-white flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90 disabled:opacity-60"
-            style={{ backgroundColor: '#a83a00' }}
+            style={{ backgroundColor: 'var(--primary)' }}
           >
             {submitting && <Loader2 size={15} className="animate-spin" />}
             {submitting ? 'Signing in…' : 'Sign In'}

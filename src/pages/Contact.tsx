@@ -69,7 +69,7 @@ const LABEL_STYLE: React.CSSProperties = {
   fontFamily: PP,
   fontSize: '0.8rem',
   fontWeight: 600,
-  color: '#a83a00',
+  color: 'var(--primary)',
   display: 'block',
   marginBottom: '6px',
   letterSpacing: '0.04em',
@@ -135,7 +135,7 @@ const Contact = () => {
   };
 
   const inputProps = (name: string) => ({
-    style: { ...FIELD_STYLE, borderColor: focused === name ? '#a83a00' : '#e5e7eb' },
+    style: { ...FIELD_STYLE, borderColor: focused === name ? 'var(--primary)' : '#e5e7eb' },
     onFocus: () => setFocused(name),
     onBlur: () => setFocused(''),
   });
@@ -188,7 +188,7 @@ const Contact = () => {
                 <item.icon size={34} />
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider mb-0.5"
-                    style={{ fontFamily: PP, color: '#a83a00' }}>{item.label}</p>
+                    style={{ fontFamily: PP, color: 'var(--primary)' }}>{item.label}</p>
                   <p className="font-semibold text-sm" style={{ fontFamily: PP, color: '#111' }}>{item.value}</p>
                 </div>
               </a>
@@ -227,8 +227,8 @@ const Contact = () => {
                     initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center text-center py-12">
                     <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md"
-                      style={{ backgroundColor: 'rgba(168,58,0,0.09)' }}>
-                      <CheckCircle size={32} style={{ color: '#a83a00' }} />
+                      style={{ backgroundColor: 'var(--p-a09)' }}>
+                      <CheckCircle size={32} style={{ color: 'var(--primary)' }} />
                     </div>
                     <h3 className="font-bold mb-2" style={{ fontFamily: PP, fontSize: '1.5rem', color: '#111' }}>
                       Message Sent!
@@ -238,7 +238,7 @@ const Contact = () => {
                     </p>
                     <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', company: '', service: '', message: '' }); }}
                       className="mt-7 font-semibold text-sm flex items-center gap-1.5 transition-opacity hover:opacity-70"
-                      style={{ fontFamily: PP, color: '#a83a00' }}>
+                      style={{ fontFamily: PP, color: 'var(--primary)' }}>
                       Send another message <ArrowRight size={14} />
                     </button>
                   </motion.div>
@@ -271,7 +271,7 @@ const Contact = () => {
                     <div>
                       <label style={LABEL_STYLE}>Service Interest</label>
                       <select name="service" value={form.service} onChange={handleChange}
-                        style={{ ...FIELD_STYLE, borderColor: focused === 'service' ? '#a83a00' : '#e5e7eb', appearance: 'none' }}
+                        style={{ ...FIELD_STYLE, borderColor: focused === 'service' ? 'var(--primary)' : '#e5e7eb', appearance: 'none' }}
                         onFocus={() => setFocused('service')} onBlur={() => setFocused('')}>
                         <option value="">Select a service...</option>
                         {apiData.serviceOptions.map((opt, i) => (
@@ -283,7 +283,7 @@ const Contact = () => {
                       <label style={LABEL_STYLE}>Your Message</label>
                       <textarea name="message" value={form.message} onChange={handleChange}
                         rows={5} placeholder="Describe your compliance challenge or query..."
-                        style={{ ...FIELD_STYLE, borderColor: focused === 'message' ? '#a83a00' : '#e5e7eb', resize: 'none' }}
+                        style={{ ...FIELD_STYLE, borderColor: focused === 'message' ? 'var(--primary)' : '#e5e7eb', resize: 'none' }}
                         onFocus={() => setFocused('message')} onBlur={() => setFocused('')} />
                     </div>
                     {submitError && (
@@ -293,7 +293,7 @@ const Contact = () => {
                     )}
                     <button type="submit" disabled={submitting}
                       className="w-full py-4 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90 disabled:opacity-60"
-                      style={{ fontFamily: PP, backgroundColor: '#a83a00', color: '#fff' }}>
+                      style={{ fontFamily: PP, backgroundColor: 'var(--primary)', color: '#fff' }}>
                       {submitting ? 'Sending…' : <><span>Send Message</span><ArrowRight size={16} /></>}
                     </button>
                   </form>
@@ -310,7 +310,7 @@ const Contact = () => {
                 transition={{ duration: 0.55, delay: 0.1 }}
                 className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
                 <div className="px-7 py-4 text-xs font-bold uppercase tracking-widest text-center"
-                  style={{ backgroundColor: '#a83a00', color: '#fda102', fontFamily: PP }}>
+                  style={{ backgroundColor: 'var(--primary)', color: '#fda102', fontFamily: PP }}>
                   Contact Details
                 </div>
                 <div className="bg-white p-7 space-y-6">
@@ -343,13 +343,13 @@ const Contact = () => {
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-4">
                       {item.icon === Clock ? (
-                        <Clock size={32} style={{ color: '#a83a00' }} className="shrink-0" />
+                        <Clock size={32} style={{ color: 'var(--primary)' }} className="shrink-0" />
                       ) : (
                         <item.icon size={32} />
                       )}
                       <div>
                         <p className="font-bold text-xs uppercase tracking-wider mb-1"
-                          style={{ fontFamily: PP, color: '#a83a00' }}>{item.label}</p>
+                          style={{ fontFamily: PP, color: 'var(--primary)' }}>{item.label}</p>
                         {item.lines.map((line, j) =>
                           item.hrefs ? (
                             <a key={j} href={item.hrefs[j]}

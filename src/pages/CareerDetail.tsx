@@ -54,7 +54,7 @@ const CareerDetail = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center" style={{ fontFamily: PP }}>
         <p className="text-gray-500 mb-4">Position not found.</p>
-        <Link to="/careers" className="font-semibold" style={{ color: '#a83a00' }}>
+        <Link to="/careers" className="font-semibold" style={{ color: 'var(--primary)' }}>
           ← Back to Careers
         </Link>
       </div>
@@ -111,7 +111,7 @@ const CareerDetail = () => {
 
       {/* ── Hero ── */}
       <section className="flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: '#a83a00', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
 
         <div className="absolute top-[-60px] right-[-60px] w-[300px] h-[300px] rounded-full opacity-10 pointer-events-none"
           style={{ backgroundColor: '#fda102' }} />
@@ -154,7 +154,7 @@ const CareerDetail = () => {
           {/* Back link */}
           <Link to="/careers"
             className="inline-flex items-center gap-2 text-sm font-semibold mb-8 transition-opacity hover:opacity-70"
-            style={{ fontFamily: PP, color: '#a83a00' }}>
+            style={{ fontFamily: PP, color: 'var(--primary)' }}>
             <ArrowLeft size={15} /> Back to All Openings
           </Link>
 
@@ -191,7 +191,7 @@ const CareerDetail = () => {
                       viewport={{ once: true }} transition={{ delay: i * 0.06 }}
                       className="flex items-start gap-4 pb-4 border-b border-gray-50 last:border-0 last:pb-0">
                       <span className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold mt-0.5"
-                        style={{ backgroundColor: 'rgba(168,58,0,0.09)', color: '#a83a00', fontFamily: PP }}>
+                        style={{ backgroundColor: 'var(--p-a09)', color: 'var(--primary)', fontFamily: PP }}>
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="text-gray-600 leading-relaxed"
@@ -213,7 +213,7 @@ const CareerDetail = () => {
                       initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }} transition={{ delay: i * 0.06 }}
                       className="flex items-start gap-3">
-                      <CheckCircle size={17} className="shrink-0 mt-0.5" style={{ color: '#a83a00' }} />
+                      <CheckCircle size={17} className="shrink-0 mt-0.5" style={{ color: 'var(--primary)' }} />
                       <span className="text-gray-600 leading-relaxed"
                         style={{ fontFamily: PP, fontSize: '0.97rem' }}>{item}</span>
                     </motion.li>
@@ -257,8 +257,8 @@ const CareerDetail = () => {
                     initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
                     className="text-center py-14">
                     <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5 shadow-sm"
-                      style={{ backgroundColor: 'rgba(168,58,0,0.1)' }}>
-                      <CheckCircle size={32} style={{ color: '#a83a00' }} />
+                      style={{ backgroundColor: 'var(--p-a10)' }}>
+                      <CheckCircle size={32} style={{ color: 'var(--primary)' }} />
                     </div>
                     <h3 className="font-bold mb-2"
                       style={{ fontFamily: PP, fontSize: '1.3rem', color: '#111' }}>
@@ -270,7 +270,7 @@ const CareerDetail = () => {
                     </p>
                     <Link to="/careers"
                       className="inline-flex items-center gap-2 font-semibold text-sm transition-opacity hover:opacity-70"
-                      style={{ color: '#a83a00', fontFamily: PP }}>
+                      style={{ color: 'var(--primary)', fontFamily: PP }}>
                       <ArrowLeft size={14} /> Browse More Openings
                     </Link>
                   </motion.div>
@@ -281,7 +281,7 @@ const CareerDetail = () => {
                       <div>
                         <label className="block text-sm font-semibold mb-2"
                           style={{ fontFamily: PP, color: '#333' }}>
-                          Full Name <span style={{ color: '#a83a00' }}>*</span>
+                          Full Name <span style={{ color: 'var(--primary)' }}>*</span>
                         </label>
                         <input
                           type="text"
@@ -289,7 +289,7 @@ const CareerDetail = () => {
                           value={form.name}
                           onChange={e => setForm({ ...form, name: e.target.value })}
                           required
-                          className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[#a83a00]"
+                          className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)]"
                           style={{ fontFamily: PP, borderColor: '#e5e7eb', color: '#333' }}
                         />
                       </div>
@@ -298,7 +298,7 @@ const CareerDetail = () => {
                       <div>
                         <label className="block text-sm font-semibold mb-2"
                           style={{ fontFamily: PP, color: '#333' }}>
-                          Phone Number <span style={{ color: '#a83a00' }}>*</span>
+                          Phone Number <span style={{ color: 'var(--primary)' }}>*</span>
                         </label>
                         <input
                           type="tel"
@@ -306,7 +306,7 @@ const CareerDetail = () => {
                           value={form.phone}
                           onChange={e => setForm({ ...form, phone: e.target.value })}
                           required
-                          className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[#a83a00]"
+                          className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)]"
                           style={{ fontFamily: PP, borderColor: '#e5e7eb', color: '#333' }}
                         />
                       </div>
@@ -316,7 +316,7 @@ const CareerDetail = () => {
                     <div>
                       <label className="block text-sm font-semibold mb-2"
                         style={{ fontFamily: PP, color: '#333' }}>
-                        Email Address <span style={{ color: '#a83a00' }}>*</span>
+                        Email Address <span style={{ color: 'var(--primary)' }}>*</span>
                       </label>
                       <input
                         type="email"
@@ -324,7 +324,7 @@ const CareerDetail = () => {
                         value={form.email}
                         onChange={e => setForm({ ...form, email: e.target.value })}
                         required
-                        className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[#a83a00]"
+                        className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)]"
                         style={{ fontFamily: PP, borderColor: '#e5e7eb', color: '#333' }}
                       />
                     </div>
@@ -333,14 +333,14 @@ const CareerDetail = () => {
                     <div>
                       <label className="block text-sm font-semibold mb-2"
                         style={{ fontFamily: PP, color: '#333' }}>
-                        Resume / CV <span style={{ color: '#a83a00' }}>*</span>
+                        Resume / CV <span style={{ color: 'var(--primary)' }}>*</span>
                         <span className="text-gray-400 font-normal ml-1">(PDF or Word, max 5MB)</span>
                       </label>
                       <div
                         className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all ${dragOver ? 'scale-[1.01]' : ''}`}
                         style={{
-                          borderColor: dragOver ? '#a83a00' : (resumeFile ? '#a83a00' : '#e5e7eb'),
-                          backgroundColor: resumeFile ? 'rgba(168,58,0,0.04)' : (dragOver ? 'rgba(168,58,0,0.03)' : '#fafafa'),
+                          borderColor: dragOver ? 'var(--primary)' : (resumeFile ? 'var(--primary)' : '#e5e7eb'),
+                          backgroundColor: resumeFile ? 'var(--p-a04)' : (dragOver ? 'var(--p-a03)' : '#fafafa'),
                         }}
                         onClick={() => fileRef.current?.click()}
                         onDragOver={e => { e.preventDefault(); setDragOver(true); }}
@@ -357,8 +357,8 @@ const CareerDetail = () => {
                         />
                         {resumeFile ? (
                           <div className="flex flex-col items-center gap-2">
-                            <CheckCircle size={28} style={{ color: '#a83a00' }} />
-                            <p className="font-semibold text-sm" style={{ fontFamily: PP, color: '#a83a00' }}>
+                            <CheckCircle size={28} style={{ color: 'var(--primary)' }} />
+                            <p className="font-semibold text-sm" style={{ fontFamily: PP, color: 'var(--primary)' }}>
                               {resumeFile.name}
                             </p>
                             <button type="button"
@@ -369,12 +369,12 @@ const CareerDetail = () => {
                           </div>
                         ) : (
                           <div className="flex flex-col items-center gap-2">
-                            <Upload size={26} style={{ color: '#a83a00' }} />
+                            <Upload size={26} style={{ color: 'var(--primary)' }} />
                             <p className="font-semibold text-sm" style={{ fontFamily: PP, color: '#333' }}>
                               Drag & drop your resume here
                             </p>
                             <p className="text-xs text-gray-400" style={{ fontFamily: PP }}>
-                              or <span style={{ color: '#a83a00', fontWeight: 600 }}>click to browse</span>
+                              or <span style={{ color: 'var(--primary)', fontWeight: 600 }}>click to browse</span>
                             </p>
                           </div>
                         )}
@@ -392,7 +392,7 @@ const CareerDetail = () => {
                         placeholder="Briefly tell us why you're a great fit for this role..."
                         value={form.coverNote}
                         onChange={e => setForm({ ...form, coverNote: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[#a83a00] resize-none"
+                        className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)] resize-none"
                         style={{ fontFamily: PP, borderColor: '#e5e7eb', color: '#333' }}
                       />
                     </div>
@@ -404,7 +404,7 @@ const CareerDetail = () => {
                     )}
                     <button type="submit" disabled={submitting}
                       className="w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 shadow-md transition-all hover:opacity-90 hover:shadow-lg disabled:opacity-60"
-                      style={{ fontFamily: PP, backgroundColor: '#a83a00', fontSize: '0.97rem' }}>
+                      style={{ fontFamily: PP, backgroundColor: 'var(--primary)', fontSize: '0.97rem' }}>
                       <Send size={16} /> {submitting ? 'Submitting…' : 'Submit Application'}
                     </button>
                   </form>
@@ -422,7 +422,7 @@ const CareerDetail = () => {
                   transition={{ duration: 0.5, delay: 0.15 }}
                   className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                   <div className="p-2 text-center text-xs font-bold uppercase tracking-widest"
-                    style={{ backgroundColor: '#a83a00', color: '#fda102', fontFamily: PP }}>
+                    style={{ backgroundColor: 'var(--primary)', color: '#fda102', fontFamily: PP }}>
                     Job Overview
                   </div>
                   <div className="p-7 space-y-4">
@@ -458,12 +458,12 @@ const CareerDetail = () => {
                   </p>
                   <a href="#apply"
                     className="w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90 mb-3"
-                    style={{ fontFamily: PP, backgroundColor: '#a83a00', color: '#fff' }}>
+                    style={{ fontFamily: PP, backgroundColor: 'var(--primary)', color: '#fff' }}>
                     Apply Now <ArrowLeft size={14} className="rotate-180" />
                   </a>
                   <a href="tel:+919876543210"
-                    className="w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 border-2 transition-all hover:bg-[#a83a00] hover:text-white"
-                    style={{ fontFamily: PP, color: '#a83a00', borderColor: '#a83a00' }}>
+                    className="w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 border-2 transition-all hover:bg-[var(--primary)] hover:text-white"
+                    style={{ fontFamily: PP, color: 'var(--primary)', borderColor: 'var(--primary)' }}>
                     Call HR Team
                   </a>
                 </motion.div>
@@ -475,16 +475,16 @@ const CareerDetail = () => {
                     transition={{ duration: 0.5, delay: 0.3 }}
                     className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
                     <h4 className="font-bold mb-5 uppercase tracking-widest text-xs"
-                      style={{ fontFamily: PP, color: '#a83a00' }}>
+                      style={{ fontFamily: PP, color: 'var(--primary)' }}>
                       More Openings
                     </h4>
                     <ul className="space-y-0.5">
                       {relatedJobs.map((j) => (
                         <li key={j._id}>
                           <Link to={`/careers/${j.slug}`}
-                            className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[#a83a00]"
+                            className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[var(--primary)]"
                             style={{ fontFamily: PP, color: '#333', fontSize: '0.88rem', fontWeight: 500 }}>
-                            <ChevronRight size={13} className="text-gray-300 group-hover:text-[#a83a00] transition-colors shrink-0" />
+                            <ChevronRight size={13} className="text-gray-300 group-hover:text-[var(--primary)] transition-colors shrink-0" />
                             <span>
                               <span className="block">{j.title}</span>
                               <span className="text-xs text-gray-400 font-normal">{j.location} · {j.type}</span>
@@ -495,7 +495,7 @@ const CareerDetail = () => {
                     </ul>
                     <Link to="/careers"
                       className="mt-4 flex items-center gap-1.5 text-xs font-semibold transition-opacity hover:opacity-70"
-                      style={{ color: '#a83a00', fontFamily: PP }}>
+                      style={{ color: 'var(--primary)', fontFamily: PP }}>
                       View all openings <ChevronRight size={12} />
                     </Link>
                   </motion.div>
