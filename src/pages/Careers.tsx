@@ -104,14 +104,16 @@ const Careers = () => {
       <section className="py-10 lg:py-20" style={{ backgroundColor: '#f8fafb' }}>
         <div className="max-w-7xl mx-auto px-4 lg:px-10">
 
-          <div className="mb-6 lg:mb-10">
+          <motion.div className="mb-6 lg:mb-10"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="font-bold tracking-[0.2em] uppercase text-xs mb-3"
               style={{ fontFamily: PP, color: 'var(--primary)' }}>Open Positions</p>
             <h2 className="font-bold"
               style={{ fontFamily: PP, fontSize: 'clamp(1.5rem, 3vw, 2.6rem)', color: '#111' }}>
               Current Openings
             </h2>
-          </div>
+          </motion.div>
 
           {/* Tabs */}
           <div className="flex gap-1 p-1 rounded-xl mb-6 lg:mb-10 w-full sm:w-fit overflow-x-auto"
@@ -157,9 +159,10 @@ const Careers = () => {
           <div className="space-y-5">
             {displayed.map((job, i) => (
               <motion.div key={job._id}
-                initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -3, transition: { duration: 0.18 } }}
                 transition={{ delay: i * 0.07, duration: 0.4 }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-5 md:p-9">
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-shadow p-5 md:p-9">
 
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
                   <div className="flex-1">

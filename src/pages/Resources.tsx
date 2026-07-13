@@ -259,7 +259,9 @@ const Resources = () => {
       {activeTab === 'downloads' && (
         <section className="py-8 lg:py-14" style={{ backgroundColor: '#f8fafb' }}>
           <div className="max-w-7xl mx-auto px-4 lg:px-10">
-            <div className="mb-6 lg:mb-10">
+            <motion.div className="mb-6 lg:mb-10"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.5 }}>
               <p className="font-bold tracking-[0.2em] uppercase text-xs mb-2"
                 style={{ fontFamily: PP, color: 'var(--primary)' }}>Free Resources</p>
               <h2 className="font-bold" style={{ fontFamily: PP, fontSize: 'clamp(1.5rem, 3vw, 2.4rem)', color: '#111' }}>
@@ -268,14 +270,17 @@ const Resources = () => {
               <p className="text-gray-500 mt-2" style={{ fontFamily: PP, fontSize: '0.9rem' }}>
                 Practical compliance templates, checklists, and reference documents — free to download.
               </p>
-            </div>
+            </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
               {downloads.map((item, i) => (
                 <motion.div key={i}
-                  initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06, duration: 0.4 }}
-                  className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-5 lg:p-7 flex flex-col">
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  whileHover={{ y: -4, transition: { duration: 0.18 } }}
+                  transition={{ delay: i * 0.07, duration: 0.4 }}
+                  className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-5 lg:p-7 flex flex-col">
 
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center"

@@ -153,15 +153,17 @@ const Clientele = () => {
       {/* ── Stats bar ── */}
       <section className="bg-white border-b border-gray-100 py-6 lg:py-8">
         <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 flex flex-nowrap justify-center gap-2.5 sm:gap-8 lg:gap-x-20">
-          {stats.map(({ target, suffix, decimals, label }) => (
-            <div key={label} className="text-center flex-1 sm:flex-initial min-w-0">
+          {stats.map(({ target, suffix, decimals, label }, i) => (
+            <motion.div key={label} className="text-center flex-1 sm:flex-initial min-w-0"
+              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}>
               <p className="font-bold text-base sm:text-xl lg:text-3xl mb-1 whitespace-nowrap"
                 style={{ fontFamily: PP, color: 'var(--primary)' }}>
                 <StatCounter target={target} suffix={suffix} decimals={decimals} />
               </p>
               <p className="text-[7px] sm:text-[9px] lg:text-xs uppercase tracking-widest text-gray-400 font-semibold leading-tight"
                 style={{ fontFamily: PP }}>{label}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -169,7 +171,9 @@ const Clientele = () => {
       {/* ── Industries We Serve ── */}
       <section className="py-10 lg:py-16" style={{ backgroundColor: '#f8fafb' }}>
         <div className="max-w-7xl mx-auto px-4 lg:px-10">
-          <div className="text-center mb-8 lg:mb-12">
+          <motion.div className="text-center mb-8 lg:mb-12"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="font-bold tracking-[0.25em] uppercase text-xs mb-2"
               style={{ fontFamily: PP, color: 'var(--primary)' }}>Industry Spread</p>
             <h2 className="font-bold mb-3"
@@ -180,7 +184,7 @@ const Clientele = () => {
               style={{ fontFamily: PP, fontSize: '1rem', lineHeight: 1.7 }}>
               Our compliance expertise spans every major sector of the Indian economy — from factory floors to fintech offices.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {industries.map((ind, i) => (

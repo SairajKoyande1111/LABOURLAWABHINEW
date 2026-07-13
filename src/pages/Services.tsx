@@ -90,9 +90,12 @@ const Services = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7">
             {services.map((service, i) => (
               <motion.div key={service._id}
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 group">
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.45, delay: (i % 3) * 0.08 }}
+                className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col border border-gray-100 group">
                 <div className="h-40 lg:h-52 relative overflow-hidden">
                   <img src={service.img} alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600" />

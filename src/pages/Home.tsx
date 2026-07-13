@@ -399,7 +399,9 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 lg:px-10">
 
           {/* Header */}
-          <div className="text-center mb-8 lg:mb-12 mx-auto">
+          <motion.div className="text-center mb-8 lg:mb-12 mx-auto"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="font-bold text-sm lg:text-base uppercase tracking-wider mb-2 lg:mb-3"
               style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>{content?.servicesPreviewLabel ?? 'Our Expertise'}</p>
             <h2 className="font-bold text-navy-900 mb-2 lg:mb-3 whitespace-nowrap overflow-hidden text-ellipsis"
@@ -410,7 +412,7 @@ const Home = () => {
               style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}>
               {content?.servicesPreviewDescription ?? 'Strategic guidance across the entire spectrum of Indian labour laws and human resource management.'}
             </p>
-          </div>
+          </motion.div>
 
           {/* 8-card grid — 2 cols mobile, 4 cols desktop */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
@@ -560,10 +562,12 @@ const Home = () => {
       {/* ── Scrolling Client Logos — two rows, opposite directions ── */}
       <section className="py-8 lg:py-14 bg-white border-y border-gray-100 overflow-hidden">
         {/* Section label — one line, tighter tracking */}
-        <p className="text-center font-semibold uppercase whitespace-nowrap mb-6 lg:mb-10"
-          style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(9.5px, 2.2vw, 11px)', letterSpacing: '0.10em', color: 'var(--primary)' }}>
+        <motion.p className="text-center font-semibold uppercase whitespace-nowrap mb-6 lg:mb-10"
+          style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(9.5px, 2.2vw, 11px)', letterSpacing: '0.10em', color: 'var(--primary)' }}
+          initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.45 }}>
           Serving 500+ Corporations Across India
-        </p>
+        </motion.p>
 
         {/* Row 1 — scrolls LEFT */}
         <div className="overflow-hidden relative mb-5 lg:mb-8">
@@ -593,7 +597,9 @@ const Home = () => {
       {/* ── Recent Insights ───────────────────────────────── */}
       <section className="py-10 lg:py-20 bg-[#f8fafb]">
         <div className="max-w-7xl mx-auto px-4 lg:px-10">
-          <div className="flex justify-between items-end mb-8 lg:mb-12">
+          <motion.div className="flex justify-between items-end mb-8 lg:mb-12"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <div>
               <p className="font-bold tracking-[0.12em] lg:tracking-[0.18em] uppercase text-[10px] lg:text-xs mb-1.5 lg:mb-2 whitespace-nowrap"
                 style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--primary)' }}>Latest Insights</p>
@@ -604,7 +610,7 @@ const Home = () => {
               className="hidden md:flex items-center gap-2 text-navy-900 font-semibold text-sm hover:text-teal-600 transition-colors border-b border-navy-900 hover:border-teal-600 pb-0.5">
               View All <ArrowRight size={15} />
             </Link>
-          </div>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
             {(content?.latestInsights?.length ? content.latestInsights : [
               { category: 'New Labour Codes', title: 'Understanding the New Wage Code', desc: 'A comprehensive guide to how the new definitions of wages impact your salary structure and PF contributions.', img: '/assets/service-payroll.png', date: 'Oct 15, 2024', articleUrl: '/resources' },
