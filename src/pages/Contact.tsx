@@ -156,13 +156,13 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center px-8 w-full max-w-6xl mx-auto relative z-10">
+          className="text-center px-2 sm:px-8 w-full max-w-6xl mx-auto relative z-10">
           <p className="uppercase tracking-[0.3em] font-light mb-3"
             style={{ fontFamily: PP, fontSize: '1.4rem', color: '#fda102' }}>
             {apiData.heroEyebrow}
           </p>
           <h1 className="font-medium mb-4"
-            style={{ fontFamily: PP, fontSize: 'clamp(0.75rem, 4vw, 3.6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.15, whiteSpace: 'nowrap' }}>
+            style={{ fontFamily: PP, fontSize: 'min(5vw, 3.6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.15, whiteSpace: 'nowrap' }}>
             {apiData.heroHeading}
           </h1>
           <p style={{
