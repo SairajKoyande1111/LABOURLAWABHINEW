@@ -45,7 +45,7 @@ const Careers = () => {
     <div className="w-full" style={{ fontFamily: PP }}>
 
       {/* ── Hero — Video/Image Background ── */}
-      <section className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: '420px', height: '56vh', maxHeight: '580px' }}>
+      <section className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: '320px', height: '48vh', maxHeight: '580px' }}>
 
         {/* Background */}
         {hero.heroBgType === 'image' && hero.heroImageUrl ? (
@@ -72,20 +72,20 @@ const Careers = () => {
         <motion.div
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="relative text-center px-8 w-full max-w-4xl mx-auto"
+          className="relative text-center px-5 lg:px-8 w-full max-w-4xl mx-auto"
           style={{ zIndex: 2 }}>
 
-          <p className="uppercase tracking-[0.3em] font-semibold mb-3"
-            style={{ fontFamily: PP, fontSize: '1.05rem', color: '#fda102' }}>
+          <p className="uppercase tracking-[0.25em] lg:tracking-[0.3em] font-semibold mb-3"
+            style={{ fontFamily: PP, fontSize: '0.9rem', color: '#fda102' }}>
             {hero.heroEyebrow}
           </p>
-          <h1 className="font-bold mb-5 leading-none whitespace-nowrap"
-            style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 4.2vw, 3.8rem)', color: '#fff' }}>
+          <h1 className="font-bold mb-5 leading-tight"
+            style={{ fontFamily: PP, fontSize: 'clamp(1.7rem, 4.2vw, 3.8rem)', color: '#fff' }}>
             {hero.heroHeading}
           </h1>
           <p style={{
             fontFamily: PP,
-            fontSize: 'clamp(1.05rem, 1.5vw, 1.25rem)',
+            fontSize: 'clamp(0.9rem, 1.5vw, 1.25rem)',
             color: 'rgba(255,255,255,0.82)',
             maxWidth: '640px',
             margin: '0 auto',
@@ -101,20 +101,20 @@ const Careers = () => {
       </section>
 
       {/* ── Job Listings ── */}
-      <section className="py-20" style={{ backgroundColor: '#f8fafb' }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <section className="py-10 lg:py-20" style={{ backgroundColor: '#f8fafb' }}>
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
 
-          <div className="mb-10">
+          <div className="mb-6 lg:mb-10">
             <p className="font-bold tracking-[0.2em] uppercase text-xs mb-3"
               style={{ fontFamily: PP, color: 'var(--primary)' }}>Open Positions</p>
             <h2 className="font-bold"
-              style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: '#111' }}>
+              style={{ fontFamily: PP, fontSize: 'clamp(1.5rem, 3vw, 2.6rem)', color: '#111' }}>
               Current Openings
             </h2>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-1 p-1 rounded-xl mb-10 w-fit"
+          <div className="flex gap-1 p-1 rounded-xl mb-6 lg:mb-10 w-full sm:w-fit overflow-x-auto"
             style={{ backgroundColor: 'var(--p-a08)' }}>
             {[
               { key: 'internal', label: `At Maru Consultancy (${internalJobs.length})` },
@@ -122,7 +122,7 @@ const Careers = () => {
             ].map(tab => (
               <button key={tab.key}
                 onClick={() => setActiveTab(tab.key as 'internal' | 'client')}
-                className="px-5 py-2.5 rounded-lg font-semibold text-sm transition-all"
+                className="px-3 lg:px-5 py-2 lg:py-2.5 rounded-lg font-semibold text-xs lg:text-sm transition-all whitespace-nowrap shrink-0"
                 style={{
                   fontFamily: PP,
                   backgroundColor: activeTab === tab.key ? 'var(--primary)' : 'transparent',
@@ -159,7 +159,7 @@ const Careers = () => {
               <motion.div key={job._id}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.07, duration: 0.4 }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-7 md:p-9">
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-5 md:p-9">
 
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
                   <div className="flex-1">
@@ -181,12 +181,12 @@ const Careers = () => {
 
                     {/* Title */}
                     <h3 className="font-bold mb-4"
-                      style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2vw, 1.5rem)', color: '#111' }}>
+                      style={{ fontFamily: PP, fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', color: '#111' }}>
                       {job.title}
                     </h3>
 
                     {/* Meta */}
-                    <div className="flex flex-wrap gap-5" style={{ fontSize: '0.97rem', color: '#555' }}>
+                    <div className="flex flex-wrap gap-3 lg:gap-5" style={{ fontSize: '0.9rem', color: '#555' }}>
                       <span className="flex items-center gap-1.5 font-medium">
                         <MapPin size={15} style={{ color: 'var(--primary)' }} /> {job.location}
                       </span>
@@ -227,11 +227,11 @@ const Careers = () => {
           <motion.div
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="mt-14 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6"
+            className="mt-8 lg:mt-14 rounded-2xl p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
             style={{ backgroundColor: 'var(--primary)' }}>
             <div>
               <h3 className="font-bold text-white mb-2"
-                style={{ fontFamily: PP, fontSize: '1.4rem' }}>
+                style={{ fontFamily: PP, fontSize: 'clamp(1.15rem, 3vw, 1.4rem)' }}>
                 Don't see a role that fits?
               </h3>
               <p style={{ fontFamily: PP, fontSize: '0.95rem', color: 'rgba(255,255,255,0.70)' }}>
@@ -239,7 +239,7 @@ const Careers = () => {
               </p>
             </div>
             <Link to="/contact"
-              className="shrink-0 inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-sm transition-all hover:opacity-90 whitespace-nowrap shadow-lg"
+              className="shrink-0 inline-flex items-center gap-2 px-6 lg:px-8 py-3.5 lg:py-4 rounded-xl font-bold text-sm transition-all hover:opacity-90 whitespace-nowrap shadow-lg"
               style={{ fontFamily: PP, backgroundColor: '#fda102', color: '#111' }}>
               Send Your Resume <ArrowRight size={16} />
             </Link>

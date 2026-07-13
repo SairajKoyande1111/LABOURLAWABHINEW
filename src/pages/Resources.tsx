@@ -75,7 +75,7 @@ const Resources = () => {
       {/* ── Hero ── */}
       <section
         className="relative flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        style={{ backgroundColor: 'var(--primary)', minHeight: '190px', maxHeight: '300px', height: '36vh' }}>
 
         {hero.heroBgType === 'image' && hero.heroImageUrl && (
           <img src={hero.heroImageUrl} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ zIndex: 0 }} />
@@ -96,19 +96,19 @@ const Resources = () => {
         <motion.div
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative text-center px-8 w-full max-w-4xl mx-auto"
+          className="relative text-center px-5 lg:px-8 w-full max-w-4xl mx-auto"
           style={{ zIndex: 2 }}>
 
-          <p className="uppercase tracking-[0.3em] font-semibold mb-2"
-            style={{ fontFamily: PP, fontSize: '0.9rem', color: '#fda102' }}>
+          <p className="uppercase tracking-[0.25em] lg:tracking-[0.3em] font-semibold mb-2"
+            style={{ fontFamily: PP, fontSize: '0.85rem', color: '#fda102' }}>
             {hero.heroEyebrow}
           </p>
           <h1 className="font-bold mb-3"
-            style={{ fontFamily: PP, fontSize: 'max(1.1rem, 2vw)', fontWeight: 700, letterSpacing: '0.03em', color: '#fff' }}>
+            style={{ fontFamily: PP, fontSize: 'clamp(1.35rem, 4vw, 2.3rem)', fontWeight: 700, letterSpacing: '0.02em', color: '#fff' }}>
             {hero.heroHeading}
           </h1>
           <p style={{
-            fontFamily: PP, fontSize: 'clamp(0.88rem, 1.3vw, 1rem)', fontWeight: 300,
+            fontFamily: PP, fontSize: 'clamp(0.82rem, 1.3vw, 1rem)', fontWeight: 300,
             color: 'rgba(255,255,255,0.82)', maxWidth: '580px', margin: '0 auto', lineHeight: 1.6,
           }}>
             {hero.heroSubtext}
@@ -118,14 +118,14 @@ const Resources = () => {
 
       {/* ── Tab Switch ── */}
       <section className="bg-white border-b border-gray-100 sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center gap-1 py-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center gap-1 py-3 lg:py-4 overflow-x-auto">
           {[
             { key: 'blogs', label: `Articles & Insights (${blogPosts.length})`, icon: BookOpen },
             { key: 'downloads', label: `Downloads & Templates (${downloads.length})`, icon: FileText },
           ].map(tab => (
             <button key={tab.key}
               onClick={() => setActiveTab(tab.key as 'blogs' | 'downloads')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all"
+              className="flex items-center gap-1.5 lg:gap-2 px-3 lg:px-5 py-2 lg:py-2.5 rounded-lg font-semibold text-xs lg:text-sm transition-all whitespace-nowrap shrink-0"
               style={{
                 fontFamily: PP,
                 backgroundColor: activeTab === tab.key ? 'var(--primary)' : 'transparent',
@@ -139,15 +139,15 @@ const Resources = () => {
 
       {/* ── Blogs Tab ── */}
       {activeTab === 'blogs' && (
-        <section className="py-14" style={{ backgroundColor: '#f8fafb' }}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <section className="py-8 lg:py-14" style={{ backgroundColor: '#f8fafb' }}>
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
 
             {/* Category filters */}
-            <div className="flex flex-wrap gap-2 mb-12">
+            <div className="flex flex-wrap gap-2 mb-8 lg:mb-12">
               {CATEGORIES.map(cat => (
                 <button key={cat}
                   onClick={() => setCatFilter(cat)}
-                  className="px-5 py-2 rounded-full font-semibold text-sm transition-all border"
+                  className="px-3.5 lg:px-5 py-1.5 lg:py-2 rounded-full font-semibold text-xs lg:text-sm transition-all border"
                   style={{
                     fontFamily: PP,
                     backgroundColor: catFilter === cat ? 'var(--primary)' : '#fff',
@@ -168,13 +168,13 @@ const Resources = () => {
                   className="mb-10">
                   <Link to={`/resources/${filteredBlogs[0].slug}`} className="group block">
                     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col lg:flex-row">
-                      <div className="lg:w-1/2 overflow-hidden" style={{ minHeight: '320px' }}>
+                      <div className="lg:w-1/2 overflow-hidden" style={{ minHeight: '200px' }}>
                         <img src={filteredBlogs[0].img} alt={filteredBlogs[0].title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600"
-                          style={{ minHeight: '320px' }} />
+                          style={{ minHeight: '200px' }} />
                       </div>
-                      <div className="lg:w-1/2 p-10 lg:p-14 flex flex-col justify-center">
-                        <div className="flex items-center gap-3 mb-4">
+                      <div className="lg:w-1/2 p-6 lg:p-14 flex flex-col justify-center">
+                        <div className="flex items-center gap-2 lg:gap-3 mb-4 flex-wrap">
                           <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full"
                             style={{ backgroundColor: 'var(--p-a10)', color: 'var(--primary)', fontFamily: PP }}>
                             {filteredBlogs[0].category}
@@ -187,11 +187,11 @@ const Resources = () => {
                           </span>
                         </div>
                         <h2 className="font-bold mb-4 leading-tight"
-                          style={{ fontFamily: PP, fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', color: '#111' }}>
+                          style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', color: '#111' }}>
                           {filteredBlogs[0].title}
                         </h2>
                         <p className="text-gray-500 leading-relaxed mb-6"
-                          style={{ fontFamily: PP, fontSize: '1rem', lineHeight: 1.8 }}>
+                          style={{ fontFamily: PP, fontSize: '0.92rem', lineHeight: 1.8 }}>
                           {filteredBlogs[0].excerpt}
                         </p>
                         <span className="inline-flex items-center gap-2 font-bold text-sm transition-opacity group-hover:opacity-70"
@@ -206,7 +206,7 @@ const Resources = () => {
             </AnimatePresence>
 
             {/* Remaining posts grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7">
               <AnimatePresence mode="popLayout">
                 {filteredBlogs.slice(1).map((post, i) => (
                   <motion.div key={post.slug}
@@ -257,25 +257,25 @@ const Resources = () => {
 
       {/* ── Downloads Tab ── */}
       {activeTab === 'downloads' && (
-        <section className="py-14" style={{ backgroundColor: '#f8fafb' }}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-10">
-            <div className="mb-10">
+        <section className="py-8 lg:py-14" style={{ backgroundColor: '#f8fafb' }}>
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
+            <div className="mb-6 lg:mb-10">
               <p className="font-bold tracking-[0.2em] uppercase text-xs mb-2"
                 style={{ fontFamily: PP, color: 'var(--primary)' }}>Free Resources</p>
-              <h2 className="font-bold" style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', color: '#111' }}>
+              <h2 className="font-bold" style={{ fontFamily: PP, fontSize: 'clamp(1.5rem, 3vw, 2.4rem)', color: '#111' }}>
                 Templates & Downloads
               </h2>
-              <p className="text-gray-500 mt-2" style={{ fontFamily: PP, fontSize: '0.97rem' }}>
+              <p className="text-gray-500 mt-2" style={{ fontFamily: PP, fontSize: '0.9rem' }}>
                 Practical compliance templates, checklists, and reference documents — free to download.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
               {downloads.map((item, i) => (
                 <motion.div key={i}
                   initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.06, duration: 0.4 }}
-                  className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-7 flex flex-col">
+                  className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-5 lg:p-7 flex flex-col">
 
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center"
@@ -332,8 +332,8 @@ const Resources = () => {
       )}
 
       {/* ── Newsletter ── */}
-      <section className="py-16" style={{ backgroundColor: 'var(--primary)' }}>
-        <div className="max-w-2xl mx-auto px-6 text-center">
+      <section className="py-10 lg:py-16" style={{ backgroundColor: 'var(--primary)' }}>
+        <div className="max-w-2xl mx-auto px-4 lg:px-6 text-center">
           <motion.p
             initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.4 }}
@@ -345,7 +345,7 @@ const Resources = () => {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.07 }}
             className="font-bold mb-4 text-white"
-            style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 3vw, 2.4rem)' }}>
+            style={{ fontFamily: PP, fontSize: 'clamp(1.5rem, 3vw, 2.4rem)' }}>
             Never miss a compliance update
           </motion.h2>
           <motion.p

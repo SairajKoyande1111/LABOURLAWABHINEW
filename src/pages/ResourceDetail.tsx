@@ -77,23 +77,23 @@ const ResourceDetail = () => {
 
       {/* ── Hero ── */}
       <section className="flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '40vh' }}>
         <div className="absolute top-[-60px] right-[-60px] w-[300px] h-[300px] rounded-full opacity-10 pointer-events-none"
           style={{ backgroundColor: '#fda102' }} />
 
         <motion.div
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center px-8 w-full max-w-4xl mx-auto">
-          <p className="uppercase tracking-[0.3em] font-semibold mb-2"
-            style={{ fontFamily: PP, fontSize: '0.85rem', color: '#fda102' }}>
+          className="text-center px-5 lg:px-8 w-full max-w-4xl mx-auto">
+          <p className="uppercase tracking-[0.25em] lg:tracking-[0.3em] font-semibold mb-2"
+            style={{ fontFamily: PP, fontSize: '0.78rem', color: '#fda102' }}>
             {post.category}
           </p>
           <h1 className="font-bold mb-3 leading-tight"
             style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2.8vw, 2.2rem)', color: '#fff', maxWidth: '780px', margin: '0 auto 12px' }}>
             {post.title}
           </h1>
-          <div className="flex flex-wrap justify-center gap-4 text-sm"
+          <div className="flex flex-wrap justify-center gap-3 lg:gap-4 text-xs lg:text-sm"
             style={{ color: 'rgba(255,255,255,0.75)' }}>
             <span className="flex items-center gap-1.5"><Calendar size={13} style={{ color: '#fda102' }} /> {post.date}</span>
             <span className="flex items-center gap-1.5"><Clock size={13} style={{ color: '#fda102' }} /> {post.readTime}</span>
@@ -107,52 +107,52 @@ const ResourceDetail = () => {
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.1 }}
         className="w-full overflow-hidden"
-        style={{ height: 'clamp(220px, 35vw, 440px)' }}>
+        style={{ height: 'clamp(180px, 45vw, 440px)' }}>
         <img src={post.img} alt={post.title}
           className="w-full h-full object-cover" style={{ objectPosition: 'center 30%' }} />
       </motion.div>
 
       {/* ── Content ── */}
-      <section className="py-14" style={{ backgroundColor: '#f8fafb' }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <section className="py-8 lg:py-14" style={{ backgroundColor: '#f8fafb' }}>
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
 
           {/* Back link */}
           <Link to="/resources"
-            className="inline-flex items-center gap-2 text-sm font-semibold mb-8 transition-opacity hover:opacity-70"
+            className="inline-flex items-center gap-2 text-sm font-semibold mb-6 lg:mb-8 transition-opacity hover:opacity-70"
             style={{ fontFamily: PP, color: 'var(--primary)' }}>
             <ArrowLeft size={15} /> Back to Resources
           </Link>
 
-          <div className="flex flex-col lg:flex-row gap-10">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
 
             {/* ── Article Body ── */}
             <motion.div
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="lg:w-2/3 space-y-7">
+              className="lg:w-2/3 space-y-5 lg:space-y-7">
 
               {/* Excerpt */}
-              <div className="rounded-2xl p-7 border-l-4"
+              <div className="rounded-2xl p-5 lg:p-7 border-l-4"
                 style={{ backgroundColor: 'var(--p-a05)', borderColor: 'var(--primary)' }}>
                 <p className="leading-relaxed font-medium"
-                  style={{ fontFamily: PP, fontSize: '1.08rem', color: '#333', fontStyle: 'italic' }}>
+                  style={{ fontFamily: PP, fontSize: '0.98rem', color: '#333', fontStyle: 'italic' }}>
                   {post.excerpt}
                 </p>
               </div>
 
               {/* Article Sections */}
-              <div className="bg-white rounded-2xl p-8 md:p-12 border border-gray-100 shadow-sm space-y-10">
+              <div className="bg-white rounded-2xl p-5 md:p-12 border border-gray-100 shadow-sm space-y-7 lg:space-y-10">
                 {(post.sections ?? []).map((section, i) => (
                   <motion.div key={i}
                     initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }} transition={{ delay: i * 0.07 }}>
                     <h2 className="font-bold mb-4"
-                      style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2vw, 1.5rem)', color: '#111' }}>
+                      style={{ fontFamily: PP, fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', color: '#111' }}>
                       {section.heading}
                     </h2>
                     {section.body.split('\n\n').map((para, j) => (
                       <p key={j} className="text-gray-600 leading-relaxed mb-4 last:mb-0"
-                        style={{ fontFamily: PP, fontSize: '1rem', lineHeight: 1.9, textAlign: 'justify' }}>
+                        style={{ fontFamily: PP, fontSize: '0.92rem', lineHeight: 1.9, textAlign: 'justify' }}>
                         {para}
                       </p>
                     ))}
@@ -161,9 +161,9 @@ const ResourceDetail = () => {
               </div>
 
               {/* Key Takeaways */}
-              <div className="bg-white rounded-2xl p-8 md:p-10 border border-gray-100 shadow-sm">
+              <div className="bg-white rounded-2xl p-5 md:p-10 border border-gray-100 shadow-sm">
                 <h2 className="font-bold mb-6"
-                  style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2vw, 1.5rem)', color: '#111' }}>
+                  style={{ fontFamily: PP, fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', color: '#111' }}>
                   Key Takeaways
                 </h2>
                 <ul className="space-y-4">
@@ -173,7 +173,7 @@ const ResourceDetail = () => {
                       viewport={{ once: true }} transition={{ delay: i * 0.07 }}
                       className="flex items-start gap-3">
                       <CheckCircle size={18} className="shrink-0 mt-0.5" style={{ color: 'var(--primary)' }} />
-                      <span style={{ fontFamily: PP, fontSize: '0.97rem', color: '#333', lineHeight: 1.7 }}>
+                      <span style={{ fontFamily: PP, fontSize: '0.9rem', color: '#333', lineHeight: 1.7 }}>
                         {item}
                       </span>
                     </motion.li>
@@ -182,15 +182,15 @@ const ResourceDetail = () => {
               </div>
 
               {/* Related Articles */}
-              <div className="bg-white rounded-2xl p-8 md:p-10 border border-gray-100 shadow-sm">
+              <div className="bg-white rounded-2xl p-5 md:p-10 border border-gray-100 shadow-sm">
                 <h2 className="font-bold mb-6"
-                  style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2vw, 1.5rem)', color: '#111' }}>
+                  style={{ fontFamily: PP, fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', color: '#111' }}>
                   Related Articles
                 </h2>
                 <div className="space-y-4">
                   {related.map((r, i) => (
                     <Link key={i} to={`/resources/${r.slug}`}
-                      className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--p-a30)] hover:shadow-sm transition-all group">
+                      className="flex items-center gap-3 lg:gap-4 p-3 lg:p-4 rounded-xl border border-gray-100 hover:border-[var(--p-a30)] hover:shadow-sm transition-all group">
                       <img src={r.img} alt={r.title}
                         className="w-16 h-16 rounded-xl object-cover shrink-0" />
                       <div className="flex-1 min-w-0">
@@ -208,7 +208,7 @@ const ResourceDetail = () => {
 
             {/* ── Sidebar ── */}
             <div className="lg:w-1/3">
-              <div className="sticky top-28 space-y-6">
+              <div className="lg:sticky lg:top-28 space-y-5 lg:space-y-6">
 
                 {/* Article Info */}
                 <motion.div
@@ -219,7 +219,7 @@ const ResourceDetail = () => {
                     style={{ backgroundColor: 'var(--primary)', color: '#fda102', fontFamily: PP }}>
                     Article Info
                   </div>
-                  <div className="p-7 space-y-4">
+                  <div className="p-5 lg:p-7 space-y-4">
                     {[
                       { label: 'Category', value: post.category },
                       { label: 'Published', value: post.date },
@@ -245,7 +245,7 @@ const ResourceDetail = () => {
                     style={{ backgroundColor: 'var(--primary)', color: '#fda102', fontFamily: PP }}>
                     Need Expert Help?
                   </div>
-                  <div className="bg-white p-7">
+                  <div className="bg-white p-5 lg:p-7">
                     <h3 className="font-bold mb-2"
                       style={{ fontFamily: PP, fontSize: '1.1rem', color: '#111' }}>
                       Talk to a Compliance Expert
@@ -270,7 +270,7 @@ const ResourceDetail = () => {
                 <motion.div
                   initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
+                  className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 lg:p-7">
                   <h4 className="font-bold mb-5 uppercase tracking-widest text-xs"
                     style={{ fontFamily: PP, color: 'var(--primary)' }}>
                     All Articles

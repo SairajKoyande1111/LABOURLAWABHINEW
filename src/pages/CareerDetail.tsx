@@ -111,7 +111,7 @@ const CareerDetail = () => {
 
       {/* ── Hero ── */}
       <section className="flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        style={{ backgroundColor: 'var(--primary)', minHeight: '220px', maxHeight: '320px', height: '42vh' }}>
 
         <div className="absolute top-[-60px] right-[-60px] w-[300px] h-[300px] rounded-full opacity-10 pointer-events-none"
           style={{ backgroundColor: '#fda102' }} />
@@ -119,18 +119,18 @@ const CareerDetail = () => {
         <motion.div
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center px-8 w-full max-w-4xl mx-auto">
+          className="text-center px-5 lg:px-8 w-full max-w-4xl mx-auto">
 
-          <p className="uppercase tracking-[0.28em] font-semibold mb-3"
-            style={{ fontFamily: PP, fontSize: '0.95rem', color: '#fda102' }}>
+          <p className="uppercase tracking-[0.22em] lg:tracking-[0.28em] font-semibold mb-3"
+            style={{ fontFamily: PP, fontSize: '0.8rem', color: '#fda102' }}>
             {job.category === 'internal' ? 'In-house Opportunity' : 'Client Job Posting'} · {job.department}
           </p>
           <h1 className="font-bold mb-5 leading-tight"
-            style={{ fontFamily: PP, fontSize: 'clamp(2rem, 4vw, 3.2rem)', color: '#fff' }}>
+            style={{ fontFamily: PP, fontSize: 'clamp(1.6rem, 4vw, 3.2rem)', color: '#fff' }}>
             {job.title}
           </h1>
-          <div className="flex flex-wrap justify-center gap-6"
-            style={{ color: 'rgba(255,255,255,0.85)', fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)' }}>
+          <div className="flex flex-wrap justify-center gap-3 lg:gap-6"
+            style={{ color: 'rgba(255,255,255,0.85)', fontSize: 'clamp(0.85rem, 1.5vw, 1.1rem)' }}>
             <span className="flex items-center gap-2 font-medium">
               <MapPin size={16} style={{ color: '#fda102' }} /> {job.location}
             </span>
@@ -148,40 +148,40 @@ const CareerDetail = () => {
       </section>
 
       {/* ── Main Content ── */}
-      <section className="py-14" style={{ backgroundColor: '#f8fafb' }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <section className="py-8 lg:py-14" style={{ backgroundColor: '#f8fafb' }}>
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
 
           {/* Back link */}
           <Link to="/careers"
-            className="inline-flex items-center gap-2 text-sm font-semibold mb-8 transition-opacity hover:opacity-70"
+            className="inline-flex items-center gap-2 text-sm font-semibold mb-6 lg:mb-8 transition-opacity hover:opacity-70"
             style={{ fontFamily: PP, color: 'var(--primary)' }}>
             <ArrowLeft size={15} /> Back to All Openings
           </Link>
 
-          <div className="flex flex-col lg:flex-row gap-10">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
 
             {/* ── Left — JD Content ── */}
             <motion.div
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="lg:w-2/3 space-y-7">
+              className="lg:w-2/3 space-y-5 lg:space-y-7">
 
               {/* About the Role */}
-              <div className="bg-white rounded-2xl p-8 md:p-10 border border-gray-100 shadow-sm">
-                <h2 className="font-bold mb-5"
-                  style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.2vw, 1.7rem)', color: '#111' }}>
+              <div className="bg-white rounded-2xl p-5 md:p-10 border border-gray-100 shadow-sm">
+                <h2 className="font-bold mb-4 lg:mb-5"
+                  style={{ fontFamily: PP, fontSize: 'clamp(1.15rem, 2.2vw, 1.7rem)', color: '#111' }}>
                   About the Role
                 </h2>
                 <p className="text-gray-600 leading-relaxed"
-                  style={{ fontFamily: PP, fontSize: '1rem', lineHeight: 1.85, textAlign: 'justify' }}>
+                  style={{ fontFamily: PP, fontSize: '0.92rem', lineHeight: 1.85, textAlign: 'justify' }}>
                   {job.about}
                 </p>
               </div>
 
               {/* Responsibilities */}
-              <div className="bg-white rounded-2xl p-8 md:p-10 border border-gray-100 shadow-sm">
-                <h2 className="font-bold mb-6"
-                  style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.2vw, 1.7rem)', color: '#111' }}>
+              <div className="bg-white rounded-2xl p-5 md:p-10 border border-gray-100 shadow-sm">
+                <h2 className="font-bold mb-5 lg:mb-6"
+                  style={{ fontFamily: PP, fontSize: 'clamp(1.15rem, 2.2vw, 1.7rem)', color: '#111' }}>
                   Key Responsibilities
                 </h2>
                 <ul className="space-y-4">
@@ -195,16 +195,16 @@ const CareerDetail = () => {
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="text-gray-600 leading-relaxed"
-                        style={{ fontFamily: PP, fontSize: '0.97rem' }}>{item}</span>
+                        style={{ fontFamily: PP, fontSize: '0.9rem' }}>{item}</span>
                     </motion.li>
                   ))}
                 </ul>
               </div>
 
               {/* Requirements */}
-              <div className="bg-white rounded-2xl p-8 md:p-10 border border-gray-100 shadow-sm">
-                <h2 className="font-bold mb-6"
-                  style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.2vw, 1.7rem)', color: '#111' }}>
+              <div className="bg-white rounded-2xl p-5 md:p-10 border border-gray-100 shadow-sm">
+                <h2 className="font-bold mb-5 lg:mb-6"
+                  style={{ fontFamily: PP, fontSize: 'clamp(1.15rem, 2.2vw, 1.7rem)', color: '#111' }}>
                   Requirements
                 </h2>
                 <ul className="space-y-3">
@@ -215,7 +215,7 @@ const CareerDetail = () => {
                       className="flex items-start gap-3">
                       <CheckCircle size={17} className="shrink-0 mt-0.5" style={{ color: 'var(--primary)' }} />
                       <span className="text-gray-600 leading-relaxed"
-                        style={{ fontFamily: PP, fontSize: '0.97rem' }}>{item}</span>
+                        style={{ fontFamily: PP, fontSize: '0.9rem' }}>{item}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -223,10 +223,10 @@ const CareerDetail = () => {
 
               {/* Nice to Have */}
               {job.niceToHave.length > 0 && (
-                <div className="rounded-2xl p-8 md:p-10 border"
+                <div className="rounded-2xl p-5 md:p-10 border"
                   style={{ backgroundColor: 'rgba(253,161,2,0.05)', borderColor: 'rgba(253,161,2,0.25)' }}>
                   <h2 className="font-bold mb-5"
-                    style={{ fontFamily: PP, fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', color: '#111' }}>
+                    style={{ fontFamily: PP, fontSize: 'clamp(1.05rem, 1.8vw, 1.4rem)', color: '#111' }}>
                     Nice to Have
                   </h2>
                   <ul className="space-y-3">
@@ -243,9 +243,9 @@ const CareerDetail = () => {
               )}
 
               {/* Apply Form */}
-              <div id="apply" className="bg-white rounded-2xl p-8 md:p-10 border border-gray-100 shadow-sm">
+              <div id="apply" className="bg-white rounded-2xl p-5 md:p-10 border border-gray-100 shadow-sm">
                 <h2 className="font-bold mb-2"
-                  style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.2vw, 1.7rem)', color: '#111' }}>
+                  style={{ fontFamily: PP, fontSize: 'clamp(1.15rem, 2.2vw, 1.7rem)', color: '#111' }}>
                   Apply for This Role
                 </h2>
                 <p className="text-gray-400 mb-8 text-sm" style={{ fontFamily: PP }}>
@@ -337,7 +337,7 @@ const CareerDetail = () => {
                         <span className="text-gray-400 font-normal ml-1">(PDF or Word, max 5MB)</span>
                       </label>
                       <div
-                        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all ${dragOver ? 'scale-[1.01]' : ''}`}
+                        className={`border-2 border-dashed rounded-xl p-5 lg:p-8 text-center cursor-pointer transition-all ${dragOver ? 'scale-[1.01]' : ''}`}
                         style={{
                           borderColor: dragOver ? 'var(--primary)' : (resumeFile ? 'var(--primary)' : '#e5e7eb'),
                           backgroundColor: resumeFile ? 'var(--p-a04)' : (dragOver ? 'var(--p-a03)' : '#fafafa'),
@@ -414,7 +414,7 @@ const CareerDetail = () => {
 
             {/* ── Right — Sidebar ── */}
             <div className="lg:w-1/3">
-              <div className="sticky top-28 space-y-6">
+              <div className="lg:sticky lg:top-28 space-y-5 lg:space-y-6">
 
                 {/* Job Snapshot */}
                 <motion.div
@@ -425,7 +425,7 @@ const CareerDetail = () => {
                     style={{ backgroundColor: 'var(--primary)', color: '#fda102', fontFamily: PP }}>
                     Job Overview
                   </div>
-                  <div className="p-7 space-y-4">
+                  <div className="p-5 lg:p-7 space-y-4">
                     {[
                       { label: 'Location', value: job.location },
                       { label: 'Job Type', value: job.type },
@@ -448,7 +448,7 @@ const CareerDetail = () => {
                 <motion.div
                   initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
+                  className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 lg:p-7">
                   <h3 className="font-bold mb-2"
                     style={{ fontFamily: PP, fontSize: '1.15rem', color: '#111' }}>
                     Ready to Apply?
@@ -473,7 +473,7 @@ const CareerDetail = () => {
                   <motion.div
                     initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
+                    className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 lg:p-7">
                     <h4 className="font-bold mb-5 uppercase tracking-widest text-xs"
                       style={{ fontFamily: PP, color: 'var(--primary)' }}>
                       More Openings
