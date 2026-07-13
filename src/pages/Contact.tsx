@@ -162,7 +162,7 @@ const Contact = () => {
             {apiData.heroEyebrow}
           </p>
           <h1 className="font-medium mb-4"
-            style={{ fontFamily: PP, fontSize: 'clamp(1.8rem, 4.2vw, 3.6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.15 }}>
+            style={{ fontFamily: PP, fontSize: 'clamp(0.75rem, 4vw, 3.6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.15, whiteSpace: 'nowrap' }}>
             {apiData.heroHeading}
           </h1>
           <p style={{
@@ -199,7 +199,7 @@ const Contact = () => {
 
       {/* ── Form + Info ── */}
       <section className="py-16" style={{ backgroundColor: '#f8fafb' }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
             {/* ── Form ── */}
@@ -209,7 +209,7 @@ const Contact = () => {
               className="lg:col-span-7 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
 
               {/* Card header */}
-              <div className="px-10 py-6 border-b border-gray-100 flex items-center gap-3">
+              <div className="px-4 sm:px-10 py-6 border-b border-gray-100 flex items-center gap-3">
                 <img src={chatIcon} alt="" className="object-contain" style={{ width: 34, height: 34 }} />
                 <div>
                   <h3 className="font-bold leading-none" style={{ fontFamily: PP, fontSize: '1.1rem', color: '#111' }}>
@@ -221,7 +221,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="p-8 md:p-10">
+              <div className="p-4 sm:p-8 md:p-10">
                 {submitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
