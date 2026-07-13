@@ -68,28 +68,32 @@ const ServiceDetail = () => {
 
       {/* ── Hero ── */}
       <section
-        className="flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: 'var(--primary)', minHeight: '200px', maxHeight: '300px', height: '38vh' }}>
+        className="flex items-center justify-center overflow-hidden min-h-[190px] max-h-[280px] h-[42vh] lg:min-h-[200px] lg:max-h-[300px] lg:h-[38vh]"
+        style={{ backgroundColor: 'var(--primary)' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center px-8 w-full max-w-7xl mx-auto">
+          className="text-center px-5 lg:px-8 w-full max-w-7xl mx-auto">
 
           <p
-            className="uppercase tracking-[0.3em] font-semibold mb-2 whitespace-nowrap"
-            style={{ fontFamily: PP, fontSize: '0.95rem', color: '#fda102' }}>
+            className="uppercase tracking-[0.2em] lg:tracking-[0.3em] font-semibold mb-2 whitespace-nowrap"
+            style={{ fontFamily: PP, fontSize: 'clamp(0.68rem, 2vw, 0.95rem)', color: '#fda102' }}>
             {detail?.subhead ?? 'Our Services'}
           </p>
 
           <h1
-            className="uppercase leading-none mb-3 whitespace-nowrap"
+            className="uppercase leading-[1.15] lg:leading-none mb-3"
             style={{
               fontFamily: PP,
-              fontSize: 'max(1.1rem, 2vw)',
+              fontSize: 'clamp(1.15rem, 5.5vw, 2.4rem)',
               fontWeight: 700,
-              letterSpacing: '0.05em',
+              letterSpacing: '0.03em',
               color: '#ffffff',
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
             }}>
             {detail?.headline || title}
           </h1>
@@ -97,7 +101,7 @@ const ServiceDetail = () => {
           <p
             style={{
               fontFamily: PP,
-              fontSize: 'clamp(0.88rem, 1.3vw, 1rem)',
+              fontSize: 'clamp(0.8rem, 1.8vw, 1rem)',
               fontWeight: 300,
               color: 'rgba(255,255,255,0.82)',
               maxWidth: '680px',
@@ -118,7 +122,7 @@ const ServiceDetail = () => {
         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
         className="w-full overflow-hidden"
-        style={{ height: 'clamp(240px, 38vw, 500px)' }}>
+        style={{ height: 'clamp(180px, 55vw, 500px)' }}>
         <img
           src={detail?.img || '/assets/service-labour.png'}
           alt={title}
@@ -128,20 +132,20 @@ const ServiceDetail = () => {
       </motion.div>
 
       {/* ── Main Content ── */}
-      <section className="py-16 bg-[#f8fafb]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col lg:flex-row gap-10">
+      <section className="py-10 lg:py-16 bg-[#f8fafb]">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10 flex flex-col lg:flex-row gap-6 lg:gap-10">
 
           {/* ── Body Column ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="lg:w-2/3 space-y-8">
+            className="lg:w-2/3 space-y-5 lg:space-y-8">
 
             {/* Body Text */}
-            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100">
+            <div className="bg-white rounded-2xl p-5 lg:p-12 shadow-sm border border-gray-100">
               <h2
-                className="font-bold mb-6"
-                style={{ fontFamily: PP, fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', color: '#111', lineHeight: 1.25 }}>
+                className="font-bold mb-4 lg:mb-6"
+                style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', color: '#111', lineHeight: 1.25 }}>
                 About This Service
               </h2>
               {detail?.body?.split('\n\n').map((para, i) => (
@@ -149,21 +153,21 @@ const ServiceDetail = () => {
                   key={i}
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
-                  className="text-gray-600 leading-relaxed mb-4"
-                  style={{ fontFamily: PP, fontSize: 'clamp(0.97rem, 1.3vw, 1.08rem)', fontWeight: 400, lineHeight: 1.8, textAlign: 'justify' }}>
+                  className="text-gray-600 leading-relaxed mb-4 text-sm lg:text-base"
+                  style={{ fontFamily: PP, fontWeight: 400, lineHeight: 1.8, textAlign: 'justify' }}>
                   {para}
                 </motion.p>
               ))}
             </div>
 
             {/* Key Deliverables — pointer format */}
-            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100">
+            <div className="bg-white rounded-2xl p-5 lg:p-12 shadow-sm border border-gray-100">
               <h2
                 className="font-bold mb-2"
-                style={{ fontFamily: PP, fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', color: '#111' }}>
+                style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', color: '#111' }}>
                 What You Get
               </h2>
-              <p className="text-gray-400 mb-8 text-sm" style={{ fontFamily: PP }}>
+              <p className="text-gray-400 mb-6 lg:mb-8 text-sm" style={{ fontFamily: PP }}>
                 Everything included in this service — delivered end-to-end.
               </p>
 
@@ -173,11 +177,11 @@ const ServiceDetail = () => {
                     key={i}
                     initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }} transition={{ duration: 0.38, delay: i * 0.07 }}
-                    className="flex items-start gap-5 group">
+                    className="flex items-start gap-3 lg:gap-5 group">
 
                     {/* Number badge */}
                     <div
-                      className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm mt-0.5 transition-all group-hover:scale-110"
+                      className="shrink-0 w-8 h-8 lg:w-10 lg:h-10 rounded-xl flex items-center justify-center font-bold text-xs lg:text-sm mt-0.5 transition-all group-hover:scale-110"
                       style={{ backgroundColor: 'var(--p-a08)', color: 'var(--primary)', fontFamily: PP }}>
                       {String(i + 1).padStart(2, '0')}
                     </div>
@@ -185,13 +189,13 @@ const ServiceDetail = () => {
                     {/* Content */}
                     <div className="flex-1 pb-4 border-b border-gray-100 last:border-0">
                       <h4
-                        className="font-semibold mb-1"
-                        style={{ fontFamily: PP, fontSize: '1.05rem', color: '#111' }}>
+                        className="font-semibold mb-1 text-sm lg:text-[1.05rem]"
+                        style={{ fontFamily: PP, color: '#111' }}>
                         {item.title}
                       </h4>
                       <p
-                        className="text-gray-500 leading-relaxed"
-                        style={{ fontFamily: PP, fontSize: '0.92rem', lineHeight: 1.7 }}>
+                        className="text-gray-500 leading-relaxed text-xs lg:text-[0.92rem]"
+                        style={{ fontFamily: PP, lineHeight: 1.7 }}>
                         {item.desc}
                       </p>
                     </div>
@@ -202,13 +206,13 @@ const ServiceDetail = () => {
 
             {/* Related Services */}
             {related.length > 0 && (
-              <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-2xl p-5 lg:p-12 shadow-sm border border-gray-100">
                 <h2
-                  className="font-bold mb-6"
-                  style={{ fontFamily: PP, fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', color: '#111' }}>
+                  className="font-bold mb-5 lg:mb-6"
+                  style={{ fontFamily: PP, fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', color: '#111' }}>
                   Related Services
                 </h2>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2.5 lg:gap-3">
                   {related.map((r, i) => (
                     <motion.div
                       key={i}
@@ -216,10 +220,9 @@ const ServiceDetail = () => {
                       viewport={{ once: true }} transition={{ duration: 0.3, delay: i * 0.07 }}>
                       <Link
                         to={`/services/${r.slug}`}
-                        className="inline-flex items-center gap-2 font-medium px-5 py-3 rounded-full transition-all border hover:shadow-md"
+                        className="inline-flex items-center gap-2 font-medium px-4 lg:px-5 py-2.5 lg:py-3 rounded-full transition-all border hover:shadow-md text-xs lg:text-[0.92rem]"
                         style={{
                           fontFamily: PP,
-                          fontSize: '0.92rem',
                           color: 'var(--primary)',
                           backgroundColor: 'var(--p-a06)',
                           borderColor: 'var(--p-a20)',
@@ -235,7 +238,7 @@ const ServiceDetail = () => {
 
           {/* ── Sidebar ── */}
           <div className="lg:w-1/3">
-            <div className="sticky top-28 space-y-6">
+            <div className="lg:sticky lg:top-28 space-y-6">
 
               {/* CTA Card */}
               <motion.div
@@ -249,28 +252,28 @@ const ServiceDetail = () => {
                   </p>
                 </div>
 
-                <div className="bg-white p-8">
+                <div className="bg-white p-6 lg:p-8">
                   <h3
-                    className="font-bold mb-3"
-                    style={{ fontFamily: PP, fontSize: '1.35rem', color: '#111', lineHeight: 1.3 }}>
+                    className="font-bold mb-3 text-lg lg:text-[1.35rem]"
+                    style={{ fontFamily: PP, color: '#111', lineHeight: 1.3 }}>
                     Ready to secure your compliance?
                   </h3>
                   <p
-                    className="text-gray-500 mb-7 leading-relaxed"
-                    style={{ fontFamily: PP, fontSize: '0.93rem', lineHeight: 1.7 }}>
+                    className="text-gray-500 mb-6 lg:mb-7 leading-relaxed text-sm lg:text-[0.93rem]"
+                    style={{ fontFamily: PP, lineHeight: 1.7 }}>
                     Speak directly with our legal experts to discuss how this service applies to your specific industry and workforce size.
                   </p>
                   <div className="space-y-3">
                     <Link
                       to="/contact"
-                      className="w-full text-white py-4 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90"
-                      style={{ backgroundColor: 'var(--primary)', fontFamily: PP, fontSize: '0.95rem' }}>
+                      className="w-full text-white py-3.5 lg:py-4 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90 text-sm lg:text-[0.95rem]"
+                      style={{ backgroundColor: 'var(--primary)', fontFamily: PP }}>
                       <FileText size={16} /> Request Proposal
                     </Link>
                     <a
                       href="tel:+919876543210"
-                      className="w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 border-2 transition-all hover:bg-[var(--primary)] hover:text-white"
-                      style={{ fontFamily: PP, fontSize: '0.95rem', color: 'var(--primary)', borderColor: 'var(--primary)', backgroundColor: 'transparent' }}>
+                      className="w-full py-3.5 lg:py-4 rounded-xl font-semibold flex items-center justify-center gap-2 border-2 transition-all hover:bg-[var(--primary)] hover:text-white text-sm lg:text-[0.95rem]"
+                      style={{ fontFamily: PP, color: 'var(--primary)', borderColor: 'var(--primary)', backgroundColor: 'transparent' }}>
                       <Phone size={16} /> Call Now
                     </a>
                   </div>
@@ -281,9 +284,9 @@ const ServiceDetail = () => {
               <motion.div
                 initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
+                className="bg-white p-5 lg:p-7 rounded-2xl border border-gray-100 shadow-sm">
                 <h4
-                  className="font-bold mb-5 uppercase tracking-widest text-xs"
+                  className="font-bold mb-4 lg:mb-5 uppercase tracking-widest text-xs"
                   style={{ fontFamily: PP, color: 'var(--primary)' }}>
                   Other Services
                 </h4>
@@ -292,8 +295,8 @@ const ServiceDetail = () => {
                     <li key={s._id}>
                       <Link
                         to={`/services/${s.slug}`}
-                        className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[var(--primary)]"
-                        style={{ fontFamily: PP, color: '#333', fontSize: '0.9rem', fontWeight: 500 }}>
+                        className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 group transition-colors hover:text-[var(--primary)] text-sm lg:text-[0.9rem]"
+                        style={{ fontFamily: PP, color: '#333', fontWeight: 500 }}>
                         <ChevronRight size={14} className="text-gray-300 group-hover:text-[var(--primary)] transition-colors shrink-0" />
                         {s.title}
                       </Link>
@@ -308,22 +311,22 @@ const ServiceDetail = () => {
       </section>
 
       {/* ── Latest Insights ── */}
-      <section className="py-20 bg-[#f8fafb]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex justify-between items-end mb-12">
+      <section className="py-12 lg:py-20 bg-[#f8fafb]">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
+          <div className="flex justify-between items-end mb-8 lg:mb-12">
             <div>
               <p className="font-bold tracking-[0.18em] uppercase text-xs mb-2"
                 style={{ fontFamily: PP, color: 'var(--primary)' }}>Latest Insights</p>
-              <h2 className="text-3xl md:text-4xl font-bold"
+              <h2 className="text-xl lg:text-4xl font-bold leading-tight"
                 style={{ fontFamily: PP, color: '#111' }}>Stay informed with expert guidance</h2>
             </div>
             <Link to="/resources"
-              className="hidden md:flex items-center gap-2 font-semibold text-sm transition-colors border-b pb-0.5 hover:opacity-70"
+              className="hidden md:flex items-center gap-2 font-semibold text-sm transition-colors border-b pb-0.5 hover:opacity-70 shrink-0"
               style={{ fontFamily: PP, color: '#111', borderColor: '#111' }}>
               View All <ArrowRight size={15} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-7">
             {[
               { category: 'New Labour Codes', title: 'Understanding the New Wage Code', desc: 'A comprehensive guide to how the new definitions of wages impact your salary structure and PF contributions.', img: '/assets/service-payroll.png', date: 'Oct 15, 2024' },
               { category: 'Compliance', title: 'Navigating State-Specific Leave Policies', desc: 'Analyzing the variations in sick, casual, and earned leaves across different Indian states.', img: '/assets/service-hr.png', date: 'Oct 02, 2024' },
@@ -333,7 +336,7 @@ const ServiceDetail = () => {
                 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.1 }}
                 className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col group">
-                <div className="relative overflow-hidden h-48">
+                <div className="relative overflow-hidden h-40 lg:h-48">
                   <img src={post.img} alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute top-3 left-3 text-white text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider"
@@ -341,7 +344,7 @@ const ServiceDetail = () => {
                     {post.category}
                   </div>
                 </div>
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-5 lg:p-6 flex flex-col flex-grow">
                   <p className="text-[11px] font-semibold mb-2 uppercase tracking-wider"
                     style={{ color: 'var(--primary)', fontFamily: PP }}>{post.date}</p>
                   <h3 className="text-base font-bold mb-3 line-clamp-2"
