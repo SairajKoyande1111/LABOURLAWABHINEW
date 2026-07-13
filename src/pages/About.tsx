@@ -774,13 +774,13 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           9. VIDEO CTA — Video background, bold overlay
          ══════════════════════════════════════════════════════ */}
-      <section className="relative lg:overflow-hidden" style={{ minHeight: '440px' }}>
+      <section className="relative flex items-center justify-center lg:overflow-hidden min-h-[320px] lg:min-h-[440px]">
         <video src={ctaVideo} autoPlay loop muted playsInline
           className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0"
           style={{ backgroundColor: 'rgba(0,0,0,0.45)' }} />
 
-        <div className="relative max-w-5xl mx-auto px-5 py-16 lg:px-8 lg:py-24 text-center overflow-x-auto">
+        <div className="relative w-full max-w-5xl mx-auto px-5 py-10 lg:px-8 lg:py-24 text-center overflow-x-auto">
           <motion.p className="font-bold uppercase tracking-[0.3em] mb-5 whitespace-nowrap"
             style={{ fontFamily: PP, color: '#fda102', fontSize: 'clamp(1rem, 1.8vw, 1.35rem)' }}
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
