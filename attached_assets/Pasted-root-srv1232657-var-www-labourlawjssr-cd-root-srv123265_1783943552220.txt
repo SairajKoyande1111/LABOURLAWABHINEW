@@ -1,0 +1,78 @@
+root@srv1232657:/var/www/labourlawjssr# cd ..
+root@srv1232657:/var/www# pm2 list
+┌────┬──────────────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                         │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 3  │ DM-pos                       │ default     │ 1.0.0   │ fork    │ 47569    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 11 │ Tarangdigitalmenu            │ default     │ 1.0.0   │ cluster │ 47634    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 15 │ airavata-app                 │ default     │ 1.0.0   │ fork    │ 47693    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 1  │ airavatatechnologies-web     │ default     │ 1.0.0   │ fork    │ 47567    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 10 │ at-digital-menu              │ default     │ 1.0.0   │ fork    │ 47633    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 20 │ at-smart-salon               │ default     │ N/A     │ fork    │ 67417    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 9  │ atdigitalmenu                │ default     │ 1.0.0   │ cluster │ 47622    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 8  │ barrelborn                   │ default     │ 1.0.0   │ fork    │ N/A      │ 0      │ 0    │ stopped   │ 0%       │ 0b       │ root     │ disabled │
+│ 5  │ bg-remover-portal            │ default     │ 1.0.0   │ fork    │ 47587    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 16 │ csv-profiler                 │ default     │ 0.0.0   │ cluster │ 47699    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 7  │ eva-jewels                   │ default     │ 1.0.0   │ cluster │ 47590    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 13 │ krushisuvidha-api            │ default     │ N/A     │ fork    │ N/A      │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 21 │ labourcodes                  │ default     │ 8.1.4   │ cluster │ 116960   │ 9m     │ 2    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 12 │ mings-chinese-cuisine        │ default     │ 1.0.0   │ cluster │ 47662    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 4  │ portfolio-app                │ default     │ N/A     │ fork    │ 47575    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 14 │ prism-server                 │ default     │ 1.0.0   │ fork    │ 47683    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 6  │ rest-express                 │ default     │ 1.0.0   │ fork    │ 47589    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 0  │ restaurant-management-app    │ default     │ N/A     │ fork    │ 47566    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 2  │ restaurant-pos               │ default     │ 1.0.0   │ cluster │ 47568    │ 5D     │ 0    │ online    │ 0%       │ 0b       │ root     │ disabled │
+│ 17 │ whamo-app                    │ default     │ 1.0.0   │ fork    │ 87316    │ 3D     │ 2    │ online    │ 0%       │ 0b       │ root     │ disabled │
+└────┴──────────────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+root@srv1232657:/var/www# ^C
+root@srv1232657:/var/www# pm2 log 21
+[TAILING] Tailing last 15 lines for [21] process (change the value with --lines option)
+/root/.pm2/logs/labourcodes-out-21.log last 15 lines:
+21|labourc |   ➜  Local:   http://localhost:3014/
+21|labourc |   ➜  Network: http://168.231.120.239:3014/
+21|labourc |   ➜  Local:   http://localhost:3014/
+21|labourc |   ➜  Network: http://168.231.120.239:3014/
+
+/root/.pm2/logs/labourcodes-error-21.log last 15 lines:
+21|labourc | AggregateError [ECONNREFUSED]:
+21|labourc |     at internalConnectMultiple (node:net:1123:18)
+21|labourc |     at afterConnectMultiple (node:net:1683:7)
+21|labourc | 11:44:00 AM [vite] http proxy error: /api/auth/login
+21|labourc | AggregateError [ECONNREFUSED]:
+21|labourc |     at internalConnectMultiple (node:net:1123:18)
+21|labourc |     at afterConnectMultiple (node:net:1683:7)
+21|labourc | 11:44:01 AM [vite] http proxy error: /api/home
+21|labourc | AggregateError [ECONNREFUSED]:
+21|labourc |     at internalConnectMultiple (node:net:1123:18)
+21|labourc |     at afterConnectMultiple (node:net:1683:7)
+21|labourc | 11:44:01 AM [vite] http proxy error: /api/services
+21|labourc | AggregateError [ECONNREFUSED]:
+21|labourc |     at internalConnectMultiple (node:net:1123:18)
+21|labourc |     at afterConnectMultiple (node:net:1683:7)
+
+^C
+root@srv1232657:/var/www# cat e
+cat: e: No such file or directory (os error 2)
+root@srv1232657:/var/www# cd labourlawjssr/
+root@srv1232657:/var/www/labourlawjssr# cat ecosystem.config.cjs
+module.exports = {
+  apps: [
+    {
+      name: 'labourcodes',
+      script: 'server/index.js',
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '512M',
+      env: {
+        NODE_ENV: 'production',
+        API_PORT: 8787,
+        MONGODB_URI: 'mongodb+srv://abhijeet18012001_db_user:q8T3i11qL29BI8Qd@cluster0.szsz7t5.mongodb.net/?appName=Cluster0',
+        CLOUDINARY_URL: 'cloudinary://154853841235429:Mvww8smlyr3G3mWeZ7ji_SR9uiQ@dayzlqvcx',
+        SESSION_SECRET: 'b67555c4d08f7d94eb9f17447715f439cea7045b8ec77f892f8dd6de6da13e2d0d126801e3fb98540db19b267fb33c43',
+      },
+    },
+  ],
+};
+root@srv1232657:/var/www/labourlawjssr# ^C
+root@srv1232657:/var/www/labourlawjssr#
