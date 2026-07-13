@@ -546,7 +546,7 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           6. OUR JOURNEY — Horizontal 30-year animated timeline
          ══════════════════════════════════════════════════════ */}
-      <section id="journey" className="py-12 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
+      <section id="journey" className="py-8 sm:py-12 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         {/* Subtle dot texture, consistent with hero */}
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.06) 1.5px, transparent 1.5px)', backgroundSize: '28px 28px' }} />
@@ -557,7 +557,7 @@ const About = () => {
             viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }}>
             <p className="font-bold uppercase tracking-[0.3em]" style={{ fontFamily: PP, color: '#fda102', fontSize: '1rem' }}>Our Journey</p>
           </motion.div>
-          <motion.h2 className="font-bold text-white text-center leading-[1.15] mb-10 mx-auto sm:whitespace-nowrap"
+          <motion.h2 className="font-bold text-white text-center leading-[1.15] mb-6 sm:mb-10 mx-auto sm:whitespace-nowrap"
             style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 2.6vw, 2.4rem)' }}
             initial={{ opacity: 0, y: -16 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5, delay: 0.1 }}>
@@ -582,20 +582,20 @@ const About = () => {
                   initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }}
                   viewport={{ once: true }} transition={{ duration: 1.6, ease: 'easeInOut' }} />
 
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-14 sm:gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 sm:gap-10">
                   {journeyMilestones.map((m, i) => {
                     const down = i % 2 === 0; // even index: image above the circle, text below. odd: reversed.
                     const Image = (
-                      <div className="w-full rounded-xl overflow-hidden shadow-lg" style={{ height: `${zoneH}px` }}>
+                      <div className="w-full rounded-xl overflow-hidden shadow-lg h-24 sm:h-44">
                         <img src={m.img} alt="" className="w-full h-full object-cover" />
                       </div>
                     );
                     const Text = (
                       <div>
-                        <p className="font-bold uppercase tracking-widest mb-3 text-center"
-                          style={{ fontFamily: PP, color: '#fda102', fontSize: '0.95rem' }}>{m.event}</p>
-                        <p className="max-w-[280px] mx-auto"
-                          style={{ fontFamily: PP, color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, textAlign: 'justify', textAlignLast: 'center', fontSize: '0.95rem' }}>
+                        <p className="font-bold uppercase tracking-widest mb-1.5 sm:mb-3 text-center text-xs sm:text-[0.95rem]"
+                          style={{ fontFamily: PP, color: '#fda102' }}>{m.event}</p>
+                        <p className="max-w-[220px] sm:max-w-[280px] mx-auto text-[0.8rem] sm:text-[0.95rem]"
+                          style={{ fontFamily: PP, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, textAlign: 'justify', textAlignLast: 'center' }}>
                           {m.description}
                         </p>
                       </div>
@@ -605,15 +605,15 @@ const About = () => {
                     // height + bottom alignment, regardless of whether it holds the image or the
                     // text — otherwise the circles drift out of line depending on up/down.
                     const imgZoneClass = down
-                      ? 'order-1 items-end mb-5 sm:order-1 sm:items-end sm:mb-5'
-                      : 'order-1 items-end mb-5 sm:order-3 sm:items-start sm:mt-5 sm:mb-0';
+                      ? 'order-1 items-end mb-3 sm:order-1 sm:items-end sm:mb-5'
+                      : 'order-1 items-end mb-3 sm:order-3 sm:items-start sm:mt-5 sm:mb-0';
                     // NOTE: `sm:min-h-[176px]` below must be a literal string (not built from the
                     // `zoneH` variable) — Tailwind's compiler only picks up arbitrary-value classes
                     // that appear verbatim in the source text, so an interpolated class here would
                     // silently never be generated. Keep this literal in sync with `zoneH` above.
                     const textZoneClass = down
-                      ? 'order-3 items-start mt-5 sm:order-3 sm:items-start sm:mt-5'
-                      : 'order-3 items-start mt-5 sm:order-1 sm:items-end sm:mb-5 sm:mt-0 sm:min-h-[176px]';
+                      ? 'order-3 items-start mt-3 sm:order-3 sm:items-start sm:mt-5'
+                      : 'order-3 items-start mt-3 sm:order-1 sm:items-end sm:mb-5 sm:mt-0 sm:min-h-[176px]';
 
                     return (
                       <motion.div key={i} className="flex flex-col items-center text-center"
@@ -621,14 +621,14 @@ const About = () => {
                         viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.4, delay: i * 0.1 }}>
 
                         {/* Image zone — always first on mobile; alternates before/after the circle on sm+ */}
-                        <div className={`w-full flex justify-center ${imgZoneClass}`} style={{ minHeight: `${zoneH}px` }}>
+                        <div className={`w-full flex justify-center ${imgZoneClass} min-h-[96px] sm:min-h-[176px]`}>
                           {Image}
                         </div>
 
                         {/* Circle node */}
                         <motion.div
-                          className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center shrink-0 font-bold shadow-lg order-2"
-                          style={{ backgroundColor: '#fda102', color: '#ffffff', fontFamily: PP, fontSize: '1.15rem' }}
+                          className="relative z-10 w-12 h-12 sm:w-20 sm:h-20 rounded-full flex items-center justify-center shrink-0 font-bold shadow-lg order-2 text-xs sm:text-[1.15rem]"
+                          style={{ backgroundColor: '#fda102', color: '#ffffff', fontFamily: PP }}
                           initial={{ scale: 0 }} whileInView={{ scale: 1 }}
                           viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.4, delay: 0.05 + i * 0.1, type: 'spring', stiffness: 260, damping: 18 }}>
                           {m.year}
