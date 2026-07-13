@@ -23,6 +23,9 @@ replit.md
 .breakpoints
 .config/
 
+# PM2 ecosystem config (contains secrets — never commit)
+ecosystem.config.cjs
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
