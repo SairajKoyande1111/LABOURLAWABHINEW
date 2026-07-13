@@ -586,7 +586,7 @@ const About = () => {
                   {journeyMilestones.map((m, i) => {
                     const down = i % 2 === 0; // even index: image above the circle, text below. odd: reversed.
                     const Image = (
-                      <div className="w-full rounded-xl overflow-hidden shadow-lg h-20 sm:h-44">
+                      <div className="w-full rounded-xl overflow-hidden shadow-lg h-28 sm:h-44">
                         <img src={m.img} alt="" className="w-full h-full object-cover" />
                       </div>
                     );
@@ -621,7 +621,7 @@ const About = () => {
                         viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.4, delay: i * 0.1 }}>
 
                         {/* Image zone — always first on mobile; alternates before/after the circle on sm+ */}
-                        <div className={`w-full flex justify-center ${imgZoneClass} min-h-[80px] sm:min-h-[176px]`}>
+                        <div className={`w-full flex justify-center ${imgZoneClass} min-h-[112px] sm:min-h-[176px]`}>
                           {Image}
                         </div>
 
