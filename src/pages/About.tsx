@@ -659,7 +659,7 @@ const About = () => {
           <motion.div className="flex justify-center mb-2"
             initial={{ opacity: 0, y: -16 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <img src="/assets/maru-logo-full.png" alt="Maru Consultancy Services"
+            <img src="/assets/maru-logo-new.png" alt="Maru Consultancy Services"
               className="w-auto object-contain h-[70px] lg:h-[110px]" />
           </motion.div>
 
@@ -720,7 +720,7 @@ const About = () => {
           8. TEAM — 4 white cards on brand-colour band
          ══════════════════════════════════════════════════════ */}
       <section className="py-10 lg:py-16 lg:overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
-        <div className="w-full px-6 lg:px-10">
+        <div className="w-full px-3 lg:px-10">
 
           {/* Section header */}
           <motion.div className="text-center mb-12"
@@ -728,7 +728,7 @@ const About = () => {
             viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <div className="overflow-x-auto lg:overflow-visible">
               <h2 className="font-bold text-white leading-[1.15] mb-4 whitespace-nowrap lg:whitespace-normal w-fit mx-auto"
-                style={{ fontFamily: PP, fontSize: 'clamp(0.85rem, 5.2vw, 2.4rem)' }}>
+                style={{ fontFamily: PP, fontSize: 'clamp(0.7rem, 4.6vw, 2.4rem)' }}>
                 Meet the Experts Behind Your Success
               </h2>
             </div>
@@ -739,7 +739,7 @@ const About = () => {
           </motion.div>
 
           {/* 4-card grid — 2x2 on mobile, single row on desktop */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-5">
             {teamMembers.map((m, i) => (
               <motion.div key={i}
                 initial={{ opacity: 0, y: 28 }}
@@ -788,21 +788,21 @@ const About = () => {
             Ready to Get Compliant?
           </motion.p>
           <motion.h2 className="font-bold text-white leading-[1.1] mb-8"
-            style={{ fontFamily: PP, fontSize: 'clamp(2rem, 5vw, 4rem)' }}
+            style={{ fontFamily: PP, fontSize: 'clamp(1rem, 5.5vw, 4rem)' }}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.08 }}>
-            Let's build your compliance<br /><span style={{ color: '#fda102' }}>framework together</span>
+            <span className="whitespace-nowrap">Let's build your compliance</span><br /><span style={{ color: '#fda102' }}>framework together</span>
           </motion.h2>
-          <motion.div className="flex flex-nowrap lg:flex-wrap gap-4 justify-center w-fit mx-auto"
+          <motion.div className="flex flex-wrap gap-3 lg:gap-4 justify-center w-full px-2"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.18 }}>
             <Link to="/contact"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3 lg:px-10 lg:py-4 font-semibold text-sm transition-all hover:scale-[1.04] shadow-xl whitespace-nowrap"
+              className="inline-flex items-center gap-2 rounded-full px-5 py-3 lg:px-10 lg:py-4 font-semibold text-xs lg:text-sm transition-all hover:scale-[1.04] shadow-xl whitespace-nowrap"
               style={{ backgroundColor: '#fda102', color: '#fff', fontFamily: PP }}>
               Schedule a Consultation <ArrowRight size={16} />
             </Link>
             <Link to="/careers"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3 lg:px-10 lg:py-4 font-semibold text-sm border transition-all hover:scale-[1.04] whitespace-nowrap"
+              className="inline-flex items-center gap-2 rounded-full px-5 py-3 lg:px-10 lg:py-4 font-semibold text-xs lg:text-sm border transition-all hover:scale-[1.04] whitespace-nowrap"
               style={{ borderColor: 'rgba(255,255,255,0.5)', color: '#fff', fontFamily: PP }}>
               Join Our Team
             </Link>
