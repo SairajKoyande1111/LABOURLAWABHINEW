@@ -582,19 +582,20 @@ const About = () => {
                   initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }}
                   viewport={{ once: true }} transition={{ duration: 1.6, ease: 'easeInOut' }} />
 
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 sm:gap-10">
+                <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-4 -mx-6 px-6
+                                sm:grid sm:grid-cols-4 sm:gap-10 sm:overflow-visible sm:pb-0 sm:mx-0 sm:px-0">
                   {journeyMilestones.map((m, i) => {
                     const down = i % 2 === 0; // even index: image above the circle, text below. odd: reversed.
                     const Image = (
-                      <div className="w-full rounded-xl overflow-hidden shadow-lg h-24 sm:h-44">
+                      <div className="w-full rounded-xl overflow-hidden shadow-lg h-32 sm:h-44">
                         <img src={m.img} alt="" className="w-full h-full object-cover" />
                       </div>
                     );
                     const Text = (
                       <div>
-                        <p className="font-bold uppercase tracking-widest mb-1.5 sm:mb-3 text-center text-xs sm:text-[0.95rem]"
+                        <p className="font-bold uppercase tracking-widest mb-2 sm:mb-3 text-center text-xs sm:text-[0.95rem]"
                           style={{ fontFamily: PP, color: '#fda102' }}>{m.event}</p>
-                        <p className="max-w-[220px] sm:max-w-[280px] mx-auto text-[0.8rem] sm:text-[0.95rem]"
+                        <p className="max-w-[220px] sm:max-w-[280px] mx-auto text-xs sm:text-[0.95rem]"
                           style={{ fontFamily: PP, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, textAlign: 'justify', textAlignLast: 'center' }}>
                           {m.description}
                         </p>
@@ -616,12 +617,12 @@ const About = () => {
                       : 'order-3 items-start mt-3 sm:order-1 sm:items-end sm:mb-5 sm:mt-0 sm:min-h-[176px]';
 
                     return (
-                      <motion.div key={i} className="flex flex-col items-center text-center"
+                      <motion.div key={i} className="flex flex-col items-center text-center shrink-0 w-[220px] snap-center sm:w-auto sm:shrink"
                         initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.4, delay: i * 0.1 }}>
 
                         {/* Image zone — always first on mobile; alternates before/after the circle on sm+ */}
-                        <div className={`w-full flex justify-center ${imgZoneClass} min-h-[96px] sm:min-h-[176px]`}>
+                        <div className={`w-full flex justify-center ${imgZoneClass} min-h-[128px] sm:min-h-[176px]`}>
                           {Image}
                         </div>
 
