@@ -463,18 +463,21 @@ const About = () => {
           </p>
         </div>
         <div className="relative max-w-[1400px] mx-auto px-5 lg:px-20 text-center overflow-x-auto">
-          {/* Mobile: everything collapsed onto a single line */}
-          <motion.div className="flex lg:hidden items-center justify-center gap-2 font-bold text-white mb-2 whitespace-nowrap w-fit mx-auto"
-            style={{ fontFamily: PP, fontSize: 'clamp(0.6rem, 3.4vw, 0.95rem)' }}
+          {/* Mobile: 4-line stacked treatment (quote lines + attribution) */}
+          <motion.div className="flex lg:hidden flex-col items-center justify-center font-bold text-white mb-2"
+            style={{ fontFamily: PP, fontSize: 'clamp(1rem, 4.8vw, 1.5rem)' }}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <span>{pullQuoteLine1}</span>
-            <span>{pullQuoteLine2}</span>
-            <span style={{ color: '#fda102' }}>{pullQuoteLine3}</span>
-            <span className="font-semibold uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.85)' }}>
-              — {pullQuoteAttribution}
-            </span>
+            <span style={{ lineHeight: 1.3 }}>{pullQuoteLine1}</span>
+            <span style={{ lineHeight: 1.3 }}>{pullQuoteLine2}</span>
+            <span style={{ lineHeight: 1.3, color: '#fda102' }}>{pullQuoteLine3}</span>
           </motion.div>
+          <motion.p className="lg:hidden font-semibold uppercase tracking-widest text-[11px]"
+            style={{ fontFamily: PP, color: 'rgba(255,255,255,0.85)' }}
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+            viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
+            {pullQuoteAttribution}
+          </motion.p>
 
           {/* Desktop: original stacked treatment */}
           <motion.div className="hidden lg:flex font-bold text-white mb-8 flex-col items-center"
@@ -716,17 +719,19 @@ const About = () => {
       {/* ══════════════════════════════════════════════════════
           8. TEAM — 4 white cards on brand-colour band
          ══════════════════════════════════════════════════════ */}
-      <section className="py-10 lg:py-16 overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
+      <section className="py-10 lg:py-16 lg:overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
         <div className="w-full px-6 lg:px-10">
 
           {/* Section header */}
           <motion.div className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="font-bold text-white leading-[1.15] mb-4 whitespace-nowrap lg:whitespace-normal"
-              style={{ fontFamily: PP, fontSize: 'clamp(1rem, 5.5vw, 2.4rem)' }}>
-              Meet the Experts Behind Your Success
-            </h2>
+            <div className="overflow-x-auto lg:overflow-visible">
+              <h2 className="font-bold text-white leading-[1.15] mb-4 whitespace-nowrap lg:whitespace-normal w-fit mx-auto"
+                style={{ fontFamily: PP, fontSize: 'clamp(0.85rem, 5.2vw, 2.4rem)' }}>
+                Meet the Experts Behind Your Success
+              </h2>
+            </div>
             <p className="px-4 sm:px-12 lg:px-32 text-justify lg:text-center"
               style={{ fontFamily: PP, color: '#fda102', fontSize: 'clamp(1rem, 1.6vw, 1.25rem)', lineHeight: 1.6 }}>
               Our experienced team of labour law, payroll, HR, and compliance professionals is committed to delivering practical solutions that help your business stay compliant and grow with confidence.
@@ -745,7 +750,7 @@ const About = () => {
                 style={{ backgroundColor: '#ffffff' }}>
 
                 {/* Photo */}
-                <div className="relative overflow-hidden h-[150px] lg:h-[360px]">
+                <div className="relative overflow-hidden h-[220px] lg:h-[360px]">
                   <img src={m.img} alt={m.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-400"
@@ -782,11 +787,11 @@ const About = () => {
             viewport={{ once: true }} transition={{ duration: 0.4 }}>
             Ready to Get Compliant?
           </motion.p>
-          <motion.h2 className="font-bold text-white leading-[1.1] mb-8 whitespace-nowrap w-fit mx-auto"
+          <motion.h2 className="font-bold text-white leading-[1.1] mb-8"
             style={{ fontFamily: PP, fontSize: 'clamp(2rem, 5vw, 4rem)' }}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.08 }}>
-            Let's build your compliance <span style={{ color: '#fda102' }}>framework together</span>
+            Let's build your compliance<br /><span style={{ color: '#fda102' }}>framework together</span>
           </motion.h2>
           <motion.div className="flex flex-nowrap lg:flex-wrap gap-4 justify-center w-fit mx-auto"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
