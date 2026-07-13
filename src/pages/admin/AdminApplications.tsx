@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FileText, Trash2, ExternalLink, ChevronDown, ChevronUp, Loader2, CheckCircle2, User, Phone, Mail, MessageSquare } from 'lucide-react';
+import { FileText, Trash2, ExternalLink, ChevronDown, ChevronUp, Loader2, User, Phone, Mail, MessageSquare } from 'lucide-react';
 import { api } from '../../lib/api';
 
 const PP = 'Poppins, sans-serif';

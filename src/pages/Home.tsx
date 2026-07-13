@@ -61,10 +61,6 @@ function StatCounter({ target, decimals = 0, suffix = '' }: { target: number; de
   return <span ref={ref}>{display}{suffix}</span>;
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay: i * 0.1 } }),
-};
 
 const defaultPhrases = [
   'Labour Compliance',
