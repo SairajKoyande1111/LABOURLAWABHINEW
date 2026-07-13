@@ -57,12 +57,12 @@ const Services = () => {
           transition={{ duration: 0.6 }}
           className="relative z-10 text-center px-5 lg:px-6">
           <h1
-            className="uppercase leading-[1.15] lg:leading-[1.1] mb-3 lg:mb-4"
+            className="uppercase leading-[1.15] lg:leading-[1.1] mb-3 lg:mb-4 whitespace-nowrap"
             style={{
               fontFamily: PP,
-              fontSize: 'clamp(1.9rem, 8vw, 4.4rem)',
+              fontSize: 'clamp(1.5rem, 6.4vw, 4.4rem)',
               fontWeight: 700,
-              letterSpacing: '0.04em',
+              letterSpacing: '0.02em',
             }}>
             <span style={{ color: '#ffffff' }}>Our </span>
             <span style={{ color: '#fda102' }}>Consultancy Services</span>
@@ -130,7 +130,7 @@ const Services = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.07 }}
-            className="font-bold mb-4 leading-[1.2]" style={{ fontFamily: PP, fontSize: 'clamp(1.3rem, 5.5vw, 2.8rem)' }}>Need a custom compliance structure?</motion.h2>
+            className="font-bold mb-4 leading-[1.2] whitespace-nowrap" style={{ fontFamily: PP, fontSize: 'clamp(1.05rem, 4.6vw, 2.8rem)' }}>Need a custom compliance structure?</motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.14 }}
