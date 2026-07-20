@@ -44,6 +44,9 @@ const HomeSchema = new mongoose.Schema({
   whyUsHeading: String,
   whyUsBody: String,
   whyUsItems: [WhyUsItem],
+  whyUsVideoUrl: String,
+  whyUsImage1Url: String,
+  whyUsImage2Url: String,
 
   servicesPreviewLabel: String,
   servicesPreviewTitle: String,

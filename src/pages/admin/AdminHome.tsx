@@ -13,6 +13,7 @@ const EMPTY: HomeContent = {
   ctaPrimaryText: '', ctaSecondaryText: '',
   oneStopLabel: '', oneStopTitle: '', oneStopCards: [],
   whyUsLogoUrl: '', whyUsHeading: '', whyUsBody: '', whyUsItems: [],
+  whyUsVideoUrl: '', whyUsImage1Url: '', whyUsImage2Url: '',
   servicesPreviewLabel: '', servicesPreviewTitle: '', servicesPreviewDescription: '',
   testimonialsHeading: '', testimonials: [],
   stats: [],
@@ -180,8 +181,11 @@ export default function AdminHome() {
         </Field>
       </Section>
 
-      <Section title="Why Choose Us">
+      <Section title="Expertise Section (Why Choose Us)">
         <ImageUploader label="Logo" value={data.whyUsLogoUrl} onChange={(v) => update('whyUsLogoUrl', v)} section="home" hint="Any width × ~80 px tall — PNG with transparent background works best" />
+        <ImageUploader label="Left panel video" value={data.whyUsVideoUrl} onChange={(v) => update('whyUsVideoUrl', v)} accept="video/*" section="home" hint="Tall video for the large left slot in the photo collage. If left blank, the Hero video is used." />
+        <ImageUploader label="Collage image 1 (top-right)" value={data.whyUsImage1Url} onChange={(v) => update('whyUsImage1Url', v)} section="home" hint="Portrait 2:3, e.g. 600 × 900 px. If left blank, Hero image 1 is used." />
+        <ImageUploader label="Collage image 2 (bottom-right)" value={data.whyUsImage2Url} onChange={(v) => update('whyUsImage2Url', v)} section="home" hint="Portrait 2:3, e.g. 600 × 900 px. If left blank, Hero image 2 is used." />
         <Field label="Heading"><TextInput value={data.whyUsHeading} onChange={(e) => update('whyUsHeading', e.target.value)} /></Field>
         <Field label="Body text"><TextArea rows={3} value={data.whyUsBody} onChange={(e) => update('whyUsBody', e.target.value)} /></Field>
         <Field label="Reasons">

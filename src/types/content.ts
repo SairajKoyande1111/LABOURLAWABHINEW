@@ -55,6 +55,9 @@ export type HomeContent = {
   whyUsHeading: string;
   whyUsBody: string;
   whyUsItems: WhyUsItem[];
+  whyUsVideoUrl: string;
+  whyUsImage1Url: string;
+  whyUsImage2Url: string;
   servicesPreviewLabel: string;
   servicesPreviewTitle: string;
   servicesPreviewDescription: string;

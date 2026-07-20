@@ -149,6 +149,10 @@ const Home = () => {
   const heroImage1 = content?.heroImage1Url || heroImageDefault;
   const heroImage2 = content?.heroImage2Url || heroImageDefault;
   const maruLogo = content?.whyUsLogoUrl || maruLogoDefault;
+  // Expertise section collage — falls back to hero media if not set separately
+  const expertiseVideo = content?.whyUsVideoUrl || heroVideo;
+  const expertiseImage1 = content?.whyUsImage1Url || heroImage1;
+  const expertiseImage2 = content?.whyUsImage2Url || heroImage2;
 
   return (
     <div className="w-full">
@@ -322,7 +326,7 @@ const Home = () => {
                 <div className="flex flex-col" style={{ width: '58%' }}>
                   <div className="rounded-2xl overflow-hidden shadow-md" style={{ flex: 1 }}>
                     <video
-                      src={heroVideo}
+                      src={expertiseVideo}
                       autoPlay loop muted playsInline aria-hidden="true"
                       className="w-full h-full object-cover"
                       style={{ display: 'block' }}
@@ -333,10 +337,10 @@ const Home = () => {
                 {/* Right column: two stacked images */}
                 <div className="flex flex-col gap-3" style={{ width: '42%' }}>
                   <div className="rounded-2xl overflow-hidden shadow-md" style={{ flex: '0 0 42%' }}>
-                    <img src={heroImage1} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+                    <img src={expertiseImage1} alt="" aria-hidden="true" className="w-full h-full object-cover" />
                   </div>
                   <div className="rounded-2xl overflow-hidden shadow-md" style={{ flex: 1 }}>
-                    <img src={heroImage2} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+                    <img src={expertiseImage2} alt="" aria-hidden="true" className="w-full h-full object-cover" />
                   </div>
                 </div>
 
