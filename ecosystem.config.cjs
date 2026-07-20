@@ -16,7 +16,7 @@ module.exports = {
         SESSION_SECRET: 'b67555c4d08f7d94eb9f17447715f439cea7045b8ec77f892f8dd6de6da13e2d0d126801e3fb98540db19b267fb33c43',
         ADMIN_EMAIL: 'maru.payslip@gmail.com',
         // Paste your Gmail App Password below (16-char password from Google Account → Security → App Passwords)
-        GMAIL_APP_PASSWORD: 'PASTE_YOUR_GMAIL_APP_PASSWORD_HERE',
+        GMAIL_APP_PASSWORD: 'uylf ywso nnqr wzcu',
       },
     },
   ],
