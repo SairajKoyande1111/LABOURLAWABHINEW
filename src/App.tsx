@@ -14,6 +14,7 @@ import { AdminAuthProvider } from './context/AdminAuthContext';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import AdminLayout from './components/admin/AdminLayout';
 import AdminLogin from './pages/admin/AdminLogin';
+import ForgotCredentials from './pages/admin/ForgotCredentials';
 import AdminHome from './pages/admin/AdminHome';
 import AdminAbout from './pages/admin/AdminAbout';
 import AdminClientele from './pages/admin/AdminClientele';
@@ -47,6 +48,7 @@ function App() {
           <AdminAuthProvider>
             <Routes>
               <Route path="login" element={<AdminLogin />} />
+              <Route path="forgot-credentials" element={<ForgotCredentials />} />
               <Route
                 element={
                   <ProtectedRoute>

@@ -5,6 +5,7 @@ import cloudinary from '../cloudinary.js';
 import { requireAuth } from '../middleware/auth.js';
 import JobApplication from '../models/JobApplication.js';
 import Career from '../models/Career.js';
+import { sendMail, ADMIN_EMAIL } from '../mailer.js';
 
 const router = express.Router();
 
@@ -93,6 +94,28 @@ router.post('/', (req, res) => {
         careerSlug,
         careerCategory,
       });
+
+      // Notify admin by email (fire-and-forget)
+      sendMail({
+        to: ADMIN_EMAIL,
+        subject: `New Job Application — ${careerTitle || 'General'} from ${name.trim()}`,
+        html: `
+          <div style="font-family:sans-serif;max-width:540px;margin:0 auto;padding:24px;border:1px solid #e5e7eb;border-radius:12px">
+            <h2 style="color:#1a2c4e;margin-top:0">New Job Application</h2>
+            <table style="width:100%;border-collapse:collapse;font-size:14px">
+              <tr><td style="padding:8px 0;color:#888;width:110px">Position</td><td style="padding:8px 0;font-weight:600">${careerTitle || 'General Application'}</td></tr>
+              <tr><td style="padding:8px 0;color:#888">Name</td><td style="padding:8px 0;font-weight:600">${name.trim()}</td></tr>
+              <tr><td style="padding:8px 0;color:#888">Email</td><td style="padding:8px 0">${email.trim()}</td></tr>
+              <tr><td style="padding:8px 0;color:#888">Phone</td><td style="padding:8px 0">${phone.trim()}</td></tr>
+              ${coverNote ? `<tr><td style="padding:8px 0;color:#888;vertical-align:top">Cover Note</td><td style="padding:8px 0">${coverNote.trim().replace(/\n/g, '<br/>')}</td></tr>` : ''}
+              <tr><td style="padding:8px 0;color:#888">Resume</td><td style="padding:8px 0"><a href="${uploaded.secure_url}" style="color:#1a2c4e">Download Resume</a></td></tr>
+            </table>
+            <hr style="border:none;border-top:1px solid #e5e7eb;margin:20px 0"/>
+            <p style="color:#bbb;font-size:12px">View all applications in the Admin Panel.</p>
+          </div>
+        `,
+        text: `New application for ${careerTitle || 'General'}\nName: ${name.trim()}\nEmail: ${email.trim()}\nPhone: ${phone.trim()}${coverNote ? `\nCover Note: ${coverNote.trim()}` : ''}\nResume: ${uploaded.secure_url}`,
+      }).catch(() => {});
 
       res.status(201).json({ ok: true, id: application._id });
     } catch (e) {

@@ -1,6 +1,7 @@
 import express from 'express';
 import { requireAuth } from '../middleware/auth.js';
 import ContactEnquiry from '../models/ContactEnquiry.js';
+import { sendMail, ADMIN_EMAIL } from '../mailer.js';
 
 const router = express.Router();
 
@@ -19,6 +20,29 @@ router.post('/', async (req, res) => {
       service: String(service || '').trim(),
       message: String(message || '').trim(),
     });
+
+    // Notify admin by email (fire-and-forget)
+    sendMail({
+      to: ADMIN_EMAIL,
+      subject: `New Enquiry from ${String(name).trim()} — Maru Labour Laws`,
+      html: `
+        <div style="font-family:sans-serif;max-width:540px;margin:0 auto;padding:24px;border:1px solid #e5e7eb;border-radius:12px">
+          <h2 style="color:#1a2c4e;margin-top:0">New Contact Enquiry</h2>
+          <table style="width:100%;border-collapse:collapse;font-size:14px">
+            <tr><td style="padding:8px 0;color:#888;width:110px">Name</td><td style="padding:8px 0;font-weight:600">${String(name).trim()}</td></tr>
+            <tr><td style="padding:8px 0;color:#888">Email</td><td style="padding:8px 0">${String(email).trim()}</td></tr>
+            <tr><td style="padding:8px 0;color:#888">Phone</td><td style="padding:8px 0">${String(phone).trim()}</td></tr>
+            ${company ? `<tr><td style="padding:8px 0;color:#888">Company</td><td style="padding:8px 0">${String(company).trim()}</td></tr>` : ''}
+            ${service ? `<tr><td style="padding:8px 0;color:#888">Service</td><td style="padding:8px 0">${String(service).trim()}</td></tr>` : ''}
+            ${message ? `<tr><td style="padding:8px 0;color:#888;vertical-align:top">Message</td><td style="padding:8px 0">${String(message).trim().replace(/\n/g, '<br/>')}</td></tr>` : ''}
+          </table>
+          <hr style="border:none;border-top:1px solid #e5e7eb;margin:20px 0"/>
+          <p style="color:#bbb;font-size:12px">View all enquiries in the Admin Panel.</p>
+        </div>
+      `,
+      text: `New enquiry from ${String(name).trim()}\nEmail: ${String(email).trim()}\nPhone: ${String(phone).trim()}${company ? `\nCompany: ${String(company).trim()}` : ''}${service ? `\nService: ${String(service).trim()}` : ''}${message ? `\nMessage: ${String(message).trim()}` : ''}`,
+    }).catch(() => {});
+
     res.status(201).json({ ok: true, id: enquiry._id });
   } catch (e) {
     console.error('[enquiries POST]', e);

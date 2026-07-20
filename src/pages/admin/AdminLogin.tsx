@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Navigate, Link, useLocation } from 'react-router-dom';
 import { Lock, User, Loader2 } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 
@@ -8,8 +8,10 @@ const PP = 'Poppins, sans-serif';
 export default function AdminLogin() {
   const { username, login } = useAdminAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
+  const [info] = useState((location.state as { message?: string })?.message || '');
   const [submitting, setSubmitting] = useState(false);
 
   if (username) return <Navigate to="/admin/home" replace />;
@@ -70,6 +72,7 @@ export default function AdminLogin() {
             </div>
           </div>
 
+          {info && <p className="text-sm text-green-600 bg-green-50 rounded-lg px-3 py-2">{info}</p>}
           {error && <p className="text-sm text-red-500">{error}</p>}
 
           <button
@@ -81,6 +84,16 @@ export default function AdminLogin() {
             {submitting && <Loader2 size={15} className="animate-spin" />}
             {submitting ? 'Signing in…' : 'Sign In'}
           </button>
+
+          <div className="text-center pt-1">
+            <Link
+              to="/admin/forgot-credentials"
+              className="text-sm transition-colors hover:underline"
+              style={{ color: 'var(--primary)', opacity: 0.7 }}
+            >
+              Forgot username or password?
+            </Link>
+          </div>
         </form>
       </div>
     </div>
