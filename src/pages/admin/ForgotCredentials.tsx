@@ -9,7 +9,6 @@ type Step = 'request' | 'reset';
 export default function ForgotCredentials() {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('request');
-  const [username, setUsername] = useState('');
   const [otp, setOtp] = useState('');
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -18,8 +17,7 @@ export default function ForgotCredentials() {
   const [info, setInfo] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const handleRequestOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleRequestOtp = async () => {
     setError('');
     setInfo('');
     setSubmitting(true);
@@ -27,11 +25,10 @@ export default function ForgotCredentials() {
       const res = await fetch('/api/auth/forgot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
+        body: JSON.stringify({}),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
-      setNewUsername(username);
       setInfo(data.message || 'OTP sent to your registered email.');
       setStep('reset');
     } catch (err) {
@@ -57,7 +54,7 @@ export default function ForgotCredentials() {
       const res = await fetch('/api/auth/reset', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, otp, newUsername, newPassword }),
+        body: JSON.stringify({ otp, newUsername, newPassword }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Reset failed');
@@ -89,39 +86,21 @@ export default function ForgotCredentials() {
                 <Mail size={22} style={{ color: 'var(--primary)' }} />
               </div>
               <p className="font-bold text-lg" style={{ color: 'var(--primary)' }}>Reset Credentials</p>
-              <p className="text-gray-400 text-sm mt-1">We'll send an OTP to your registered email</p>
+              <p className="text-gray-400 text-sm mt-1">An OTP will be sent to the registered admin email</p>
             </div>
 
-            <form onSubmit={handleRequestOtp} className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: '#333' }}>Your Username</label>
-                <div className="relative">
-                  <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                  <input
-                    type="text"
-                    autoFocus
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    placeholder="Enter your current username"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-[var(--primary)]"
-                    style={{ borderColor: '#e5e7eb' }}
-                  />
-                </div>
-              </div>
+            {error && <p className="text-sm text-red-500 mb-4">{error}</p>}
 
-              {error && <p className="text-sm text-red-500">{error}</p>}
-
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full py-3 rounded-xl font-semibold text-white flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90 disabled:opacity-60"
-                style={{ backgroundColor: 'var(--primary)' }}
-              >
-                {submitting && <Loader2 size={15} className="animate-spin" />}
-                {submitting ? 'Sending OTP…' : 'Send OTP'}
-              </button>
-            </form>
+            <button
+              type="button"
+              onClick={handleRequestOtp}
+              disabled={submitting}
+              className="w-full py-3 rounded-xl font-semibold text-white flex items-center justify-center gap-2 shadow-md transition-opacity hover:opacity-90 disabled:opacity-60"
+              style={{ backgroundColor: 'var(--primary)' }}
+            >
+              {submitting && <Loader2 size={15} className="animate-spin" />}
+              {submitting ? 'Sending OTP…' : 'Send OTP to Admin Email'}
+            </button>
           </>
         ) : (
           <>

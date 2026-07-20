@@ -40,14 +40,12 @@ router.get('/me', requireAuth, (req, res) => {
   res.json({ username: req.admin.username });
 });
 
-// ── Forgot — send OTP ─────────────────────────────────────────────────────────
+// ── Forgot — send OTP (no username required — single-admin system) ────────────
 router.post('/forgot', async (req, res) => {
   try {
-    const { username } = req.body || {};
-    if (!username) return res.status(400).json({ error: 'Username is required.' });
-
-    const admin = await Admin.findOne({ username: String(username).toLowerCase().trim() });
-    if (!admin) return res.status(404).json({ error: 'No admin account found with that username.' });
+    // Single-admin system: find the one admin account
+    const admin = await Admin.findOne({});
+    if (!admin) return res.status(404).json({ error: 'No admin account found.' });
 
     // Use stored email or fall back to env ADMIN_EMAIL
     const recipientEmail = admin.email || ADMIN_EMAIL;
@@ -91,15 +89,15 @@ router.post('/forgot', async (req, res) => {
 // ── Reset — verify OTP + update credentials ───────────────────────────────────
 router.post('/reset', async (req, res) => {
   try {
-    const { username, otp, newUsername, newPassword } = req.body || {};
-    if (!username || !otp || !newUsername || !newPassword) {
+    const { otp, newUsername, newPassword } = req.body || {};
+    if (!otp || !newUsername || !newPassword) {
       return res.status(400).json({ error: 'All fields are required.' });
     }
     if (newPassword.length < 8) {
       return res.status(400).json({ error: 'Password must be at least 8 characters.' });
     }
 
-    const admin = await Admin.findOne({ username: String(username).toLowerCase().trim() });
+    const admin = await Admin.findOne({});
     if (!admin) return res.status(404).json({ error: 'Admin account not found.' });
 
     if (!admin.otpHash || !admin.otpExpiry) {
