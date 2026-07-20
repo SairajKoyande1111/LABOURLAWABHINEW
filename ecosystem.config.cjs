@@ -12,8 +12,11 @@ module.exports = {
         NODE_ENV: 'production',
         API_PORT: 8787,
         MONGODB_URI: 'mongodb+srv://abhijeet18012001_db_user:q8T3i11qL29BI8Qd@cluster0.szsz7t5.mongodb.net/?appName=Cluster0',
-        CLOUDINARY_URL: 'cloudinary://154853841235429:Mvww8smlyr3G3mWeZ7ji_SR9uiQ@dayzlqvcx',
+        CLOUDINARY_URL: 'cloudinary://354465238347128:liG-x4mwCgO4omBM-hOt3BOakf0@ulxjdptx',
         SESSION_SECRET: 'b67555c4d08f7d94eb9f17447715f439cea7045b8ec77f892f8dd6de6da13e2d0d126801e3fb98540db19b267fb33c43',
+        ADMIN_EMAIL: 'maru.payslip@gmail.com',
+        // Paste your Gmail App Password below (16-char password from Google Account → Security → App Passwords)
+        GMAIL_APP_PASSWORD: 'PASTE_YOUR_GMAIL_APP_PASSWORD_HERE',
       },
     },
   ],
