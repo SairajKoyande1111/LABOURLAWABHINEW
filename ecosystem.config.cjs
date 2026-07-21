@@ -11,7 +11,7 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
         API_PORT: 8787,
-        MONGODB_URI: 'mongodb+srv://abhijeet18012001_db_user:q8T3i11qL29BI8Qd@cluster0.szsz7t5.mongodb.net/?appName=Cluster0',
+        MONGODB_URI: 'mongodb+srv://maruconsultancy:marulaw@maru.mk4qvu8.mongodb.net/?appName=Maru',
         CLOUDINARY_URL: 'cloudinary://354465238347128:liG-x4mwCgO4omBM-hOt3BOakf0@ulxjdptx',
         SESSION_SECRET: 'b67555c4d08f7d94eb9f17447715f439cea7045b8ec77f892f8dd6de6da13e2d0d126801e3fb98540db19b267fb33c43',
         ADMIN_EMAIL: 'maru.payslip@gmail.com',
