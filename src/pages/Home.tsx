@@ -186,49 +186,72 @@ const Home = () => {
           style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
 
         {/* ── Decorative BG elements ── */}
-        {/* Amber gradient orb — top left */}
-        <div className="absolute pointer-events-none"
-          style={{ top: '-80px', left: '-80px', width: '420px', height: '420px',
-            background: 'radial-gradient(circle, rgba(253,161,2,0.13) 0%, rgba(253,161,2,0.04) 55%, transparent 75%)',
-            borderRadius: '50%' }} />
 
-        {/* Navy gradient orb — bottom right */}
+        {/* PRIMARY: large amber glow centred on the text block */}
         <div className="absolute pointer-events-none"
-          style={{ bottom: '-100px', right: '-60px', width: '500px', height: '500px',
-            background: 'radial-gradient(circle, rgba(15,23,42,0.07) 0%, rgba(15,23,42,0.02) 55%, transparent 75%)',
+          style={{ top: '50%', left: '10%', transform: 'translate(-20%, -50%)',
+            width: '640px', height: '560px',
+            background: 'radial-gradient(ellipse, rgba(253,161,2,0.18) 0%, rgba(253,161,2,0.07) 40%, transparent 70%)',
+            borderRadius: '50%', filter: 'blur(8px)' }} />
+
+        {/* Secondary soft navy glow — bottom right behind collage */}
+        <div className="absolute pointer-events-none"
+          style={{ bottom: '-80px', right: '-40px', width: '480px', height: '480px',
+            background: 'radial-gradient(circle, rgba(15,23,42,0.08) 0%, transparent 70%)',
             borderRadius: '50%' }} />
 
         {/* Large decorative ring — bottom left */}
         <svg className="absolute pointer-events-none hidden lg:block"
-          style={{ bottom: '-60px', left: '-60px', opacity: 0.07 }}
-          width="320" height="320" viewBox="0 0 320 320" fill="none">
-          <circle cx="160" cy="160" r="140" stroke="#0F172A" strokeWidth="28" />
-          <circle cx="160" cy="160" r="100" stroke="#fda102" strokeWidth="12" />
+          style={{ bottom: '-60px', left: '-60px', opacity: 0.08 }}
+          width="340" height="340" viewBox="0 0 340 340" fill="none">
+          <circle cx="170" cy="170" r="150" stroke="#0F172A" strokeWidth="24" />
+          <circle cx="170" cy="170" r="108" stroke="#fda102" strokeWidth="10" />
+          <circle cx="170" cy="170" r="66" stroke="#0F172A" strokeWidth="4" strokeDasharray="6 8" />
         </svg>
 
         {/* Diagonal accent lines — top right */}
         <svg className="absolute pointer-events-none hidden lg:block"
-          style={{ top: '0', right: '0', opacity: 0.06 }}
-          width="260" height="260" viewBox="0 0 260 260" fill="none">
-          {[0,1,2,3,4,5,6,7].map(i => (
-            <line key={i} x1={260 - i * 30} y1="0" x2="260" y2={i * 30}
+          style={{ top: 0, right: 0, opacity: 0.07 }}
+          width="280" height="280" viewBox="0 0 280 280" fill="none">
+          {[0,1,2,3,4,5,6,7,8].map(i => (
+            <line key={i} x1={280 - i * 32} y1="0" x2="280" y2={i * 32}
               stroke="#0F172A" strokeWidth="1.5" />
           ))}
-          {[0,1,2,3,4,5,6,7].map(i => (
-            <line key={i + 8} x1={0} y1={i * 30} x2={i * 30} y2="0"
-              stroke="#fda102" strokeWidth="1" />
+          {[0,1,2,3,4].map(i => (
+            <line key={i + 9} x1={i * 32} y1="0" x2="0" y2={i * 32}
+              stroke="#fda102" strokeWidth="1.2" />
           ))}
         </svg>
 
-        {/* Small decorative dot cluster — mid right */}
+        {/* Dot grid cluster — mid right */}
         <svg className="absolute pointer-events-none hidden lg:block"
-          style={{ top: '50%', right: '28px', transform: 'translateY(-50%)', opacity: 0.18 }}
-          width="60" height="160" viewBox="0 0 60 160" fill="none">
+          style={{ top: '50%', right: '32px', transform: 'translateY(-50%)', opacity: 0.22 }}
+          width="72" height="168" viewBox="0 0 72 168" fill="none">
           {[0,1,2,3].map(col => [0,1,2,3,4].map(row => (
-            <circle key={`${col}-${row}`} cx={col * 16 + 8} cy={row * 32 + 16} r="3"
+            <circle key={`${col}-${row}`} cx={col * 20 + 10} cy={row * 36 + 18} r="3.5"
               fill={col % 2 === 0 ? '#fda102' : '#0F172A'} />
           )))}
         </svg>
+
+        {/* Floating diamond — upper left near text */}
+        <svg className="absolute pointer-events-none hidden lg:block"
+          style={{ top: '12%', left: '3%', opacity: 0.15 }}
+          width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect x="14" y="1" width="18" height="18" rx="2" transform="rotate(45 14 1)" fill="#fda102" />
+        </svg>
+
+        {/* Floating small diamond — lower mid-left */}
+        <svg className="absolute pointer-events-none hidden lg:block"
+          style={{ bottom: '18%', left: '22%', opacity: 0.12 }}
+          width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="9" y="1" width="11" height="11" rx="1" transform="rotate(45 9 1)" fill="#0F172A" />
+        </svg>
+
+        {/* Thin amber horizontal rule above text — decorative */}
+        <div className="absolute pointer-events-none hidden lg:block"
+          style={{ top: '13%', left: '4%', width: '48px', height: '3px',
+            background: 'linear-gradient(90deg, #fda102, transparent)',
+            borderRadius: '2px', opacity: 0.7 }} />
 
         <div className="relative max-w-7xl mx-auto px-4 lg:px-6 w-full">
           {/*
