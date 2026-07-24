@@ -181,21 +181,16 @@ const Home = () => {
 
       {/* ── Hero ───────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-white pt-4 pb-8 lg:py-14 lg:flex lg:items-center">
-        {/* Subtle dot pattern background */}
+        {/* Full-hero dot grid background — amber + navy alternating */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
-
-        {/* ── Decorative BG elements ── */}
-
-        {/* Dot grid cluster — mid right */}
-        <svg className="absolute pointer-events-none hidden lg:block"
-          style={{ top: '50%', right: '32px', transform: 'translateY(-50%)', opacity: 0.22 }}
-          width="72" height="168" viewBox="0 0 72 168" fill="none">
-          {[0,1,2,3].map(col => [0,1,2,3,4].map(row => (
-            <circle key={`${col}-${row}`} cx={col * 20 + 10} cy={row * 36 + 18} r="3.5"
-              fill={col % 2 === 0 ? '#fda102' : '#0F172A'} />
-          )))}
-        </svg>
+          style={{
+            backgroundImage: `
+              radial-gradient(circle, rgba(253,161,2,0.35) 1.5px, transparent 1.5px),
+              radial-gradient(circle, rgba(15,23,42,0.18) 1.5px, transparent 1.5px)
+            `,
+            backgroundSize: '28px 28px, 28px 28px',
+            backgroundPosition: '0 0, 14px 14px',
+          }} />
 
         <div className="relative max-w-7xl mx-auto px-4 lg:px-6 w-full">
           {/*
