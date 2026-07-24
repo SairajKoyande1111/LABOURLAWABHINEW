@@ -192,6 +192,12 @@ const Home = () => {
             backgroundPosition: '0 0, 14px 14px',
           }} />
 
+        {/* Soft white spotlight behind left text column */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 55% 80% at 25% 50%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 45%, transparent 75%)',
+          }} />
+
         <div className="relative max-w-7xl mx-auto px-4 lg:px-6 w-full">
           {/*
             Mobile:  flex-col with CSS order → h1(1), collage(2), p(3), buttons(4)
