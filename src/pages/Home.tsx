@@ -185,6 +185,51 @@ const Home = () => {
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
 
+        {/* ── Decorative BG elements ── */}
+        {/* Amber gradient orb — top left */}
+        <div className="absolute pointer-events-none"
+          style={{ top: '-80px', left: '-80px', width: '420px', height: '420px',
+            background: 'radial-gradient(circle, rgba(253,161,2,0.13) 0%, rgba(253,161,2,0.04) 55%, transparent 75%)',
+            borderRadius: '50%' }} />
+
+        {/* Navy gradient orb — bottom right */}
+        <div className="absolute pointer-events-none"
+          style={{ bottom: '-100px', right: '-60px', width: '500px', height: '500px',
+            background: 'radial-gradient(circle, rgba(15,23,42,0.07) 0%, rgba(15,23,42,0.02) 55%, transparent 75%)',
+            borderRadius: '50%' }} />
+
+        {/* Large decorative ring — bottom left */}
+        <svg className="absolute pointer-events-none hidden lg:block"
+          style={{ bottom: '-60px', left: '-60px', opacity: 0.07 }}
+          width="320" height="320" viewBox="0 0 320 320" fill="none">
+          <circle cx="160" cy="160" r="140" stroke="#0F172A" strokeWidth="28" />
+          <circle cx="160" cy="160" r="100" stroke="#fda102" strokeWidth="12" />
+        </svg>
+
+        {/* Diagonal accent lines — top right */}
+        <svg className="absolute pointer-events-none hidden lg:block"
+          style={{ top: '0', right: '0', opacity: 0.06 }}
+          width="260" height="260" viewBox="0 0 260 260" fill="none">
+          {[0,1,2,3,4,5,6,7].map(i => (
+            <line key={i} x1={260 - i * 30} y1="0" x2="260" y2={i * 30}
+              stroke="#0F172A" strokeWidth="1.5" />
+          ))}
+          {[0,1,2,3,4,5,6,7].map(i => (
+            <line key={i + 8} x1={0} y1={i * 30} x2={i * 30} y2="0"
+              stroke="#fda102" strokeWidth="1" />
+          ))}
+        </svg>
+
+        {/* Small decorative dot cluster — mid right */}
+        <svg className="absolute pointer-events-none hidden lg:block"
+          style={{ top: '50%', right: '28px', transform: 'translateY(-50%)', opacity: 0.18 }}
+          width="60" height="160" viewBox="0 0 60 160" fill="none">
+          {[0,1,2,3].map(col => [0,1,2,3,4].map(row => (
+            <circle key={`${col}-${row}`} cx={col * 16 + 8} cy={row * 32 + 16} r="3"
+              fill={col % 2 === 0 ? '#fda102' : '#0F172A'} />
+          )))}
+        </svg>
+
         <div className="relative max-w-7xl mx-auto px-4 lg:px-6 w-full">
           {/*
             Mobile:  flex-col with CSS order → h1(1), collage(2), p(3), buttons(4)
