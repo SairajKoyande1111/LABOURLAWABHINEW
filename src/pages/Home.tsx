@@ -4,7 +4,7 @@ import heroVideoDefault from '@assets/7552418-hd_1080_1920_25fps_1783420764090.m
 import heroImageDefault from '@assets/pexels-vlada-karpovich-7433855_1783420874088.jpg';
 import customerReviewIcon from '@assets/customer-review_1783487769231.png';
 const maruLogoDefault = '/assets/maru-logo-new.png';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { ArrowRight, ChevronRight, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ALL_CLIENTS } from '../components/ClientLogos';
