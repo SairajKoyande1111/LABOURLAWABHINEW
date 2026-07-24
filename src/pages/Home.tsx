@@ -185,50 +185,41 @@ const Home = () => {
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
 
-        {/* ── Decorative BG elements ── */}
+        {/* ── Decorative BG elements — ring / arc style ── */}
 
-        {/* Amber filled blob — top left corner */}
-        <div className="absolute pointer-events-none" aria-hidden="true"
-          style={{
-            top: '-120px', left: '-120px',
-            width: '420px', height: '420px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle at 40% 40%, rgba(253,161,2,0.22) 0%, rgba(253,161,2,0.08) 50%, transparent 72%)',
-          }} />
-
-        {/* Navy blob — bottom left */}
-        <div className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
-          style={{
-            bottom: '-100px', left: '8%',
-            width: '340px', height: '340px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle at 50% 60%, rgba(15,23,42,0.10) 0%, rgba(15,23,42,0.04) 55%, transparent 75%)',
-          }} />
-
-        {/* Bold amber vertical accent bar — left edge */}
-        <div className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
-          style={{
-            top: '15%', left: '0',
-            width: '6px', height: '70%',
-            borderRadius: '0 6px 6px 0',
-            background: 'linear-gradient(to bottom, transparent 0%, #fda102 25%, #fda102 75%, transparent 100%)',
-            opacity: 0.45,
-          }} />
-
-        {/* Stacked amber lines — decorative, bottom-left text area */}
-        <svg className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
-          style={{ bottom: '12%', left: '3%', opacity: 0.22 }}
-          width="80" height="36" viewBox="0 0 80 36" fill="none">
-          <rect x="0" y="0"  width="80" height="6" rx="3" fill="#fda102" />
-          <rect x="0" y="15" width="52" height="6" rx="3" fill="#fda102" />
-          <rect x="0" y="30" width="28" height="6" rx="3" fill="#fda102" />
+        {/* PRIMARY: large amber ring — top left */}
+        <svg className="absolute pointer-events-none" aria-hidden="true"
+          style={{ top: '-130px', left: '-130px', opacity: 0.18 }}
+          width="540" height="540" viewBox="0 0 540 540" fill="none">
+          <circle cx="270" cy="270" r="230" stroke="#fda102" strokeWidth="48" />
         </svg>
 
-        {/* Large navy circle outline — behind text, left-center */}
+        {/* SECONDARY: navy ring inside amber — top left */}
+        <svg className="absolute pointer-events-none" aria-hidden="true"
+          style={{ top: '-60px', left: '-60px', opacity: 0.10 }}
+          width="300" height="300" viewBox="0 0 300 300" fill="none">
+          <circle cx="150" cy="150" r="124" stroke="#0F172A" strokeWidth="18" />
+        </svg>
+
+        {/* MIRROR: large amber ring — bottom right */}
         <svg className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
-          style={{ top: '50%', left: '-10%', transform: 'translateY(-50%)', opacity: 0.045 }}
-          width="600" height="600" viewBox="0 0 600 600" fill="none">
-          <circle cx="300" cy="300" r="280" stroke="#0F172A" strokeWidth="60" />
+          style={{ bottom: '-140px', right: '-140px', opacity: 0.15 }}
+          width="500" height="500" viewBox="0 0 500 500" fill="none">
+          <circle cx="250" cy="250" r="212" stroke="#fda102" strokeWidth="44" />
+        </svg>
+
+        {/* MIRROR: navy ring — bottom right, inset */}
+        <svg className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
+          style={{ bottom: '-70px', right: '-70px', opacity: 0.09 }}
+          width="280" height="280" viewBox="0 0 280 280" fill="none">
+          <circle cx="140" cy="140" r="116" stroke="#0F172A" strokeWidth="16" />
+        </svg>
+
+        {/* ACCENT: small amber ring — mid left */}
+        <svg className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
+          style={{ top: '50%', left: '-40px', transform: 'translateY(-50%)', opacity: 0.12 }}
+          width="180" height="180" viewBox="0 0 180 180" fill="none">
+          <circle cx="90" cy="90" r="72" stroke="#fda102" strokeWidth="22" />
         </svg>
 
         <div className="relative max-w-7xl mx-auto px-4 lg:px-6 w-full">
