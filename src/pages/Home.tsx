@@ -207,7 +207,7 @@ const Home = () => {
                   {typewriterText}<span className="typewriter-cursor">|</span>
                 </span>
               </span>
-              <span className="text-navy-900 block">{content?.heroLine2 ?? 'for Indian businesses'}</span>
+              <span className="text-navy-900 block">{content?.heroLine2 ?? 'without compromise'}</span>
             </motion.h1>
 
             {/* ── Collage ── order-2 on mobile, grid col-2 row-span-3 on desktop */}
