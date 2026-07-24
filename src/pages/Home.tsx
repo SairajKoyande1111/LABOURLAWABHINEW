@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import heroBg from '@assets/image_1784877058703.png';
 import heroVideoDefault from '@assets/7552418-hd_1080_1920_25fps_1783420764090.mp4';
 import heroImageDefault from '@assets/pexels-vlada-karpovich-7433855_1783420874088.jpg';
 import customerReviewIcon from '@assets/customer-review_1783487769231.png';
@@ -180,24 +181,19 @@ const Home = () => {
     <div className="w-full">
 
       {/* ── Hero ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white pt-4 pb-8 lg:py-14 lg:flex lg:items-center">
-        {/* Full-hero dot grid background — amber + navy alternating */}
-        <div className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `
-              radial-gradient(circle, rgba(253,161,2,0.35) 1.5px, transparent 1.5px),
-              radial-gradient(circle, rgba(15,23,42,0.18) 1.5px, transparent 1.5px)
-            `,
-            backgroundSize: '28px 28px, 28px 28px',
-            backgroundPosition: '0 0, 14px 14px',
-          }} />
+      <section className="relative overflow-hidden pt-4 pb-8 lg:py-14 lg:flex lg:items-center"
+        style={{ backgroundColor: '#f5f0eb' }}>
 
-        {/* Soft white spotlight — covers full width on mobile, left-column on desktop */}
+        {/* BG image */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.18 }} />
+
+        {/* White overlay so content stays crisp */}
         <div className="absolute inset-0 pointer-events-none"
           style={{
             background: `
-              radial-gradient(ellipse 120% 55% at 50% 15%, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.55) 55%, transparent 80%),
-              radial-gradient(ellipse 55% 85% at 25% 52%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.55) 45%, transparent 75%)
+              radial-gradient(ellipse 120% 55% at 50% 15%, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.4) 55%, transparent 80%),
+              radial-gradient(ellipse 60% 90% at 22% 52%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.5) 45%, transparent 72%)
             `,
           }} />
 
