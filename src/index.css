@@ -57,6 +57,18 @@
 }
 .animate-marquee-testimonials:hover { animation-play-state: paused; }
 
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.typewriter-cursor {
+  display: inline-block;
+  color: #fda102;
+  animation: cursor-blink 0.75s step-end infinite;
+  font-weight: 300;
+  margin-left: 1px;
+}
+
 /* ─── Theme: CSS custom properties ─── */
 :root, [data-theme="red"] {
   --primary:      var(--primary);

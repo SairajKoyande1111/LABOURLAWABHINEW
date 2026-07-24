@@ -36,6 +36,34 @@ function LottieAnim({ animationData, className }: { animationData: unknown; clas
   return <div ref={containerRef} className={className} />;
 }
 
+/* ── Typewriter effect ────────────────────────────────────── */
+function useTypewriter(phrases: string[], typingSpeed = 75, deletingSpeed = 38, pauseMs = 1800) {
+  const [displayed, setDisplayed] = useState('');
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = phrases[phraseIdx] ?? '';
+    if (!isDeleting && displayed === current) {
+      const t = setTimeout(() => setIsDeleting(true), pauseMs);
+      return () => clearTimeout(t);
+    }
+    if (isDeleting && displayed === '') {
+      setIsDeleting(false);
+      setPhraseIdx((p) => (p + 1) % phrases.length);
+      return;
+    }
+    const t = setTimeout(() => {
+      setDisplayed(isDeleting
+        ? current.slice(0, displayed.length - 1)
+        : current.slice(0, displayed.length + 1));
+    }, isDeleting ? deletingSpeed : typingSpeed);
+    return () => clearTimeout(t);
+  }, [displayed, isDeleting, phraseIdx, phrases, typingSpeed, deletingSpeed, pauseMs]);
+
+  return displayed;
+}
+
 /* ── Animated count-up stat ───────────────────────────────── */
 function StatCounter({ target, decimals = 0, suffix = '' }: { target: number; decimals?: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -63,11 +91,12 @@ function StatCounter({ target, decimals = 0, suffix = '' }: { target: number; de
 
 
 const defaultPhrases = [
-  'Labour Compliance',
-  'Payroll Solutions',
-  'HR Outsourcing',
-  'Statutory Filings',
-  'Legal Expertise',
+  'Compliance Certainty',
+  'Payroll Precision',
+  'HR Excellence',
+  'Statutory Clarity',
+  'Legal Confidence',
+  'Workforce Harmony',
 ];
 
 const defaultTestimonials = [
@@ -105,7 +134,6 @@ const defaultStats = [
 ];
 
 const Home = () => {
-  const [phraseIndex, setPhraseIndex] = useState(0);
   const [content, setContent] = useState<HomeContent | null>(null);
   const [previewServices, setPreviewServices] = useState<ServiceContent[]>([]);
 
@@ -130,13 +158,7 @@ const Home = () => {
   useLiveContent(fetchHome);
 
   const phrases = content?.heroPhrases?.length ? content.heroPhrases : defaultPhrases;
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPhraseIndex((prev) => (prev + 1) % phrases.length);
-    }, 2800);
-    return () => clearInterval(interval);
-  }, [phrases.length]);
+  const typewriterText = useTypewriter(phrases);
 
   const testimonials = content?.testimonials?.length ? content.testimonials : defaultTestimonials;
   const whyUs = content?.whyUsItems?.length ? content.whyUsItems : defaultWhyUs;
@@ -178,19 +200,12 @@ const Home = () => {
               transition={{ duration: 0.55 }}
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2rem, 4.2vw, 3.6rem)', lineHeight: 1.15 }}>
               <span className="text-navy-900 block" style={{ marginBottom: '0.2em' }}>{content?.heroLine1 ?? 'We bring'}</span>
-              <span style={{ position: 'relative', display: 'block', height: '1.15em', overflow: 'visible', clipPath: 'inset(0 -9999px 0 0)', marginBottom: '0.2em' }}>
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={phraseIndex}
-                    initial={{ y: '100%', opacity: 0 }}
-                    animate={{ y: '0%', opacity: 1 }}
-                    exit={{ y: '-100%', opacity: 0 }}
-                    transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                    className="font-semibold"
-                    style={{ position: 'absolute', left: 0, top: 0, color: '#fda102', whiteSpace: 'nowrap', fontSize: 'inherit', lineHeight: 1.15 }}>
-                    {phrases[phraseIndex]}
-                  </motion.span>
-                </AnimatePresence>
+              <span style={{ position: 'relative', display: 'block', height: '1.15em', overflow: 'visible', marginBottom: '0.2em' }}>
+                <span
+                  className="font-semibold"
+                  style={{ position: 'absolute', left: 0, top: 0, color: '#fda102', whiteSpace: 'nowrap', fontSize: 'inherit', lineHeight: 1.15 }}>
+                  {typewriterText}<span className="typewriter-cursor">|</span>
+                </span>
               </span>
               <span className="text-navy-900 block">{content?.heroLine2 ?? 'to your growth'}</span>
             </motion.h1>
