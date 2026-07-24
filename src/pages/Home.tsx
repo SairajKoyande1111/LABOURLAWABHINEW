@@ -192,10 +192,13 @@ const Home = () => {
             backgroundPosition: '0 0, 14px 14px',
           }} />
 
-        {/* Soft white spotlight behind left text column */}
+        {/* Soft white spotlight — covers full width on mobile, left-column on desktop */}
         <div className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 55% 80% at 25% 50%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 45%, transparent 75%)',
+            background: `
+              radial-gradient(ellipse 120% 55% at 50% 15%, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.55) 55%, transparent 80%),
+              radial-gradient(ellipse 55% 85% at 25% 52%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.55) 45%, transparent 75%)
+            `,
           }} />
 
         <div className="relative max-w-7xl mx-auto px-4 lg:px-6 w-full">
