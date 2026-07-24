@@ -199,7 +199,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2rem, 4.2vw, 3.6rem)', lineHeight: 1.15 }}>
-              <span className="text-navy-900 block" style={{ marginBottom: '0.2em' }}>{content?.heroLine1 ?? 'We bring'}</span>
+              <span className="text-navy-900 block" style={{ marginBottom: '0.2em' }}>{content?.heroLine1 ?? 'We deliver'}</span>
               <span style={{ position: 'relative', display: 'block', height: '1.15em', overflow: 'visible', marginBottom: '0.2em' }}>
                 <span
                   className="font-semibold"
@@ -207,7 +207,7 @@ const Home = () => {
                   {typewriterText}<span className="typewriter-cursor">|</span>
                 </span>
               </span>
-              <span className="text-navy-900 block">{content?.heroLine2 ?? 'to your growth'}</span>
+              <span className="text-navy-900 block">{content?.heroLine2 ?? 'for Indian businesses'}</span>
             </motion.h1>
 
             {/* ── Collage ── order-2 on mobile, grid col-2 row-span-3 on desktop */}
@@ -242,7 +242,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
               style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, color: '#444444', textAlign: 'justify' }}>
-              {content?.heroDescription ?? 'Unlock the potential of your business with our comprehensive HR and compliance solutions. From recruitment to payroll management to compliance, we provide tailored services that ensure your business runs smoothly, efficiently, and in full compliance with all regulations.'}
+              {content?.heroDescription ?? "India's labour laws are complex, constantly evolving, and unforgiving of errors. We take that burden off your shoulders — handling everything from PF, ESIC and statutory filings to payroll processing, HR advisory, and the New Wage Code transition, so your business stays protected and your teams stay focused on growth."}
             </motion.p>
 
             {/* ── Buttons ── order-4 on mobile, grid col-1 row-3 on desktop */}
