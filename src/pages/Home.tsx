@@ -186,14 +186,14 @@ const Home = () => {
 
         {/* BG image */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{ backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.18 }} />
+          style={{ backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.45 }} />
 
-        {/* White overlay so content stays crisp */}
+        {/* White overlay — keeps text legible while image shows through */}
         <div className="absolute inset-0 pointer-events-none"
           style={{
             background: `
-              radial-gradient(ellipse 120% 55% at 50% 15%, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.4) 55%, transparent 80%),
-              radial-gradient(ellipse 60% 90% at 22% 52%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.5) 45%, transparent 72%)
+              radial-gradient(ellipse 120% 55% at 50% 15%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.25) 55%, transparent 80%),
+              radial-gradient(ellipse 60% 90% at 22% 52%, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.3) 45%, transparent 72%)
             `,
           }} />
 
