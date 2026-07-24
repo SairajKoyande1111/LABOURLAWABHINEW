@@ -91,12 +91,12 @@ function StatCounter({ target, decimals = 0, suffix = '' }: { target: number; de
 
 
 const defaultPhrases = [
-  'Compliance Certainty',
-  'Payroll Precision',
   'HR Excellence',
-  'Statutory Clarity',
-  'Legal Confidence',
-  'Workforce Harmony',
+  'Legal Mastery',
+  'Payroll Clarity',
+  'Tax Compliance',
+  'Workforce Peace',
+  'Statutory Ease',
 ];
 
 const defaultTestimonials = [
