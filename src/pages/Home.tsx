@@ -186,48 +186,49 @@ const Home = () => {
           style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.55 }} />
 
         {/* ── Decorative BG elements ── */}
-        {/* Amber gradient orb — top left */}
-        <div className="absolute pointer-events-none"
-          style={{ top: '-80px', left: '-80px', width: '420px', height: '420px',
-            background: 'radial-gradient(circle, rgba(253,161,2,0.13) 0%, rgba(253,161,2,0.04) 55%, transparent 75%)',
-            borderRadius: '50%' }} />
 
-        {/* Navy gradient orb — bottom right */}
-        <div className="absolute pointer-events-none"
-          style={{ bottom: '-100px', right: '-60px', width: '500px', height: '500px',
-            background: 'radial-gradient(circle, rgba(15,23,42,0.07) 0%, rgba(15,23,42,0.02) 55%, transparent 75%)',
-            borderRadius: '50%' }} />
+        {/* Amber filled blob — top left corner */}
+        <div className="absolute pointer-events-none" aria-hidden="true"
+          style={{
+            top: '-120px', left: '-120px',
+            width: '420px', height: '420px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle at 40% 40%, rgba(253,161,2,0.22) 0%, rgba(253,161,2,0.08) 50%, transparent 72%)',
+          }} />
 
-        {/* Large decorative ring — bottom left */}
-        <svg className="absolute pointer-events-none hidden lg:block"
-          style={{ bottom: '-60px', left: '-60px', opacity: 0.07 }}
-          width="320" height="320" viewBox="0 0 320 320" fill="none">
-          <circle cx="160" cy="160" r="140" stroke="#0F172A" strokeWidth="28" />
-          <circle cx="160" cy="160" r="100" stroke="#fda102" strokeWidth="12" />
+        {/* Navy blob — bottom left */}
+        <div className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
+          style={{
+            bottom: '-100px', left: '8%',
+            width: '340px', height: '340px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle at 50% 60%, rgba(15,23,42,0.10) 0%, rgba(15,23,42,0.04) 55%, transparent 75%)',
+          }} />
+
+        {/* Bold amber vertical accent bar — left edge */}
+        <div className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
+          style={{
+            top: '15%', left: '0',
+            width: '6px', height: '70%',
+            borderRadius: '0 6px 6px 0',
+            background: 'linear-gradient(to bottom, transparent 0%, #fda102 25%, #fda102 75%, transparent 100%)',
+            opacity: 0.45,
+          }} />
+
+        {/* Stacked amber lines — decorative, bottom-left text area */}
+        <svg className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
+          style={{ bottom: '12%', left: '3%', opacity: 0.22 }}
+          width="80" height="36" viewBox="0 0 80 36" fill="none">
+          <rect x="0" y="0"  width="80" height="6" rx="3" fill="#fda102" />
+          <rect x="0" y="15" width="52" height="6" rx="3" fill="#fda102" />
+          <rect x="0" y="30" width="28" height="6" rx="3" fill="#fda102" />
         </svg>
 
-        {/* Diagonal accent lines — top right */}
-        <svg className="absolute pointer-events-none hidden lg:block"
-          style={{ top: '0', right: '0', opacity: 0.06 }}
-          width="260" height="260" viewBox="0 0 260 260" fill="none">
-          {[0,1,2,3,4,5,6,7].map(i => (
-            <line key={i} x1={260 - i * 30} y1="0" x2="260" y2={i * 30}
-              stroke="#0F172A" strokeWidth="1.5" />
-          ))}
-          {[0,1,2,3,4,5,6,7].map(i => (
-            <line key={i + 8} x1={0} y1={i * 30} x2={i * 30} y2="0"
-              stroke="#fda102" strokeWidth="1" />
-          ))}
-        </svg>
-
-        {/* Small decorative dot cluster — mid right */}
-        <svg className="absolute pointer-events-none hidden lg:block"
-          style={{ top: '50%', right: '28px', transform: 'translateY(-50%)', opacity: 0.18 }}
-          width="60" height="160" viewBox="0 0 60 160" fill="none">
-          {[0,1,2,3].map(col => [0,1,2,3,4].map(row => (
-            <circle key={`${col}-${row}`} cx={col * 16 + 8} cy={row * 32 + 16} r="3"
-              fill={col % 2 === 0 ? '#fda102' : '#0F172A'} />
-          )))}
+        {/* Large navy circle outline — behind text, left-center */}
+        <svg className="absolute pointer-events-none hidden lg:block" aria-hidden="true"
+          style={{ top: '50%', left: '-10%', transform: 'translateY(-50%)', opacity: 0.045 }}
+          width="600" height="600" viewBox="0 0 600 600" fill="none">
+          <circle cx="300" cy="300" r="280" stroke="#0F172A" strokeWidth="60" />
         </svg>
 
         <div className="relative max-w-7xl mx-auto px-4 lg:px-6 w-full">
